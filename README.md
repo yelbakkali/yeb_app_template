@@ -73,3 +73,16 @@ Pour ajouter un nouveau calcul :
 ## Documentation
 
 Pour plus de détails sur l'approche de packaging, consultez `docs/packaging_approach.md`.
+
+## Organisation des branches
+
+Le projet utilise une structure de branches pour organiser le développement :
+
+- **main** : Branche de production stable. Elle contient le code prêt à être déployé.
+- **dev** : Branche de développement. Toutes les nouvelles fonctionnalités et corrections sont d'abord intégrées ici.
+
+### Workflow de développement
+
+1. Le développement de nouvelles fonctionnalités se fait sur la branche **dev** ou sur des branches dédiées créées à partir de **dev**
+2. Une fois les fonctionnalités testées et validées dans **dev**, elles sont fusionnées vers **main**
+3. Les versions de production sont toujours créées à partir de la branche **main**
