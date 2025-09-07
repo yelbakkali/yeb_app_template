@@ -1,16 +1,6 @@
 # Résumé de la conversation sur le projet 737calcs
 
-Ce docum4. **Configuration de l'environnement de développement VS Code**
-   - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
-   - Correction du type de configuration de debug Python (`python` → `debugpy`) dans `launch.json` pour compatibilité future
-   - Synchronisation de ces fichiers sur la branche `dev` du dépôt GitHub
-
-5. **Développement de la couche d'accès aux données**
-   - Création d'une classe utilitaire `SQLiteManager` dans `/python_backend/utils/sqlite_manager.py` pour gérer les opérations de base sur la base de données SQLite
-   - Implémentation des méthodes de connexion et déconnexion à la base
-   - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
-
-## Prochaines étapes discutéessume les principaux points abordés dans notre conversation sur le développement du projet 737calcs. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
+Ce document résume les principaux points abordés dans notre conversation sur le développement du projet 737calcs. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
 **Dernière mise à jour :** 7 septembre 2025
 
@@ -68,10 +58,15 @@ Ce docum4. **Configuration de l'environnement de développement VS Code**
    - Mise à jour complète du fichier `workload.md` avec l'architecture et les prérequis
    - Création du fichier de résumé de conversation `docs/chat_resume.md`
 
-4. **Configuration de l’environnement de développement VS Code**
+4. **Configuration de l'environnement de développement VS Code**
    - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
    - Correction du type de configuration de debug Python (`python` → `debugpy`) dans `launch.json` pour compatibilité future
    - Synchronisation de ces fichiers sur la branche `dev` du dépôt GitHub
+
+5. **Développement de la couche d'accès aux données**
+   - Création d'une classe utilitaire `SQLiteManager` dans `/python_backend/utils/sqlite_manager.py` pour gérer les opérations de base sur la base de données SQLite
+   - Implémentation des méthodes de connexion et déconnexion à la base
+   - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
 
 ## Prochaines étapes discutées
 
