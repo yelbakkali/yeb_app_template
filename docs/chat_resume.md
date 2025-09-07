@@ -2,6 +2,8 @@
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet 737calcs. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
+**Dernière mise à jour :** 7 septembre 2025
+
 ## Contexte du projet
 
 - **Projet** : Application 737calcs - Application Flutter multiplateforme avec calculs en Python
@@ -36,12 +38,39 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 
 ## Travail en cours
 
-- Configuration du workflow avec branches `main` (production) et `dev` (développement)
 - Mise en place de la documentation pour le projet
-- Nettoyage des fichiers redondants suite à l'adoption de l'approche de packaging
+- Utilisation d'un workflow Git structuré avec branches `main` et `dev`
+
+## Dernières réalisations
+
+1. **Structure des branches Git**
+   - Branche `main` créée pour la production
+   - Branche `dev` créée pour le développement
+   - Documentation du workflow dans `docs/git_workflow.md`
+   - Configuration des règles de protection de branches dans `docs/github_branch_protection.md`
+
+2. **Nettoyage des fichiers redondants**
+   - Suppression des scripts Python redondants dans `flutter_app/android/app/src/main/python/`
+   - Suppression des scripts Python redondants dans `flutter_app/ios/PythonBundle/`
+   - Sauvegarde des fichiers obsolètes avec extension `.bak`
+
+3. **Mise à jour de la documentation**
+   - Mise à jour complète du fichier `workload.md` avec l'architecture et les prérequis
+   - Création du fichier de résumé de conversation `docs/chat_resume.md`
 
 ## Prochaines étapes discutées
 
 - Implémentation des calculs spécifiques au 737
 - Amélioration de l'interface utilisateur
 - Mise en place de tests
+- Développement de nouvelles fonctionnalités sur la branche `dev`
+
+## Continuité des conversations
+
+Pour reprendre la conversation avec un assistant IA :
+
+1. Référencer ce fichier de résumé au début d'une nouvelle session
+2. Mentionner la dernière action effectuée (ex: "Nous venons de mettre en place les branches Git")
+3. Indiquer le travail que vous souhaitez poursuivre
+
+Ce fichier sera régulièrement mis à jour pour maintenir la continuité des échanges et du développement.
