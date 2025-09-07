@@ -1,3 +1,5 @@
+# pylint: disable=import-error
+# type: ignore
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import importlib
@@ -8,6 +10,7 @@ import uvicorn
 import json
 from pydantic import BaseModel
 from typing import List
+
 
 # Configuration des chemins pour accéder directement aux scripts Python partagés
 SHARED_PYTHON_DIR = Path(__file__).parent.parent / "shared_python"

@@ -51,6 +51,7 @@ _737calcs/
 - `package_python_scripts.sh` : Prépare les scripts Python pour le packaging
 - `run_dev.sh` : Lance l'environnement de développement complet
 - `run_dev_direct.sh` : Lance l'environnement avec accès direct aux scripts source
+- `start_web_dev.sh` : Lance l'application Flutter en mode web avec le backend FastAPI
 
 ## Développement
 
@@ -62,6 +63,13 @@ Pour développer et tester l'application :
 
 # Lancer l'environnement de développement
 ./run_dev.sh
+```
+
+Pour développer et tester l'application en mode web :
+
+```bash
+# Lancer l'application en mode web avec le backend FastAPI
+./start_web_dev.sh
 ```
 
 Pour ajouter un nouveau calcul :
