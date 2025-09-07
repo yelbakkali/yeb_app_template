@@ -1,26 +1,75 @@
-# 737calcs
+# _737calcs
 
-Application multiplateforme (Flutter) avec backend de calculs en Python natif embarqué.
+Application Flutter multiplateforme avec intégration Python pour les calculs spécifiques.
 
-## Objectif
+## Présentation
 
-- Interface graphique, gestion réseau et utilisateurs : 100% Flutter
-- Calculs métier : scripts Python embarqués et exécutés localement sur chaque plateforme
-- Synchronisation des données dès que l’utilisateur est en ligne
+Ce projet combine la puissance de Flutter pour l'interface utilisateur cross-plateforme avec la flexibilité de Python pour les calculs techniques. L'application est conçue pour fonctionner sur plusieurs plateformes :
 
-## Plateformes supportées
+- Android (via Chaquopy)
+- iOS (via Python-Apple-support)
+- Windows (via Python embarqué)
+- Web (via API backend)
+- Linux/macOS (via Python système)
 
-- **Android** : Python embarqué via Chaquopy
-- **iOS** : Python embarqué via Python-Apple-support
-- **Windows** : Python portable embarqué
+## Architecture
+
+L'architecture du projet est basée sur une approche de packaging des scripts Python :
+
+- Les scripts Python sont développés dans le dossier `shared_python/`
+- Ces scripts sont empaquetés comme assets dans l'application Flutter
+- Un service unifié (`UnifiedPythonService`) extrait et exécute ces scripts sur chaque plateforme
 
 ## Structure du projet
 
-- `flutter_app/` : code Flutter (UI, logique, services)
-- `python_backend/` : scripts Python (calculs)
-- `docs/` : documentation technique et utilisateur
-- `workload.md` : suivi des étapes du projet
+```plaintext
+_737calcs/
+├── docs/                   # Documentation du projet
+├── flutter_app/            # Application Flutter
+│   ├── android/            # Configuration Android avec Chaquopy
+│   ├── ios/                # Configuration iOS avec Python-Apple-support
+│   ├── windows/            # Configuration Windows avec Python embarqué
+│   ├── lib/                # Code Dart de l'application
+│   │   ├── services/       # Services dont UnifiedPythonService
+│   │   └── main.dart       # Point d'entrée de l'application
+│   └── assets/             # Assets de l'application
+│       └── shared_python/  # Scripts Python packagés
+├── shared_python/          # Scripts Python source partagés
+│   └── calculs/            # Modules de calcul
+└── web_backend/            # API backend pour la version web
+```
 
-## Lancement rapide
+## Installation
 
-(À compléter selon l’avancement du projet)
+1. Clonez ce dépôt
+2. Assurez-vous que Flutter est installé et configuré
+3. Exécutez `package_python_scripts.sh` pour préparer les scripts Python
+4. Lancez l'application avec `flutter run`
+
+## Scripts utilitaires
+
+- `package_python_scripts.sh` : Prépare les scripts Python pour le packaging
+- `run_dev.sh` : Lance l'environnement de développement complet
+- `run_dev_direct.sh` : Lance l'environnement avec accès direct aux scripts source
+
+## Développement
+
+Pour développer et tester l'application :
+
+```bash
+# Préparer les scripts Python pour le packaging
+./package_python_scripts.sh
+
+# Lancer l'environnement de développement
+./run_dev.sh
+```
+
+Pour ajouter un nouveau calcul :
+
+1. Créez un nouveau script Python dans `shared_python/calculs/`
+2. Exécutez `package_python_scripts.sh` pour mettre à jour les assets
+3. Dans votre code Flutter, utilisez `UnifiedPythonService.runScript('nom_du_script', [args])`
+
+## Documentation
+
+Pour plus de détails sur l'approche de packaging, consultez `docs/packaging_approach.md`.

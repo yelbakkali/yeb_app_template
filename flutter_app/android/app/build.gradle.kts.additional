@@ -1,0 +1,9 @@
+// Tâche Gradle pour copier les scripts Python partagés dans le projet Android
+task copySharedPythonScripts(type: Copy) {
+    from '../../shared_python'
+    into 'src/main/python'
+    include '**/*.py'
+}
+
+// Exécuter la copie avant la compilation
+preBuild.dependsOn(copySharedPythonScripts)
