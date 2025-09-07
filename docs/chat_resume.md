@@ -1,6 +1,16 @@
 # Résumé de la conversation sur le projet 737calcs
 
-Ce document résume les principaux points abordés dans notre conversation sur le développement du projet 737calcs. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
+Ce docum4. **Configuration de l'environnement de développement VS Code**
+   - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
+   - Correction du type de configuration de debug Python (`python` → `debugpy`) dans `launch.json` pour compatibilité future
+   - Synchronisation de ces fichiers sur la branche `dev` du dépôt GitHub
+
+5. **Développement de la couche d'accès aux données**
+   - Création d'une classe utilitaire `SQLiteManager` dans `/python_backend/utils/sqlite_manager.py` pour gérer les opérations de base sur la base de données SQLite
+   - Implémentation des méthodes de connexion et déconnexion à la base
+   - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
+
+## Prochaines étapes discutéessume les principaux points abordés dans notre conversation sur le développement du projet 737calcs. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
 **Dernière mise à jour :** 7 septembre 2025
 
@@ -58,6 +68,11 @@ Ce document résume les principaux points abordés dans notre conversation sur l
    - Mise à jour complète du fichier `workload.md` avec l'architecture et les prérequis
    - Création du fichier de résumé de conversation `docs/chat_resume.md`
 
+4. **Configuration de l’environnement de développement VS Code**
+   - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
+   - Correction du type de configuration de debug Python (`python` → `debugpy`) dans `launch.json` pour compatibilité future
+   - Synchronisation de ces fichiers sur la branche `dev` du dépôt GitHub
+
 ## Prochaines étapes discutées
 
 - Implémentation des calculs spécifiques au 737
@@ -65,12 +80,27 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 - Mise en place de tests
 - Développement de nouvelles fonctionnalités sur la branche `dev`
 
-## Continuité des conversations
+## Continuité des conversations et Instructions pour l'assistant
+
+Ce fichier est utilisé comme point d'entrée pour chaque nouvelle session avec l'assistant IA. Il contient tout le contexte nécessaire pour reprendre le travail exactement où il a été arrêté.
+
+### Pour l'utilisateur
 
 Pour reprendre la conversation avec un assistant IA :
 
-1. Référencer ce fichier de résumé au début d'une nouvelle session
-2. Mentionner la dernière action effectuée (ex: "Nous venons de mettre en place les branches Git")
-3. Indiquer le travail que vous souhaitez poursuivre
+1. Demandez simplement à l'assistant de lire ce fichier résumé au début d'une nouvelle session
+2. Indiquez directement le travail que vous souhaitez poursuivre, sans avoir besoin de rappeler la dernière action effectuée
+
+### Pour l'assistant (instructions)
+
+Quand ce fichier est mentionné au début d'une session :
+
+1. Parcourir l'ensemble du contenu de ce fichier pour comprendre le contexte du projet, l'historique des développements et l'état actuel
+2. Consulter également les autres fichiers du dossier `docs/` mentionnés dans ce résumé pour une compréhension approfondie
+3. Identifier automatiquement la dernière étape réalisée (dernière entrée de la section "Dernières réalisations")
+4. Être capable de reprendre le travail directement sans que l'utilisateur ait à rappeler ce qui a été fait précédemment
+5. Mettre à jour ce fichier à chaque nouvelle étape significative de développement
+6. Si une étape est annulée, la retirer également de ce fichier
+7. Maintenir la cohérence entre ce fichier et l'état réel du projet
 
 Ce fichier sera régulièrement mis à jour pour maintenir la continuité des échanges et du développement.
