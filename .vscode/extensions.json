@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "ms-python.python",
+    "ms-vscode.cpptools",
+    "github.vscode-pull-request-github"
+  ]
+}

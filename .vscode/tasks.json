@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lancer le backend Python",
+      "type": "shell",
+      "command": "poetry run python web_backend/main.py",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter build web",
+      "type": "shell",
+      "command": "cd flutter_app && flutter build web",
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

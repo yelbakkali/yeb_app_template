@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Lancer le backend Python",
+  "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/python_backend/web_backend/main.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Flutter App",
+      "type": "dart",
+      "request": "launch",
+      "program": "${workspaceFolder}/flutter_app/lib/main.dart"
+    }
+  ]
+}
