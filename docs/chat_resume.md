@@ -2,13 +2,13 @@
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
-**Dernière mise à jour :** 7 septembre 2025
+**Dernière mise à jour :** 9 septembre 2025
 
 ## Contexte du projet
 
-- **Projet** : Application yeb_app_template - Application Flutter multiplateforme avec backend Python
-- **Objectif** : Intégrer des scripts Python pour effectuer des calculs spécifiques sur plusieurs plateformes (Android, iOS, Windows, Web)
-- **État actuel** : Architecture de packaging mise en place avec `UnifiedPythonService`
+- **Projet** : Template yeb_app_template - Template pour applications Flutter multiplateforme avec backend Python
+- **Objectif** : Fournir une base réutilisable pour créer des applications avec intégration Python sur plusieurs plateformes (Android, iOS, Windows, Web)
+- **État actuel** : Architecture de packaging mise en place avec `UnifiedPythonService` et configuration complète du template GitHub
 
 ## Principales décisions techniques
 
@@ -66,7 +66,7 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 5. **Développement de la couche d'accès aux données**
    - Création d'une classe utilitaire `SQLiteManager` dans `/python_backend/utils/sqlite_manager.py` pour gérer les opérations de base sur la base de données SQLite
    - Implémentation des méthodes de connexion et déconnexion à la base
-   - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
+   - Structure prête pour l'ajout ultérieur de fonctions métier
 
 6. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
    - Création d'une structure dans `docs/copilot/` pour documenter les sessions de travail
@@ -78,13 +78,21 @@ Ce document résume les principaux points abordés dans notre conversation sur l
    - Mise à jour du README avec badges, instructions détaillées et guide d'utilisation du template
    - Configuration des GitHub Actions pour la validation CI (Flutter et Python)
    - Ajout d'une licence MIT
+   
+8. **Amélioration de l'expérience utilisateur du template**
+   - Configuration officielle du template GitHub avec `.github/template-config.yml`
+   - Création de scripts d'initialisation automatique (`init_project.sh` et `init_project.bat`)
+   - Documentation spécifique pour GitHub Copilot sur l'initialisation du template
+   - Restructuration du README avec un processus d'utilisation clair en 3 étapes
+   - Correction des références pour homogénéiser le nom "yeb_app_template" dans tout le projet
 
 ## Prochaines étapes discutées
 
-- Implémentation des calculs spécifiques au 737
+- Développement des fonctionnalités métier spécifiques
+- Création d'exemples d'implémentation pour différents cas d'usage
+- Mise en place d'une suite de tests automatisés complète
+- Documentation utilisateur détaillée avec tutoriels
 - Amélioration de l'interface utilisateur
-- Mise en place de tests
-- Développement de nouvelles fonctionnalités sur la branche `dev`
 
 ## Continuité des conversations et Instructions pour l'assistant
 
