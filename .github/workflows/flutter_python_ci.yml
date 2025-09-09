@@ -1,0 +1,72 @@
+# Workflow de validation CI pour Flutter/Python
+
+name: Flutter/Python CI
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+  workflow_dispatch:
+
+jobs:
+  flutter_test:
+    name: Test Flutter
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.x'
+          channel: 'stable'
+          
+      - name: Install dependencies
+        run: |
+          cd flutter_app
+          flutter pub get
+          
+      - name: Verify formatting
+        run: |
+          cd flutter_app
+          flutter format --set-exit-if-changed .
+          
+      - name: Analyze project source
+        run: |
+          cd flutter_app
+          flutter analyze
+          
+      - name: Run tests
+        run: |
+          cd flutter_app
+          flutter test
+  
+  python_test:
+    name: Test Python
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          
+      - name: Install dependencies & run tests for python_backend
+        run: |
+          cd python_backend
+          poetry install
+          poetry run pytest
+          
+      - name: Install dependencies & run tests for web_backend
+        run: |
+          cd web_backend
+          poetry install
+          poetry run pytest

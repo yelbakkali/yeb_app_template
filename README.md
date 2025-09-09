@@ -1,10 +1,14 @@
-# _737calcs
+# _737calcs - Template pour applications Flutter/Python
 
-Application Flutter multiplateforme avec intégration Python pour les calculs spécifiques.
+> Template pour applications Flutter multiplateforme avec intégration Python pour les calculs spécifiques.
 
-## Présentation
+![Flutter](https://img.shields.io/badge/Flutter-3.19+-02569B?logo=flutter&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
+![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Windows%20%7C%20Linux-lightgrey)
 
-Ce projet combine la puissance de Flutter pour l'interface utilisateur cross-plateforme avec la flexibilité de Python pour les calculs techniques. L'application est conçue pour fonctionner sur plusieurs plateformes :
+## ✨ Présentation
+
+Ce projet est un **template réutilisable** qui combine la puissance de Flutter pour l'interface utilisateur cross-plateforme avec la flexibilité de Python pour les calculs techniques. L'application est conçue pour fonctionner sur plusieurs plateformes :
 
 - Android (via Chaquopy)
 - iOS (via Python-Apple-support)
@@ -39,12 +43,39 @@ _737calcs/
 └── web_backend/            # API backend pour la version web
 ```
 
-## Installation
+## 🚀 Démarrage rapide
 
-1. Clonez ce dépôt
-2. Assurez-vous que Flutter est installé et configuré
-3. Exécutez `package_python_scripts.sh` pour préparer les scripts Python
-4. Lancez l'application avec `flutter run`
+### Installation automatisée
+
+1. Clonez ce dépôt ou utilisez-le comme [template GitHub](https://github.com/yelbakkali/_737calcs/generate)
+2. Exécutez le script d'installation correspondant à votre plateforme :
+
+```bash
+# Sur Linux/WSL
+bash scripts/setup.sh
+
+# Sur Windows (en tant qu'administrateur)
+scripts\setup.bat
+```
+
+Le script d'installation configurera automatiquement :
+
+- Flutter et ses dépendances
+- Python et Poetry pour la gestion des dépendances Python
+- VS Code avec les extensions recommandées
+- Toutes les dépendances spécifiques au projet
+
+### Installation manuelle
+
+Si vous préférez une installation manuelle :
+
+1. Installez [Flutter](https://docs.flutter.dev/get-started/install) (v3.19+)
+2. Installez [Python](https://www.python.org/downloads/) (v3.8+) et [Poetry](https://python-poetry.org/docs/#installation)
+3. Clonez ce dépôt et naviguez dans le dossier
+4. Exécutez `package_python_scripts.sh` pour préparer les scripts Python
+5. Installez les dépendances Python avec Poetry : `cd python_backend && poetry install`
+6. Installez les dépendances Flutter : `cd flutter_app && flutter pub get`
+7. Lancez l'application avec `flutter run`
 
 ## Scripts utilitaires
 
@@ -82,7 +113,7 @@ Pour ajouter un nouveau calcul :
 
 Pour plus de détails sur l'approche de packaging, consultez `docs/packaging_approach.md`.
 
-## Organisation des branches
+## 🌿 Organisation des branches
 
 Le projet utilise une structure de branches pour organiser le développement :
 
@@ -94,3 +125,52 @@ Le projet utilise une structure de branches pour organiser le développement :
 1. Le développement de nouvelles fonctionnalités se fait sur la branche **dev** ou sur des branches dédiées créées à partir de **dev**
 2. Une fois les fonctionnalités testées et validées dans **dev**, elles sont fusionnées vers **main**
 3. Les versions de production sont toujours créées à partir de la branche **main**
+
+## 🔧 Utilisation du template
+
+Ce projet est conçu pour servir de point de départ pour vos propres applications combinant Flutter et Python. Pour l'utiliser efficacement :
+
+### 1. Création de votre projet
+
+- Utilisez le bouton "Use this template" sur GitHub pour créer votre propre dépôt
+- Ou clonez ce dépôt et réinitialisez l'historique Git :
+
+  ```bash
+  git clone https://github.com/yelbakkali/_737calcs.git mon_projet
+  cd mon_projet
+  rm -rf .git
+  git init
+  git add .
+  git commit -m "Premier commit à partir du template 737calcs"
+  ```
+
+### 2. Personnalisation
+
+1. Modifiez le nom du projet dans :
+   - `pubspec.yaml`
+   - `package_python_scripts.sh`
+   - `README.md`
+   
+2. Ajoutez vos propres modules Python dans `shared_python/calculs/`
+
+3. Personnalisez l'interface Flutter dans `flutter_app/lib/`
+
+### 3. Développement VS Code
+
+Ce template inclut une configuration VS Code prête à l'emploi :
+
+- Extensions recommandées pour Flutter et Python
+- Configurations de débogage préconfigurées
+- Tâches VS Code pour les opérations courantes
+
+## 🤖 Collaboration avec GitHub Copilot
+
+Ce projet utilise une structure documentée pour faciliter la collaboration avec GitHub Copilot. Consultez les fichiers dans `docs/copilot/` pour plus d'informations.
+
+## 📄 Licence
+
+Ce template est distribué sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+
+## 👤 Auteur
+
+- [Yassine El Bakkali](https://github.com/yelbakkali)
