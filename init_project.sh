@@ -91,7 +91,7 @@ replace_in_files() {
     find_cmd="find . -type f -not -path '*/\.*' -not -path '*/build/*' -not -path '*/\node_modules/*' -not -path '*/.dart_tool/*' -not -path '*/\venv/*' -not -path '*/.github/*' -not -path '*/init_project.*'"
     
     # Extensions textuelles courantes
-    for ext in md dart py yaml yml json txt sh bat toml html css js; do
+    for ext in md dart py yaml yml json txt sh bat toml html css js iml; do
         files=$(eval "$find_cmd -name '*.$ext'" | xargs grep -l "yeb_app_template" 2>/dev/null)
         if [ -n "$files" ]; then
             echo "$files" | while read file; do
@@ -102,7 +102,20 @@ replace_in_files() {
     done
 }
 
+# Fonction pour renommer les fichiers contenant "yeb_app_template" dans leur nom
+rename_files() {
+    echo "Recherche de fichiers contenant 'yeb_app_template' dans leur nom..."
+    find . -name "*yeb_app_template*" -not -path "*/\.*" -not -path "*/build/*" -not -path "*/\node_modules/*" -not -path "*/.dart_tool/*" -not -path "*/\venv/*" | while read file; do
+        new_file=$(echo "$file" | sed "s/yeb_app_template/$PROJECT_NAME/g")
+        if [ "$file" != "$new_file" ]; then
+            echo "Renommage du fichier: $file -> $new_file"
+            mv "$file" "$new_file"
+        fi
+    done
+}
+
 replace_in_files
+rename_files
 print_success "Renommage terminé"
 
 # Mettre à jour le pubspec.yaml pour Flutter

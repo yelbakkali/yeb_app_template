@@ -79,7 +79,11 @@ REM Remplacer toutes les occurrences de "yeb_app_template" par le nom du projet
 call :print_header "Renommage du projet dans tous les fichiers"
 
 REM Utiliser PowerShell pour le remplacement dans les fichiers
-powershell -Command "Get-ChildItem -Path . -Recurse -File | Where-Object { $_.Extension -match '^\.(md|dart|py|yaml|yml|json|txt|sh|bat|toml|html|css|js)$' -and $_.FullName -notmatch '(/|\\)\.(git|dart_tool|github)(/|\\)' -and $_.FullName -notmatch '(/|\\)(build|node_modules|venv)(/|\\)' } | ForEach-Object { if (Get-Content $_.FullName -Raw | Select-String -Pattern 'yeb_app_template') { (Get-Content $_.FullName) -replace 'yeb_app_template', '%PROJECT_NAME%' | Set-Content $_.FullName; Write-Host ('Renommage dans ' + $_.FullName) } }"
+powershell -Command "Get-ChildItem -Path . -Recurse -File | Where-Object { $_.Extension -match '^\.(md|dart|py|yaml|yml|json|txt|sh|bat|toml|html|css|js|iml)$' -and $_.FullName -notmatch '(/|\\)\.(git|dart_tool|github)(/|\\)' -and $_.FullName -notmatch '(/|\\)(build|node_modules|venv)(/|\\)' } | ForEach-Object { if (Get-Content $_.FullName -Raw | Select-String -Pattern 'yeb_app_template') { (Get-Content $_.FullName) -replace 'yeb_app_template', '%PROJECT_NAME%' | Set-Content $_.FullName; Write-Host ('Renommage dans ' + $_.FullName) } }"
+
+REM Renommer les fichiers contenant "yeb_app_template" dans leur nom
+echo Recherche de fichiers contenant 'yeb_app_template' dans leur nom...
+powershell -Command "Get-ChildItem -Path . -Recurse -File | Where-Object { $_.Name -match 'yeb_app_template' -and $_.FullName -notmatch '(/|\\)\.(git|dart_tool|github)(/|\\)' -and $_.FullName -notmatch '(/|\\)(build|node_modules|venv)(/|\\)' } | ForEach-Object { $newName = $_.FullName -replace 'yeb_app_template', '%PROJECT_NAME%'; if ($_.FullName -ne $newName) { Write-Host ('Renommage du fichier: ' + $_.FullName + ' -> ' + $newName); Rename-Item -Path $_.FullName -NewName (Split-Path -Leaf $newName) } }"
 
 call :print_success "Renommage terminé"
 
