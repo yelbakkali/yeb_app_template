@@ -5,6 +5,7 @@
 ![Flutter](https://img.shields.io/badge/Flutter-3.19+-02569B?logo=flutter&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
 ![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Windows%20%7C%20Linux-lightgrey)
+![CI](https://github.com/yelbakkali/_737calcs/workflows/Flutter/Python%20CI/badge.svg)
 
 ## ✨ Présentation
 
@@ -16,7 +17,7 @@ Ce projet est un **template réutilisable** qui combine la puissance de Flutter 
 - Web (via API backend)
 - Linux/macOS (via Python système)
 
-## Architecture
+## 📂 Architecture
 
 L'architecture du projet est basée sur une approche de packaging des scripts Python :
 
@@ -24,24 +25,7 @@ L'architecture du projet est basée sur une approche de packaging des scripts Py
 - Ces scripts sont empaquetés comme assets dans l'application Flutter
 - Un service unifié (`UnifiedPythonService`) extrait et exécute ces scripts sur chaque plateforme
 
-## Structure du projet
-
-```plaintext
-_737calcs/
-├── docs/                   # Documentation du projet
-├── flutter_app/            # Application Flutter
-│   ├── android/            # Configuration Android avec Chaquopy
-│   ├── ios/                # Configuration iOS avec Python-Apple-support
-│   ├── windows/            # Configuration Windows avec Python embarqué
-│   ├── lib/                # Code Dart de l'application
-│   │   ├── services/       # Services dont UnifiedPythonService
-│   │   └── main.dart       # Point d'entrée de l'application
-│   └── assets/             # Assets de l'application
-│       └── shared_python/  # Scripts Python packagés
-├── shared_python/          # Scripts Python source partagés
-│   └── calculs/            # Modules de calcul
-└── web_backend/            # API backend pour la version web
-```
+Pour plus de détails sur la structure du projet, consultez notre [documentation de structure du projet](docs/project_structure.md).
 
 ## 🚀 Démarrage rapide
 
@@ -65,26 +49,16 @@ Le script d'installation configurera automatiquement :
 - VS Code avec les extensions recommandées
 - Toutes les dépendances spécifiques au projet
 
-### Installation manuelle
+Pour des instructions détaillées, consultez notre [guide d'installation](docs/installation.md).
 
-Si vous préférez une installation manuelle :
-
-1. Installez [Flutter](https://docs.flutter.dev/get-started/install) (v3.19+)
-2. Installez [Python](https://www.python.org/downloads/) (v3.8+) et [Poetry](https://python-poetry.org/docs/#installation)
-3. Clonez ce dépôt et naviguez dans le dossier
-4. Exécutez `package_python_scripts.sh` pour préparer les scripts Python
-5. Installez les dépendances Python avec Poetry : `cd python_backend && poetry install`
-6. Installez les dépendances Flutter : `cd flutter_app && flutter pub get`
-7. Lancez l'application avec `flutter run`
-
-## Scripts utilitaires
+## 🛠️ Scripts utilitaires
 
 - `package_python_scripts.sh` : Prépare les scripts Python pour le packaging
 - `run_dev.sh` : Lance l'environnement de développement complet
 - `run_dev_direct.sh` : Lance l'environnement avec accès direct aux scripts source
 - `start_web_dev.sh` : Lance l'application Flutter en mode web avec le backend FastAPI
 
-## Développement
+## 👩‍💻 Développement
 
 Pour développer et tester l'application :
 
@@ -109,9 +83,15 @@ Pour ajouter un nouveau calcul :
 2. Exécutez `package_python_scripts.sh` pour mettre à jour les assets
 3. Dans votre code Flutter, utilisez `UnifiedPythonService.runScript('nom_du_script', [args])`
 
-## Documentation
+## 📊 Tests et intégration continue (CI)
 
-Pour plus de détails sur l'approche de packaging, consultez `docs/packaging_approach.md`.
+Ce projet est configuré avec GitHub Actions pour l'intégration continue :
+
+- Tests automatiques des composants Flutter
+- Tests automatiques des modules Python
+- Vérification du formatage du code
+
+Pour plus d'informations sur notre système CI/CD, consultez notre [guide CI/CD](docs/ci_guide.md).
 
 ## 🌿 Organisation des branches
 
@@ -120,11 +100,7 @@ Le projet utilise une structure de branches pour organiser le développement :
 - **main** : Branche de production stable. Elle contient le code prêt à être déployé.
 - **dev** : Branche de développement. Toutes les nouvelles fonctionnalités et corrections sont d'abord intégrées ici.
 
-### Workflow de développement
-
-1. Le développement de nouvelles fonctionnalités se fait sur la branche **dev** ou sur des branches dédiées créées à partir de **dev**
-2. Une fois les fonctionnalités testées et validées dans **dev**, elles sont fusionnées vers **main**
-3. Les versions de production sont toujours créées à partir de la branche **main**
+Pour plus de détails sur notre workflow Git, consultez [notre guide de workflow Git](docs/git_workflow.md).
 
 ## 🔧 Utilisation du template
 
@@ -163,6 +139,14 @@ Ce template inclut une configuration VS Code prête à l'emploi :
 - Configurations de débogage préconfigurées
 - Tâches VS Code pour les opérations courantes
 
+## 📈 Roadmap
+
+Consultez notre [roadmap](docs/roadmap.md) pour connaître les fonctionnalités prévues et les objectifs de développement.
+
+## 👥 Comment contribuer
+
+Les contributions sont les bienvenues ! Consultez notre [guide de contribution](docs/contributing.md) pour en savoir plus sur comment participer au projet.
+
 ## 🤖 Collaboration avec GitHub Copilot
 
 Ce projet utilise une structure documentée pour faciliter la collaboration avec GitHub Copilot. Consultez les fichiers dans `docs/copilot/` pour plus d'informations.
@@ -174,3 +158,7 @@ Ce template est distribué sous licence MIT. Voir le fichier LICENSE pour plus d
 ## 👤 Auteur
 
 - [Yassine El Bakkali](https://github.com/yelbakkali)
+
+## 🙏 Remerciements
+
+Merci à tous les [contributeurs](CONTRIBUTORS.md) qui ont participé à ce projet.
