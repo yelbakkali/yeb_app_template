@@ -82,7 +82,7 @@ jobs:
           # Vérifions où se trouve Poetry
           which poetry || echo "Poetry not found in PATH"
           # Mise à jour du fichier lock si nécessaire
-          poetry lock --no-update
+          poetry lock
           # Installe les dépendances avec l'option explicite dev
           poetry config virtualenvs.create true
           poetry install
@@ -99,7 +99,7 @@ jobs:
           # Vérifions où se trouve Poetry
           which poetry || echo "Poetry not found in PATH"
           # Mise à jour du fichier lock si nécessaire
-          poetry lock --no-update
+          poetry lock
           # Installe les dépendances avec l'option explicite dev
           poetry config virtualenvs.create true
           poetry install
