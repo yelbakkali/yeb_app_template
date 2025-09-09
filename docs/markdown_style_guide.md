@@ -55,7 +55,7 @@ Texte précédant une liste.
 - Les blocs de code doivent être entourés de lignes vides (MD031)
 - Utiliser des blocs délimités (triple backtick) plutôt que l'indentation pour les blocs de code
 
-```markdown
+```text
 Voici un exemple de code :
 
 ```dart

@@ -40,6 +40,7 @@
   - Documentation, scripts, code source et métadonnées ont été mis à jour
 
 - **Commandes exécutées**:
+
   ```bash
   # Plusieurs remplacements effectués via l'outil replace_string_in_file
   ```

@@ -78,7 +78,7 @@ Ce document résume les principaux points abordés dans notre conversation sur l
    - Mise à jour du README avec badges, instructions détaillées et guide d'utilisation du template
    - Configuration des GitHub Actions pour la validation CI (Flutter et Python)
    - Ajout d'une licence MIT
-   
+
 8. **Amélioration de l'expérience utilisateur du template**
    - Configuration officielle du template GitHub avec `.github/template-config.yml`
    - Création de scripts d'initialisation automatique (`init_project.sh` et `init_project.bat`)
