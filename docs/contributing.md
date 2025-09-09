@@ -46,6 +46,19 @@ Utilisez un préfixe descriptif pour votre branche :
 - Assurez-vous de suivre les conventions de codage du projet.
 - Écrivez des tests pour vos changements lorsque c'est pertinent.
 - Maintenez votre code propre et bien documenté.
+- Veillez à respecter les règles de formatage Markdown dans la documentation.
+
+#### Correction automatique des erreurs Markdown
+
+GitHub Copilot peut vous aider à corriger automatiquement les erreurs de formatage Markdown. Si vous rencontrez des problèmes de formatage dans vos documents Markdown :
+
+1. Demandez à GitHub Copilot de vérifier et corriger le formatage
+2. Les erreurs courantes qui peuvent être corrigées automatiquement incluent :
+   - Espacement autour des blocs de code
+   - Indentation incorrecte des listes
+   - Espacement autour des titres
+   - Spécification des langages pour les blocs de code
+   - Numérotation des listes ordonnées
 
 ### 5. Tests locaux
 

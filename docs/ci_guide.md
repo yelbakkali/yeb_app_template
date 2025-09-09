@@ -60,3 +60,12 @@ Ce workflow configure les paramètres du template GitHub.
 3. **Commits** :
    - Utiliser des messages de commit conventionnels (feat:, fix:, docs:, ci:, etc.)
    - Inclure des descriptions détaillées pour les changements importants
+
+4. **Documentation Markdown** :
+   - Respecter les règles de formatage Markdown
+   - Utiliser GitHub Copilot pour corriger automatiquement les erreurs de formatage
+   - Erreurs courantes à éviter :
+     - Manque d'espaces autour des blocs de code
+     - Indentation incorrecte des listes
+     - Non-spécification des langages pour les blocs de code
+     - Incohérence dans la numérotation des listes ordonnées
