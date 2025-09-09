@@ -20,8 +20,13 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.x'
+          flutter-version: '3.35.3'  # Version exacte utilisée en local avec Dart 3.9.2
           channel: 'stable'
+          
+      - name: Check Dart SDK version
+        run: |
+          cd flutter_app
+          flutter --version
           
       - name: Install dependencies
         run: |
