@@ -63,17 +63,34 @@ jobs:
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
           
       - name: Install dependencies & run tests for python_backend
         run: |
           cd python_backend
-          poetry install --with dev
-          poetry add --dev pytest
-          poetry run pytest
+          # Vérifions où se trouve Poetry
+          which poetry || echo "Poetry not found in PATH"
+          # Installe les dépendances avec l'option explicite dev
+          poetry config virtualenvs.create true
+          poetry install
+          # Ajout explicite de pytest
+          poetry add pytest --group dev
+          # Lister les paquets installés pour vérification
+          poetry show
+          # Exécution du test
+          poetry run python -m pytest tests/ -v
           
       - name: Install dependencies & run tests for web_backend
         run: |
           cd web_backend
-          poetry install --with dev
-          poetry add --dev pytest
-          poetry run pytest
+          # Vérifions où se trouve Poetry
+          which poetry || echo "Poetry not found in PATH"
+          # Installe les dépendances avec l'option explicite dev
+          poetry config virtualenvs.create true
+          poetry install
+          # Ajout explicite de pytest
+          poetry add pytest --group dev
+          # Lister les paquets installés pour vérification
+          poetry show
+          # Exécution du test
+          poetry run python -m pytest tests/ -v
