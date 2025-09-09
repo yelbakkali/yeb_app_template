@@ -68,6 +68,17 @@ Ce document résume les principaux points abordés dans notre conversation sur l
    - Implémentation des méthodes de connexion et déconnexion à la base
    - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
 
+6. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
+   - Création d'une structure dans `docs/copilot/` pour documenter les sessions de travail
+   - Mise en place d'instructions et règles de communication claires entre l'utilisateur et l'assistant
+   - Ajout d'un système de validation avant toute action sur le projet
+
+7. **Transformation du projet en template GitHub réutilisable**
+   - Création de scripts d'installation automatisée pour WSL et Windows dans `scripts/`
+   - Mise à jour du README avec badges, instructions détaillées et guide d'utilisation du template
+   - Configuration des GitHub Actions pour la validation CI (Flutter et Python)
+   - Ajout d'une licence MIT
+
 ## Prochaines étapes discutées
 
 - Implémentation des calculs spécifiques au 737
