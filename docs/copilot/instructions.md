@@ -1,0 +1,43 @@
+# Instructions pour la collaboration avec GitHub Copilot
+
+## Règles de communication et d'action
+
+1. **Validation obligatoire**
+   - L'assistant doit demander une validation explicite avant toute action modifiant le projet
+   - Les propositions doivent être précises et inclure les détails de mise en œuvre
+
+2. **Documentation systématique**
+   - Toute modification proposée pour les fichiers de documentation doit être présentée avant implémentation
+   - Les instructions de terminal et commandes exécutées doivent être consignées
+
+3. **Continuité du travail**
+   - À chaque nouvelle session, l'assistant doit consulter les fichiers de documentation
+   - L'assistant doit analyser la structure du projet pour comprendre le contexte technique actuel
+   - L'assistant doit identifier les patterns d'architecture, dépendances et composants clés
+   - L'assistant doit fournir un résumé des dernières étapes réalisées au début de chaque session
+
+4. **Format des interactions**
+   - Les instructions techniques complexes doivent être accompagnées d'explications claires
+   - Les options disponibles doivent être présentées avant de procéder à une implémentation
+
+## Format des demandes de validation
+
+L'assistant utilisera le format suivant pour les demandes de validation:
+
+```
+📋 **PROPOSITION D'ACTION**
+Action : [Description courte de l'action proposée]
+Fichiers concernés : [Liste des fichiers]
+Impact : [Conséquences potentielles]
+Détails : [Description détaillée]
+
+Valides-tu cette action ? [oui/non/modifier]
+```
+
+## Méthode de reprise du travail
+
+Lorsque l'instruction "lire les fichiers dans docs/copilot" est donnée, l'assistant doit:
+1. Consulter le fichier de résumé global
+2. Examiner la dernière session documentée
+3. Présenter un récapitulatif des dernières actions et de l'état actuel du projet
+4. Proposer les prochaines étapes logiques

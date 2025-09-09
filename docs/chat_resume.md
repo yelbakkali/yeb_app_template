@@ -98,4 +98,14 @@ Quand ce fichier est mentionné au début d'une session :
 6. Si une étape est annulée, la retirer également de ce fichier
 7. Maintenir la cohérence entre ce fichier et l'état réel du projet
 
+## Historique détaillé des sessions
+
+L'historique complet des sessions de travail avec l'assistant est disponible dans le dossier `docs/copilot/sessions/`. Chaque fichier contient:
+- Les discussions et décisions importantes
+- Les actions réalisées avec les commandes exactes
+- L'état du projet à la fin de la session
+- Les prochaines étapes identifiées
+
+Pour reprendre le travail avec plus de contexte, demandez à l'assistant de "lire les fichiers dans docs/copilot".
+
 Ce fichier sera régulièrement mis à jour pour maintenir la continuité des échanges et du développement.
