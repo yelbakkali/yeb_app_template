@@ -8,6 +8,7 @@
 ## Discussions et décisions
 
 ### [Sujet 1]
+
 - **Question/Problème**: [Description]
 - **Options considérées**:
   1. [Option 1]
@@ -16,21 +17,27 @@
 - **Justification**: [Pourquoi]
 
 ### [Sujet 2]
+
 ...
 
 ## Actions réalisées
 
 ### Action 1: [Titre descriptif]
-- **Fichiers modifiés**: 
+
+- **Fichiers modifiés**:
   - `[chemin/vers/fichier]`: [Description des modifications]
+
 - **Commandes exécutées**:
+
 ```bash
 # Commandes exactes exécutées
 commande argument
 ```
+
 - **Résultat**: [Description du résultat]
 
 ### Action 2: [Titre descriptif]
+
 ...
 
 ## État du projet
@@ -38,9 +45,10 @@ commande argument
 - **Fonctionnalités complétées**:
   - [Fonctionnalité 1]
   - [Fonctionnalité 2]
+
 - **Problèmes en cours**:
-  - [Problème 1]: [Statut]
-  - [Problème 2]: [Statut]
+  - Problème 1: [Statut]
+  - Problème 2: [Statut]
 
 ## Prochaines étapes
 

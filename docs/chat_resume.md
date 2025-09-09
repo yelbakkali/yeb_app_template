@@ -101,6 +101,7 @@ Quand ce fichier est mentionné au début d'une session :
 ## Historique détaillé des sessions
 
 L'historique complet des sessions de travail avec l'assistant est disponible dans le dossier `docs/copilot/sessions/`. Chaque fichier contient:
+
 - Les discussions et décisions importantes
 - Les actions réalisées avec les commandes exactes
 - L'état du projet à la fin de la session

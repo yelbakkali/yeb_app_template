@@ -24,7 +24,7 @@
 
 L'assistant utilisera le format suivant pour les demandes de validation:
 
-```
+```markdown
 📋 **PROPOSITION D'ACTION**
 Action : [Description courte de l'action proposée]
 Fichiers concernés : [Liste des fichiers]
@@ -37,6 +37,7 @@ Valides-tu cette action ? [oui/non/modifier]
 ## Méthode de reprise du travail
 
 Lorsque l'instruction "lire les fichiers dans docs/copilot" est donnée, l'assistant doit:
+
 1. Consulter le fichier de résumé global
 2. Examiner la dernière session documentée
 3. Présenter un récapitulatif des dernières actions et de l'état actuel du projet

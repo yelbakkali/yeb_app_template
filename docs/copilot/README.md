@@ -5,13 +5,14 @@ Ce document explique comment utiliser GitHub Copilot efficacement avec ce projet
 ## Introduction
 
 Ce projet utilise un système structuré pour documenter les interactions avec GitHub Copilot. Cette approche permet de:
+
 - Maintenir une continuité entre les sessions de travail
 - Documenter les décisions techniques et leur justification
 - Offrir un contexte clair pour les nouveaux contributeurs
 
 ## Structure de documentation
 
-```
+```text
 docs/
   ├── copilot/
   │   ├── sessions/               # Historique des sessions
