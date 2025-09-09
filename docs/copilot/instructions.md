@@ -20,6 +20,12 @@
    - Les instructions techniques complexes doivent être accompagnées d'explications claires
    - Les options disponibles doivent être présentées avant de procéder à une implémentation
 
+5. **Correction des fichiers Markdown**
+   - L'assistant doit systématiquement vérifier et corriger les erreurs de formatage Markdown dans tous les fichiers
+   - Les fichiers doivent respecter les règles de linting Markdown (espacement, titres, blocs de code, etc.)
+   - Chaque fichier doit se terminer par une ligne vide
+   - Les blocs de code doivent toujours spécifier un langage et être entourés de lignes vides
+
 ## Format des demandes de validation
 
 L'assistant utilisera le format suivant pour les demandes de validation:
