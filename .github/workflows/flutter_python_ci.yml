@@ -67,11 +67,13 @@ jobs:
       - name: Install dependencies & run tests for python_backend
         run: |
           cd python_backend
-          poetry install
+          poetry install --with dev
+          poetry add --dev pytest
           poetry run pytest
           
       - name: Install dependencies & run tests for web_backend
         run: |
           cd web_backend
-          poetry install
+          poetry install --with dev
+          poetry add --dev pytest
           poetry run pytest
