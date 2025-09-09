@@ -1,6 +1,6 @@
-# Roadmap du projet 737calcs
+# Roadmap du projet yeb_app_template
 
-Ce document présente les objectifs de développement du projet 737calcs à court, moyen et long terme.
+Ce document présente les objectifs de développement du projet yeb_app_template à court, moyen et long terme.
 
 ## Objectifs à court terme (0-3 mois)
 

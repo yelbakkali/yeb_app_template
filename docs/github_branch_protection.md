@@ -1,6 +1,6 @@
 # Configuration de protection des branches GitHub
 
-Ce document décrit comment configurer la protection des branches dans GitHub pour le projet 737calcs.
+Ce document décrit comment configurer la protection des branches dans GitHub pour le projet yeb_app_template.
 
 ## Règles de protection recommandées
 

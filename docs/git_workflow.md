@@ -1,6 +1,6 @@
-# Guide du workflow Git pour 737calcs
+# Guide du workflow Git pour yeb_app_template
 
-Ce document décrit le workflow Git recommandé pour le développement de l'application 737calcs.
+Ce document décrit le workflow Git recommandé pour le développement de l'application yeb_app_template.
 
 ## Structure des branches
 

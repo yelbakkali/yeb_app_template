@@ -1,5 +1,5 @@
 """
-Module principal de calculs pour 737calcs.
+Module principal de calculs pour yeb_app_template.
 Ce fichier est utilisé par toutes les plateformes (Android, iOS, Windows, Web).
 """
 

@@ -3,7 +3,7 @@
 # Ce script démarre le backend FastAPI et l'application Flutter pour le web en mode séquentiel
 # sans nécessiter tmux ou sudo
 
-echo "Démarrage du test de l'application 737calcs en mode web"
+echo "Démarrage du test de l'application yeb_app_template en mode web"
 
 # Chemin vers le répertoire du projet
 PROJECT_DIR="$(dirname "$(readlink -f "$0")")"

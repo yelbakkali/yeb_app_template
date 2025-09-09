@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "python_backend"
 version = "0.1.0"
-description = "Backend de calculs Python pour 737calcs"
+description = "Backend de calculs Python pour yeb_app_template"
 authors = ["Ton Nom <ton.email@example.com>"]
 
 

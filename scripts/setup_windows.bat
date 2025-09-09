@@ -1,6 +1,6 @@
 @echo off
 REM Script d'installation des dépendances pour Windows
-REM Ce script installe tous les outils nécessaires pour le développement du projet 737calcs sous Windows
+REM Ce script installe tous les outils nécessaires pour le développement du projet yeb_app_template sous Windows
 
 echo [INFO] Démarrage du script d'installation pour Windows...
 
@@ -134,13 +134,13 @@ if %ERRORLEVEL% EQU 0 (
     REM Copier le script d'installation WSL
     echo [INFO] Copie du script d'installation WSL...
     cd /d %~dp0
-    wsl -d Ubuntu -- mkdir -p ~/737calcs_setup
-    wsl -d Ubuntu -- cp $(wslpath '%~dp0setup_wsl.sh') ~/737calcs_setup/
-    wsl -d Ubuntu -- chmod +x ~/737calcs_setup/setup_wsl.sh
+    wsl -d Ubuntu -- mkdir -p ~/yeb_app_template_setup
+    wsl -d Ubuntu -- cp $(wslpath '%~dp0setup_wsl.sh') ~/yeb_app_template_setup/
+    wsl -d Ubuntu -- chmod +x ~/yeb_app_template_setup/setup_wsl.sh
     
     echo [INFO] Pour finaliser l'installation sous WSL, exécutez:
     echo       wsl -d Ubuntu
-    echo       ~/737calcs_setup/setup_wsl.sh
+    echo       ~/yeb_app_template_setup/setup_wsl.sh
 ) else (
     echo [INFO] WSL n'est pas disponible. Vous pouvez l'activer via les fonctionnalités Windows.
 )

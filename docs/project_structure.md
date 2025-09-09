@@ -1,11 +1,11 @@
-# Structure du projet 737calcs
+# Structure du projet yeb_app_template
 
 Ce document décrit l'organisation des dossiers et fichiers du projet.
 
 ## Répertoires principaux
 
 ```bash
-_737calcs/
+yeb_app_template/
 ├── docs/                    # Documentation du projet
 ├── flutter_app/             # Application Flutter principale
 ├── lib/                     # Code Dart partagé

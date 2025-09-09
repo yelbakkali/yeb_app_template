@@ -1,6 +1,6 @@
-# Web Backend pour 737calcs
+# Web Backend pour yeb_app_template
 
-Ce module est le backend web de 737calcs, construit avec FastAPI, pour offrir une API RESTful qui exécute les mêmes calculs que les versions mobile et desktop.
+Ce module est le backend web de yeb_app_template, construit avec FastAPI, pour offrir une API RESTful qui exécute les mêmes calculs que les versions mobile et desktop.
 
 ## Prérequis
 
@@ -57,7 +57,7 @@ Réponse attendue :
 
 ```json
 {
-  "message": "737calcs API est en ligne. Utilisez /api/run_script pour exécuter des calculs."
+  "message": "yeb_app_template API est en ligne. Utilisez /api/run_script pour exécuter des calculs."
 }
 ```
 

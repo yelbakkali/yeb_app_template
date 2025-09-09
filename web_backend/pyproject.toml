@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "web_backend"
 version = "0.1.0"
-description = "API Web pour 737calcs"
+description = "API Web pour yeb_app_template"
 authors = ["Votre Nom <votre.email@example.com>"]
 packages = [{include = "*.py"}]
 

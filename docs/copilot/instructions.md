@@ -42,3 +42,17 @@ Lorsque l'instruction "lire les fichiers dans docs/copilot" est donnée, l'assis
 2. Examiner la dernière session documentée
 3. Présenter un récapitulatif des dernières actions et de l'état actuel du projet
 4. Proposer les prochaines étapes logiques
+
+## Instructions spéciales pour l'initialisation du template
+
+Lorsque l'utilisateur demande de "lire la documentation dans docs/" après avoir créé un projet à partir du template, l'assistant doit :
+
+1. Consulter le fichier `docs/copilot/template_initialization.md`
+2. Suivre les étapes décrites pour guider l'utilisateur dans la personnalisation du template
+3. Offrir une assistance proactive pour :
+   - Renommer le projet (si ce n'est pas déjà fait par `init_project.sh`)
+   - Personnaliser l'application selon les besoins spécifiques
+   - Configurer les environnements de développement
+   - Ajouter de nouveaux modules Python et écrans Flutter
+
+L'assistant doit adopter une approche guidée par étapes, en commençant par un résumé de la structure du projet et en proposant ensuite un plan d'action adapté aux besoins exprimés par l'utilisateur.

@@ -1,6 +1,6 @@
 # Approche de Packaging pour Scripts Python
 
-Ce document explique l'approche de packaging adoptée pour gérer les scripts Python dans l'application 737calcs.
+Ce document explique l'approche de packaging adoptée pour gérer les scripts Python dans l'application yeb_app_template.
 
 ## Résumé
 

@@ -17,12 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '737calcs',
+      title: 'yeb_app_template',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: '737calcs - Démo Python'),
+      home: const MyHomePage(title: 'yeb_app_template - Démo Python'),
     );
   }
 }

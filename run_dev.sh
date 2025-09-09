@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script lanceur tout-en-un pour 737calcs avec l'approche de packaging
+# Script lanceur tout-en-un pour yeb_app_template avec l'approche de packaging
 # Ce script prépare les scripts Python pour le packaging, lance le backend web et l'application Flutter
 
 # Chemin de base du projet
@@ -28,7 +28,7 @@ bash "$BASE_DIR/package_python_scripts.sh"
 export FLUTTER_DEV_MODE=true
 
 # Créer une nouvelle session tmux
-SESSION_NAME="737calcs-dev"
+SESSION_NAME="yeb_app_template-dev"
 tmux new-session -d -s "$SESSION_NAME"
 
 # Diviser l'écran horizontalement
@@ -43,7 +43,7 @@ print_header "Démarrage de l'application Flutter Web"
 tmux send-keys -t "${SESSION_NAME}:0.1" "cd $BASE_DIR/flutter_app && FLUTTER_DEV_MODE=true flutter run -d chrome --web-hostname 0.0.0.0 --web-port 8080" C-m
 
 # Attacher à la session tmux
-print_header "Démarrage de l'environnement de développement 737calcs"
+print_header "Démarrage de l'environnement de développement yeb_app_template"
 echo "Les scripts Python sont maintenant intégrés dans les assets."
 echo "- Backend API: http://localhost:8000"
 echo "- Frontend Flutter: http://localhost:8080"

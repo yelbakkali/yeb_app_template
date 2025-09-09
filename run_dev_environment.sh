@@ -1,5 +1,5 @@
 #!/bin/bash
-# Script lanceur tout-en-un pour 737calcs
+# Script lanceur tout-en-un pour yeb_app_template
 # Ce script synchronise les scripts Python, lance le backend web et l'application Flutter
 
 # Chemin de base du projet
@@ -25,7 +25,7 @@ print_header "Synchronisation des scripts Python partagés"
 bash "$BASE_DIR/sync_python_scripts.sh"
 
 # Créer une nouvelle session tmux
-SESSION_NAME="737calcs"
+SESSION_NAME="yeb_app_template"
 tmux new-session -d -s "$SESSION_NAME"
 
 # Diviser l'écran horizontalement

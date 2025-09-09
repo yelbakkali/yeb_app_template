@@ -1,12 +1,12 @@
-# Résumé de la conversation sur le projet 737calcs
+# Résumé de la conversation sur le projet yeb_app_template
 
-Ce document résume les principaux points abordés dans notre conversation sur le développement du projet 737calcs. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
+Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
 **Dernière mise à jour :** 7 septembre 2025
 
 ## Contexte du projet
 
-- **Projet** : Application 737calcs - Application Flutter multiplateforme avec calculs en Python
+- **Projet** : Application yeb_app_template - Application Flutter multiplateforme avec backend Python
 - **Objectif** : Intégrer des scripts Python pour effectuer des calculs spécifiques sur plusieurs plateformes (Android, iOS, Windows, Web)
 - **État actuel** : Architecture de packaging mise en place avec `UnifiedPythonService`
 

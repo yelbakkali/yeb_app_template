@@ -16,7 +16,7 @@ from typing import List
 SHARED_PYTHON_DIR = Path(__file__).parent.parent / "shared_python"
 sys.path.append(str(SHARED_PYTHON_DIR))
 
-app = FastAPI(title="737calcs API", description="API pour les calculs aéronautiques")
+app = FastAPI(title="yeb_app_template API", description="API pour l'application yeb_app_template")
 
 # Configuration CORS pour permettre les requêtes depuis le frontend Flutter
 app.add_middleware(
@@ -33,7 +33,7 @@ class ScriptRequest(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"message": "737calcs API est en ligne. Utilisez /api/run_script pour exécuter des calculs."}
+    return {"message": "yeb_app_template API est en ligne. Utilisez /api/run_script pour exécuter des calculs."}
 
 @app.post("/api/run_script")
 async def run_script(request: ScriptRequest):

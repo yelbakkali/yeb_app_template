@@ -81,9 +81,9 @@ class UnifiedPythonService {
       }
       
       _extractedScriptsPath = scriptsExtractPath;
-      print('Scripts Python extraits vers: $_extractedScriptsPath');
+      debugPrint('Scripts Python extraits vers: $_extractedScriptsPath');
     } catch (e) {
-      print('Erreur lors de l\'extraction des scripts Python: $e');
+      debugPrint('Erreur lors de l\'extraction des scripts Python: $e');
       rethrow;
     }
   }

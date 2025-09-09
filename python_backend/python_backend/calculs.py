@@ -1,5 +1,5 @@
 """
-Module de calculs Python pour 737calcs.
+Module de calculs Python pour yeb_app_template.
 Toutes les fonctions de calcul métier seront définies ici.
 """
 

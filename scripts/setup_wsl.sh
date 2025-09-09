@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script d'installation des dépendances pour WSL (Ubuntu/Debian)
-# Ce script installe tous les outils nécessaires pour le développement du projet 737calcs dans WSL
+# Ce script installe tous les outils nécessaires pour le développement du projet yeb_app_template dans WSL
 
 set -e  # Arrête le script si une erreur se produit
 

@@ -13,7 +13,7 @@ if ! command -v tmux &> /dev/null; then
 fi
 
 # Créer une nouvelle session tmux
-tmux new-session -d -s 737calcs
+tmux new-session -d -s yeb_app_template
 
 # Diviser la fenêtre horizontalement
 tmux split-window -h
@@ -31,4 +31,4 @@ tmux select-pane -t 1
 tmux send-keys "cd $PROJECT_DIR/flutter_app && flutter run -d chrome" C-m
 
 # Attacher à la session tmux
-tmux attach-session -t 737calcs
+tmux attach-session -t yeb_app_template

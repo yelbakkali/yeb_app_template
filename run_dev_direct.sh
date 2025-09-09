@@ -24,7 +24,7 @@ fi
 export FLUTTER_DEV_MODE=true
 
 # Créer une nouvelle session tmux
-SESSION_NAME="737calcs-direct"
+SESSION_NAME="yeb_app_template-direct"
 tmux new-session -d -s "$SESSION_NAME"
 
 # Diviser l'écran horizontalement
@@ -39,7 +39,7 @@ print_header "Démarrage de l'application Flutter Web (accès direct)"
 tmux send-keys -t "${SESSION_NAME}:0.1" "cd $BASE_DIR/flutter_app && FLUTTER_DEV_MODE=true flutter run -d chrome --web-hostname 0.0.0.0 --web-port 8080" C-m
 
 # Attacher à la session tmux
-print_header "Démarrage de l'environnement de développement 737calcs (accès direct)"
+print_header "Démarrage de l'environnement de développement yeb_app_template (accès direct)"
 echo "L'application accède directement aux scripts Python partagés"
 echo "- Backend API: http://localhost:8000"
 echo "- Frontend Flutter: http://localhost:8080"

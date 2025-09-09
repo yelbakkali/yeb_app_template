@@ -1,6 +1,6 @@
-# Guide d'installation du projet 737calcs
+# Guide d'installation du projet yeb_app_template
 
-Ce guide vous aidera à installer et configurer l'environnement de développement pour le projet 737calcs.
+Ce guide vous aidera à installer et configurer l'environnement de développement pour le projet yeb_app_template.
 
 ## Prérequis
 
@@ -17,8 +17,8 @@ Avant de commencer, assurez-vous d'avoir installé :
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/votre-utilisateur/737calcs.git
-cd 737calcs
+git clone https://github.com/votre-utilisateur/yeb_app_template.git
+cd yeb_app_template
 ```
 
 ### 2. Configuration Flutter
@@ -128,19 +128,19 @@ Pour plus d'informations sur la CI, consultez le [guide CI/CD](./ci_guide.md).
 
 - Si vous rencontrez des erreurs liées à Flutter, essayez :
 
-  ```bash
-  flutter clean
-  flutter pub get
-  ```
+```bash
+flutter clean
+flutter pub get
+```
 
 ### Problèmes Python
 
 - Si vous rencontrez des erreurs liées à Poetry :
 
-  ```bash
-  poetry lock --no-update
-  poetry install
-  ```
+```bash
+poetry lock --no-update
+poetry install
+```
 
 ### Problèmes de synchronisation des scripts Python
 

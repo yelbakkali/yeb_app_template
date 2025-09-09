@@ -1,11 +1,11 @@
-# _737calcs - Template pour applications Flutter/Python
+# yeb_app_template - Template pour applications Flutter/Python
 
 > Template pour applications Flutter multiplateforme avec intégration Python pour les calculs spécifiques.
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.19+-02569B?logo=flutter&logoColor=white)
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)
 ![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Web%20%7C%20Windows%20%7C%20Linux-lightgrey)
-![CI](https://github.com/yelbakkali/_737calcs/workflows/Flutter/Python%20CI/badge.svg)
+![CI](https://github.com/yelbakkali/yeb_app_template/workflows/Flutter/Python%20CI/badge.svg)
 
 ## ✨ Présentation
 
@@ -29,25 +29,50 @@ Pour plus de détails sur la structure du projet, consultez notre [documentation
 
 ## 🚀 Démarrage rapide
 
-### Installation automatisée
+### Étape 1 : Utiliser ce template
 
-1. Clonez ce dépôt ou utilisez-le comme [template GitHub](https://github.com/yelbakkali/_737calcs/generate)
-2. Exécutez le script d'installation correspondant à votre plateforme :
+1. Cliquez sur le bouton vert **"Use this template"** en haut de la page GitHub
+2. Sélectionnez **"Create a new repository"**
+3. Remplissez les informations de votre nouveau dépôt et cliquez sur **"Create repository from template"**
+
+### Étape 2 : Explorer la documentation
 
 ```bash
-# Sur Linux/WSL
-bash scripts/setup.sh
-
-# Sur Windows (en tant qu'administrateur)
-scripts\setup.bat
+# Si vous utilisez VS Code avec GitHub Copilot, demandez simplement :
+# "Lire la documentation dans docs/"
 ```
 
-Le script d'installation configurera automatiquement :
+Parcourez le dossier `docs/` pour découvrir :
 
-- Flutter et ses dépendances
-- Python et Poetry pour la gestion des dépendances Python
-- VS Code avec les extensions recommandées
-- Toutes les dépendances spécifiques au projet
+- La structure du projet (`project_structure.md`)
+- Le guide d'installation détaillé (`installation.md`)
+- L'approche de packaging des scripts Python (`packaging_approach.md`)
+- Le workflow Git recommandé (`git_workflow.md`)
+- Et plus encore...
+
+### Étape 3 : Initialiser votre nouveau dépôt
+
+```bash
+# Cloner votre nouveau dépôt
+git clone https://github.com/votre-username/nom-de-votre-depot.git
+cd nom-de-votre-depot
+
+# Initialiser votre projet (automatiquement)
+# Pour Linux/macOS :
+chmod +x init_project.sh
+./init_project.sh
+
+# Pour Windows :
+init_project.bat
+```
+
+Le script d'initialisation va :
+
+- Détecter automatiquement le nom de votre projet (basé sur le nom du dépôt)
+- Personnaliser tous les fichiers en remplaçant "yeb_app_template" par votre nom de projet
+- Installer les dépendances nécessaires
+- Configurer votre environnement de développement
+- Créer le premier commit avec les modifications
 
 Pour des instructions détaillées, consultez notre [guide d'installation](docs/installation.md).
 
@@ -102,34 +127,29 @@ Le projet utilise une structure de branches pour organiser le développement :
 
 Pour plus de détails sur notre workflow Git, consultez [notre guide de workflow Git](docs/git_workflow.md).
 
-## 🔧 Utilisation du template
+## 🔧 Personnalisation du projet
 
-Ce projet est conçu pour servir de point de départ pour vos propres applications combinant Flutter et Python. Pour l'utiliser efficacement :
+Une fois que vous avez créé votre projet à partir de ce template, vous pouvez le personnaliser selon vos besoins :
 
-### 1. Création de votre projet
+### Personnalisation automatique
 
-- Utilisez le bouton "Use this template" sur GitHub pour créer votre propre dépôt
-- Ou clonez ce dépôt et réinitialisez l'historique Git :
+Le script `init_project.sh` (ou `init_project.bat` sur Windows) s'occupe de la personnalisation initiale :
 
-  ```bash
-  git clone https://github.com/yelbakkali/_737calcs.git mon_projet
-  cd mon_projet
-  rm -rf .git
-  git init
-  git add .
-  git commit -m "Premier commit à partir du template 737calcs"
-  ```
+- Renommage automatique du projet dans tous les fichiers
+- Configuration des dépendances
+- Préparation de l'environnement de développement
 
-### 2. Personnalisation
+### Personnalisation manuelle
 
-1. Modifiez le nom du projet dans :
-   - `pubspec.yaml`
-   - `package_python_scripts.sh`
-   - `README.md`
+Pour personnaliser davantage votre projet :
+
+1. Ajoutez vos propres modules Python dans `shared_python/`
    
-2. Ajoutez vos propres modules Python dans `shared_python/calculs/`
+2. Personnalisez l'interface Flutter dans `flutter_app/lib/`
+   
+3. Configurez les environnements backend dans `python_backend/` et `web_backend/`
 
-3. Personnalisez l'interface Flutter dans `flutter_app/lib/`
+4. Si vous utilisez VS Code avec GitHub Copilot, demandez simplement à l'assistant de **"lire la documentation dans docs/"** pour obtenir une aide personnalisée pour adapter le template à vos besoins
 
 ### 3. Développement VS Code
 

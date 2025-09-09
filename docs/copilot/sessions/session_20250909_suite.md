@@ -25,7 +25,7 @@
 - **Question/Problème**: Comment permettre de travailler à la fois en WSL et Windows de manière transparente?
 
 - **Décision**:
-  
+
   - Création de scripts d'installation spécifiques pour chaque environnement
   - Script intelligent qui détecte l'environnement et appelle le script approprié
   - Configuration automatique de VS Code pour Remote-WSL

@@ -1,6 +1,6 @@
 # Guide de contribution
 
-Merci de votre intérêt pour contribuer au projet 737calcs ! Ce guide vous aidera à comprendre comment vous pouvez participer efficacement au développement du projet.
+Merci de votre intérêt pour contribuer au projet yeb_app_template ! Ce guide vous aidera à comprendre comment vous pouvez participer efficacement au développement du projet.
 
 ## Processus de contribution
 
@@ -16,14 +16,14 @@ Merci de votre intérêt pour contribuer au projet 737calcs ! Ce guide vous aide
 2. Clonez votre fork localement :
 
    ```bash
-   git clone https://github.com/votre-username/737calcs.git
-   cd 737calcs
+   git clone https://github.com/votre-username/yeb_app_template.git
+   cd yeb_app_template
    ```
 
 3. Ajoutez le dépôt original comme remote "upstream" :
 
    ```bash
-   git remote add upstream https://github.com/organisation-originale/737calcs.git
+   git remote add upstream https://github.com/organisation-originale/yeb_app_template.git
    ```
 
 ### 3. Création d'une branche

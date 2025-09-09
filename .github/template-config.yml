@@ -1,0 +1,8 @@
+# Template configuration file for GitHub
+name: yeb_app_template
+description: A Flutter application template with Python backend integration
+tags:
+  - flutter
+  - python
+  - cross-platform
+  - template
