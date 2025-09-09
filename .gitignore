@@ -48,7 +48,10 @@ app.*.map.json
 *.bak
 
 # Scripts Python extraits
-/flutter_app/assets/shared_python/
+# Nous gardons la structure des dossiers mais ignorons les fichiers Python
+/flutter_app/assets/shared_python/**/*.py
+/flutter_app/assets/shared_python/**/*.pyc
+!/flutter_app/assets/shared_python/**/.gitkeep
 
 # Environnement Python
 __pycache__/
