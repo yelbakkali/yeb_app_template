@@ -14,8 +14,8 @@ class UnifiedPythonService {
   /// URL de l'API pour la version web (en développement local)
   static const String apiBaseUrl = 'http://localhost:8000/api';
   
-  /// Chemin standard des scripts Python (répertoire calculs)
-  static const String scriptsDir = 'calculs';
+  /// Chemin standard des scripts Python
+  static const String scriptsDir = '';
   
   /// Indique si les scripts ont déjà été extraits des assets
   static bool _scriptsExtracted = false;
@@ -46,11 +46,8 @@ class UnifiedPythonService {
         await dir.create(recursive: true);
       }
       
-      // Créer le sous-répertoire calculs
-      final calculsDir = Directory(path.join(scriptsExtractPath, 'calculs'));
-      if (!await calculsDir.exists()) {
-        await calculsDir.create(recursive: true);
-      }
+      // Nous n'avons plus besoin de créer un sous-répertoire calculs
+      // car les scripts sont directement dans shared_python
       
       // Lister les scripts à extraire
       final manifestContent = await rootBundle.loadString('AssetManifest.json');

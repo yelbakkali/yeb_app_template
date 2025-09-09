@@ -12,8 +12,8 @@ class PythonService {
   /// URL de l'API pour la version web (en développement local)
   static const String apiBaseUrl = 'http://localhost:8000/api';
   
-  /// Chemin standard des scripts Python (répertoire calculs)
-  static const String scriptsDir = 'calculs';
+  /// Chemin standard des scripts Python
+  static const String scriptsDir = '';
 
   /// Exécute un script Python avec des arguments et retourne la sortie.
   /// [scriptPath] : chemin du script Python à exécuter

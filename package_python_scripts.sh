@@ -24,7 +24,6 @@ if ! grep -q "assets/shared_python/" "$FLUTTER_DIR/pubspec.yaml"; then
     echo "ATTENTION: Assurez-vous que votre pubspec.yaml contient les assets suivants:"
     echo "  assets:"
     echo "    - assets/shared_python/"
-    echo "    - assets/shared_python/calculs/"
 fi
 
 # Rappel pour Android

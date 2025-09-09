@@ -66,9 +66,7 @@ flutter:
   assets:
     # Embarquer les scripts Python partagés comme assets
     - assets/shared_python/
-    - assets/shared_python/calculs/
     - ../shared_python/
-    - ../shared_python/calculs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
