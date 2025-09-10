@@ -83,47 +83,51 @@ EOF
 
 print_success "Fichier de configuration créé avec le nom du projet : $PROJECT_NAME"
 
-# Remplacer toutes les occurrences de "yeb_app_template" par le nom du projet
-print_header "Renommage du projet dans tous les fichiers"
+# Renommer le fichier .code-workspace et mettre à jour les fichiers clés
+print_header "Mise à jour du projet avec le nouveau nom"
 
-# Fonction pour remplacer dans les fichiers
-replace_in_files() {
-    find_cmd="find . -type f -not -path '*/\.*' -not -path '*/build/*' -not -path '*/\node_modules/*' -not -path '*/.dart_tool/*' -not -path '*/\venv/*' -not -path '*/.github/*' -not -path '*/init_project.*'"
+# Vérifier si le fichier code-workspace existe
+if [ -f "yeb_app_template.code-workspace" ]; then
+    echo "Renommage du fichier code-workspace..."
+    cp "yeb_app_template.code-workspace" "$PROJECT_NAME.code-workspace"
+    rm "yeb_app_template.code-workspace"
     
-    # Extensions textuelles courantes
-    for ext in md dart py yaml yml json txt sh bat toml html css js iml; do
-        files=$(eval "$find_cmd -name '*.$ext'" | xargs grep -l "yeb_app_template" 2>/dev/null)
-        if [ -n "$files" ]; then
-            echo "$files" | while read file; do
-                echo "Renommage dans $file"
-                sed -i "s/yeb_app_template/$PROJECT_NAME/g" "$file"
-            done
-        fi
-    done
-}
+    # Remplacer le contenu du fichier
+    sed -i "s/yeb_app_template/$PROJECT_NAME/g" "$PROJECT_NAME.code-workspace"
+    print_success "Fichier code-workspace renommé en $PROJECT_NAME.code-workspace"
+else
+    print_warning "Fichier code-workspace non trouvé"
+fi
 
-# Fonction pour renommer les fichiers contenant "yeb_app_template" dans leur nom
-rename_files() {
-    echo "Recherche de fichiers contenant 'yeb_app_template' dans leur nom..."
-    find . -name "*yeb_app_template*" -not -path "*/\.*" -not -path "*/build/*" -not -path "*/\node_modules/*" -not -path "*/.dart_tool/*" -not -path "*/\venv/*" | while read file; do
-        new_file=$(echo "$file" | sed "s/yeb_app_template/$PROJECT_NAME/g")
-        if [ "$file" != "$new_file" ]; then
-            echo "Renommage du fichier: $file -> $new_file"
-            mv "$file" "$new_file"
-        fi
-    done
-}
+# Mettre à jour le fichier pubspec.yaml
+if [ -f "pubspec.yaml" ]; then
+    echo "Mise à jour du nom du package dans pubspec.yaml..."
+    sed -i "s/^name: yeb_app_template/name: $PROJECT_NAME/g" pubspec.yaml
+    print_success "Nom du package mis à jour dans pubspec.yaml"
+fi
 
-replace_in_files
-rename_files
+# Mettre à jour tous les imports dans le code
+echo "Mise à jour des imports dans les fichiers Dart..."
+find . -name "*.dart" -type f -exec sed -i "s/package:yeb_app_template\//package:$PROJECT_NAME\//g" {} \;
+print_success "Imports mis à jour dans les fichiers Dart"
+
+# Mettre à jour les fichiers web
+if [ -f "flutter_app/web/index.html" ]; then
+    echo "Mise à jour du fichier index.html..."
+    sed -i "s/content=\"Application yeb_app_template/content=\"Application $PROJECT_NAME/g" flutter_app/web/index.html
+    sed -i "s/content=\"yeb_app_template\"/content=\"$PROJECT_NAME\"/g" flutter_app/web/index.html
+    sed -i "s/<title>yeb_app_template</<title>$PROJECT_NAME</g" flutter_app/web/index.html
+    print_success "Fichier index.html mis à jour"
+fi
+
+# Aucune autre fonction de remplacement nécessaire puisqu'on ne renomme que le fichier code-workspace
+echo "Aucun autre renommage n'est effectué, comme demandé."
 print_success "Renommage terminé"
 
-# Mettre à jour le pubspec.yaml pour Flutter
+# Ne pas mettre à jour le pubspec.yaml pour Flutter avec le nom du projet
 if [ -f "flutter_app/pubspec.yaml" ]; then
-    echo "Mise à jour de pubspec.yaml..."
-    sed -i "s/name: flutter_app/name: ${PROJECT_NAME}_flutter/g" flutter_app/pubspec.yaml
-    sed -i "s/description: A new Flutter project./description: $PROJECT_NAME - Application Flutter avec backend Python/g" flutter_app/pubspec.yaml
-    print_success "pubspec.yaml mis à jour"
+    echo "Vérification du pubspec.yaml..."
+    print_success "pubspec.yaml laissé inchangé, comme demandé"
 fi
 
 # Installer les dépendances

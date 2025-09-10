@@ -3,17 +3,5 @@
         {
             "path": "."
         }
-    ],
-    "settings": {
-        "python.defaultInterpreterPath": "/home/yassine/.cache/pypoetry/virtualenvs/web-backend-djriY445-py3.12/bin/python",
-        "python.analysis.extraPaths": [
-            "/home/yassine/.cache/pypoetry/virtualenvs/web-backend-djriY445-py3.12/lib/python3.12/site-packages"
-        ],
-        "python.linting.enabled": true,
-        "python.linting.pylintEnabled": true,
-        "[python]": {
-            "editor.formatOnSave": true,
-            "editor.defaultFormatter": "ms-python.python"
-        }
-    }
+    ]
 }

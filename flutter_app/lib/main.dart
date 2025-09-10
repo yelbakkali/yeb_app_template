@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/services/unified_python_service.dart';
+import 'services/unified_python_service.dart';
+import 'config/project_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,12 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'yeb_app_template',
+      title: ProjectConfig.projectName,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'yeb_app_template - Démo Python'),
+      home: MyHomePage(title: '${ProjectConfig.projectName} - Démo Python'),
     );
   }
 }

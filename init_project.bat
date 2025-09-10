@@ -75,24 +75,49 @@ echo } >> flutter_app\lib\config\project_config.dart
 
 call :print_success "Fichier de configuration créé avec le nom du projet : %PROJECT_NAME%"
 
-REM Remplacer toutes les occurrences de "yeb_app_template" par le nom du projet
-call :print_header "Renommage du projet dans tous les fichiers"
+REM Renommer le fichier .code-workspace et mettre à jour les fichiers clés
+call :print_header "Mise à jour du projet avec le nouveau nom"
 
-REM Utiliser PowerShell pour le remplacement dans les fichiers
-powershell -Command "Get-ChildItem -Path . -Recurse -File | Where-Object { $_.Extension -match '^\.(md|dart|py|yaml|yml|json|txt|sh|bat|toml|html|css|js|iml)$' -and $_.FullName -notmatch '(/|\\)\.(git|dart_tool|github)(/|\\)' -and $_.FullName -notmatch '(/|\\)(build|node_modules|venv)(/|\\)' } | ForEach-Object { if (Get-Content $_.FullName -Raw | Select-String -Pattern 'yeb_app_template') { (Get-Content $_.FullName) -replace 'yeb_app_template', '%PROJECT_NAME%' | Set-Content $_.FullName; Write-Host ('Renommage dans ' + $_.FullName) } }"
+REM Vérifier si le fichier code-workspace existe
+if exist "yeb_app_template.code-workspace" (
+    echo Renommage du fichier code-workspace...
+    copy "yeb_app_template.code-workspace" "%PROJECT_NAME%.code-workspace" > nul
+    del "yeb_app_template.code-workspace"
+    
+    REM Remplacer le contenu du fichier
+    powershell -Command "(Get-Content '%PROJECT_NAME%.code-workspace') -replace 'yeb_app_template', '%PROJECT_NAME%' | Set-Content '%PROJECT_NAME%.code-workspace'"
+    call :print_success "Fichier code-workspace renommé en %PROJECT_NAME%.code-workspace"
+) else (
+    call :print_warning "Fichier code-workspace non trouvé"
+)
 
-REM Renommer les fichiers contenant "yeb_app_template" dans leur nom
-echo Recherche de fichiers contenant 'yeb_app_template' dans leur nom...
-powershell -Command "Get-ChildItem -Path . -Recurse -File | Where-Object { $_.Name -match 'yeb_app_template' -and $_.FullName -notmatch '(/|\\)\.(git|dart_tool|github)(/|\\)' -and $_.FullName -notmatch '(/|\\)(build|node_modules|venv)(/|\\)' } | ForEach-Object { $newName = $_.FullName -replace 'yeb_app_template', '%PROJECT_NAME%'; if ($_.FullName -ne $newName) { Write-Host ('Renommage du fichier: ' + $_.FullName + ' -> ' + $newName); Rename-Item -Path $_.FullName -NewName (Split-Path -Leaf $newName) } }"
+REM Mettre à jour le fichier pubspec.yaml
+if exist "pubspec.yaml" (
+    echo Mise à jour du nom du package dans pubspec.yaml...
+    powershell -Command "(Get-Content 'pubspec.yaml') -replace '^name: yeb_app_template', 'name: %PROJECT_NAME%' | Set-Content 'pubspec.yaml'"
+    call :print_success "Nom du package mis à jour dans pubspec.yaml"
+)
+
+REM Mettre à jour tous les imports dans le code
+echo Mise à jour des imports dans les fichiers Dart...
+powershell -Command "Get-ChildItem -Path . -Include *.dart -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace 'package:yeb_app_template/', 'package:%PROJECT_NAME%/' | Set-Content $_.FullName }"
+call :print_success "Imports mis à jour dans les fichiers Dart"
+
+REM Mettre à jour les fichiers web
+if exist "flutter_app\web\index.html" (
+    echo Mise à jour du fichier index.html...
+    powershell -Command "(Get-Content 'flutter_app\web\index.html') -replace 'content=""Application yeb_app_template', 'content=""Application %PROJECT_NAME%' | Set-Content 'flutter_app\web\index.html'"
+    powershell -Command "(Get-Content 'flutter_app\web\index.html') -replace 'content=""yeb_app_template""', 'content=""%PROJECT_NAME%""' | Set-Content 'flutter_app\web\index.html'"
+    powershell -Command "(Get-Content 'flutter_app\web\index.html') -replace '<title>yeb_app_template<', '<title>%PROJECT_NAME%<' | Set-Content 'flutter_app\web\index.html'"
+    call :print_success "Fichier index.html mis à jour"
+)
 
 call :print_success "Renommage terminé"
 
-REM Mettre à jour le pubspec.yaml pour Flutter
+REM Ne pas mettre à jour le pubspec.yaml pour Flutter avec le nom du projet
 if exist "flutter_app\pubspec.yaml" (
-    echo Mise à jour de pubspec.yaml...
-    powershell -Command "(Get-Content flutter_app\pubspec.yaml) -replace 'name: flutter_app', 'name: %PROJECT_NAME%_flutter' | Set-Content flutter_app\pubspec.yaml"
-    powershell -Command "(Get-Content flutter_app\pubspec.yaml) -replace 'description: A new Flutter project.', 'description: %PROJECT_NAME% - Application Flutter avec backend Python' | Set-Content flutter_app\pubspec.yaml"
-    call :print_success "pubspec.yaml mis à jour"
+    echo Vérification du pubspec.yaml...
+    call :print_success "pubspec.yaml laissé inchangé, comme demandé"
 )
 
 REM Installer les dépendances

@@ -20,17 +20,10 @@
    - Les instructions techniques complexes doivent être accompagnées d'explications claires
    - Les options disponibles doivent être présentées avant de procéder à une implémentation
 
-5. **Correction des fichiers Markdown**
-   - L'assistant doit systématiquement vérifier et corriger les erreurs de formatage Markdown dans tous les fichiers
-   - Les fichiers doivent respecter le guide de style Markdown défini dans `docs/markdown_style_guide.md`
-   - Points particulièrement importants à respecter :
-     - Chaque fichier doit se terminer par une seule ligne vide (MD047)
-     - Les titres doivent être précédés d'une ligne vide, sauf s'ils commencent le document (MD022)
-     - Les blocs de code délimités doivent spécifier un langage (MD040) et être entourés de lignes vides (MD031)
-     - Les listes doivent être précédées d'une ligne vide (MD032)
-     - Utiliser des tirets (`-`) pour les éléments de liste plutôt que des astérisques (*)
-   - L'assistant doit appliquer ces règles à chaque création ou modification de fichier Markdown
-   - En cas de doute, se référer au guide de style complet dans `docs/markdown_style_guide.md`
+5. **Correction des erreurs de formatage Markdown**
+   - À chaque erreur de formatage Markdown signalée par l'utilisateur, ajouter la règle correspondante au guide de style Markdown s'il n'existe pas déjà
+   - Utiliser le guide de style dans `docs/markdown_style_guide.md` comme référence pour éviter les erreurs de formatage
+   - S'assurer que tous les documents Markdown créés ou modifiés respectent ces règles de formatage
 
 ## Format des demandes de validation
 

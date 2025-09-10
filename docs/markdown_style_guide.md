@@ -1,120 +1,111 @@
-# Guide de style Markdown pour yeb_app_template
+# Guide de style Markdown
 
-Ce document définit les conventions de formatage Markdown à suivre pour tous les fichiers de documentation dans le projet yeb_app_template.
+Ce document définit les règles de formatage Markdown à suivre pour tous les documents du projet. L'objectif est de maintenir une documentation cohérente, lisible et maintenable.
+
+> **Note pour GitHub Copilot** : À chaque erreur de formatage Markdown signalée par l'utilisateur, ajouter la règle correspondante à ce guide si elle n'existe pas déjà. Utiliser ce guide comme référence pour éviter les erreurs de formatage dans tous les documents Markdown du projet.
 
 ## Règles générales
 
-- Tous les fichiers doivent se terminer par une seule ligne vide (MD047)
-- Éviter les espaces en fin de ligne (MD009)
-- Utiliser des espaces pour l'indentation, pas des tabulations (MD010)
-- Ne pas dépasser 100 caractères par ligne pour le texte (MD013)
+1. **Utilisez des titres pour structurer votre contenu**
+   - Commencez chaque document par un titre de niveau 1 (`#`)
+   - Utilisez les niveaux de titre de manière séquentielle (ne sautez pas de niveaux)
 
-## Titres
+2. **Gardez les lignes à une longueur raisonnable**
+   - Limitez vos lignes à environ 80-100 caractères pour une meilleure lisibilité
 
-- Les titres doivent être précédés d'une ligne vide, sauf au début du document (MD022)
-- Les titres doivent être suivis d'une ligne vide (MD022)
-- Pas d'espaces en fin des titres (MD009)
-- Utiliser la syntaxe ATX pour les titres (`#`, `##`, etc.) et non la syntaxe Setext (soulignement) (MD003)
-- Les titres de même niveau doivent utiliser un style cohérent (MD003)
+3. **Utilisez la syntaxe correcte pour les éléments Markdown**
+   - Italique : `*texte*` ou `_texte_`
+   - Gras : `**texte**` ou `__texte__`
+   - Code inline : `` `code` ``
 
-```markdown
-# Titre de niveau 1
+## Espacement et formatage
 
-## Titre de niveau 2
+### MD012 : Lignes vides consécutives
 
-Texte...
+- N'utilisez jamais plus d'une ligne vide consécutive
+- Utilisez exactement une ligne vide pour séparer les paragraphes et les sections
 
-### Titre de niveau 3
+### MD032 : Lignes vides autour des listes
 
-Texte...
-```
+- Toujours entourer les listes de lignes vides, avant et après
+
+### MD031 : Lignes vides autour des blocs de code
+
+- Entourez les blocs de code avec des lignes vides (avant et après)
 
 ## Listes
 
-- Les listes doivent être précédées d'une ligne vide (MD032)
-- Utiliser des tirets (`-`) pour les listes non ordonnées plutôt que des astérisques (`*`)
-- Utiliser des chiffres suivis d'un point pour les listes ordonnées
-- Indenter les listes imbriquées de 2 ou 4 espaces
+### MD007 : Indentation des listes à puces
 
-```markdown
-Texte précédant une liste.
+- Indentez les sous-listes avec 2 ou 4 espaces (soyez cohérent)
 
-- Élément 1
-- Élément 2
-  - Sous-élément 2.1
-  - Sous-élément 2.2
-- Élément 3
+### MD030 : Espaces après les marqueurs de liste
 
-1. Premier élément
-2. Deuxième élément
-```
+- Utilisez un seul espace après les marqueurs de liste à puces (`-`, `*`, `+`)
+- Utilisez un espace après les numéros pour les listes ordonnées
+
+### MD029 : Style de numérotation des listes ordonnées
+
+- Utilisez toujours la numérotation séquentielle (1, 2, 3...) pour les listes ordonnées
+- Ne réinitialisez pas la numérotation à 1 au milieu d'une liste
 
 ## Blocs de code
 
-- Les blocs de code délimités doivent spécifier un langage (MD040)
-- Les blocs de code doivent être entourés de lignes vides (MD031)
-- Utiliser des blocs délimités (triple backtick) plutôt que l'indentation pour les blocs de code
+### MD040 : Langue des blocs de code
 
-```text
-Voici un exemple de code :
+- Spécifiez toujours le langage dans les blocs de code délimités
+- Utilisez "text" comme langage si aucun langage spécifique n'est applicable
 
-```dart
-void main() {
-  print('Hello, world!');
-}
-```
+### MD048 : Style de délimitation des blocs de code
 
-Le texte continue ici.
-```
+- Utilisez des backticks (`` ``` ``) plutôt que des tildes (`~~~`) pour les blocs de code
 
-## Liens et références
+## Liens et images
 
-- Utiliser la syntaxe de référence pour les liens répétés
-- Les URL ne doivent pas être écrites en texte brut dans le document
+### MD034 : URLs brutes
 
-```markdown
-[Texte du lien](https://exemple.com)
+- Évitez les URLs brutes, utilisez plutôt la syntaxe des liens Markdown
 
-<!-- Pour les liens répétés -->
-[Texte du lien][reference]
+### MD033 : HTML inline
 
-<!-- Plus bas dans le document -->
-[reference]: https://exemple.com
-```
+- Évitez d'utiliser du HTML dans les documents Markdown sauf si absolument nécessaire
 
-## Mise en forme du texte
+## Titres
 
-- Utiliser des double-astérisques pour le texte en gras: `**texte en gras**`
-- Utiliser des underscores simples pour l'italique: `_texte en italique_`
-- Utiliser des backticks pour le code en ligne: `` `code` ``
+### MD001 : Niveaux de titre
 
-## Tableaux
+- Ne sautez pas de niveaux de titre (ex : de `#` à `###` sans `##`)
 
-- Les tableaux doivent avoir une ligne d'en-tête et une ligne de séparation
-- Aligner les délimiteurs de colonnes pour une meilleure lisibilité
+### MD026 : Ponctuation dans les titres
 
-```markdown
-| Colonne 1 | Colonne 2 | Colonne 3 |
-|-----------|-----------|-----------|
-| Valeur 1  | Valeur 2  | Valeur 3  |
-| Valeur 4  | Valeur 5  | Valeur 6  |
-```
+- Évitez d'utiliser la ponctuation à la fin des titres (., :, ;)
 
-## Citations
+## Cohérence
 
-- Les blocs de citation doivent être précédés d'une ligne vide
-- Les blocs de citation doivent être suivis d'une ligne vide
+### MD047 : Fichiers se terminant par une nouvelle ligne
 
-```markdown
-Texte précédant une citation.
+- Tous les fichiers doivent se terminer par une nouvelle ligne
 
-> Ceci est une citation.
-> Elle peut s'étendre sur plusieurs lignes.
+### MD041 : Premier élément du document
 
-Le texte continue ici.
-```
+- Le premier élément d'un fichier doit être un titre de niveau 1
 
-## Validation
+## Outils recommandés
 
-- Utiliser des outils de linting comme markdownlint pour valider les fichiers
-- Dans VS Code, installer l'extension "markdownlint" de David Anson
+Pour vous aider à respecter ces règles, nous recommandons l'utilisation de:
+
+1. **markdownlint** : Extension VS Code pour vérifier le formatage Markdown
+2. **Prettier** : Pour formater automatiquement les documents
+3. **GitHub Copilot** : Pour suggérer des corrections de formatage
+
+## Gestion des blocs de code imbriqués
+
+### MD049 : Exemples de syntaxe Markdown
+
+Pour montrer des exemples de syntaxe Markdown dans un document Markdown:
+
+1. Utilisez plus de backticks pour le bloc extérieur (ex: quatre backticks pour entourer un bloc de trois backticks)
+
+2. Ou échappez les backticks internes avec des caractères d'échappement (`\`)
+
+Note: Pour les exemples complexes, envisagez d'utiliser des captures d'écran plutôt que d'essayer de représenter du code Markdown imbriqué.
