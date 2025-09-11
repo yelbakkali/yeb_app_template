@@ -2,8 +2,6 @@
 
 Ce document définit les règles de formatage Markdown à suivre pour tous les documents du projet. L'objectif est de maintenir une documentation cohérente, lisible et maintenable.
 
-> **Note pour GitHub Copilot** : À chaque erreur de formatage Markdown signalée par l'utilisateur, ajouter la règle correspondante à ce guide si elle n'existe pas déjà. Utiliser ce guide comme référence pour éviter les erreurs de formatage dans tous les documents Markdown du projet.
-
 ## Règles générales
 
 1. **Utilisez des titres pour structurer votre contenu**

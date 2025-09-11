@@ -18,7 +18,7 @@ docs/
   │   ├── sessions/               # Historique des sessions
   │   │   ├── session_DATE.md     # Une session par date
   │   │   └── template.md         # Template pour nouvelles sessions
-  │   ├── instructions.md         # Instructions pour Copilot
+  │   ├── methodologie.md         # Méthodologie pour GitHub Copilot
   │   └── README.md               # Ce fichier
   └── chat_resume.md              # Résumé global du projet
 ```
@@ -32,5 +32,5 @@ docs/
 ## Bonnes pratiques
 
 - Demandez à l'assistant de documenter les sessions importantes dans un nouveau fichier sous `docs/copilot/sessions/`
-- Utilisez le format de validation proposé dans `instructions.md` pour les changements significatifs
+- Utilisez le format de validation proposé dans `methodologie.md` pour les changements significatifs
 - Consultez régulièrement le fichier `chat_resume.md` pour une vue d'ensemble du projet
