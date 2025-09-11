@@ -80,6 +80,8 @@ poetry run pytest
 
 ### 6. Commit et push
 
+#### Méthode manuelle
+
 Faites des commits clairs et descriptifs :
 
 ```bash
@@ -87,6 +89,43 @@ git add .
 git commit -m "Description concise de vos modifications"
 git push origin feature/nom-de-votre-fonctionnalite
 ```
+
+#### Scripts d'automatisation Git
+
+Pour simplifier les opérations Git courantes, le projet inclut plusieurs scripts d'automatisation :
+
+1. **Script d'auto-commit** : Automatise le processus add, commit et push
+
+   ```bash
+   # Mode automatique (non-interactif)
+   ./scripts/git_autocommit.sh
+   
+   # Mode interactif (questions pour valider le message et le push)
+   ./scripts/git_autocommit.sh --interactive
+   # ou
+   ./scripts/git_autocommit.sh -i
+   
+   # Avec message personnalisé
+   ./scripts/git_autocommit.sh -m "Votre message de commit"
+   ```
+
+   Ce script :
+   - Détecte automatiquement les fichiers modifiés
+   - Génère un message de commit pertinent basé sur les fichiers modifiés
+   - Effectue les opérations git add, commit et push en une seule commande
+   - Fonctionne en mode non-interactif par défaut (aucune question)
+
+2. **Script de fusion vers main** : Automatise le processus de fusion de la branche dev vers main
+
+   ```bash
+   ./scripts/merge_to_main.sh
+   ```
+
+   Ce script :
+   - S'assure que vous êtes sur la branche dev et qu'elle est à jour
+   - Effectue la fusion vers main en appliquant les règles du projet
+   - Exclut les fichiers spécifiques au développement de la branche main
+   - Pousse les modifications vers le dépôt distant
 
 ### 7. Pull Request
 
@@ -119,6 +158,31 @@ git push origin feature/nom-de-votre-fonctionnalite
 - Utilisez les commentaires des issues et des PR pour discuter des détails techniques.
 - Pour des discussions plus générales, utilisez les discussions GitHub du projet.
 - Restez respectueux et constructif dans toutes vos interactions.
+
+## Outils d'automatisation
+
+Le projet fournit plusieurs outils d'automatisation pour faciliter le travail des contributeurs :
+
+### Scripts Git
+
+- `scripts/git_autocommit.sh` : Automatise les opérations git add, commit et push
+- `scripts/merge_to_main.sh` : Automatise la fusion de dev vers main en respectant les règles du projet
+
+### Scripts d'environnement
+
+- `run_dev.sh` : Configure et lance l'environnement de développement
+- `update_docs.sh` : Met à jour la documentation générée automatiquement
+- `configure_vscode.sh` : Configure l'environnement VS Code pour le projet
+
+### Intégration avec GitHub Copilot
+
+Le projet est configuré pour tirer le meilleur parti de GitHub Copilot :
+
+- Des instructions spécifiques sont disponibles dans `docs/copilot/`
+- La méthodologie de collaboration avec Copilot est documentée dans `docs/copilot/methodologie.md`
+- Les sessions importantes avec Copilot sont archivées dans `docs/copilot/sessions/`
+
+Pour utiliser GitHub Copilot efficacement sur ce projet, consultez les instructions spécifiques dans la documentation.
 
 ## Remerciements
 
