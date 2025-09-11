@@ -66,13 +66,23 @@ GitHub Copilot ne doit JAMAIS oublier cette règle, quelle que soit la complexit
 
 ### Script d'automatisation du merge
 
-Un script d'automatisation pour la fusion de `dev` vers `main` sera créé dans le dossier `scripts/` :
+Un script d'automatisation pour la fusion de `dev` vers `main` est disponible dans le dossier `scripts/` :
 
 | Fichier | Description | Action avant fusion vers `main` |
 |---------|------------|--------------------------------|
 | **`scripts/merge_to_main.sh`** | Script qui automatise la fusion de dev vers main avec exclusion des fichiers spécifiques | **JAMAIS INCLUS** - Ce script ne doit pas être inclus dans la branche `main` |
 
 Ce script fait partie des outils de développement du template et ne doit donc pas être inclus dans la version distribuée aux utilisateurs finaux. Il doit être ajouté à la liste des fichiers à exclure lors de la fusion vers `main`.
+
+### Exécution automatique du script de merge
+
+**RÈGLE IMPORTANTE** : Lorsque l'utilisateur demande à GitHub Copilot de "merger" ou de "fusionner vers main" ou utilise des termes similaires, GitHub Copilot DOIT AUTOMATIQUEMENT :
+
+1. **EXÉCUTER** le script `scripts/merge_to_main.sh` sans demander de confirmation préalable
+2. **GUIDER** l'utilisateur à travers le processus interactif du script
+3. **CONFIRMER** à la fin que le merge a été correctement effectué
+
+Cette règle s'applique à toute demande de fusion de `dev` vers `main`, quelle que soit la formulation utilisée par l'utilisateur. Le script d'automatisation doit être utilisé systématiquement pour garantir le respect des règles d'exclusion des fichiers.
 
 ### Rappel du contexte
 
