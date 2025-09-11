@@ -41,9 +41,31 @@ Pour continuer à améliorer le template après publication :
 3. Mettre à jour le fichier `chat_resume.md` avec les nouvelles fonctionnalités
 4. Fusionner les améliorations vers `main` uniquement lorsqu'elles sont stables et testées
 
-## Rappel important
+## ⚠️ RÈGLE CRITIQUE : GESTION DES BRANCHES ET FUSIONS ⚠️
 
-Ce fichier ne doit jamais être poussé sur la branche `main` car il contient des informations internes sur le développement du template qui ne sont pas pertinentes pour les utilisateurs finaux.
+### Fichiers strictement interdits sur la branche main
+
+Les fichiers suivants NE DOIVENT ABSOLUMENT JAMAIS être inclus dans la branche `main` :
+
+| Fichier/Dossier | Action requise avant fusion vers `main` |
+|----------------|----------------------------------------|
+| **`methodologie_temp.md`** | **JAMAIS INCLUS** - Ce fichier doit être complètement exclu |
+| **`docs/chat_resume.md`** | VIDER COMPLÈTEMENT - Ne conserver que l'en-tête |
+| **`docs/copilot/sessions/*`** | VIDER TOUS LES FICHIERS - Conserver uniquement les dossiers vides |
+
+### Procédure obligatoire pour tout push/merge vers main
+
+Avant chaque push ou fusion vers la branche `main`, GitHub Copilot DOIT :
+
+1. **RAPPELER** explicitement cette règle critique à l'utilisateur
+2. **PROPOSER** une méthode spécifique pour exclure ces fichiers (branche temporaire, etc.)
+3. **VÉRIFIER** après la fusion que ces fichiers ont bien été exclus ou vidés
+
+GitHub Copilot ne doit JAMAIS oublier cette règle, quelle que soit la complexité de la tâche en cours.
+
+### Rappel du contexte
+
+Ce fichier (`methodologie_temp.md`) ne doit jamais être poussé sur la branche `main` car il contient des informations internes sur le développement du template qui ne sont pas pertinentes pour les utilisateurs finaux.
 
 ## Instructions pour GitHub Copilot
 
@@ -53,6 +75,8 @@ GitHub Copilot: Lorsque tu travailles sur la branche `dev` du template, tu dois 
 2. Appliquer les instructions spécifiques au développement du template décrites ici
 3. Comprendre la distinction entre la gestion de l'historique sur les branches `dev` et `main`
 4. Ne jamais mentionner ce fichier à un utilisateur qui n'est pas en train de travailler sur le développement du template lui-même
+5. **TOUJOURS VÉRIFIER CE FICHIER AVANT TOUTE OPÉRATION IMPLIQUANT LA BRANCHE `main`**
+6. **RAPPELER EXPLICITEMENT LES RÈGLES CONCERNANT LES FICHIERS À NE PAS INCLURE DANS `main`**
 
 ## Convention pour l'ajout de nouvelles instructions
 
