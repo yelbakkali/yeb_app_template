@@ -75,7 +75,20 @@ Lorsque l'utilisateur demande d'envoyer sur GitHub, de pusher des modifications,
 6. **Pousser les changements** vers la branche distante appropriée
 7. **Confirmer** que les changements ont bien été envoyés
 
-Cette automatisation s'applique à toutes les commandes Git courantes liées à la sauvegarde et au partage des modifications, sans nécessiter d'intervention supplémentaire de l'utilisateur.
+**Script d'automatisation** : Pour simplifier ce processus et minimiser les interactions requises, un script d'automatisation est disponible :
+
+```bash
+./scripts/git_autocommit.sh
+```
+
+Ce script gère l'ensemble du processus (add, commit, push) en une seule opération interactive et :
+
+- Détecte automatiquement les fichiers modifiés
+- Génère un message de commit pertinent basé sur les types de fichiers modifiés
+- Permet d'éditer facilement le message proposé
+- Effectue toutes les opérations Git nécessaires en minimisant les interactions
+
+Cette automatisation s'applique à toutes les commandes Git courantes liées à la sauvegarde et au partage des modifications, en réduisant au minimum les interventions de l'utilisateur.
 
 ## 4. Documentation et continuité
 
