@@ -2,7 +2,14 @@
 
 # git_autocommit.sh
 # Script d'automatisation des opérations Git courantes (add, commit, push)
-# Ce script détecte les fichiers modifiés, propose un message de commit, puis effectue toutes les actions nécessaires
+# Ce script détecte les fichiers modifiés, génère un message de commit, puis effectue toutes les actions nécessaires
+#
+# Utilisation:
+#   ./git_autocommit.sh                   # Mode automatique (non-interactif)
+#   ./git_autocommit.sh -i                # Mode interactif (questions pour le message et le push)
+#   ./git_autocommit.sh --interactive     # Mode interactif (questions pour le message et le push)
+#   ./git_autocommit.sh -m "Message"      # Mode automatique avec message personnalisé
+#   ./git_autocommit.sh --message "Message" # Mode automatique avec message personnalisé
 
 set -e  # Arrête le script en cas d'erreur
 
@@ -93,19 +100,26 @@ else
 fi
 
 echo -e "${GREEN}Message de commit généré:${NC} $commit_message"
-echo -e "${YELLOW}Voulez-vous utiliser ce message? [o/n/e] ${NC}"
-echo -e "(o = oui, n = non (saisir un nouveau message), e = éditer ce message)"
-read -r response
+# En mode non-interactif, utilise directement le message généré
+if [ "$1" == "--interactive" ] || [ "$1" == "-i" ]; then
+    # Mode interactif activé avec le drapeau
+    echo -e "${YELLOW}Voulez-vous utiliser ce message? [o/n/e] ${NC}"
+    echo -e "(o = oui, n = non (saisir un nouveau message), e = éditer ce message)"
+    read -r response
 
-if [ "$response" == "n" ]; then
-    echo -e "${YELLOW}Entrez votre message de commit:${NC}"
-    read -r commit_message
-elif [ "$response" == "e" ]; then
-    echo -e "${YELLOW}Éditez le message de commit:${NC}"
-    echo "$commit_message" > /tmp/commit_msg_temp
-    ${EDITOR:-nano} /tmp/commit_msg_temp
-    commit_message=$(cat /tmp/commit_msg_temp)
-    rm /tmp/commit_msg_temp
+    if [ "$response" == "n" ]; then
+        echo -e "${YELLOW}Entrez votre message de commit:${NC}"
+        read -r commit_message
+    elif [ "$response" == "e" ]; then
+        echo -e "${YELLOW}Éditez le message de commit:${NC}"
+        echo "$commit_message" > /tmp/commit_msg_temp
+        ${EDITOR:-nano} /tmp/commit_msg_temp
+        commit_message=$(cat /tmp/commit_msg_temp)
+        rm /tmp/commit_msg_temp
+    fi
+else
+    # En mode non-interactif, affiche simplement le message qui sera utilisé
+    echo -e "${GREEN}Utilisation du message généré automatiquement.${NC}"
 fi
 
 # Ajouter tous les fichiers modifiés à l'index
@@ -120,16 +134,25 @@ echo -e "${GREEN}Commit créé avec succès.${NC}"
 
 # Pousser les modifications vers la branche distante
 echo -e "\n${GREEN}4. Push vers le dépôt distant${NC}"
-echo -e "${YELLOW}Voulez-vous pousser les changements vers le dépôt distant? [o/n]${NC}"
-read -r push_response
 
-if [ "$push_response" == "o" ]; then
+if [ "$1" == "--interactive" ] || [ "$1" == "-i" ]; then
+    # Mode interactif activé avec le drapeau
+    echo -e "${YELLOW}Voulez-vous pousser les changements vers le dépôt distant? [o/n]${NC}"
+    read -r push_response
+    
+    if [ "$push_response" == "o" ]; then
+        current_branch=$(git branch --show-current)
+        git push origin "$current_branch"
+        echo -e "${GREEN}Push réussi vers la branche $current_branch.${NC}"
+    else
+        echo -e "${YELLOW}Les changements n'ont pas été poussés.${NC}"
+        echo -e "Vous pouvez les pousser plus tard avec: git push origin $(git branch --show-current)"
+    fi
+else
+    # En mode non-interactif, push automatiquement
     current_branch=$(git branch --show-current)
     git push origin "$current_branch"
-    echo -e "${GREEN}Push réussi vers la branche $current_branch.${NC}"
-else
-    echo -e "${YELLOW}Les changements n'ont pas été poussés.${NC}"
-    echo -e "Vous pouvez les pousser plus tard avec: git push origin $(git branch --show-current)"
+    echo -e "${GREEN}Push automatique réussi vers la branche $current_branch.${NC}"
 fi
 
 echo -e "\n${GREEN}===============================================${NC}"
