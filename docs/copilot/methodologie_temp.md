@@ -49,7 +49,8 @@ Les fichiers suivants NE DOIVENT ABSOLUMENT JAMAIS être inclus dans la branche 
 
 | Fichier/Dossier | Action requise avant fusion vers `main` |
 |----------------|----------------------------------------|
-| **`methodologie_temp.md`** | **JAMAIS INCLUS** - Ce fichier doit être complètement exclu |
+| **`docs/copilot/methodologie_temp.md`** | **JAMAIS INCLUS** - Ce fichier doit être complètement exclu |
+| **`scripts/merge_to_main.sh`** | **JAMAIS INCLUS** - Ce script d'automatisation doit être complètement exclu |
 | **`docs/chat_resume.md`** | VIDER COMPLÈTEMENT - Ne conserver que l'en-tête |
 | **`docs/copilot/sessions/*`** | VIDER TOUS LES FICHIERS - Conserver uniquement les dossiers vides |
 
@@ -62,6 +63,16 @@ Avant chaque push ou fusion vers la branche `main`, GitHub Copilot DOIT :
 3. **VÉRIFIER** après la fusion que ces fichiers ont bien été exclus ou vidés
 
 GitHub Copilot ne doit JAMAIS oublier cette règle, quelle que soit la complexité de la tâche en cours.
+
+### Script d'automatisation du merge
+
+Un script d'automatisation pour la fusion de `dev` vers `main` sera créé dans le dossier `scripts/` :
+
+| Fichier | Description | Action avant fusion vers `main` |
+|---------|------------|--------------------------------|
+| **`scripts/merge_to_main.sh`** | Script qui automatise la fusion de dev vers main avec exclusion des fichiers spécifiques | **JAMAIS INCLUS** - Ce script ne doit pas être inclus dans la branche `main` |
+
+Ce script fait partie des outils de développement du template et ne doit donc pas être inclus dans la version distribuée aux utilisateurs finaux. Il doit être ajouté à la liste des fichiers à exclure lors de la fusion vers `main`.
 
 ### Rappel du contexte
 
