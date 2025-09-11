@@ -84,9 +84,11 @@ Pour les sessions importantes, créer un nouveau fichier de session dans `docs/c
 
 ### 5.1 Correction des erreurs de formatage Markdown
 
-- À chaque erreur de formatage Markdown signalée, ajouter la règle correspondante au guide de style `docs/markdown_style_guide.md`
-- Utiliser ce guide comme référence pour tous les documents Markdown
-- S'assurer que tous les documents créés ou modifiés respectent strictement ces règles
+- À chaque erreur de formatage Markdown signalée (comme MD009, MD012, etc.), ajouter **systématiquement et immédiatement** la règle correspondante au guide de style `docs/markdown_style_guide.md` si elle n'y est pas déjà
+- Expliquer la règle de manière claire avec des exemples de ce qui est correct et incorrect
+- Utiliser ce guide comme référence stricte pour tous les documents Markdown
+- S'assurer que tous les documents créés ou modifiés respectent l'intégralité des règles documentées
+- Ne jamais corriger une erreur de formatage sans documenter la règle correspondante
 
 ### 5.2 Instructions pour l'initialisation du template
 

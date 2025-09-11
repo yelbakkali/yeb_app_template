@@ -53,7 +53,7 @@ chmod +x /home/yassine/_737calcs/scripts/setup.sh /home/yassine/_737calcs/script
 
 - **Fichiers créés/modifiés**:
   - `README.md`: Mise à jour complète avec instructions pour l'utilisation du template
-  - `LICENSE`: Ajout d'une licence MIT
+  - `LICENSE`: Ajout d'une licence propriétaire
   - `.github/workflows/template_config.yml`: Configuration du template GitHub
   - `.github/workflows/flutter_python_ci.yml`: CI pour Flutter et Python
 

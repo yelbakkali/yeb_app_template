@@ -144,9 +144,9 @@ Le script `init_project.sh` (ou `init_project.bat` sur Windows) s'occupe de la p
 Pour personnaliser davantage votre projet :
 
 1. Ajoutez vos propres modules Python dans `shared_python/`
-   
+
 2. Personnalisez l'interface Flutter dans `flutter_app/lib/`
-   
+
 3. Configurez les environnements backend dans `python_backend/` et `web_backend/`
 
 4. Si vous utilisez VS Code avec GitHub Copilot, demandez simplement à l'assistant de **"lire la documentation dans docs/"** pour obtenir une aide personnalisée pour adapter le template à vos besoins
@@ -173,7 +173,7 @@ Ce projet utilise une structure documentée pour faciliter la collaboration avec
 
 ## 📄 Licence
 
-Ce template est distribué sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+Ce template est distribué sous licence propriétaire. Voir le fichier LICENSE pour plus de détails.
 
 ## 👤 Auteur
 

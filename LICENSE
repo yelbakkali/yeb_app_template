@@ -1,21 +1,97 @@
-# MIT License
+# PROPRIETARY LICENSE
 
-Copyright (c) 2025 Yassine El Bakkali
+Copyright (c) 2025 Yassine El Bakkali. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## IDENTIFICATION OF COPYRIGHT HOLDER
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Name: Yassine El Bakkali
+Contact: [yelbakkali@icloud.com](mailto:yelbakkali@icloud.com)
+Country of Residence: Maroc (Casablanca)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+This software and associated documentation files (the "Software") are the exclusive property
+of Yassine El Bakkali. The Software is protected by copyright laws and international
+copyright treaties, as well as other intellectual property laws and treaties.
+
+## GRANT OF LICENSE
+
+The copyright holder grants a limited, non-exclusive, non-transferable license to use
+the Software subject to the following conditions:
+
+1. **Distribution Control**: This Software may only be distributed to individuals or
+   organizations specifically authorized by the copyright holder, either for free or for a fee
+   at the sole discretion of the copyright holder.
+
+2. **Attribution Requirement**: Any project created using this template must include
+   prominent attribution to the original template: "Based on yeb_app_template by Yassine El Bakkali"
+   in documentation, about sections, and wherever appropriate.
+
+3. **Non-Commercial Use**: Recipients who received the Software for free may use it only for
+   non-commercial purposes. Commercial use requires explicit written permission from the
+   copyright holder.
+
+4. **No Redistribution**: The Software may not be redistributed, sold, leased, licensed,
+   sublicensed, or otherwise made available to any third party without explicit written
+   permission from the copyright holder.
+
+5. **Revenue Sharing**: Any commercial application or service developed using this template
+   (whether distributed for free or paid) that generates revenue through any means, including
+   but not limited to direct sales, subscriptions, in-app purchases, advertising, or data
+   monetization, requires a revenue-sharing agreement with the copyright holder. Contact
+   the copyright holder for licensing terms before commercializing any derivative work.
+
+## RESTRICTIONS
+
+Unless explicitly authorized in writing by the copyright holder, you may not:
+
+1. Use the Software for any commercial purpose if you received it for free.
+
+2. Redistribute or sell access to the Software in any form, whether modified or unmodified.
+
+3. Remove any copyright, trademark, attribution, or other proprietary notices from the Software.
+
+4. Create derivative templates based on this Software for distribution purposes.
+
+5. Generate revenue from applications developed using this template without a revenue-sharing
+   agreement with the copyright holder, regardless of how the revenue is generated.
+
+6. Use the template in the development of applications or services that compete directly
+   with products offered by the copyright holder.
+
+## TERMINATION
+
+This license will terminate automatically if you fail to comply with any of the terms and
+conditions of this license. Upon termination, you must destroy all copies of the Software
+in your possession.
+
+## LEGAL ENFORCEMENT
+
+The copyright holder reserves the right to enforce the terms of this license to the fullest
+extent of applicable law. By using the Software, you acknowledge that monetary damages alone
+would be inadequate compensation for breach of this license and that injunctive relief is an
+appropriate remedy.
+
+## PROOF OF OWNERSHIP AND AUTHENTICITY
+
+1. Cette licence est authentifiée par la signature numérique de Yassine El Bakkali.
+2. La version originale de cette licence est conservée dans le dépôt privé de l'auteur et peut être fournie sur demande.
+3. Date de publication originale : 11 septembre 2025.
+4. En cas de litige concernant la propriété ou les conditions de licence, la version définitive sera
+   celle conservée par le titulaire du droit d'auteur et qui pourra être authentifiée par son contact.
+
+## LEGAL RIGHTS OF THE COPYRIGHT HOLDER
+
+The copyright holder has the legal right to:
+
+1. Sell or license this Software as a proprietary product.
+2. Determine who may use the Software and under what terms.
+3. Require revenue sharing for commercial applications derived from this template.
+4. Enforce the terms of this license through legal action when necessary.
+
+## DISCLAIMER
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.

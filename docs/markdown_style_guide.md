@@ -18,6 +18,12 @@ Ce document définit les règles de formatage Markdown à suivre pour tous les d
 
 ## Espacement et formatage
 
+### MD009 : Espaces en fin de ligne
+
+- Évitez les espaces en fin de ligne (trailing spaces)
+- Pour les sauts de ligne forcés, utilisez exactement deux espaces en fin de ligne, pas plus
+- Préférez utiliser des lignes vides pour séparer les paragraphes plutôt que des espaces en fin de ligne
+
 ### MD012 : Lignes vides consécutives
 
 - N'utilisez jamais plus d'une ligne vide consécutive
