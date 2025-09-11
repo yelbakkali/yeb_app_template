@@ -63,6 +63,20 @@ Valides-tu cette action ? [oui/non/modifier]
 - **Pour les actions complexes** : Description détaillée avec étapes spécifiques et code exact
 - **Pour les modifications de structure** : Présenter l'impact global et les avantages/inconvénients
 
+### 3.3 Automatisation des actions Git
+
+Lorsque l'utilisateur demande d'envoyer sur GitHub, de pusher des modifications, ou utilise des phrases comme "c'est bon", "valide les changements", "enregistre", GitHub Copilot doit AUTOMATIQUEMENT :
+
+1. **Vérifier l'état** du dépôt Git avec `git status`
+2. **Identifier les fichiers modifiés** qui doivent être ajoutés à l'index
+3. **Ajouter les fichiers pertinents** à l'index avec `git add`
+4. **Proposer un message de commit** adapté au contenu des modifications
+5. **Créer un commit** avec le message validé ou modifié par l'utilisateur
+6. **Pousser les changements** vers la branche distante appropriée
+7. **Confirmer** que les changements ont bien été envoyés
+
+Cette automatisation s'applique à toutes les commandes Git courantes liées à la sauvegarde et au partage des modifications, sans nécessiter d'intervention supplémentaire de l'utilisateur.
+
 ## 4. Documentation et continuité
 
 ### 4.1 Documentation systématique
