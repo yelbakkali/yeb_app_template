@@ -17,7 +17,8 @@ echo -e "${BLUE}===============================================${NC}"
 
 # Fonctions utiles
 confirmation() {
-    read -p "$1 (o/N) " -n 1 -r
+    # Version compatible avec macOS (sans l'option -n)
+    read -p "$1 (o/N) " REPLY
     echo
     [[ $REPLY =~ ^[oO]$ ]]
 }
@@ -25,8 +26,14 @@ confirmation() {
 create_version_tag() {
     echo -e "\n${GREEN}Création d'un tag de version${NC}"
     
-    # Obtenir la dernière version
-    LATEST_TAG=$(git tag | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+$" | sort -V | tail -n 1)
+    # Obtenir la dernière version (compatible macOS)
+    if command -v sort >/dev/null 2>&1 && sort --version 2>&1 | grep -q GNU; then
+        # GNU sort avec l'option -V
+        LATEST_TAG=$(git tag | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+$" | sort -V | tail -n 1)
+    else
+        # Version alternative pour macOS
+        LATEST_TAG=$(git tag | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+$" | python -c "import sys; print(sorted(sys.stdin.readlines(), key=lambda v: [int(x) for x in v.strip()[1:].split('.')])[-1].strip() if sys.stdin.readlines() else '')" 2>/dev/null || git tag | grep -E "^v[0-9]+\.[0-9]+\.[0-9]+$" | sort | tail -n 1)
+    fi
     
     if [ -z "$LATEST_TAG" ]; then
         SUGGESTED_VERSION="v0.1.0"
