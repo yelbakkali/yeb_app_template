@@ -6,24 +6,25 @@
     ],
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,
-    
     // Configuration GitHub
     "github-enterprise.uri": "",
-    
     // Configuration générale de l'éditeur
     "editor.formatOnSave": true,
     "editor.renderWhitespace": "boundary",
-    "editor.rulers": [100],
+    "editor.rulers": [
+        100
+    ],
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "files.trimFinalNewlines": true,
-    
     // Configuration Python supplémentaire
     "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["--line-length", "100"],
+    "python.formatting.blackArgs": [
+        "--line-length",
+        "100"
+    ],
     "python.testing.pytestEnabled": true,
     "python.terminal.activateEnvironment": true,
-    
     // Configuration Flutter/Dart
     "dart.previewFlutterUiGuides": true,
     "dart.openDevTools": "flutter",
@@ -33,7 +34,8 @@
     "dart.flutterHotReloadOnSave": true,
     "dart.lineLength": 100,
     "dart.completeFunctionCalls": true,
-    
+    "dart.runPubGetOnPubspecChanges": "always",
+    "flutter.autoInstallPubDeps": true,
     // Configuration spécifique aux langages
     "[python]": {
         "editor.formatOnSave": true,
@@ -56,12 +58,10 @@
         "editor.defaultFormatter": "yzhang.markdown-all-in-one",
         "editor.formatOnSave": true
     },
-    
     // Configuration Git
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "gitlens.hovers.currentLine.over": "line",
-    
     // Configuration pour WSL Remote
     "terminal.integrated.defaultProfile.linux": "bash",
     "remote.WSL.fileWatcher.polling": true

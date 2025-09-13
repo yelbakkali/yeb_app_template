@@ -379,6 +379,28 @@ if [ "$POETRY_INSTALLED" = true ]; then
     print_success "Tentative d'installation des dépendances Python terminée"
 fi
 
+# Configuration de VS Code pour l'installation automatique des dépendances Flutter
+print_header "Configuration de VS Code"
+if [ -f "$SCRIPT_DIR/scripts/configure_vscode_for_flutter.sh" ]; then
+    echo "Configuration de VS Code pour Flutter..."
+    chmod +x "$SCRIPT_DIR/scripts/configure_vscode_for_flutter.sh"
+    "$SCRIPT_DIR/scripts/configure_vscode_for_flutter.sh"
+    print_success "VS Code configuré pour l'installation automatique des dépendances Flutter"
+else
+    print_warning "Le script de configuration de VS Code n'a pas été trouvé."
+fi
+
+# Installation des dépendances du projet
+print_header "Installation des dépendances"
+if [ -f "$SCRIPT_DIR/scripts/install_dependencies.sh" ]; then
+    echo "Installation des dépendances du projet..."
+    chmod +x "$SCRIPT_DIR/scripts/install_dependencies.sh"
+    "$SCRIPT_DIR/scripts/install_dependencies.sh"
+    print_success "Dépendances installées avec succès"
+else
+    print_warning "Le script d'installation des dépendances n'a pas été trouvé."
+fi
+
 # Préparation du premier commit Git
 print_header "Configuration Git"
 if [ -d .git ]; then

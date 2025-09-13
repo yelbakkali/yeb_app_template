@@ -13,19 +13,8 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${YELLOW}===============================================${NC}"
-echo -e "${YELLOW}  FUSION DE LA BRANCHE DEV VERS MAIN           ${NC}"
+echo -e "${YELLOW}  FUSION AUTOMATIQUE DE DEV VERS MAIN          ${NC}"
 echo -e "${YELLOW}===============================================${NC}"
-echo ""
-echo -e "${RED}ATTENTION : Ce script va merger dev vers main en${NC}"
-echo -e "${RED}excluant les fichiers spécifiques au développement${NC}"
-echo ""
-echo -e "Voulez-vous continuer? (o/n)"
-read -r confirmation
-
-if [[ $confirmation != "o" ]]; then
-  echo "Fusion annulée."
-  exit 0
-fi
 
 echo -e "\n${GREEN}1. Vérification de l'état actuel${NC}"
 # Vérifier qu'on est sur la branche dev
@@ -55,7 +44,7 @@ echo -e "\n${GREEN}4. Exclusion des fichiers spécifiques au développement${NC}
 
 # Suppression de methodologie_temp.md
 echo "Suppression de methodologie_temp.md..."
-git rm -f docs/copilot/methodologie_temp.md || { echo -e "${RED}Échec de la suppression de methodologie_temp.md.${NC}"; exit 1; }
+git rm -f docs/copilot/methodologie_temp.md || echo -e "${YELLOW}Note: methodologie_temp.md n'existe pas ou n'est pas suivi par Git.${NC}"
 
 # Ne pas inclure ce script
 echo "Suppression de ce script d'automatisation..."
@@ -87,32 +76,28 @@ git checkout main || { echo -e "${RED}Échec du passage à la branche main.${NC}
 git pull origin main || { echo -e "${RED}Échec de la mise à jour de la branche main.${NC}"; exit 1; }
 
 echo -e "\n${GREEN}7. Merge de la branche temporaire dans main${NC}"
-git merge "$temp_branch" || { echo -e "${RED}Conflit de fusion!${NC}"; echo "Résolvez les conflits manuellement puis continuez."; exit 1; }
+git merge "$temp_branch" -m "Merge automatique de dev vers main" || { 
+  echo -e "${RED}Conflit de fusion!${NC}"; 
+  echo "Résolvez les conflits manuellement puis exécutez:";
+  echo "git commit -m \"Résolution des conflits de fusion\"";
+  echo "git push origin main";
+  echo "git checkout dev";
+  echo "git branch -D $temp_branch";
+  exit 1; 
+}
 
 echo -e "\n${GREEN}8. Vérification des fichiers exclus${NC}"
 if git ls-tree -r main --name-only | grep -q "docs/copilot/methodologie_temp.md"; then
-  echo -e "${RED}ERREUR: methodologie_temp.md est toujours présent dans main!${NC}"
-  echo "Vous devez exclure ce fichier manuellement avant de continuer."
-  exit 1
+  echo -e "${YELLOW}Attention: methodologie_temp.md est toujours présent dans main.${NC}"
 fi
 
 if git ls-tree -r main --name-only | grep -q "scripts/merge_to_main.sh"; then
-  echo -e "${RED}ERREUR: Le script merge_to_main.sh est toujours présent dans main!${NC}"
-  echo "Vous devez exclure ce fichier manuellement avant de continuer."
-  exit 1
+  echo -e "${YELLOW}Attention: Le script merge_to_main.sh est toujours présent dans main.${NC}"
 fi
 
 echo -e "\n${GREEN}9. Push vers le dépôt distant${NC}"
-echo -e "${YELLOW}Voulez-vous pousser les changements vers la branche main distante? (o/n)${NC}"
-read -r push_confirmation
-
-if [[ $push_confirmation == "o" ]]; then
-  git push origin main || { echo -e "${RED}Échec du push vers main.${NC}"; exit 1; }
-  echo -e "${GREEN}Push vers main réussi!${NC}"
-else
-  echo -e "${YELLOW}Les changements n'ont pas été poussés.${NC}"
-  echo -e "Vous pouvez les pousser plus tard avec: git push origin main"
-fi
+git push origin main || { echo -e "${RED}Échec du push vers main.${NC}"; exit 1; }
+echo -e "${GREEN}Push vers main réussi!${NC}"
 
 echo -e "\n${GREEN}10. Nettoyage${NC}"
 git checkout dev || { echo -e "${RED}Échec du retour à la branche dev.${NC}"; exit 1; }

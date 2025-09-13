@@ -333,6 +333,26 @@ if "%POETRY_INSTALLED%"=="true" (
     call :print_success "Tentative d'installation des dépendances Python terminée"
 )
 
+REM Configuration de VS Code pour l'installation automatique des dépendances Flutter
+call :print_header "Configuration de VS Code"
+if exist "%SCRIPT_DIR%scripts\configure_vscode_for_flutter.bat" (
+    echo Configuration de VS Code pour Flutter...
+    call "%SCRIPT_DIR%scripts\configure_vscode_for_flutter.bat"
+    call :print_success "VS Code configuré pour l'installation automatique des dépendances Flutter"
+) else (
+    call :print_warning "Le script de configuration de VS Code n'a pas été trouvé."
+)
+
+REM Installation des dépendances du projet
+call :print_header "Installation des dépendances"
+if exist "%SCRIPT_DIR%scripts\install_dependencies.bat" (
+    echo Installation des dépendances du projet...
+    call "%SCRIPT_DIR%scripts\install_dependencies.bat"
+    call :print_success "Dépendances installées avec succès"
+) else (
+    call :print_warning "Le script d'installation des dépendances n'a pas été trouvé."
+)
+
 REM Préparation du premier commit Git
 call :print_header "Configuration Git"
 if exist ".git" (
