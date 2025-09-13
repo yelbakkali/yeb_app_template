@@ -100,7 +100,6 @@ Pour vous aider à respecter ces règles, nous recommandons l'utilisation de:
 
 1. **markdownlint** : Extension VS Code pour vérifier le formatage Markdown
 2. **Prettier** : Pour formater automatiquement les documents
-3. **GitHub Copilot** : Pour suggérer des corrections de formatage
 
 ## Gestion des blocs de code imbriqués
 

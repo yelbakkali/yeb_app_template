@@ -140,7 +140,19 @@ Lorsque l'utilisateur utilise ce projet comme template :
 
 ## 6. Gestion des fichiers d'historique pour les nouveaux projets
 
-### 6.1 Comportement au démarrage d'un nouveau projet depuis le template
+### 6.1 Stratégie de gestion de l'historique dans les branches
+
+Pour ce template, la stratégie de gestion de l'historique suit une approche différenciée selon les branches :
+
+- **Branche `dev`** : Conserve l'historique complet du développement du template, incluant tous les fichiers de sessions (`docs/copilot/sessions/`) et le fichier `chat_resume.md` avec tout l'historique de développement
+- **Branche `main`** : Ne contient pas les fichiers d'historique car elle est destinée aux utilisateurs finaux qui créent de nouveaux projets à partir du template
+
+Cette approche permet de :
+- Maintenir la traçabilité complète du développement du template dans la branche `dev`
+- Fournir un point de départ propre pour les utilisateurs dans la branche `main`
+- Faciliter la maintenance et l'évolution continue du template
+
+### 6.2 Comportement au démarrage d'un nouveau projet depuis le template
 
 Pour les utilisateurs qui créent un nouveau projet à partir de ce template :
 
@@ -149,7 +161,7 @@ Pour les utilisateurs qui créent un nouveau projet à partir de ce template :
 - L'état initial du nouveau projet de l'utilisateur est "propre", sans historique de développement antérieur
 - L'utilisateur est libre de définir sa propre stratégie de gestion de branches et d'historique pour son projet
 
-### 6.2 Actions à entreprendre automatiquement pour un nouveau projet
+### 6.3 Actions à entreprendre automatiquement pour un nouveau projet
 
 Pour tout nouveau projet créé à partir du template, GitHub Copilot doit, sans qu'on le lui rappelle :
 
@@ -158,7 +170,7 @@ Pour tout nouveau projet créé à partir du template, GitHub Copilot doit, sans
 3. Suivre strictement toutes les règles de cette méthodologie dès le premier échange
 4. Expliquer à l'utilisateur le fonctionnement de cette méthodologie de documentation
 
-### 6.3 Explication de cette procédure à l'utilisateur
+### 6.4 Explication de cette procédure à l'utilisateur
 
 GitHub Copilot doit expliquer clairement à l'utilisateur que :
 
