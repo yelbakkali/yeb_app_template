@@ -7,8 +7,7 @@ Ce document décrit l'organisation des dossiers et fichiers du projet.
 ```bash
 yeb_app_template/
 ├── docs/                    # Documentation du projet
-├── flutter_app/             # Application Flutter principale
-├── lib/                     # Code Dart partagé
+├── flutter_app/             # Application Flutter principale (contient tout le code Dart)
 ├── python_backend/          # Backend Python pour le développement local
 ├── scripts/                 # Scripts d'installation et de configuration
 ├── shared_python/           # Code Python partagé entre les plateformes
@@ -41,10 +40,14 @@ flutter_app/
 ├── assets/                  # Ressources et scripts Python embarqués
 │   └── shared_python/       # Scripts Python partagés
 ├── ios/                     # Configuration iOS avec Python-Apple-support
-├── lib/                     # Code Dart spécifique à l'application Flutter
+├── lib/                     # Code Dart de l'application (tout le code Dart du projet)
+│   ├── config/              # Configurations et constantes de l'application
+│   ├── models/              # Modèles de données
+│   ├── services/            # Services, dont UnifiedPythonService
+│   └── utils/               # Utilitaires et helpers
 ├── linux/                   # Configuration Linux
 ├── macos/                   # Configuration macOS
-├── test/                    # Tests Flutter
+├── test/                    # Tests spécifiques à l'application Flutter
 ├── web/                     # Configuration web
 └── windows/                 # Configuration Windows avec Python embarqué
 ```

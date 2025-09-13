@@ -8,6 +8,27 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Vérifier si le script de prérequis existe et l'exécuter
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PREREQ_SCRIPT="${SCRIPT_DIR}/scripts/check_prerequisites.sh"
+
+if [ -f "$PREREQ_SCRIPT" ]; then
+    echo "Vérification des prérequis avant l'initialisation..."
+    chmod +x "$PREREQ_SCRIPT"
+    "$PREREQ_SCRIPT"
+    
+    # Si le script de prérequis échoue, demander si l'utilisateur veut continuer
+    if [ $? -ne 0 ]; then
+        echo -e "${YELLOW}Des prérequis sont manquants. Voulez-vous continuer quand même ? (o/N)${NC}"
+        read -p "" -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[oO]$ ]]; then
+            echo "Initialisation annulée. Veuillez installer les prérequis manquants et réessayer."
+            exit 1
+        fi
+    fi
+fi
+
 # Fonctions utilitaires
 print_header() {
     echo -e "${BLUE}===================================================================${NC}"
@@ -27,6 +48,10 @@ print_error() {
     echo -e "${RED}✗ $1${NC}"
 }
 
+# Obtenir le chemin absolu du répertoire du script
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd "$SCRIPT_DIR"
+
 # Vérifier si git est disponible
 if ! command -v git &> /dev/null; then
     print_error "Git n'est pas installé. Veuillez l'installer pour continuer."
@@ -36,7 +61,7 @@ fi
 # Détecter le nom du projet à partir du dossier racine
 REPO_PATH=$(git rev-parse --show-toplevel 2>/dev/null)
 if [ -z "$REPO_PATH" ]; then
-    REPO_PATH=$(pwd)
+    REPO_PATH="$SCRIPT_DIR"
 fi
 PROJECT_NAME=$(basename "$REPO_PATH")
 
@@ -101,28 +126,130 @@ fi
 
 # Mettre à jour le fichier pubspec.yaml
 if [ -f "pubspec.yaml" ]; then
-    echo "Mise à jour du nom du package dans pubspec.yaml..."
-    sed -i "s/^name: yeb_app_template/name: $PROJECT_NAME/g" pubspec.yaml
-    print_success "Nom du package mis à jour dans pubspec.yaml"
+    print_header "Mise à jour du fichier pubspec.yaml"
+    sed -i "s/^name: yeb_app_template/name: $PROJECT_NAME/" pubspec.yaml
+    print_success "Nom du projet mis à jour dans pubspec.yaml"
 fi
 
-# Mettre à jour tous les imports dans le code
-echo "Mise à jour des imports dans les fichiers Dart..."
+# Mettre à jour les imports Dart
+print_header "Mise à jour des imports dans les fichiers Dart"
 find . -name "*.dart" -type f -exec sed -i "s/package:yeb_app_template\//package:$PROJECT_NAME\//g" {} \;
-print_success "Imports mis à jour dans les fichiers Dart"
+print_success "Imports Dart mis à jour"
 
-# Mettre à jour les fichiers web
+# Mettre à jour les métadonnées dans index.html
 if [ -f "flutter_app/web/index.html" ]; then
-    echo "Mise à jour du fichier index.html..."
+    print_header "Mise à jour des métadonnées web"
     sed -i "s/content=\"Application yeb_app_template/content=\"Application $PROJECT_NAME/g" flutter_app/web/index.html
     sed -i "s/content=\"yeb_app_template\"/content=\"$PROJECT_NAME\"/g" flutter_app/web/index.html
     sed -i "s/<title>yeb_app_template</<title>$PROJECT_NAME</g" flutter_app/web/index.html
-    print_success "Fichier index.html mis à jour"
+    print_success "Métadonnées web mises à jour"
 fi
+
+# Mettre à jour le backend Python
+print_header "Mise à jour des références dans le backend Python"
+if [ -f "web_backend/main.py" ]; then
+    sed -i "s/title=\"yeb_app_template API\"/title=\"$PROJECT_NAME API\"/g" web_backend/main.py
+    sed -i "s/description=\"API pour l'application yeb_app_template\"/description=\"API pour l'application $PROJECT_NAME\"/g" web_backend/main.py
+    print_success "Backend Python mis à jour"
+fi
+
+# Mettre à jour les scripts de lancement
+print_header "Mise à jour des scripts d'environnement"
+find . -name "*.sh" -type f -exec sed -i "s/yeb_app_template-direct/$PROJECT_NAME-direct/g" {} \;
+find . -name "*.sh" -type f -exec sed -i "s/Démarrage de l'environnement de développement yeb_app_template/Démarrage de l'environnement de développement $PROJECT_NAME/g" {} \;
+print_success "Scripts d'environnement mis à jour"
+
+# Mettre à jour les fichiers de documentation
+print_header "Mise à jour de la documentation"
+find ./docs -name "*.md" -type f -exec sed -i "s/yeb_app_template/$PROJECT_NAME/g" {} \;
+print_success "Documentation mise à jour"
 
 # Aucune autre fonction de remplacement nécessaire puisqu'on ne renomme que le fichier code-workspace
 echo "Aucun autre renommage n'est effectué, comme demandé."
 print_success "Renommage terminé"
+
+# Configuration automatique de VS Code
+print_header "Configuration de l'environnement VS Code"
+mkdir -p .vscode
+
+# Création du fichier settings.json
+cat > .vscode/settings.json << EOF
+{
+  // Configuration Flutter
+  "dart.lineLength": 100,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [100],
+    "editor.selectionHighlight": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  
+  // Configuration Python
+  "python.defaultInterpreterPath": "\${workspaceFolder}/web_backend/.venv/bin/python",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "\${workspaceFolder}/web_backend/.venv/bin/black",
+  "python.formatting.blackArgs": ["--line-length", "88"],
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  
+  // Configuration générale
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+  "editor.tabSize": 2,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false
+}
+EOF
+
+# Création du fichier extensions.json pour recommander les extensions
+cat > .vscode/extensions.json << EOF
+{
+  "recommendations": [
+    "dart-code.flutter",
+    "dart-code.dart-code",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "littlefoxteam.vscode-python-test-adapter",
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
+EOF
+
+# Création du fichier launch.json pour le débogage
+cat > .vscode/launch.json << EOF
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter App",
+      "type": "dart",
+      "request": "launch",
+      "program": "flutter_app/lib/main.dart"
+    },
+    {
+      "name": "Web Backend (Python)",
+      "type": "python",
+      "request": "launch",
+      "program": "\${workspaceFolder}/web_backend/main.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}
+EOF
+
+print_success "Configuration VS Code créée. Les extensions recommandées seront proposées à l'ouverture du projet."
 
 # Ne pas mettre à jour le pubspec.yaml pour Flutter avec le nom du projet
 if [ -f "flutter_app/pubspec.yaml" ]; then
@@ -144,11 +271,33 @@ if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; t
     else
         print_error "Le script setup.bat n'a pas été trouvé"
     fi
-else
-    # Linux/macOS
-    echo "Système Unix détecté (Linux/macOS)"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    echo "Système macOS détecté"
     if [ -f "scripts/setup.sh" ]; then
         echo "Exécution de scripts/setup.sh..."
+        chmod +x scripts/setup.sh
+        ./scripts/setup.sh
+        print_success "Configuration macOS terminée"
+    else
+        print_error "Le script setup.sh n'a pas été trouvé"
+    fi
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Linux
+    echo "Système Linux détecté"
+    if [ -f "scripts/setup.sh" ]; then
+        echo "Exécution de scripts/setup.sh..."
+        chmod +x scripts/setup.sh
+        ./scripts/setup.sh
+        print_success "Configuration Linux terminée"
+    else
+        print_error "Le script setup.sh n'a pas été trouvé"
+    fi
+else
+    # Autre système Unix
+    echo "Système Unix non identifié détecté"
+    if [ -f "scripts/setup.sh" ]; then
+        echo "Tentative d'exécution de scripts/setup.sh..."
         chmod +x scripts/setup.sh
         ./scripts/setup.sh
         print_success "Configuration Unix terminée"
@@ -158,23 +307,76 @@ else
 fi
 
 # Installation des dépendances Flutter
+print_header "Installation des dépendances Flutter"
+
 if command -v flutter &> /dev/null; then
     echo "Installation des dépendances Flutter..."
-    (cd flutter_app && flutter pub get)
-    print_success "Dépendances Flutter installées"
+    (cd flutter_app && flutter pub get) || {
+        print_error "Erreur lors de l'installation des dépendances Flutter. Vérifiez les messages d'erreur ci-dessus."
+        print_warning "Vous pouvez essayer de résoudre les problèmes et exécuter 'cd flutter_app && flutter pub get' manuellement."
+    }
+    
+    if [ $? -eq 0 ]; then
+        print_success "Dépendances Flutter installées avec succès"
+    fi
 else
-    print_warning "Flutter non trouvé dans le PATH. Veuillez l'installer manuellement."
+    print_warning "Flutter non trouvé dans le PATH."
+    print_warning "Pour installer Flutter:"
+    echo "1. Visitez https://docs.flutter.dev/get-started/install"
+    echo "2. Suivez les instructions d'installation pour votre système d'exploitation"
+    echo "3. Ajoutez Flutter au PATH avec 'export PATH=\"\$PATH:\$HOME/flutter/bin\"'"
+    echo "4. Puis exécutez 'cd flutter_app && flutter pub get' pour installer les dépendances"
 fi
 
-# Installation des dépendances Python si Poetry est installé
-if command -v poetry &> /dev/null; then
-    echo "Installation des dépendances Python pour le backend local..."
-    (cd python_backend && poetry install)
-    echo "Installation des dépendances Python pour le backend web..."
-    (cd web_backend && poetry install)
-    print_success "Dépendances Python installées"
+# Installation des dépendances Python
+print_header "Installation des dépendances Python"
+
+# Vérification de l'installation de Poetry
+if ! command -v poetry &> /dev/null; then
+    print_warning "Poetry n'est pas installé ou n'est pas dans le PATH"
+    echo "Installation automatique de Poetry..."
+    
+    # Tente d'installer Poetry
+    if curl -sSL https://install.python-poetry.org | python3 -; then
+        print_success "Poetry installé avec succès"
+        # Ajout de Poetry au PATH pour cette session
+        export PATH="$HOME/.local/bin:$PATH"
+        if ! command -v poetry &> /dev/null; then
+            export PATH="$HOME/.poetry/bin:$PATH"
+            if ! command -v poetry &> /dev/null; then
+                print_error "Poetry installé mais non trouvé dans le PATH. Ajoutez manuellement le chemin de Poetry à votre PATH."
+                print_warning "Veuillez exécuter manuellement 'poetry install' dans les dossiers python_backend et web_backend."
+                POETRY_INSTALLED=false
+            else
+                POETRY_INSTALLED=true
+            fi
+        else
+            POETRY_INSTALLED=true
+        fi
+    else
+        print_error "Échec de l'installation de Poetry. Veuillez l'installer manuellement: https://python-poetry.org/docs/#installation"
+        print_warning "Veuillez exécuter manuellement 'poetry install' dans les dossiers python_backend et web_backend."
+        POETRY_INSTALLED=false
+    fi
 else
-    print_warning "Poetry non trouvé. Veuillez installer Poetry et exécuter manuellement 'poetry install' dans les dossiers python_backend et web_backend."
+    POETRY_INSTALLED=true
+fi
+
+# Si Poetry est installé, installer les dépendances
+if [ "$POETRY_INSTALLED" = true ]; then
+    # Installation pour python_backend
+    echo "Installation des dépendances Python pour le backend local..."
+    (cd python_backend && poetry install) || {
+        print_error "Erreur lors de l'installation des dépendances Python dans python_backend"
+    }
+    
+    # Installation pour web_backend
+    echo "Installation des dépendances Python pour le backend web..."
+    (cd web_backend && poetry install) || {
+        print_error "Erreur lors de l'installation des dépendances Python dans web_backend"
+    }
+    
+    print_success "Tentative d'installation des dépendances Python terminée"
 fi
 
 # Préparation du premier commit Git

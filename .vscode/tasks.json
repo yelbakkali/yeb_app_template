@@ -6,6 +6,10 @@
       "type": "shell",
       "command": "poetry run python web_backend/main.py",
       "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
       "problemMatcher": []
     },
     {
@@ -13,6 +17,57 @@
       "type": "shell",
       "command": "cd flutter_app && flutter build web",
       "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Flutter: Run Debug (WSL)",
+      "type": "shell",
+      "command": "cd flutter_app && flutter run -d web-server",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Full Development Environment (WSL)",
+      "type": "shell",
+      "command": "./run_dev.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Web Development Environment (WSL)",
+      "type": "shell",
+      "command": "./start_web_dev.sh",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Package Python Scripts (WSL)",
+      "type": "shell",
+      "command": "./package_python_scripts.sh",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
       "problemMatcher": []
     }
   ]

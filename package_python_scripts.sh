@@ -4,6 +4,12 @@
 
 # Chemin de base du projet
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Charger la configuration d'environnement du projet
+if [ -f "$BASE_DIR/.project_config/env_setup.sh" ]; then
+    source "$BASE_DIR/.project_config/env_setup.sh"
+fi
+
 SHARED_PYTHON_DIR="$BASE_DIR/shared_python"
 FLUTTER_DIR="$BASE_DIR/flutter_app"
 

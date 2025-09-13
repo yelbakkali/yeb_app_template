@@ -8,6 +8,25 @@ set "YELLOW=[93m"
 set "BLUE=[94m"
 set "NC=[0m"
 
+REM Vérifier si le script de prérequis existe et l'exécuter
+set "SCRIPT_DIR=%~dp0"
+set "PREREQ_SCRIPT=%SCRIPT_DIR%scripts\check_prerequisites.bat"
+
+if exist "%PREREQ_SCRIPT%" (
+    echo Vérification des prérequis avant l'initialisation...
+    call "%PREREQ_SCRIPT%"
+    
+    REM Si le script de prérequis a affiché des avertissements, demander si l'utilisateur veut continuer
+    if %ERRORLEVEL% NEQ 0 (
+        echo %YELLOW%Des prérequis sont manquants. Voulez-vous continuer quand même ? (O/N)%NC%
+        set /p CONTINUE_CHOICE=
+        if /i not "%CONTINUE_CHOICE%"=="O" (
+            echo Initialisation annulée. Veuillez installer les prérequis manquants et réessayer.
+            exit /b 1
+        )
+    )
+)
+
 REM Fonctions utilitaires
 :print_header
 echo %BLUE%===================================================================%NC%
@@ -34,6 +53,13 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b 1
 )
 
+REM Vérifier si PowerShell est disponible
+where powershell >nul 2>nul
+if %ERRORLEVEL% NEQ 0 (
+    call :print_error "PowerShell n'est pas disponible. Ce script nécessite PowerShell pour fonctionner correctement."
+    exit /b 1
+)
+
 REM Détecter le nom du projet à partir du dossier racine
 for %%I in (.) do set "PROJECT_NAME=%%~nxI"
 
@@ -57,20 +83,23 @@ REM Version Windows
 echo @echo off > .project_config\project_info.bat
 echo REM Informations sur le projet - générées automatiquement >> .project_config\project_info.bat
 echo set PROJECT_NAME=%PROJECT_NAME% >> .project_config\project_info.bat
-echo set PROJECT_CREATED_DATE=%date% >> .project_config\project_info.bat
+echo set PROJECT_CREATED_DATE=%ISO_DATE% >> .project_config\project_info.bat
+
+REM Obtenir la date au format ISO (YYYY-MM-DD)
+for /f "tokens=2 delims==" %%I in ('powershell -Command "Get-Date -Format 'yyyy-MM-dd'"') do set "ISO_DATE=%%I"
 
 REM Version Bash (pour WSL ou Git Bash)
 echo #!/bin/bash > .project_config\project_info.sh
 echo # Informations sur le projet - générées automatiquement >> .project_config\project_info.sh
 echo PROJECT_NAME="%PROJECT_NAME%" >> .project_config\project_info.sh
-echo PROJECT_CREATED_DATE="%date%" >> .project_config\project_info.sh
+echo PROJECT_CREATED_DATE="%ISO_DATE%" >> .project_config\project_info.sh
 
 REM Création d'un fichier Dart pour les constantes du projet
 if not exist "flutter_app\lib\config" mkdir flutter_app\lib\config
 echo // Fichier généré automatiquement - Contient les informations de base du projet > flutter_app\lib\config\project_config.dart
 echo class ProjectConfig { >> flutter_app\lib\config\project_config.dart
 echo   static const String projectName = '%PROJECT_NAME%'; >> flutter_app\lib\config\project_config.dart
-echo   static const String projectCreatedDate = '%date%'; >> flutter_app\lib\config\project_config.dart
+echo   static const String projectCreatedDate = '%ISO_DATE%'; >> flutter_app\lib\config\project_config.dart
 echo } >> flutter_app\lib\config\project_config.dart
 
 call :print_success "Fichier de configuration créé avec le nom du projet : %PROJECT_NAME%"
@@ -100,19 +129,105 @@ if exist "pubspec.yaml" (
 
 REM Mettre à jour tous les imports dans le code
 echo Mise à jour des imports dans les fichiers Dart...
-powershell -Command "Get-ChildItem -Path . -Include *.dart -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace 'package:yeb_app_template/', 'package:%PROJECT_NAME%/' | Set-Content $_.FullName }"
-call :print_success "Imports mis à jour dans les fichiers Dart"
+powershell -Command "try { Get-ChildItem -Path . -Include *.dart -Recurse | ForEach-Object { (Get-Content $_.FullName) -replace 'package:yeb_app_template/', 'package:%PROJECT_NAME%/' | Set-Content $_.FullName }; exit 0 } catch { Write-Host \"Erreur: $_\"; exit 1 }"
+if %ERRORLEVEL% NEQ 0 (
+    call :print_warning "Problème détecté lors de la mise à jour des imports. Certains fichiers peuvent ne pas avoir été mis à jour correctement."
+) else (
+    call :print_success "Imports mis à jour dans les fichiers Dart"
+)
 
 REM Mettre à jour les fichiers web
 if exist "flutter_app\web\index.html" (
     echo Mise à jour du fichier index.html...
-    powershell -Command "(Get-Content 'flutter_app\web\index.html') -replace 'content=""Application yeb_app_template', 'content=""Application %PROJECT_NAME%' | Set-Content 'flutter_app\web\index.html'"
-    powershell -Command "(Get-Content 'flutter_app\web\index.html') -replace 'content=""yeb_app_template""', 'content=""%PROJECT_NAME%""' | Set-Content 'flutter_app\web\index.html'"
-    powershell -Command "(Get-Content 'flutter_app\web\index.html') -replace '<title>yeb_app_template<', '<title>%PROJECT_NAME%<' | Set-Content 'flutter_app\web\index.html'"
+    REM Utiliser le chemin normalisé avec des slashes avant pour PowerShell
+    set "WEB_INDEX=flutter_app/web/index.html"
+    powershell -Command "(Get-Content '%WEB_INDEX%') -replace 'content=""Application yeb_app_template', 'content=""Application %PROJECT_NAME%' | Set-Content '%WEB_INDEX%'"
+    powershell -Command "(Get-Content '%WEB_INDEX%') -replace 'content=""yeb_app_template""', 'content=""%PROJECT_NAME%""' | Set-Content '%WEB_INDEX%'"
+    powershell -Command "(Get-Content '%WEB_INDEX%') -replace '<title>yeb_app_template<', '<title>%PROJECT_NAME%<' | Set-Content '%WEB_INDEX%'"
     call :print_success "Fichier index.html mis à jour"
 )
 
 call :print_success "Renommage terminé"
+
+REM Configuration automatique de VS Code
+call :print_header "Configuration de l'environnement VS Code"
+if not exist ".vscode" mkdir .vscode
+
+REM Création du fichier settings.json
+echo Création du fichier settings.json...
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '{'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  // Configuration Flutter'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"dart.lineLength\": 100,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"[dart]\": {'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.formatOnSave\": true,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.formatOnType\": true,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.rulers\": [100],'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.selectionHighlight\": false,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.suggestSelection\": \"first\",'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.tabCompletion\": \"onlySnippets\",'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.wordBasedSuggestions\": \"off\"'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  },'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value ''"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  // Configuration Python'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"python.defaultInterpreterPath\": \"${workspaceFolder}/web_backend/.venv/bin/python\",'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"python.linting.enabled\": true,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"python.linting.pylintEnabled\": true,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"python.formatting.provider\": \"black\",'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"python.formatting.blackPath\": \"${workspaceFolder}/web_backend/.venv/bin/black\",'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"python.formatting.blackArgs\": [\"--line-length\", \"88\"],'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"[python]\": {'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.formatOnSave\": true,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    \"editor.codeActionsOnSave\": {'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '      \"source.organizeImports\": \"explicit\"'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '    }'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  },'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value ''"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  // Configuration générale'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"files.autoSave\": \"afterDelay\",'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"files.autoSaveDelay\": 1000,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"editor.tabSize\": 2,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"git.enableSmartCommit\": true,'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '  \"git.confirmSync\": false'"
+powershell -Command "Add-Content -Path .vscode\settings.json -Value '}'"
+
+REM Création du fichier extensions.json
+echo Création du fichier extensions.json...
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '{'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '  \"recommendations\": ['"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"dart-code.flutter\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"dart-code.dart-code\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"ms-python.python\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"ms-python.vscode-pylance\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"littlefoxteam.vscode-python-test-adapter\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"mhutchie.git-graph\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"eamodio.gitlens\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"dbaeumer.vscode-eslint\",'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '    \"esbenp.prettier-vscode\"'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '  ]'"
+powershell -Command "Add-Content -Path .vscode\extensions.json -Value '}'"
+
+REM Création du fichier launch.json
+echo Création du fichier launch.json...
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '{'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '  \"version\": \"0.2.0\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '  \"configurations\": ['"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '    {'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"name\": \"Flutter App\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"type\": \"dart\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"request\": \"launch\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"program\": \"flutter_app/lib/main.dart\"'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '    },'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '    {'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"name\": \"Web Backend (Python)\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"type\": \"python\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"request\": \"launch\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"program\": \"${workspaceFolder}/web_backend/main.py\",'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '      \"console\": \"integratedTerminal\"'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '    }'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '  ]'"
+powershell -Command "Add-Content -Path .vscode\launch.json -Value '}'"
+
+call :print_success "Configuration VS Code créée. Les extensions recommandées seront proposées à l'ouverture du projet."
 
 REM Ne pas mettre à jour le pubspec.yaml pour Flutter avec le nom du projet
 if exist "flutter_app\pubspec.yaml" (
@@ -133,31 +248,89 @@ if exist "scripts\setup.bat" (
 )
 
 REM Installation des dépendances Flutter
+call :print_header "Installation des dépendances Flutter"
+
 where flutter >nul 2>nul
 if %ERRORLEVEL% EQU 0 (
     echo Installation des dépendances Flutter...
     pushd flutter_app
     flutter pub get
+    if %ERRORLEVEL% NEQ 0 (
+        call :print_error "Erreur lors de l'installation des dépendances Flutter. Vérifiez les messages d'erreur ci-dessus."
+        call :print_warning "Vous pouvez essayer de résoudre les problèmes et exécuter 'cd flutter_app && flutter pub get' manuellement."
+    ) else (
+        call :print_success "Dépendances Flutter installées avec succès"
+    )
     popd
-    call :print_success "Dépendances Flutter installées"
 ) else (
-    call :print_warning "Flutter non trouvé dans le PATH. Veuillez l'installer manuellement."
+    call :print_warning "Flutter non trouvé dans le PATH."
+    call :print_warning "Pour installer Flutter:"
+    echo 1. Visitez https://docs.flutter.dev/get-started/install
+    echo 2. Téléchargez et extrayez Flutter SDK
+    echo 3. Ajoutez le dossier flutter\bin au PATH système
+    echo 4. Puis exécutez 'cd flutter_app && flutter pub get' pour installer les dépendances
 )
 
-REM Installation des dépendances Python si Poetry est installé
+REM Installation des dépendances Python
+call :print_header "Installation des dépendances Python"
+
+REM Vérification de l'installation de Poetry
 where poetry >nul 2>nul
-if %ERRORLEVEL% EQU 0 (
+if %ERRORLEVEL% NEQ 0 (
+    call :print_warning "Poetry n'est pas installé ou n'est pas dans le PATH"
+    echo Installation automatique de Poetry...
+    
+    REM Tente d'installer Poetry avec PowerShell
+    powershell -Command "try { (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -; exit 0 } catch { Write-Host \"Erreur lors de l'installation de Poetry: $_\"; exit 1 }"
+    
+    if %ERRORLEVEL% EQU 0 (
+        call :print_success "Poetry installé avec succès"
+        REM Ajout de Poetry au PATH pour cette session
+        set "PATH=%USERPROFILE%\.poetry\bin;%PATH%"
+        where poetry >nul 2>nul
+        if %ERRORLEVEL% NEQ 0 (
+            set "PATH=%APPDATA%\Python\Scripts;%PATH%"
+            where poetry >nul 2>nul
+            if %ERRORLEVEL% NEQ 0 (
+                call :print_error "Poetry installé mais non trouvé dans le PATH. Ajoutez manuellement le chemin de Poetry à votre PATH."
+                call :print_warning "Veuillez exécuter manuellement 'poetry install' dans les dossiers python_backend et web_backend."
+                set "POETRY_INSTALLED=false"
+            ) else (
+                set "POETRY_INSTALLED=true"
+            )
+        ) else (
+            set "POETRY_INSTALLED=true"
+        )
+    ) else (
+        call :print_error "Échec de l'installation de Poetry. Veuillez l'installer manuellement: https://python-poetry.org/docs/#installation"
+        call :print_warning "Veuillez exécuter manuellement 'poetry install' dans les dossiers python_backend et web_backend."
+        set "POETRY_INSTALLED=false"
+    )
+) else (
+    set "POETRY_INSTALLED=true"
+)
+
+REM Si Poetry est installé, installer les dépendances
+if "%POETRY_INSTALLED%"=="true" (
+    REM Installation pour python_backend
     echo Installation des dépendances Python pour le backend local...
     pushd python_backend
     poetry install
+    if %ERRORLEVEL% NEQ 0 (
+        call :print_error "Erreur lors de l'installation des dépendances Python dans python_backend"
+    )
     popd
+    
+    REM Installation pour web_backend
     echo Installation des dépendances Python pour le backend web...
     pushd web_backend
     poetry install
+    if %ERRORLEVEL% NEQ 0 (
+        call :print_error "Erreur lors de l'installation des dépendances Python dans web_backend"
+    )
     popd
-    call :print_success "Dépendances Python installées"
-) else (
-    call :print_warning "Poetry non trouvé. Veuillez installer Poetry et exécuter manuellement 'poetry install' dans les dossiers python_backend et web_backend."
+    
+    call :print_success "Tentative d'installation des dépendances Python terminée"
 )
 
 REM Préparation du premier commit Git
