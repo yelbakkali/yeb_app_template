@@ -4,13 +4,60 @@ Ce guide vous aidera à installer et configurer l'environnement de développemen
 
 ## Prérequis
 
+### Outils principaux
+
 Avant de commencer, assurez-vous d'avoir installé :
 
 - [Flutter](https://docs.flutter.dev/get-started/install) (version 3.35.0 ou supérieure)
+- [Dart SDK](https://dart.dev/get-dart) (installé automatiquement avec Flutter)
 - [Python](https://www.python.org/downloads/) (version 3.9 ou supérieure)
 - [Poetry](https://python-poetry.org/docs/#installation) (pour la gestion des dépendances Python)
 - [Git](https://git-scm.com/downloads)
-- [VS Code](https://code.visualstudio.com/download) (recommandé)
+- [VS Code](https://code.visualstudio.com/download) (recommandé comme environnement de développement)
+- [tmux](https://github.com/tmux/tmux/wiki/Installing) (pour Linux/macOS, utilisé par les scripts de développement)
+
+### Extensions VS Code recommandées
+
+Pour une expérience de développement optimale, installez ces extensions VS Code :
+
+- **Flutter/Dart** :
+  - [Flutter](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter) - Support Flutter et Dart
+  - [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code) - Support du langage Dart
+
+- **Python** :
+  - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python) - Support Python
+  - [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) - Serveur de langage Python
+  - [Python Test Explorer](https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter) - Pour exécuter les tests Python
+
+- **Outils généraux** :
+  - [Git Graph](https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph) - Visualisation de l'historique Git
+  - [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) - Fonctionnalités Git avancées
+  - [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) - Assistant IA pour le développement (optionnel)
+
+- **Qualité du code** :
+  - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) - Linting pour JavaScript/TypeScript
+  - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - Formattage de code
+
+Vous pouvez installer toutes ces extensions rapidement en exécutant les commandes suivantes dans un terminal :
+
+```bash
+# Extensions Flutter/Dart
+code --install-extension Dart-Code.flutter
+code --install-extension Dart-Code.dart-code
+
+# Extensions Python
+code --install-extension ms-python.python
+code --install-extension ms-python.vscode-pylance
+code --install-extension LittleFoxTeam.vscode-python-test-adapter
+
+# Outils généraux
+code --install-extension mhutchie.git-graph
+code --install-extension eamodio.gitlens
+
+# Qualité du code
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension esbenp.prettier-vscode
+```
 
 ## Installation
 
@@ -21,7 +68,33 @@ git clone https://github.com/votre-utilisateur/yeb_app_template.git
 cd yeb_app_template
 ```
 
-### 2. Configuration Flutter
+### 2. Utiliser le script d'installation automatique (recommandé)
+
+Le projet inclut des scripts qui automatisent l'installation et la configuration :
+
+```bash
+# Pour Linux/macOS :
+chmod +x setup_project.sh
+./setup_project.sh
+
+# Pour Windows :
+setup_project.bat
+```
+
+Ce script va :
+
+- Vérifier les prérequis (Git, Python, Poetry, Flutter, VS Code)
+- Tenter d'installer automatiquement les outils manquants lorsque possible
+- Initialiser le projet avec votre nom personnalisé
+- Configurer VS Code avec les paramètres recommandés
+- Installer les dépendances Flutter et Python
+- Ouvrir le projet dans VS Code si disponible
+
+### 3. Installation manuelle (alternative)
+
+Si vous préférez une installation étape par étape, suivez les instructions ci-dessous :
+
+#### Configuration Flutter
 
 Assurez-vous que Flutter est correctement installé et configuré :
 
@@ -69,6 +142,40 @@ chmod +x run_dev_environment.sh
 ```bash
 run_dev_environment.bat
 ```
+
+## Configuration de l'éditeur VS Code
+
+La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`init_project.sh` ou `init_project.bat`). Les scripts créent les fichiers suivants dans le dossier `.vscode` :
+
+- `settings.json` : Configuration de l'éditeur et des extensions
+- `extensions.json` : Recommandations d'extensions à installer
+- `launch.json` : Configurations de débogage pour Flutter et Python
+
+### Configuration appliquée
+
+Cette configuration automatique inclut :
+
+1. **Pour Flutter/Dart** :
+   - Formatage automatique du code
+   - Longueur de ligne à 100 caractères
+   - Règles d'édition optimisées
+
+2. **Pour Python** :
+   - Configuration de l'interpréteur Python
+   - Activation du linting avec Pylint
+   - Formatage avec Black (88 caractères par ligne)
+   - Organisation automatique des imports
+
+3. **Configuration générale** :
+   - Sauvegarde automatique
+   - Taille de tabulation à 2 espaces
+   - Paramètres Git simplifiés
+
+### Personnalisation
+
+Si vous souhaitez personnaliser davantage ces paramètres, vous pouvez modifier manuellement les fichiers dans le dossier `.vscode` après l'initialisation du projet.
+
+> Note: Les extensions recommandées seront proposées à l'installation lors de la première ouverture du projet dans VS Code.
 
 ## Lancement de l'application
 

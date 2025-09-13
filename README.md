@@ -27,7 +27,21 @@ L'architecture du projet est basée sur une approche de packaging des scripts Py
 
 Pour plus de détails sur la structure du projet, consultez notre [documentation de structure du projet](docs/project_structure.md).
 
-## 🚀 Démarrage rapide
+## �️ Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé les outils suivants :
+
+- **Flutter** (v3.35.0+) et Dart SDK
+- **Python** (v3.9+)
+- **Poetry** (gestion des dépendances Python)
+- **VS Code** avec les extensions recommandées (Flutter, Dart, Python, Pylance)
+- **Git**
+
+Pour les utilisateurs Linux/macOS, **tmux** est également requis pour les scripts de développement.
+
+Consultez notre [guide d'installation détaillé](docs/installation.md) pour des instructions complètes sur la configuration de l'environnement de développement.
+
+## �🚀 Démarrage rapide
 
 ### Étape 1 : Utiliser ce template
 
@@ -57,7 +71,18 @@ Parcourez le dossier `docs/` pour découvrir :
 git clone https://github.com/votre-username/nom-de-votre-depot.git
 cd nom-de-votre-depot
 
-# Initialiser votre projet (automatiquement)
+# Méthode 1 : Installation automatique tout-en-un (recommandée)
+# Cette méthode vérifie les prérequis, installe les outils manquants si possible,
+# initialise le projet et ouvre VS Code automatiquement.
+
+# Pour Linux/macOS :
+chmod +x setup_project.sh
+./setup_project.sh
+
+# Pour Windows :
+setup_project.bat
+
+# Méthode 2 : Installation manuelle étape par étape
 # Pour Linux/macOS :
 chmod +x init_project.sh
 ./init_project.sh

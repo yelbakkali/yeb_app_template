@@ -3,16 +3,66 @@
   "configurations": [
     {
       "name": "Lancer le backend Python",
-  "type": "debugpy",
+      "type": "debugpy",
       "request": "launch",
       "program": "${workspaceFolder}/python_backend/web_backend/main.py",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
     },
     {
       "name": "Flutter App",
       "type": "dart",
       "request": "launch",
       "program": "${workspaceFolder}/flutter_app/lib/main.dart"
+    },
+    {
+      "name": "Python: Web Backend Server",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/web_backend/main.py",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      }
+    },
+    {
+      "name": "Flutter: Web Server (WSL)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "program": "${workspaceFolder}/flutter_app/lib/main.dart",
+      "args": [
+        "-d",
+        "web-server",
+        "--web-port",
+        "8000"
+      ]
+    },
+    {
+      "name": "Python: Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": [
+        "${workspaceFolder}/web_backend/tests"
+      ],
+      "env": {
+        "PYTHONPATH": "${workspaceFolder}"
+      },
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full Stack: Backend + Flutter Web",
+      "configurations": [
+        "Python: Web Backend Server",
+        "Flutter: Web Server (WSL)"
+      ]
     }
   ]
 }

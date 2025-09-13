@@ -6,6 +6,11 @@
 PROJECT_DIR="$(dirname "$(readlink -f "$0")")"
 echo "Répertoire du projet: $PROJECT_DIR"
 
+# Charger la configuration d'environnement du projet
+if [ -f "$PROJECT_DIR/.project_config/env_setup.sh" ]; then
+    source "$PROJECT_DIR/.project_config/env_setup.sh"
+fi
+
 # Vérifier si tmux est installé
 if ! command -v tmux &> /dev/null; then
     echo "tmux n'est pas installé. Installation en cours..."
@@ -28,7 +33,20 @@ sleep 5
 
 # Pane 1: Démarrer l'application Flutter en mode web
 tmux select-pane -t 1
-tmux send-keys "cd $PROJECT_DIR/flutter_app && flutter run -d chrome" C-m
+tmux send-keys "cd $PROJECT_DIR/flutter_app && flutter run -d web-server --web-hostname 0.0.0.0 --web-port 8080" C-m
+
+# Afficher l'adresse IP de WSL pour faciliter l'accès depuis Windows
+WSL_IP=$(ip addr show eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+
+# Afficher les informations de connexion
+echo "============================================================"
+echo "Informations de connexion pour le développement avec WSL Remote:"
+echo "- Backend FastAPI: http://$WSL_IP:8000"
+echo "- Frontend Flutter: http://$WSL_IP:8080"
+echo "============================================================"
+echo "Pour accéder à ces services depuis Windows, utilisez les adresses ci-dessus."
+echo "Pour détacher de la session tmux sans arrêter les serveurs: Ctrl+B puis D"
+echo "Pour revenir à la session: tmux attach -t yeb_app_template"
 
 # Attacher à la session tmux
 tmux attach-session -t yeb_app_template

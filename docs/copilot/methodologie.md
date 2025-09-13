@@ -63,6 +63,46 @@ Valides-tu cette action ? [oui/non/modifier]
 - **Pour les actions complexes** : Description détaillée avec étapes spécifiques et code exact
 - **Pour les modifications de structure** : Présenter l'impact global et les avantages/inconvénients
 
+### 3.3 Automatisation des actions Git
+
+Lorsque l'utilisateur demande d'envoyer sur GitHub, de pusher des modifications, ou utilise des phrases comme "c'est bon", "valide les changements", "enregistre", GitHub Copilot doit AUTOMATIQUEMENT :
+
+1. **Vérifier l'état** du dépôt Git avec `git status`
+2. **Identifier les fichiers modifiés** qui doivent être ajoutés à l'index
+3. **Ajouter les fichiers pertinents** à l'index avec `git add`
+4. **Proposer un message de commit** adapté au contenu des modifications
+5. **Créer un commit** avec le message généré automatiquement
+6. **Pousser les changements** vers la branche distante appropriée
+7. **Confirmer** que les changements ont bien été envoyés
+
+**Script d'automatisation** : Pour simplifier ce processus et éliminer complètement les interactions requises, un script d'automatisation non-interactif est disponible :
+
+```bash
+./scripts/git_autocommit.sh
+```
+
+Ce script gère l'ensemble du processus (add, commit, push) en une seule opération automatique et :
+
+- Détecte automatiquement les fichiers modifiés
+- Génère un message de commit pertinent basé sur les types de fichiers modifiés
+- Effectue toutes les opérations Git nécessaires sans aucune intervention de l'utilisateur
+- Confirme les actions réalisées avec un compte-rendu clair
+
+Pour les cas où l'utilisateur souhaite contrôler le processus, le script offre également un mode interactif :
+
+```bash
+./scripts/git_autocommit.sh --interactive
+# ou
+./scripts/git_autocommit.sh -i
+```
+
+En mode interactif, l'utilisateur peut :
+
+- Valider ou modifier le message de commit généré automatiquement
+- Choisir de pousser ou non les modifications vers le dépôt distant
+
+Cette automatisation s'applique à toutes les commandes Git courantes liées à la sauvegarde et au partage des modifications, en éliminant complètement les interventions de l'utilisateur dans le mode par défaut.
+
 ## 4. Documentation et continuité
 
 ### 4.1 Documentation systématique
