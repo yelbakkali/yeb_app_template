@@ -353,15 +353,78 @@ if exist "%SCRIPT_DIR%scripts\install_dependencies.bat" (
     call :print_warning "Le script d'installation des dépendances n'a pas été trouvé."
 )
 
-REM Préparation du premier commit Git
+REM Configuration Git et création des branches
 call :print_header "Configuration Git"
 if exist ".git" (
     echo Préparation du premier commit...
     git add .
     git commit -m "🚀 Initialisation du projet %PROJECT_NAME% à partir du template yeb_app_template"
     call :print_success "Premier commit créé"
+    
+    REM Vérifier si la branche main existe déjà
+    git rev-parse --verify main >nul 2>nul
+    if %ERRORLEVEL% EQU 0 (
+        echo La branche main existe déjà
+    ) else (
+        REM Renommer la branche actuelle en main si ce n'est pas déjà le cas
+        for /f "tokens=*" %%a in ('git branch --show-current') do set current_branch=%%a
+        if not "!current_branch!"=="main" (
+            echo Renommage de la branche '!current_branch!' en 'main'...
+            git branch -m !current_branch! main
+            call :print_success "Branche renommée en 'main'"
+        )
+    )
+    
+    REM Création de la branche dev
+    echo Création de la branche dev...
+    git rev-parse --verify dev >nul 2>nul
+    if %ERRORLEVEL% EQU 0 (
+        echo La branche dev existe déjà
+    ) else (
+        git checkout -b dev
+        call :print_success "Branche dev créée et activée"
+    )
+    
+    echo Configuration du flux de travail Git : main (stable) et dev (développement)
 ) else (
-    call :print_warning "Ce dossier n'est pas un dépôt Git. Veuillez initialiser Git manuellement."
+    call :print_warning "Ce dossier n'est pas un dépôt Git. Initialisation Git..."
+    git init
+    git add .
+    git commit -m "🚀 Initialisation du projet %PROJECT_NAME% à partir du template yeb_app_template"
+    
+    REM Renommer la branche par défaut en main
+    git branch -m main
+    call :print_success "Dépôt Git initialisé avec la branche principale 'main'"
+    
+    REM Création de la branche dev
+    git checkout -b dev
+    call :print_success "Branche dev créée et activée"
+    
+    echo Flux de travail Git configuré : main (stable) et dev (développement)
+    
+    echo.
+    echo %YELLOW%Conseil : Pour connecter ce dépôt à GitHub ou un autre service distant :%NC%
+    echo 1. Créez un dépôt vide sur GitHub/GitLab/etc.
+    echo 2. Exécutez : git remote add origin URL_DU_DEPOT
+    echo 3. Exécutez : git push -u origin main
+    echo 4. Exécutez : git push -u origin dev
+)
+
+REM Proposer de nettoyer les fichiers d'initialisation
+call :print_header "Finalisation"
+echo Souhaitez-vous supprimer les scripts d'initialisation maintenant qu'ils ont été exécutés ?
+echo Ces scripts ne sont plus nécessaires après la première configuration et peuvent être supprimés.
+set /p CLEANUP_CHOICE=Nettoyer les fichiers d'initialisation ? (O/N) 
+if /i "%CLEANUP_CHOICE%"=="O" (
+    if exist "%SCRIPT_DIR%scripts\cleanup_init_files.bat" (
+        echo Exécution du script de nettoyage...
+        call "%SCRIPT_DIR%scripts\cleanup_init_files.bat"
+    ) else (
+        call :print_warning "Script de nettoyage non trouvé"
+    )
+) else (
+    echo Les fichiers d'initialisation n'ont pas été supprimés.
+    echo Vous pouvez les nettoyer ultérieurement en exécutant scripts\cleanup_init_files.bat
 )
 
 REM Instructions finales
@@ -372,6 +435,8 @@ echo Prochaines étapes recommandées :
 echo 1. Consultez la documentation dans le dossier 'docs/' pour plus d'informations
 echo 2. Lancez votre application en développement avec 'run_dev.bat'
 echo 3. Pour le développement web, utilisez 'start_web_dev.bat'
+echo 4. Utilisez git avec le workflow recommandé : développement sur 'dev', fusion vers 'main'
+echo    Pour fusionner dev vers main : scripts\merge_dev_to_main.bat
 echo.
 echo Si vous utilisez VS Code avec GitHub Copilot, demandez à l'assistant de 'lire la documentation dans docs/' pour vous aider à personnaliser davantage votre projet.
 echo.
