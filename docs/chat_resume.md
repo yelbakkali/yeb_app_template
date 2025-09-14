@@ -2,7 +2,7 @@
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
-**Dernière mise à jour :** 7 septembre 2025
+**Dernière mise à jour :** 14 septembre 2025
 
 ## Contexte du projet
 
@@ -43,37 +43,42 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 
 ## Dernières réalisations
 
-1. **Structure des branches Git**
+1. **Amélioration de la méthodologie pour GitHub Copilot (14 septembre 2025)**
+   - Ajout d'instructions automatiques dans `docs/copilot/methodologie.md` pour déclencher la lecture de toute la documentation
+   - Mise à jour du guide de style Markdown avec de nouvelles règles
+   - Documentation de la session dans `docs/copilot/sessions/session_20250914_auto_doc.md`
+
+2. **Structure des branches Git**
    - Branche `main` créée pour la production
    - Branche `dev` créée pour le développement
    - Documentation du workflow dans `docs/git_workflow.md`
    - Configuration des règles de protection de branches dans `docs/github_branch_protection.md`
 
-2. **Nettoyage des fichiers redondants**
+3. **Nettoyage des fichiers redondants**
    - Suppression des scripts Python redondants dans `flutter_app/android/app/src/main/python/`
    - Suppression des scripts Python redondants dans `flutter_app/ios/PythonBundle/`
    - Sauvegarde des fichiers obsolètes avec extension `.bak`
 
-3. **Mise à jour de la documentation**
+4. **Mise à jour de la documentation**
    - Mise à jour complète du fichier `workload.md` avec l'architecture et les prérequis
    - Création du fichier de résumé de conversation `docs/chat_resume.md`
 
-4. **Configuration de l'environnement de développement VS Code**
+5. **Configuration de l'environnement de développement VS Code**
    - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
    - Correction du type de configuration de debug Python (`python` → `debugpy`) dans `launch.json` pour compatibilité future
    - Synchronisation de ces fichiers sur la branche `dev` du dépôt GitHub
 
-5. **Développement de la couche d'accès aux données**
+6. **Développement de la couche d'accès aux données**
    - Création d'une classe utilitaire `SQLiteManager` dans `/python_backend/utils/sqlite_manager.py` pour gérer les opérations de base sur la base de données SQLite
    - Implémentation des méthodes de connexion et déconnexion à la base
    - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
 
-6. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
+7. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
    - Création d'une structure dans `docs/copilot/` pour documenter les sessions de travail
    - Mise en place d'instructions et règles de communication claires entre l'utilisateur et l'assistant
    - Ajout d'un système de validation avant toute action sur le projet
 
-7. **Transformation du projet en template GitHub réutilisable**
+8. **Transformation du projet en template GitHub réutilisable**
    - Création de scripts d'installation automatisée pour WSL et Windows dans `scripts/`
    - Mise à jour du README avec badges, instructions détaillées et guide d'utilisation du template
    - Configuration des GitHub Actions pour la validation CI (Flutter et Python)
