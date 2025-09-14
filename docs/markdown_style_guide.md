@@ -93,6 +93,7 @@ Ce document définit les règles de formatage Markdown à suivre pour tous les d
 ### MD041 : Premier élément du document
 
 - Le premier élément d'un fichier doit être un titre de niveau 1
+- Ne commencez jamais un fichier Markdown avec des délimiteurs de blocs de code (```), ils doivent être précédés d'un titre
 
 ## Outils recommandés
 
