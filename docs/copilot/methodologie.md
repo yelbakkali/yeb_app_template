@@ -27,8 +27,11 @@ GitHub Copilot doit :
 
 ### 2.1 Au début de chaque session
 
-1. Lire ce fichier pour rappeler la méthodologie complète
-2. Lire tous les fichiers disponibles dans le dossier `docs/copilot/`
+1. Lire ce fichier (`methodologie.md`) pour rappeler la méthodologie complète
+2. **RÈGLE CRITIQUE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `docs/copilot/`, en particulier:
+   - `methodologie_temp.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques au développement du template
+   - `README.md` - Pour comprendre la structure générale de documentation
+   - Tous les autres fichiers présents dans ce dossier
 3. Lire tous les fichiers README.md du projet pour en comprendre la structure et les fonctionnalités
 4. Consulter `docs/chat_resume.md` pour comprendre le contexte global du projet
 5. Examiner les dernières sessions documentées dans `docs/copilot/sessions/`
@@ -40,6 +43,20 @@ GitHub Copilot doit :
 - **Quand l'utilisateur dit** "lire les fichiers dans docs/copilot" : Effectuer les étapes de la section 2.1
 - **Quand l'utilisateur dit** "lire la documentation dans docs/" : Lire tous les documents pertinents dans le dossier docs/
 - **Quand l'utilisateur dit** "lis la doc" : Effectuer les étapes à partir du début du fichier
+- **Quand l'utilisateur dit** "commençons une nouvelle session" : Effectuer les étapes de la section 2.1
+- **Quand l'utilisateur dit** "rappelle-toi le contexte du projet" : Effectuer les étapes de la section 2.1
+
+### 2.3 Règle d'or pour la documentation
+
+**RÈGLE ABSOLUE ET NON-NÉGOCIABLE** : À chaque début de session, TOUS les fichiers du dossier `docs/copilot/` doivent être lus SANS EXCEPTION, y compris mais non limité à:
+
+- `methodologie.md` (ce fichier)
+- `methodologie_temp.md` (instructions spéciales pour le développement du template)
+- `README.md`
+- `template_initialization.md`
+- Tout nouveau fichier qui aurait pu être ajouté depuis
+
+Cette règle s'applique AUTOMATIQUEMENT au démarrage de chaque session, SANS qu'il soit nécessaire que l'utilisateur le demande explicitement. L'assistant ne doit JAMAIS omettre la lecture de l'un quelconque de ces documents, car ils contiennent des informations CRITIQUES pour le bon déroulement du projet.
 
 ## 3. Protocole de communication et validation
 
@@ -65,32 +82,33 @@ Valides-tu cette action ? [oui/non/modifier]
 
 ### 3.3 Automatisation des actions Git
 
-Lorsque l'utilisateur demande d'envoyer sur GitHub, de pusher des modifications, ou utilise des phrases comme "c'est bon", "valide les changements", "enregistre", GitHub Copilot doit AUTOMATIQUEMENT :
+#### 3.3.1 Déclencheurs pour l'automatisation Git
 
-1. **Vérifier l'état** du dépôt Git avec `git status`
-2. **Identifier les fichiers modifiés** qui doivent être ajoutés à l'index
-3. **Ajouter les fichiers pertinents** à l'index avec `git add`
-4. **Proposer un message de commit** adapté au contenu des modifications
-5. **Créer un commit** avec le message généré automatiquement
-6. **Pousser les changements** vers la branche distante appropriée
-7. **Confirmer** que les changements ont bien été envoyés
+**RÈGLE CRITIQUE** : Lorsque l'utilisateur demande d'envoyer sur GitHub, de pusher des modifications, ou utilise des phrases comme "c'est bon", "valide les changements", "enregistre", "push deja ces changement", GitHub Copilot doit AUTOMATIQUEMENT et SANS DEMANDER DE CONFIRMATION SUPPLÉMENTAIRE :
 
-**Script d'automatisation** : Pour simplifier ce processus et éliminer complètement les interactions requises, un script d'automatisation non-interactif est disponible :
+1. Exécuter immédiatement le script `./scripts/git_autocommit.sh` (voir ci-dessous)
+2. Ne pas demander d'instructions supplémentaires ou de confirmation
+3. Exécuter le script en mode non-interactif par défaut
+
+#### 3.3.2 Actions automatiques avec git_autocommit.sh
+
+Le script `git_autocommit.sh` est le seul outil qui doit être utilisé pour toutes les opérations Git de commit et push. Ce script:
+
+1. **Vérifie l'état** du dépôt Git avec `git status`
+2. **Identifie les fichiers modifiés** qui doivent être ajoutés à l'index
+3. **Ajoute les fichiers pertinents** à l'index avec `git add`
+4. **Propose un message de commit** adapté au contenu des modifications
+5. **Crée un commit** avec le message généré automatiquement
+6. **Pousse les changements** vers la branche distante appropriée
+7. **Confirme** que les changements ont bien été envoyés
+
+**Utilisation du script d'automatisation** :
 
 ```bash
+# Mode automatique (à utiliser systématiquement par défaut)
 ./scripts/git_autocommit.sh
-```
 
-Ce script gère l'ensemble du processus (add, commit, push) en une seule opération automatique et :
-
-- Détecte automatiquement les fichiers modifiés
-- Génère un message de commit pertinent basé sur les types de fichiers modifiés
-- Effectue toutes les opérations Git nécessaires sans aucune intervention de l'utilisateur
-- Confirme les actions réalisées avec un compte-rendu clair
-
-Pour les cas où l'utilisateur souhaite contrôler le processus, le script offre également un mode interactif :
-
-```bash
+# Mode interactif (uniquement si explicitement demandé par l'utilisateur)
 ./scripts/git_autocommit.sh --interactive
 # ou
 ./scripts/git_autocommit.sh -i
