@@ -15,7 +15,7 @@ set "PREREQ_SCRIPT=%SCRIPT_DIR%scripts\check_prerequisites.bat"
 if exist "%PREREQ_SCRIPT%" (
     echo Vérification des prérequis avant l'initialisation...
     call "%PREREQ_SCRIPT%"
-    
+
     REM Si le script de prérequis a affiché des avertissements, demander si l'utilisateur veut continuer
     if %ERRORLEVEL% NEQ 0 (
         echo %YELLOW%Des prérequis sont manquants. Voulez-vous continuer quand même ? (O/N)%NC%
@@ -112,7 +112,7 @@ if exist "yeb_app_template.code-workspace" (
     echo Renommage du fichier code-workspace...
     copy "yeb_app_template.code-workspace" "%PROJECT_NAME%.code-workspace" > nul
     del "yeb_app_template.code-workspace"
-    
+
     REM Remplacer le contenu du fichier
     powershell -Command "(Get-Content '%PROJECT_NAME%.code-workspace') -replace 'yeb_app_template', '%PROJECT_NAME%' | Set-Content '%PROJECT_NAME%.code-workspace'"
     call :print_success "Fichier code-workspace renommé en %PROJECT_NAME%.code-workspace"
@@ -137,6 +137,7 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 REM Mettre à jour les fichiers web
+REM Mettre à jour les fichiers pour le Web
 if exist "flutter_app\web\index.html" (
     echo Mise à jour du fichier index.html...
     REM Utiliser le chemin normalisé avec des slashes avant pour PowerShell
@@ -144,7 +145,65 @@ if exist "flutter_app\web\index.html" (
     powershell -Command "(Get-Content '%WEB_INDEX%') -replace 'content=""Application yeb_app_template', 'content=""Application %PROJECT_NAME%' | Set-Content '%WEB_INDEX%'"
     powershell -Command "(Get-Content '%WEB_INDEX%') -replace 'content=""yeb_app_template""', 'content=""%PROJECT_NAME%""' | Set-Content '%WEB_INDEX%'"
     powershell -Command "(Get-Content '%WEB_INDEX%') -replace '<title>yeb_app_template<', '<title>%PROJECT_NAME%<' | Set-Content '%WEB_INDEX%'"
-    call :print_success "Fichier index.html mis à jour"
+
+    if exist "flutter_app\web\manifest.json" (
+        echo Mise à jour du manifest.json Web...
+        set "WEB_MANIFEST=flutter_app/web/manifest.json"
+        powershell -Command "(Get-Content '%WEB_MANIFEST%') -replace '""name"": ""flutter_app""', '""name"": ""%PROJECT_NAME%""' | Set-Content '%WEB_MANIFEST%'"
+        powershell -Command "(Get-Content '%WEB_MANIFEST%') -replace '""short_name"": ""flutter_app""', '""short_name"": ""%PROJECT_NAME%""' | Set-Content '%WEB_MANIFEST%'"
+        powershell -Command "(Get-Content '%WEB_MANIFEST%') -replace '""description"": ""A new Flutter project.""', '""description"": ""%PROJECT_NAME% application""' | Set-Content '%WEB_MANIFEST%'"
+    )
+    call :print_success "Fichiers web mis à jour"
+)
+
+REM Mettre à jour les fichiers pour Android
+if exist "flutter_app\android\app\src\main\AndroidManifest.xml" (
+    echo Mise à jour de AndroidManifest.xml...
+    set "ANDROID_MANIFEST=flutter_app/android/app/src/main/AndroidManifest.xml"
+    powershell -Command "(Get-Content '%ANDROID_MANIFEST%') -replace 'android:label=""flutter_app""', 'android:label=""%PROJECT_NAME%""' | Set-Content '%ANDROID_MANIFEST%'"
+
+    REM Mise à jour du package dans build.gradle s'il existe
+    if exist "flutter_app\android\app\build.gradle" (
+        set "ANDROID_BUILD_GRADLE=flutter_app/android/app/build.gradle"
+        powershell -Command "(Get-Content '%ANDROID_BUILD_GRADLE%') -replace 'applicationId ""com.example.flutter_app""', 'applicationId ""com.example.%PROJECT_NAME%""' | Set-Content '%ANDROID_BUILD_GRADLE%'"
+    )
+
+    call :print_success "Fichiers Android mis à jour"
+)
+
+REM Mettre à jour les fichiers pour iOS
+if exist "flutter_app\ios\Runner\Info.plist" (
+    echo Mise à jour de Info.plist pour iOS...
+    set "IOS_PLIST=flutter_app/ios/Runner/Info.plist"
+    powershell -Command "(Get-Content '%IOS_PLIST%') -replace '<key>CFBundleName</key>[^<]*<string>flutter_app</string>', '<key>CFBundleName</key>^M	<string>%PROJECT_NAME%</string>' | Set-Content '%IOS_PLIST%'"
+    powershell -Command "(Get-Content '%IOS_PLIST%') -replace '<key>CFBundleDisplayName</key>[^<]*<string>flutter_app</string>', '<key>CFBundleDisplayName</key>^M	<string>%PROJECT_NAME%</string>' | Set-Content '%IOS_PLIST%'"
+    call :print_success "Fichiers iOS mis à jour"
+)
+
+REM Mettre à jour les fichiers pour macOS
+if exist "flutter_app\macos\Runner\Configs\AppInfo.xcconfig" (
+    echo Mise à jour des fichiers pour macOS...
+    set "MACOS_CONFIG=flutter_app/macos/Runner/Configs/AppInfo.xcconfig"
+    powershell -Command "(Get-Content '%MACOS_CONFIG%') -replace 'PRODUCT_NAME = flutter_app', 'PRODUCT_NAME = %PROJECT_NAME%' | Set-Content '%MACOS_CONFIG%'"
+    call :print_success "Fichiers macOS mis à jour"
+)
+
+REM Mettre à jour les fichiers pour Windows
+if exist "flutter_app\windows\runner\Runner.rc" (
+    echo Mise à jour des fichiers pour Windows...
+    set "WINDOWS_RC=flutter_app/windows/runner/Runner.rc"
+    powershell -Command "(Get-Content '%WINDOWS_RC%') -replace 'VALUE ""FileDescription"", ""flutter_app""', 'VALUE ""FileDescription"", ""%PROJECT_NAME%""' | Set-Content '%WINDOWS_RC%'"
+    powershell -Command "(Get-Content '%WINDOWS_RC%') -replace 'VALUE ""ProductName"", ""flutter_app""', 'VALUE ""ProductName"", ""%PROJECT_NAME%""' | Set-Content '%WINDOWS_RC%'"
+    call :print_success "Fichiers Windows mis à jour"
+)
+
+REM Mettre à jour les fichiers pour Linux
+if exist "flutter_app\linux\CMakeLists.txt" (
+    echo Mise à jour des fichiers pour Linux...
+    set "LINUX_CMAKE=flutter_app/linux/CMakeLists.txt"
+    powershell -Command "(Get-Content '%LINUX_CMAKE%') -replace 'set\(BINARY_NAME ""flutter_app""\)', 'set(BINARY_NAME ""%PROJECT_NAME%"")' | Set-Content '%LINUX_CMAKE%'"
+    powershell -Command "(Get-Content '%LINUX_CMAKE%') -replace 'set\(APPLICATION_ID ""com.example.flutter_app""\)', 'set(APPLICATION_ID ""com.example.%PROJECT_NAME%"")' | Set-Content '%LINUX_CMAKE%'"
+    call :print_success "Fichiers Linux mis à jour"
 )
 
 call :print_success "Renommage terminé"
@@ -279,10 +338,10 @@ where poetry >nul 2>nul
 if %ERRORLEVEL% NEQ 0 (
     call :print_warning "Poetry n'est pas installé ou n'est pas dans le PATH"
     echo Installation automatique de Poetry...
-    
+
     REM Tente d'installer Poetry avec PowerShell
     powershell -Command "try { (Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | python -; exit 0 } catch { Write-Host \"Erreur lors de l'installation de Poetry: $_\"; exit 1 }"
-    
+
     if %ERRORLEVEL% EQU 0 (
         call :print_success "Poetry installé avec succès"
         REM Ajout de Poetry au PATH pour cette session
@@ -320,7 +379,7 @@ if "%POETRY_INSTALLED%"=="true" (
         call :print_error "Erreur lors de l'installation des dépendances Python dans python_backend"
     )
     popd
-    
+
     REM Installation pour web_backend
     echo Installation des dépendances Python pour le backend web...
     pushd web_backend
@@ -329,7 +388,7 @@ if "%POETRY_INSTALLED%"=="true" (
         call :print_error "Erreur lors de l'installation des dépendances Python dans web_backend"
     )
     popd
-    
+
     call :print_success "Tentative d'installation des dépendances Python terminée"
 )
 
@@ -360,7 +419,7 @@ if exist ".git" (
     git add .
     git commit -m "🚀 Initialisation du projet %PROJECT_NAME% à partir du template yeb_app_template"
     call :print_success "Premier commit créé"
-    
+
     REM Vérifier si la branche main existe déjà
     git rev-parse --verify main >nul 2>nul
     if %ERRORLEVEL% EQU 0 (
@@ -374,7 +433,7 @@ if exist ".git" (
             call :print_success "Branche renommée en 'main'"
         )
     )
-    
+
     REM Création de la branche dev
     echo Création de la branche dev...
     git rev-parse --verify dev >nul 2>nul
@@ -384,24 +443,24 @@ if exist ".git" (
         git checkout -b dev
         call :print_success "Branche dev créée et activée"
     )
-    
+
     echo Configuration du flux de travail Git : main (stable) et dev (développement)
 ) else (
     call :print_warning "Ce dossier n'est pas un dépôt Git. Initialisation Git..."
     git init
     git add .
     git commit -m "🚀 Initialisation du projet %PROJECT_NAME% à partir du template yeb_app_template"
-    
+
     REM Renommer la branche par défaut en main
     git branch -m main
     call :print_success "Dépôt Git initialisé avec la branche principale 'main'"
-    
+
     REM Création de la branche dev
     git checkout -b dev
     call :print_success "Branche dev créée et activée"
-    
+
     echo Flux de travail Git configuré : main (stable) et dev (développement)
-    
+
     echo.
     echo %YELLOW%Conseil : Pour connecter ce dépôt à GitHub ou un autre service distant :%NC%
     echo 1. Créez un dépôt vide sur GitHub/GitLab/etc.
@@ -414,7 +473,7 @@ REM Proposer de nettoyer les fichiers d'initialisation
 call :print_header "Finalisation"
 echo Souhaitez-vous supprimer les scripts d'initialisation maintenant qu'ils ont été exécutés ?
 echo Ces scripts ne sont plus nécessaires après la première configuration et peuvent être supprimés.
-set /p CLEANUP_CHOICE=Nettoyer les fichiers d'initialisation ? (O/N) 
+set /p CLEANUP_CHOICE=Nettoyer les fichiers d'initialisation ? (O/N)
 if /i "%CLEANUP_CHOICE%"=="O" (
     if exist "%SCRIPT_DIR%scripts\cleanup_init_files.bat" (
         echo Exécution du script de nettoyage...
