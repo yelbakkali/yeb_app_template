@@ -43,10 +43,11 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 
 ## Dernières réalisations
 
-1. **Amélioration de la méthodologie pour GitHub Copilot (14 septembre 2025)**
-   - Ajout d'instructions automatiques dans `docs/copilot/methodologie.md` pour déclencher la lecture de toute la documentation
+1. **Renforcement de l'automatisation pour GitHub Copilot (14 septembre 2025)**
+   - Ajout d'instructions impératives dans `docs/copilot/methodologie.md` pour déclencher la lecture de la documentation ET l'application automatique des consignes
+   - Spécification explicite de l'utilisation automatique des scripts (`git_autocommit.sh`, `merge_to_main.sh`) sans intervention de l'utilisateur
    - Mise à jour du guide de style Markdown avec de nouvelles règles
-   - Documentation de la session dans `docs/copilot/sessions/session_20250914_auto_doc.md`
+   - Documentation détaillée dans `docs/copilot/sessions/session_20250914_auto_doc.md`
 
 2. **Structure des branches Git**
    - Branche `main` créée pour la production

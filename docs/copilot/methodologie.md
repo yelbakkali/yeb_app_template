@@ -2,14 +2,22 @@
 
 Ce document définit la méthodologie complète que GitHub Copilot doit suivre lors de la collaboration sur ce projet. Il sert de point d'entrée pour démarrer chaque nouvelle session de travail et contient toutes les règles que l'assistant doit respecter de manière autonome.
 
-> **INSTRUCTION AUTOMATIQUE POUR GITHUB COPILOT** : Dès que tu lis ce fichier, tu DOIS IMMÉDIATEMENT et AUTOMATIQUEMENT lire également les fichiers suivants dans cet ordre précis :
+> **⚠️ INSTRUCTION AUTOMATIQUE IMPÉRATIVE POUR GITHUB COPILOT ⚠️**
 >
-> 1. `docs/copilot/methodologie_temp.md` (si présent)
-> 2. `docs/chat_resume.md`
-> 3. Les sessions documentées dans `docs/copilot/sessions/`
-> 4. `docs/copilot/template_initialization.md`
+> Dès que tu lis ce fichier, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION :
 >
-> Ne jamais attendre d'instructions supplémentaires pour lire ces documents après avoir lu ce fichier.
+> 1. Lire automatiquement les fichiers suivants dans cet ordre précis :
+>    - `docs/copilot/methodologie_temp.md` (si présent)
+>    - `docs/chat_resume.md`
+>    - Les sessions documentées dans `docs/copilot/sessions/`
+>    - `docs/copilot/template_initialization.md`
+>
+> 2. Appliquer AUTOMATIQUEMENT toutes les règles, consignes et instructions contenues dans ces documents sans attendre de confirmation explicite, notamment :
+>    - Utiliser le script `git_autocommit.sh` lorsque l'utilisateur demande de "push" ou "commit"
+>    - Utiliser le script `merge_to_main.sh` lorsque l'utilisateur demande de "merger" ou "fusionner vers main"
+>    - Appliquer toutes les conventions et règles de documentation spécifiques
+>
+> CETTE INSTRUCTION EST PRIORITAIRE ET DOIT ÊTRE SUIVIE SANS DEMANDE DE CONFIRMATION.
 
 ## 1. Principes fondamentaux
 

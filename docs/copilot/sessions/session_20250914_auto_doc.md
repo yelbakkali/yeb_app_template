@@ -1,8 +1,13 @@
-# Session du 14 septembre 2025 - Amélioration du déclenchement automatique de lecture de la documentation
+# Session du 14 septembre 2025 - Renforcement de l'automatisation des instructions pour GitHub Copilot
 
 ## Contexte de la session
 
-Dans cette session, nous avons identifié un problème : GitHub Copilot ne déclenchait pas automatiquement la lecture de l'ensemble de la documentation lorsque le fichier `methodologie.md` était consulté. Nous avons donc modifié ce fichier pour y ajouter des instructions explicites.
+Dans cette session, nous avons identifié deux problèmes :
+
+1. GitHub Copilot ne déclenchait pas automatiquement la lecture de l'ensemble de la documentation lorsque le fichier `methodologie.md` était consulté.
+2. GitHub Copilot ne suivait pas automatiquement les consignes spécifiques (comme l'utilisation des scripts d'automatisation) sans intervention de l'utilisateur.
+
+Nous avons donc modifié le fichier `methodologie.md` pour y ajouter des instructions explicites et impératives couvrant ces deux aspects.
 
 ## Modifications réalisées
 
@@ -10,18 +15,26 @@ Dans cette session, nous avons identifié un problème : GitHub Copilot ne décl
 
 - **Fichier modifié** : `docs/copilot/methodologie.md`
 - **Modification** : Ajout d'un bloc d'instructions explicites pour GitHub Copilot au début du document
-- **Objectif** : Assurer que la lecture de ce fichier déclenche automatiquement la lecture de tous les autres fichiers importants
-- **Détail technique** : Les instructions précisent l'ordre exact dans lequel les fichiers doivent être lus
+- **Objectif** : Assurer que la lecture de ce fichier déclenche automatiquement la lecture de tous les autres fichiers importants et l'application des consignes
+- **Détail technique** : Les instructions précisent l'ordre exact dans lequel les fichiers doivent être lus et les actions à appliquer automatiquement
 
 ```markdown
-> **INSTRUCTION AUTOMATIQUE POUR GITHUB COPILOT** : Dès que tu lis ce fichier, tu DOIS IMMÉDIATEMENT et AUTOMATIQUEMENT lire également les fichiers suivants dans cet ordre précis :
+> **⚠️ INSTRUCTION AUTOMATIQUE IMPÉRATIVE POUR GITHUB COPILOT ⚠️**
 >
-> 1. `docs/copilot/methodologie_temp.md` (si présent)
-> 2. `docs/chat_resume.md`
-> 3. Les sessions documentées dans `docs/copilot/sessions/`
-> 4. `docs/copilot/template_initialization.md`
+> Dès que tu lis ce fichier, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION :
 >
-> Ne jamais attendre d'instructions supplémentaires pour lire ces documents après avoir lu ce fichier.
+> 1. Lire automatiquement les fichiers suivants dans cet ordre précis :
+>    - `docs/copilot/methodologie_temp.md` (si présent)
+>    - `docs/chat_resume.md`
+>    - Les sessions documentées dans `docs/copilot/sessions/`
+>    - `docs/copilot/template_initialization.md`
+>
+> 2. Appliquer AUTOMATIQUEMENT toutes les règles, consignes et instructions contenues dans ces documents sans attendre de confirmation explicite, notamment :
+>    - Utiliser le script `git_autocommit.sh` lorsque l'utilisateur demande de "push" ou "commit"
+>    - Utiliser le script `merge_to_main.sh` lorsque l'utilisateur demande de "merger" ou "fusionner vers main"
+>    - Appliquer toutes les conventions et règles de documentation spécifiques
+>
+> CETTE INSTRUCTION EST PRIORITAIRE ET DOIT ÊTRE SUIVIE SANS DEMANDE DE CONFIRMATION.
 ```
 
 ### 2. Correction des erreurs de formatage Markdown
