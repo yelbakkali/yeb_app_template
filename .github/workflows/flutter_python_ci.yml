@@ -76,49 +76,36 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           
-      - name: Install dependencies & run tests for shared Python code
+      - name: Install dependencies & run tests for python_backend
         run: |
-          cd shared_python
+          cd python_backend
           # Vérifions où se trouve Poetry
           which poetry || echo "Poetry not found in PATH"
           # Mise à jour du fichier lock si nécessaire
           poetry lock
-          # Installe les dépendances avec l'option --no-root pour éviter l'erreur tuple index
+          # Installe les dépendances avec l'option explicite dev
           poetry config virtualenvs.create true
-          poetry install --no-root
+          poetry install
           # Ajout explicite de pytest
           poetry add pytest --group dev
           # Lister les paquets installés pour vérification
           poetry show
-          # Vérifier la structure des scripts
-          echo "Vérification de la structure des scripts Python:"
-          ls -la scripts/
-          # Exécuter un test simple pour vérifier l'importation
-          poetry run python -c "import scripts.calcul_demo; print('Import réussi!')"
-          # Exécution des tests s'ils existent
-          if [ -d "tests" ]; then
-            poetry run python -m pytest tests/ -v
-          else
-            echo "Aucun répertoire de tests trouvé dans shared_python, création de tests prévue dans une prochaine étape"
-          fi
+          # Exécution du test
+          poetry run python -m pytest tests/ -v
           
-      - name: Install dependencies & run tests for web_backend (si existant)
+      - name: Install dependencies & run tests for web_backend
         run: |
-          if [ -d "web_backend" ]; then
-            cd web_backend
-            # Vérifions où se trouve Poetry
-            which poetry || echo "Poetry not found in PATH"
-            # Mise à jour du fichier lock si nécessaire
-            poetry lock
-            # Installe les dépendances avec l'option explicite dev
-            poetry config virtualenvs.create true
-            poetry install
-            # Ajout explicite de pytest
-            poetry add pytest --group dev
-            # Lister les paquets installés pour vérification
-            poetry show
-            # Exécution du test
-            poetry run python -m pytest tests/ -v
-          else
-            echo "Le répertoire web_backend n'existe pas, utilisation de la nouvelle structure unifiée"
-          fi
+          cd web_backend
+          # Vérifions où se trouve Poetry
+          which poetry || echo "Poetry not found in PATH"
+          # Mise à jour du fichier lock si nécessaire
+          poetry lock
+          # Installe les dépendances avec l'option explicite dev
+          poetry config virtualenvs.create true
+          poetry install
+          # Ajout explicite de pytest
+          poetry add pytest --group dev
+          # Lister les paquets installés pour vérification
+          poetry show
+          # Exécution du test
+          poetry run python -m pytest tests/ -v
