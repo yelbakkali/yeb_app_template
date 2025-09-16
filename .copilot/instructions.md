@@ -1,23 +1,25 @@
 # Instructions pour GitHub Copilot - Projet YEB App Template
 
-Ce document définit les instructions complètes que GitHub Copilot doit suivre lors de la collaboration sur ce projet. Il sert de point d'entrée automatique pour démarrer chaque nouvelle session de travail et contient toutes les règles que l'assistant doit respecter de manière autonome.
+Ce document définit les instructions complètes que GitHub Copilot doit suivre lors de la collaboration sur ce projet. Il sert de point d'entrée automatique pour démarrer chaque nouvelle session de travail et contient toutes les règles que l'assistant doit respecter de manière autonome. TOUT LE CONTENU DE CE DOCUMENT EST OBLIGATOIRE SANS EXCEPTION.
 
 > **⚠️ INSTRUCTION AUTOMATIQUE IMPÉRATIVE POUR GITHUB COPILOT ⚠️**
 >
-> Dès que tu lis ce fichier, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION :
+> ACTION IMMÉDIATE REQUISE : Dès l'ouverture de ce projet, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION exécuter TOUTES les actions suivantes AVANT de répondre à l'utilisateur :
 >
-> 1. Lire automatiquement les fichiers suivants dans cet ordre précis :
+> 1. Lire OBLIGATOIREMENT et SANS DÉLAI les fichiers suivants dans cet ordre précis :
 >    - `docs/copilot/methodologie_temp.md` (si présent)
->    - `docs/chat_resume.md`
->    - Les sessions documentées dans `docs/copilot/sessions/`
+>    - `docs/chat_resume.md` << CRITIQUE POUR L'HISTORIQUE DU PROJET >>
+>    - Les sessions documentées dans `docs/copilot/sessions/` << CRITIQUE POUR LE CONTEXTE >>
 >    - `docs/copilot/template_initialization.md`
 >
-> 2. Appliquer AUTOMATIQUEMENT toutes les règles, consignes et instructions contenues dans ces documents sans attendre de confirmation explicite, notamment :
+> 2. Appliquer AUTOMATIQUEMENT et SANS EXCEPTION toutes les règles, consignes et instructions contenues dans ces documents sans attendre de confirmation explicite, notamment :
 >    - Utiliser le script `git_autocommit.sh` lorsque l'utilisateur demande de "push" ou "commit"
 >    - Utiliser le script `merge_to_main.sh` lorsque l'utilisateur demande de "merger" ou "fusionner vers main"
 >    - Appliquer toutes les conventions et règles de documentation spécifiques
 >
-> CETTE INSTRUCTION EST PRIORITAIRE ET DOIT ÊTRE SUIVIE SANS DEMANDE DE CONFIRMATION.
+> 3. Confirmer dans ta première réponse que tu as bien lu l'historique du projet en mentionnant EXPLICITEMENT la dernière mise à jour de `docs/chat_resume.md` et la dernière session documentée.
+>
+> ATTENTION : CHAQUE MOT DE CE DOCUMENT DOIT ÊTRE CONSIDÉRÉ COMME UNE INSTRUCTION FORMELLE ET OBLIGATOIRE. AUCUNE PARTIE N'EST FACULTATIVE OU DE MOINDRE IMPORTANCE. CES INSTRUCTIONS SONT PRIORITAIRES ABSOLUES ET DOIVENT ÊTRE SUIVIES SANS AUCUNE EXCEPTION. L'ASSISTANT DOIT LIRE L'INTÉGRALITÉ DE L'HISTORIQUE AUTOMATIQUEMENT.
 
 ## 1. Principes fondamentaux
 
@@ -45,9 +47,9 @@ GitHub Copilot doit :
 ### 2.1 Au début de chaque session
 
 1. Lire ce fichier (`.copilot/instructions.md`) pour rappeler la méthodologie complète
-2. **RÈGLE CRITIQUE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `docs/copilot/`, en particulier:
+2. **RÈGLE ABSOLUMENT CRITIQUE ET NON NÉGOCIABLE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `docs/copilot/`, en particulier:
    - `methodologie_temp.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques au développement du template
-   - `README.md` - Pour comprendre la structure générale de documentation
+   - `README.md` - **LECTURE OBLIGATOIRE** pour comprendre la structure générale de documentation
    - Tous les autres fichiers présents dans ce dossier
 3. Lire tous les fichiers README.md du projet pour en comprendre la structure et les fonctionnalités
 4. Consulter `docs/chat_resume.md` pour comprendre le contexte global du projet
@@ -65,14 +67,16 @@ GitHub Copilot doit :
 
 ### 2.3 Règle d'or pour la documentation
 
-**RÈGLE ABSOLUE ET NON-NÉGOCIABLE** : À chaque début de session, TOUS les fichiers du dossier `docs/copilot/` doivent être lus SANS EXCEPTION, y compris mais non limité à:
+**RÈGLE ABSOLUMENT IMPÉRATIVE ET TOTALEMENT NON-NÉGOCIABLE** : À chaque début de session, TOUS les fichiers du dossier `docs/copilot/` doivent être lus SANS AUCUNE EXCEPTION, y compris mais non limité à:
 
-- `methodologie_temp.md` (instructions spéciales pour le développement du template)
-- `README.md`
-- `template_initialization.md`
-- Tout nouveau fichier qui aurait pu être ajouté depuis
+- `methodologie_temp.md` (instructions spéciales pour le développement du template) - **OBLIGATOIRE**
+- `README.md` - **OBLIGATOIRE**
+- `template_initialization.md` - **OBLIGATOIRE**
+- Tout nouveau fichier qui aurait pu être ajouté depuis - **OBLIGATOIRE**
+- TOUS les fichiers dans `docs/copilot/sessions/` - **ABSOLUMENT OBLIGATOIRE**
+- Le fichier `docs/chat_resume.md` - **CRITIQUE ET OBLIGATOIRE**
 
-Cette règle s'applique AUTOMATIQUEMENT au démarrage de chaque session, SANS qu'il soit nécessaire que l'utilisateur le demande explicitement. L'assistant ne doit JAMAIS omettre la lecture de l'un quelconque de ces documents, car ils contiennent des informations CRITIQUES pour le bon déroulement du projet.
+Cette règle s'applique AUTOMATIQUEMENT au démarrage de chaque session, SANS qu'il soit nécessaire que l'utilisateur le demande explicitement. L'assistant ne doit JAMAIS, SOUS AUCUN PRÉTEXTE, omettre la lecture de l'un quelconque de ces documents, car ils contiennent des informations VITALES pour le bon déroulement du projet.
 
 ## 3. Protocole de communication et validation
 
