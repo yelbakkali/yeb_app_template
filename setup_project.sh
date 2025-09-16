@@ -201,7 +201,7 @@ echo "Votre projet est maintenant configuré et prêt à l'emploi."
 echo 
 echo "Pour lancer l'application en développement :"
 echo "  - Mode local : ./run_dev.sh"
-echo "  - Mode web   : ./start_web_dev.sh"
+echo "  - Mode web   : ./start_web_integrated.sh"
 echo
 echo "Pour plus d'informations, consultez la documentation dans le dossier 'docs/'."
 print_success "Bon développement !"

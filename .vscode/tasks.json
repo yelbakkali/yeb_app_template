@@ -49,9 +49,9 @@
       "problemMatcher": []
     },
     {
-      "label": "Run Web Development Environment (WSL)",
+      "label": "Run Web Integrated Environment (WSL)",
       "type": "shell",
-      "command": "./start_web_dev.sh",
+      "command": "./start_web_integrated.sh",
       "group": "build",
       "presentation": {
         "reveal": "always",

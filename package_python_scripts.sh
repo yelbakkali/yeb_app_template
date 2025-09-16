@@ -18,10 +18,18 @@ echo "Préparation des scripts Python pour le packaging..."
 # S'assurer que le répertoire assets existe
 ASSETS_DIR="$FLUTTER_DIR/assets/shared_python"
 mkdir -p "$ASSETS_DIR"
+mkdir -p "$ASSETS_DIR/scripts"
+mkdir -p "$ASSETS_DIR/packages"
 
 # Copier les scripts Python partagés dans les assets de Flutter
 echo "Copie des scripts Python vers les assets de Flutter..."
-rsync -av --include="*/" --include="*.py" --exclude="*" "$SHARED_PYTHON_DIR/" "$ASSETS_DIR/"
+
+# Copier les fichiers à la racine (init, web_adapter, etc)
+rsync -av --include="*.py" --exclude="*/" --exclude="__pycache__" "$SHARED_PYTHON_DIR/" "$ASSETS_DIR/"
+
+# Copier les dossiers scripts et packages en préservant leur structure
+rsync -av --include="*/" --include="*.py" --exclude="*" --exclude="__pycache__" "$SHARED_PYTHON_DIR/scripts/" "$ASSETS_DIR/scripts/"
+rsync -av --include="*/" --include="*.py" --exclude="*" --exclude="__pycache__" "$SHARED_PYTHON_DIR/packages/" "$ASSETS_DIR/packages/"
 
 echo "Scripts Python copiés avec succès dans les assets."
 

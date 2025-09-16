@@ -15,11 +15,17 @@ sync_python_scripts() {
   
   echo "Synchronisation vers $dest_dir..."
   
-  # Créer le répertoire de destination s'il n'existe pas
+  # Créer le répertoire de destination et ses sous-dossiers
   mkdir -p "$dest_dir"
+  mkdir -p "$dest_dir/scripts"
+  mkdir -p "$dest_dir/packages"
   
-  # Copier les fichiers .py et les dossiers
-  rsync -av --include="*/" --include="*.py" --exclude="*" "$source_dir/" "$dest_dir/"
+  # Copier les fichiers de base
+  rsync -av --include="*.py" --exclude="*/" --exclude="__pycache__" "$source_dir/" "$dest_dir/"
+  
+  # Copier les scripts et packages en préservant la structure
+  rsync -av --include="*/" --include="*.py" --exclude="*" --exclude="__pycache__" "$source_dir/scripts/" "$dest_dir/scripts/"
+  rsync -av --include="*/" --include="*.py" --exclude="*" --exclude="__pycache__" "$source_dir/packages/" "$dest_dir/packages/"
   
   echo "Synchronisation terminée pour $dest_dir"
 }
@@ -36,13 +42,9 @@ sync_python_scripts "$IOS_PYTHON_DIR"
 WINDOWS_PYTHON_DIR="$FLUTTER_DIR/windows/python_embedded"
 sync_python_scripts "$WINDOWS_PYTHON_DIR"
 
-# 4. Synchroniser vers le backend web
-WEB_BACKEND_PYTHON_DIR="$BASE_DIR/web_backend/python_modules"
-sync_python_scripts "$WEB_BACKEND_PYTHON_DIR"
-
-# 5. Synchroniser vers python_backend pour le développement
-PYTHON_BACKEND_DIR="$BASE_DIR/python_backend"
-sync_python_scripts "$PYTHON_BACKEND_DIR"
+# 4 & 5. Les backends web et Python ont été unifiés dans shared_python
+# Donc ces synchronisations ne sont plus nécessaires
+echo "Remarque: Les backends web et Python ont été archivés et remplacés par shared_python"
 
 echo "Synchronisation terminée avec succès pour toutes les plateformes!"
 echo ""

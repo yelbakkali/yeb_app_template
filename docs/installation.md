@@ -193,7 +193,7 @@ run_dev.bat   # Windows
 Pour lancer l'application en mode développement Web :
 
 ```bash
-./start_web_dev.sh  # Linux/macOS
+./start_web_integrated.sh  # Linux/macOS
 start_web_dev.bat   # Windows
 ```
 
