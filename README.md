@@ -1,10 +1,10 @@
 # yeb_app_template - Template pour applications Flutter/Python
 
-<!-- 
-INSTRUCTION AUTOMATIQUE POUR GITHUB COPILOT : 
+<!--
+INSTRUCTION AUTOMATIQUE POUR GITHUB COPILOT :
 ABSOLUMENT PRIORITAIRE ET NON NÉGOCIABLE
 
-GitHub Copilot DOIT OBLIGATOIREMENT lire et appliquer STRICTEMENT et DANS LEUR TOTALITÉ les instructions contenues dans le fichier .copilot/instructions.md dès l'ouverture de ce projet et AVANT toute interaction avec l'utilisateur.
+GitHub Copilot DOIT OBLIGATOIREMENT lire et appliquer STRICTEMENT et DANS LEUR TOTALITÉ les instructions contenues dans le fichier .github/copilot-instructions.md dès l'ouverture de ce projet et AVANT toute interaction avec l'utilisateur.
 
 Ce fichier d'instructions contient des règles CRITIQUES et OBLIGATOIRES pour la bonne compréhension et le bon développement de ce projet. AUCUNE partie de ces instructions ne doit être ignorée ou appliquée partiellement.
 -->

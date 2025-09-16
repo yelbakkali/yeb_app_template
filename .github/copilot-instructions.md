@@ -7,7 +7,7 @@ Ce document définit les instructions complètes que GitHub Copilot doit suivre 
 > ACTION IMMÉDIATE REQUISE : Dès l'ouverture de ce projet, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION exécuter TOUTES les actions suivantes AVANT de répondre à l'utilisateur :
 >
 > 1. Lire OBLIGATOIREMENT et SANS DÉLAI les fichiers suivants dans cet ordre précis :
->    - `.copilot/memoire_long_terme.md` << ABSOLUMENT CRITIQUE POUR MAINTENIR LA COHÉRENCE >>
+>    - `.github/copilot-instructions.md` << ABSOLUMENT CRITIQUE POUR MAINTENIR LA COHÉRENCE >>
 >    - `.copilot/methodologie_temp.md` (si présent)
 >    - `.copilot/chat_resume.md` << CRITIQUE POUR L'HISTORIQUE DU PROJET >>
 >    - Les sessions documentées dans `.copilot/sessions/` << CRITIQUE POUR LE CONTEXTE >>
@@ -49,7 +49,7 @@ GitHub Copilot doit :
 
 ### 2.1 Au début de chaque session
 
-1. Lire ce fichier (`.copilot/instructions.md`) pour rappeler la méthodologie complète
+1. Lire ce fichier (`.github/copilot-instructions.md`) pour rappeler la méthodologie complète
 2. **RÈGLE ABSOLUMENT CRITIQUE ET NON NÉGOCIABLE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `.copilot/`, en particulier:
    - `methodologie_temp.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques au développement du template
    - `README.md` - **LECTURE OBLIGATOIRE** pour comprendre la structure générale de documentation
@@ -223,7 +223,7 @@ GitHub Copilot doit expliquer clairement à l'utilisateur que :
 La méthodologie décrite dans ce document n'est pas figée et peut être adaptée selon les besoins spécifiques du projet :
 
 - L'utilisateur peut demander à tout moment d'ajouter, modifier ou supprimer des règles méthodologiques
-- Lorsque l'utilisateur demande un changement de méthodologie, GitHub Copilot appliquera ces modifications dans ce fichier (`instructions.md`)
+- Lorsque l'utilisateur demande un changement de méthodologie, GitHub Copilot appliquera ces modifications dans ce fichier (`copilot-instructions.md`)
 - Les changements de méthodologie seront appliqués immédiatement pour la suite de la collaboration
 - GitHub Copilot suivra toujours la version la plus récente de la méthodologie
 
@@ -232,7 +232,7 @@ La méthodologie décrite dans ce document n'est pas figée et peut être adapt�
 Pour modifier cette méthodologie, l'utilisateur peut simplement :
 
 1. Indiquer clairement à GitHub Copilot quelles règles doivent être ajoutées, modifiées ou supprimées
-2. Demander explicitement la mise à jour du fichier `instructions.md`
+2. Demander explicitement la mise à jour du fichier `copilot-instructions.md`
 3. Vérifier les modifications proposées avant validation
 
 Cette approche permet au projet d'évoluer et de s'adapter aux besoins changeants de l'utilisateur tout en maintenant une documentation claire des pratiques de travail.

@@ -33,16 +33,16 @@ print_error() {
 # Vérifier si les outils nécessaires sont installés
 check_prerequisites() {
     print_header "Vérification des prérequis"
-    
+
     local missing_tools=()
-    
+
     # Vérifier Git
     if ! command -v git &> /dev/null; then
         missing_tools+=("git")
     else
         print_success "Git est installé"
     fi
-    
+
     # Vérifier curl ou wget
     if command -v curl &> /dev/null; then
         print_success "curl est installé"
@@ -53,7 +53,7 @@ check_prerequisites() {
     else
         missing_tools+=("curl ou wget")
     fi
-    
+
     # Afficher les erreurs si des outils sont manquants
     if [ ${#missing_tools[@]} -ne 0 ]; then
         print_error "Outils manquants: ${missing_tools[*]}"
@@ -65,52 +65,52 @@ check_prerequisites() {
 # Demander le nom du projet à l'utilisateur
 ask_project_name() {
     print_header "Configuration du projet"
-    
+
     echo -e "Entrez le nom de votre nouveau projet (lettres, chiffres et tirets uniquement):"
     read -p "> " project_name
-    
+
     # Valider le nom du projet
     if [[ ! "$project_name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
         print_error "Nom de projet invalide. Utilisez uniquement des lettres, chiffres et tirets."
         ask_project_name
         return
     fi
-    
+
     echo -e "Entrez une brève description de votre projet:"
     read -p "> " project_description
-    
+
     echo -e "Entrez votre nom ou celui de votre organisation:"
     read -p "> " project_author
-    
+
     PROJECT_NAME=$project_name
     PROJECT_DESCRIPTION=$project_description
     PROJECT_AUTHOR=$project_author
-    
+
     print_success "Nom du projet configuré: $PROJECT_NAME"
 }
 
 # Télécharger le template depuis GitHub
 download_template() {
     print_header "Téléchargement du template"
-    
+
     # Créer le répertoire du projet
     mkdir -p "$PROJECT_NAME"
     cd "$PROJECT_NAME"
-    
+
     echo -e "Téléchargement du template depuis GitHub..."
-    
+
     # Cloner le dépôt
     if git clone --depth 1 https://github.com/yelbakkali/yeb_app_template.git .; then
         print_success "Template téléchargé avec succès"
-        
+
         # Supprimer le répertoire .git pour recommencer l'historique
         rm -rf .git
-        
+
         # Initialiser un nouveau dépôt Git
         git init
         git add .
         git commit -m "Initial commit from yeb_app_template"
-        
+
         print_success "Nouveau dépôt Git initialisé"
     else
         print_error "Échec du téléchargement du template"
@@ -121,16 +121,16 @@ download_template() {
 # Personnaliser le template pour le nouveau projet
 customize_template() {
     print_header "Personnalisation du template"
-    
+
     echo -e "Mise à jour des fichiers de configuration..."
-    
+
     # Mettre à jour le pubspec.yaml principal
     if [ -f "pubspec.yaml" ]; then
         sed -i "s/name: yeb_app_template/name: $PROJECT_NAME/g" pubspec.yaml
         sed -i "s/description: \"Template d'application Flutter\/Python par YEB\"/description: \"$PROJECT_DESCRIPTION\"/g" pubspec.yaml
         print_success "pubspec.yaml mis à jour"
     fi
-    
+
     # Mettre à jour les fichiers pyproject.toml
     if [ -f "web_backend/pyproject.toml" ]; then
         sed -i "s/name = \"web_backend\"/name = \"${PROJECT_NAME}_web_backend\"/g" web_backend/pyproject.toml
@@ -138,43 +138,43 @@ customize_template() {
         sed -i "s/authors = \[\"Votre Nom <votre.email@example.com>\"\]/authors = [\"$PROJECT_AUTHOR\"]/g" web_backend/pyproject.toml
         print_success "web_backend/pyproject.toml mis à jour"
     fi
-    
+
     if [ -f "python_backend/pyproject.toml" ]; then
         sed -i "s/name = \"python_backend\"/name = \"${PROJECT_NAME}_python_backend\"/g" python_backend/pyproject.toml
         sed -i "s/description = \"Backend Python pour yeb_app_template\"/description = \"Backend Python pour $PROJECT_NAME\"/g" python_backend/pyproject.toml
         sed -i "s/authors = \[\"Votre Nom <votre.email@example.com>\"\]/authors = [\"$PROJECT_AUTHOR\"]/g" python_backend/pyproject.toml
         print_success "python_backend/pyproject.toml mis à jour"
     fi
-    
+
     # Mettre à jour le README.md
     if [ -f "README.md" ]; then
         sed -i "s/# Template d'Application Flutter\/Python (YEB)\/# $PROJECT_NAME/g" README.md
         sed -i "s/Ce template fournit une base pour développer des applications Flutter avec un backend Python./$PROJECT_DESCRIPTION/g" README.md
         print_success "README.md mis à jour"
     fi
-    
+
     # Mettre à jour le fichier de configuration du projet Flutter
     if [ -f "flutter_app/lib/config/project_config.dart" ]; then
         sed -i "s/static const String projectName = \"yeb_app_template\";/static const String projectName = \"$PROJECT_NAME\";/g" flutter_app/lib/config/project_config.dart
         print_success "Fichier de configuration Flutter mis à jour"
     fi
-    
+
     print_success "Personnalisation terminée"
 }
 
 # Exécuter le script d'installation du projet
 run_setup_script() {
     print_header "Installation du projet"
-    
+
     echo -e "Exécution du script d'installation..."
-    
+
     # Rendre les scripts exécutables
     chmod +x setup_project.sh
     chmod +x scripts/*.sh
-    
+
     # Exécuter le script d'installation
     ./setup_project.sh
-    
+
     if [ $? -eq 0 ]; then
         print_success "Installation terminée avec succès"
     else
@@ -185,9 +185,9 @@ run_setup_script() {
 # Instructions pour GitHub Copilot
 create_copilot_instructions() {
     print_header "Configuration pour GitHub Copilot"
-    
+
     echo -e "Création des instructions pour GitHub Copilot..."
-    
+
     # Créer un fichier d'instructions pour GitHub Copilot
     mkdir -p .copilot
     cat > .copilot/bootstrap_instructions.md << EOL
@@ -237,7 +237,7 @@ EOL
 # Afficher les instructions finales
 show_final_instructions() {
     print_header "Félicitations! Votre projet est prêt."
-    
+
     echo -e "Le projet ${GREEN}$PROJECT_NAME${NC} a été créé et configuré avec succès."
     echo -e ""
     echo -e "Prochaines étapes recommandées :"
@@ -256,7 +256,7 @@ show_final_instructions() {
 # Fonction principale
 main() {
     print_header "Création d'un nouveau projet à partir du template yeb_app_template"
-    
+
     check_prerequisites
     ask_project_name
     download_template

@@ -66,7 +66,7 @@ find docs/copilot/sessions/ -type f -name "*.md" | while read -r file; do
 done
 
 echo -e "\n${GREEN}5. Commit des modifications${NC}"
-git commit -m "Préparation de la fusion vers main - exclusion des fichiers de développement" || { 
+git commit -m "Préparation de la fusion vers main - exclusion des fichiers de développement" || {
   echo -e "${YELLOW}Aucun changement à commiter ou aucun fichier à exclure trouvé.${NC}";
   echo -e "Vérifiez si les fichiers à exclure existent déjà.";
 }
@@ -76,14 +76,14 @@ git checkout main || { echo -e "${RED}Échec du passage à la branche main.${NC}
 git pull origin main || { echo -e "${RED}Échec de la mise à jour de la branche main.${NC}"; exit 1; }
 
 echo -e "\n${GREEN}7. Merge de la branche temporaire dans main${NC}"
-git merge "$temp_branch" -m "Merge automatique de dev vers main" || { 
-  echo -e "${RED}Conflit de fusion!${NC}"; 
+git merge "$temp_branch" -m "Merge automatique de dev vers main" || {
+  echo -e "${RED}Conflit de fusion!${NC}";
   echo "Résolvez les conflits manuellement puis exécutez:";
   echo "git commit -m \"Résolution des conflits de fusion\"";
   echo "git push origin main";
   echo "git checkout dev";
   echo "git branch -D $temp_branch";
-  exit 1; 
+  exit 1;
 }
 
 echo -e "\n${GREEN}8. Vérification des fichiers exclus${NC}"

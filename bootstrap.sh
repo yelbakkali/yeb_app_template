@@ -32,39 +32,39 @@ print_error() {
 # Version simplifiée qui télécharge le template complet et lance le bootstrap.sh interne
 main() {
     print_header "Initialisation d'un nouveau projet à partir du template yeb_app_template"
-    
+
     # Vérifier si Git est installé
     if ! command -v git &> /dev/null; then
         print_error "Git n'est pas installé. Veuillez l'installer avant de continuer."
         exit 1
     fi
-    
+
     # Demander le nom du projet
     echo -e "Entrez le nom de votre nouveau projet (lettres, chiffres et tirets uniquement):"
     read -p "> " project_name
-    
+
     # Valider le nom du projet
     if [[ ! "$project_name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
         print_error "Nom de projet invalide. Utilisez uniquement des lettres, chiffres et tirets."
         exit 1
     fi
-    
+
     # Créer le répertoire du projet
     mkdir -p "$project_name"
     cd "$project_name"
-    
+
     print_header "Téléchargement du template"
-    
+
     # Cloner le dépôt
     if git clone --depth 1 https://github.com/yelbakkali/yeb_app_template.git .; then
         print_success "Template téléchargé avec succès"
-        
+
         # Exécuter le script d'initialisation interne
         # Note: Pour le moment, nous utilisons directement init_project.sh
         # Dans le futur, nous pourrons utiliser template/bootstrap.sh quand il sera disponible
         chmod +x ./init_project.sh
         ./init_project.sh "$project_name"
-        
+
         print_success "Initialisation terminée"
     else
         print_error "Échec du téléchargement du template"
