@@ -37,6 +37,7 @@ Date: 2025-09-16
 - Lance l'application Flutter en mode web-server
 
 **Usage typique:**
+
 - Tests rapides d'interface utilisateur
 - Développement axé principalement sur le frontend
 - Exécution plus légère avec moins de dépendances
