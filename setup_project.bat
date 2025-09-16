@@ -45,7 +45,7 @@ set "PREREQ_SCRIPT=%SCRIPT_DIR%scripts\check_prerequisites.bat"
 
 if exist "%PREREQ_SCRIPT%" (
     call "%PREREQ_SCRIPT%"
-    
+
     REM Si le script de prérequis a affiché des avertissements, demander si l'utilisateur veut continuer
     if %ERRORLEVEL% NEQ 0 (
         echo %YELLOW%Des prérequis sont manquants. Voulez-vous continuer quand même ? (O/N)%NC%
@@ -66,7 +66,7 @@ call :print_header "Étape 2: Initialisation du projet"
 set "INIT_SCRIPT=%SCRIPT_DIR%init_project.bat"
 if exist "%INIT_SCRIPT%" (
     call "%INIT_SCRIPT%"
-    
+
     if %ERRORLEVEL% NEQ 0 (
         call :print_error "Échec de l'initialisation du projet"
         exit /b 1

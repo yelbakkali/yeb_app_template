@@ -110,12 +110,12 @@ Pour simplifier les opérations Git courantes, le projet inclut plusieurs script
    ```bash
    # Mode automatique (non-interactif)
    ./scripts/git_autocommit.sh
-   
+
    # Mode interactif (questions pour valider le message et le push)
    ./scripts/git_autocommit.sh --interactive
    # ou
    ./scripts/git_autocommit.sh -i
-   
+
    # Avec message personnalisé
    ./scripts/git_autocommit.sh -m "Votre message de commit"
    ```

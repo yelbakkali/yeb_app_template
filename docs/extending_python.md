@@ -54,20 +54,20 @@ def main(*args):
     """
     Point d'entrée principal appelé par l'application.
     Cette fonction est OBLIGATOIRE et doit accepter un nombre variable d'arguments.
-    
+
     Args:
         *args: Arguments variables passés depuis l'application Flutter
-    
+
     Returns:
         Un dictionnaire qui sera automatiquement converti en JSON
     """
     try:
         # Traitement des arguments
         # ...
-        
+
         # Votre logique métier
         # ...
-        
+
         # Retourner le résultat sous forme de dictionnaire
         return {
             "resultat": "valeur",
@@ -237,9 +237,9 @@ Future<void> executerMonScript() async {
       'scripts/mon_script',
       [argument1, argument2],
     );
-    
+
     final jsonResult = jsonDecode(output);
-    
+
     // Utiliser le résultat
     setState(() {
       resultat = "Traitement terminé :\n";
