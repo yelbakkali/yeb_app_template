@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:7]
+-->
+
 # Session du 09 septembre 2025 - Suite
 
 ## Contexte et objectifs

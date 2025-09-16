@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier ne semble pas être référencé explicitement dans d'autres fichiers du projet
+-->
+
 # Session du 15 septembre 2025
 
 ## Objectif de la session

@@ -1,3 +1,9 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:15, 83]
+- Ce fichier est référencé dans: [.copilot/sessions/session_20250914_auto_doc.md:30]
+-->
+
 # Instructions pour GitHub Copilot - Initialisation du template
 
 Ce document contient les instructions destinées à GitHub Copilot pour aider les utilisateurs après qu'ils ont créé un projet à partir du template `yeb_app_template`.

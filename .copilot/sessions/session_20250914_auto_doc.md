@@ -1,3 +1,14 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [scripts/git_autocommit.sh:8]
+- Ce fichier est référencé dans: [scripts/merge_to_main.sh:8]
+- Ce fichier est référencé dans: [docs/markdown_style_guide.md:5]
+- Ce fichier est référencé dans: [docs/copilot/template_initialization.md:4]
+- Ce fichier est référencé dans: [docs/chat_resume.md:61]
+- Ce fichier est référencé dans: [.copilot/chat_resume.md:69]
+- Ce fichier est référencé dans: [.copilot/methodologie_temp.md:7]
+-->
+
 # Session du 14 septembre 2025 - Renforcement de l'automatisation des instructions pour GitHub Copilot
 
 ## Contexte de la session

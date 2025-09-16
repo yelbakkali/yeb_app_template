@@ -1,3 +1,14 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [docs/project_structure.md:33]
+- Ce fichier est référencé dans: [scripts/package_python_scripts.sh:8]
+- Ce fichier est référencé dans: [scripts/git_autocommit.sh:10]
+- Ce fichier est référencé dans: [scripts/merge_to_main.sh:10]
+- Ce fichier est référencé dans: [docs/git_workflow.md:6]
+- Ce fichier est référencé dans: [docs/github_branch_protection.md:4]
+- Ce fichier est référencé dans: [docs/packaging_approach.md:4]
+-->
+
 # Résumé de la conversation sur le projet yeb_app_template
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.

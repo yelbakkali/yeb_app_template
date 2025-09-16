@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:172]
+- Ce fichier est référencé dans: [.copilot/memoire_long_terme.md:100]
+- Ce fichier est référencé dans: [.copilot/sessions/session_20250914_auto_doc.md:50]
+-->
+
 # Guide de style Markdown
 
 Ce document définit les règles de formatage Markdown à suivre pour tous les documents du projet. L'objectif est de maintenir une documentation cohérente, lisible et maintenable.

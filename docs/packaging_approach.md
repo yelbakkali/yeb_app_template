@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:91]
+- Ce fichier est référencé dans: [docs/chat_resume.md:36]
+- Ce fichier est référencé dans: [.copilot/chat_resume.md:46]
+-->
+
 # Approche de Packaging pour Scripts Python
 
 Ce document explique l'approche de packaging adoptée pour gérer les scripts Python dans l'application yeb_app_template.

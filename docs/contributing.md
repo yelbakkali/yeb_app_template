@@ -1,3 +1,14 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:236]
+- Ce fichier est référencé dans: [run_dev.sh:9]
+- Ce fichier est référencé dans: [scripts/git_autocommit.sh:9]
+- Ce fichier est référencé dans: [scripts/merge_to_main.sh:9]
+- Ce fichier est référencé dans: [CONTRIBUTORS.md:25]
+- Ce fichier est référencé dans: [template/bootstrap.sh:203]
+- Ce fichier est référencé dans: [update_docs.sh:11]
+-->
+
 # Guide de contribution
 
 Merci de votre intérêt pour contribuer au projet yeb_app_template ! Ce guide vous aidera à comprendre comment vous pouvez participer efficacement au développement du projet.

@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [template/bootstrap.sh:208]
+-->
+
 # Structure des Tests dans Yeb App Template
 
 ## Tests Flutter

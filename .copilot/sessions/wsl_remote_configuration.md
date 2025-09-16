@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier ne semble pas être référencé explicitement dans d'autres fichiers du projet
+-->
+
 # Session: Configuration de WSL Remote pour le développement Flutter/Python
 
 Date: 13 septembre 2025

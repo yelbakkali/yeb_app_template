@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:187]
+- Ce fichier est référencé dans: [docs/project_structure.md:34]
+- Ce fichier est référencé dans: [docs/installation.md:244]
+-->
+
 # Guide CI/CD - Flutter/Python
 
 Ce document décrit la configuration CI/CD mise en place pour ce projet et comment résoudre les problèmes courants.

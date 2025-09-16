@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:252]
+- Ce fichier est référencé dans: [docs/contributing.md:7, 200]
+- Ce fichier est référencé dans: [update_docs.sh:13, 24]
+-->
+
 # Contributeurs
 
 ## Mainteneurs principaux

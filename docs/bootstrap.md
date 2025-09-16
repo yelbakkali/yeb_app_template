@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [docs/installation.md:83]
+-->
+
 # Script Bootstrap pour yeb_app_template
 
 Ce script autonome (`bootstrap.sh`) vous permet de créer rapidement un nouveau projet basé sur le template yeb_app_template.

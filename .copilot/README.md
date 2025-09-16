@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.copilot/chat_resume.md:4]
+- Ce fichier est référencé dans: [.copilot/memoire_long_terme.md:4]
+- Ce fichier est référencé dans: [.copilot/methodologie_temp.md:4]
+-->
+
 # Utilisation de GitHub Copilot avec ce projet
 
 Ce document explique comment utiliser GitHub Copilot efficacement avec ce projet, et comment naviguer dans l'historique des sessions de collaboration.

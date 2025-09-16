@@ -1,3 +1,9 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:93]
+- Ce fichier est référencé dans: [docs/installation.md:280]
+-->
+
 # Analyse des modes de démarrage
 
 Date: 2025-09-16
