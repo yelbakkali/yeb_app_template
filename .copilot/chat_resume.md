@@ -43,43 +43,52 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 
 ## Dernières réalisations
 
-1. **Renforcement de l'automatisation pour GitHub Copilot (14 septembre 2025)**
+1. **Réorganisation complète de la structure du projet (16 septembre 2025)**
+   - Création des dossiers `template/` et `.copilot/` à la racine du projet pour une meilleure organisation
+   - Déplacement des scripts liés au template (bootstrap.sh, init_project.sh, etc.) vers le dossier `template/`
+   - Déplacement de la documentation du template vers `template/docs/`
+   - Déplacement des fichiers GitHub Copilot vers `.copilot/` (depuis `docs/copilot/`)
+   - Mise à jour de toutes les références croisées dans les scripts et la documentation
+   - Simplification du script `bootstrap.sh` à la racine pour une meilleure expérience utilisateur
+   - Test complet du processus d'initialisation du projet
+
+2. **Renforcement de l'automatisation pour GitHub Copilot (14 septembre 2025)**
    - Ajout d'instructions impératives dans `.copilot/methodologie_temp.md` pour déclencher la lecture de la documentation ET l'application automatique des consignes
    - Spécification explicite de l'utilisation automatique des scripts (`git_autocommit.sh`, `merge_to_main.sh`) sans intervention de l'utilisateur
    - Mise à jour du guide de style Markdown avec de nouvelles règles
    - Documentation détaillée dans `.copilot/sessions/session_20250914_auto_doc.md`
 
-2. **Structure des branches Git**
+3. **Structure des branches Git**
    - Branche `main` créée pour la production
    - Branche `dev` créée pour le développement
    - Documentation du workflow dans `docs/git_workflow.md`
    - Configuration des règles de protection de branches dans `docs/github_branch_protection.md`
 
-3. **Nettoyage des fichiers redondants**
+4. **Nettoyage des fichiers redondants**
    - Suppression des scripts Python redondants dans `flutter_app/android/app/src/main/python/`
    - Suppression des scripts Python redondants dans `flutter_app/ios/PythonBundle/`
    - Sauvegarde des fichiers obsolètes avec extension `.bak`
 
-4. **Mise à jour de la documentation**
+5. **Mise à jour de la documentation**
    - Mise à jour complète du fichier `workload.md` avec l'architecture et les prérequis
    - Création du fichier de résumé de conversation `.copilot/chat_resume.md`
 
-5. **Configuration de l'environnement de développement VS Code**
+6. **Configuration de l'environnement de développement VS Code**
    - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
    - Correction du type de configuration de debug Python (`python` → `debugpy`) dans `launch.json` pour compatibilité future
    - Synchronisation de ces fichiers sur la branche `dev` du dépôt GitHub
 
-6. **Développement de la couche d'accès aux données**
+7. **Développement de la couche d'accès aux données**
    - Création d'une classe utilitaire `SQLiteManager` dans `/python_backend/utils/sqlite_manager.py` pour gérer les opérations de base sur la base de données SQLite
    - Implémentation des méthodes de connexion et déconnexion à la base
    - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
 
-7. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
+8. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
    - Création d'une structure dans `.copilot/` pour documenter les sessions de travail
    - Mise en place d'instructions et règles de communication claires entre l'utilisateur et l'assistant
    - Ajout d'un système de validation avant toute action sur le projet
 
-8. **Transformation du projet en template GitHub réutilisable**
+9. **Transformation du projet en template GitHub réutilisable**
    - Création de scripts d'installation automatisée pour WSL et Windows dans `scripts/`
    - Mise à jour du README avec badges, instructions détaillées et guide d'utilisation du template
    - Configuration des GitHub Actions pour la validation CI (Flutter et Python)
