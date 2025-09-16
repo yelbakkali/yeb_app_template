@@ -62,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
       
       // Appel du script Python unifié sur toutes les plateformes
       final output = await UnifiedPythonService.runScript(
-        'calcul_demo',     // Le nom du script Python (sans extension)
+        'scripts/calcul_demo',     // Le nom du script Python avec le chemin dans shared_python
         [a, b],            // Les arguments à passer
       );
       
@@ -158,6 +158,47 @@ class _MyHomePageState extends State<MyHomePage> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(_result),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: _isLoading ? null : () async {
+                setState(() {
+                  _isLoading = true;
+                  _result = "Analyse en cours...";
+                });
+                
+                try {
+                  // Appel du script d'analyse de données
+                  final output = await UnifiedPythonService.runScript(
+                    'scripts/analyse_data',  // Chemin complet incluant 'scripts/'
+                    ["10, 20, 30, 40, 50"],  // Données de test
+                  );
+                  
+                  // Afficher le résultat avec mise en forme
+                  try {
+                    final jsonResult = jsonDecode(output);
+                    setState(() {
+                      _result = "Résultat de l'analyse des données:\n";
+                      jsonResult.forEach((key, value) {
+                        _result += "\n• $key: $value";
+                      });
+                    });
+                  } catch (e) {
+                    setState(() {
+                      _result = "Résultat de l'analyse:\n$output";
+                    });
+                  }
+                } catch (e) {
+                  setState(() {
+                    _result = "Erreur: $e";
+                  });
+                } finally {
+                  setState(() {
+                    _isLoading = false;
+                  });
+                }
+              },
+              child: const Text("Tester l'analyse de données"),
             ),
           ],
         ),

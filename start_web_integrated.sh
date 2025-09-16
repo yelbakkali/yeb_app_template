@@ -14,7 +14,8 @@ fi
 # Installer les dépendances avec l'extra web
 echo "Installation des dépendances Python pour le web..."
 cd shared_python
-poetry install --extras web
+# Utiliser l'option --no-root pour éviter l'erreur tuple index out of range
+poetry install --extras web --no-root
 
 # Démarrer le serveur Python en arrière-plan
 echo "Démarrage du serveur Python..."
