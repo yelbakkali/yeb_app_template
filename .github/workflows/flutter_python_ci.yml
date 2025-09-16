@@ -76,9 +76,9 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
           
-      - name: Install dependencies & run tests for python_backend
+      - name: Install dependencies & run tests for shared_python
         run: |
-          cd python_backend
+          cd shared_python
           # Vérifions où se trouve Poetry
           which poetry || echo "Poetry not found in PATH"
           # Mise à jour du fichier lock si nécessaire
@@ -93,19 +93,8 @@ jobs:
           # Exécution du test
           poetry run python -m pytest tests/ -v
           
-      - name: Install dependencies & run tests for web_backend
+      # Note: web_backend a été archivé, nous passons cette étape
+      - name: Note about archived web_backend
         run: |
-          cd web_backend
-          # Vérifions où se trouve Poetry
-          which poetry || echo "Poetry not found in PATH"
-          # Mise à jour du fichier lock si nécessaire
-          poetry lock
-          # Installe les dépendances avec l'option explicite dev
-          poetry config virtualenvs.create true
-          poetry install
-          # Ajout explicite de pytest
-          poetry add pytest --group dev
-          # Lister les paquets installés pour vérification
-          poetry show
-          # Exécution du test
-          poetry run python -m pytest tests/ -v
+          echo "Le répertoire web_backend a été déplacé vers archived_backends/web_backend"
+          echo "Les tests pour ce composant sont temporairement désactivés"
