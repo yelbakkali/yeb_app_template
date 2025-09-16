@@ -5,10 +5,10 @@ import 'config/project_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialiser le service Python unifié
   await UnifiedPythonService.initialize();
-  
+
   runApp(const MyApp());
 }
 
@@ -59,13 +59,13 @@ class _MyHomePageState extends State<MyHomePage> {
     try {
       final a = _valueAController.text;
       final b = _valueBController.text;
-      
+
       // Appel du script Python unifié sur toutes les plateformes
       final output = await UnifiedPythonService.runScript(
-        'scripts/calcul_demo',     // Le nom du script Python avec le chemin dans shared_python
-        [a, b],            // Les arguments à passer
+        'scripts/calcul_demo', // Le nom du script Python avec le chemin dans shared_python
+        [a, b], // Les arguments à passer
       );
-      
+
       // Afficher le résultat avec mise en forme
       try {
         final jsonResult = jsonDecode(output);
@@ -130,26 +130,23 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _isLoading ? null : _runPythonCalculation,
-              child: _isLoading 
-                ? const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      ),
-                      SizedBox(width: 12),
-                      Text("Calcul en cours..."),
-                    ],
-                  )
-                : const Text("Exécuter le calcul Python"),
+              child: _isLoading
+                  ? const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        ),
+                        SizedBox(width: 12),
+                        Text("Calcul en cours..."),
+                      ],
+                    )
+                  : const Text("Exécuter le calcul Python"),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Résultat:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Résultat:', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Container(
               padding: const EdgeInsets.all(12),
@@ -161,43 +158,45 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: _isLoading ? null : () async {
-                setState(() {
-                  _isLoading = true;
-                  _result = "Analyse en cours...";
-                });
-                
-                try {
-                  // Appel du script d'analyse de données
-                  final output = await UnifiedPythonService.runScript(
-                    'scripts/analyse_data',  // Chemin complet incluant 'scripts/'
-                    ["10, 20, 30, 40, 50"],  // Données de test
-                  );
-                  
-                  // Afficher le résultat avec mise en forme
-                  try {
-                    final jsonResult = jsonDecode(output);
-                    setState(() {
-                      _result = "Résultat de l'analyse des données:\n";
-                      jsonResult.forEach((key, value) {
-                        _result += "\n• $key: $value";
+              onPressed: _isLoading
+                  ? null
+                  : () async {
+                      setState(() {
+                        _isLoading = true;
+                        _result = "Analyse en cours...";
                       });
-                    });
-                  } catch (e) {
-                    setState(() {
-                      _result = "Résultat de l'analyse:\n$output";
-                    });
-                  }
-                } catch (e) {
-                  setState(() {
-                    _result = "Erreur: $e";
-                  });
-                } finally {
-                  setState(() {
-                    _isLoading = false;
-                  });
-                }
-              },
+
+                      try {
+                        // Appel du script d'analyse de données
+                        final output = await UnifiedPythonService.runScript(
+                          'scripts/analyse_data', // Chemin complet incluant 'scripts/'
+                          ["10, 20, 30, 40, 50"], // Données de test
+                        );
+
+                        // Afficher le résultat avec mise en forme
+                        try {
+                          final jsonResult = jsonDecode(output);
+                          setState(() {
+                            _result = "Résultat de l'analyse des données:\n";
+                            jsonResult.forEach((key, value) {
+                              _result += "\n• $key: $value";
+                            });
+                          });
+                        } catch (e) {
+                          setState(() {
+                            _result = "Résultat de l'analyse:\n$output";
+                          });
+                        }
+                      } catch (e) {
+                        setState(() {
+                          _result = "Erreur: $e";
+                        });
+                      } finally {
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    },
               child: const Text("Tester l'analyse de données"),
             ),
           ],
