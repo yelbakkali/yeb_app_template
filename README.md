@@ -27,6 +27,16 @@ L'architecture du projet est basée sur une approche de packaging des scripts Py
 
 Pour plus de détails sur la structure du projet, consultez notre [documentation de structure du projet](docs/project_structure.md).
 
+### 🔧 Extension avec vos propres scripts et packages
+
+Le template est conçu pour être facilement étendu avec vos propres scripts et packages Python. Pour apprendre comment :
+
+- Ajouter vos propres scripts Python
+- Créer et organiser des packages personnalisés
+- Intégrer ces scripts avec l'interface Flutter
+
+Consultez notre [guide d'extension Python détaillé](docs/extending_python.md).
+
 ## �️ Prérequis
 
 Avant de commencer, assurez-vous d'avoir installé les outils suivants :
