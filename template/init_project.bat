@@ -10,7 +10,7 @@ set "NC=[0m"
 
 REM Vérifier si le script de prérequis existe et l'exécuter
 set "SCRIPT_DIR=%~dp0"
-set "PREREQ_SCRIPT=%SCRIPT_DIR%scripts\check_prerequisites.bat"
+set "PREREQ_SCRIPT=%SCRIPT_DIR%template\scripts\check_prerequisites.bat"
 
 if exist "%PREREQ_SCRIPT%" (
     echo Vérification des prérequis avant l'initialisation...

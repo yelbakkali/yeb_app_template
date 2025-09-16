@@ -1,4 +1,10 @@
 #!/bin/bash
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [template/init_project.sh:13]
+# - Ce fichier est référencé dans: [template/setup_project.sh:40]
+# ==========================================================================
+
 # Script de vérification et d'installation des prérequis pour le template yeb_app_template
 # Ce script détecte et installe automatiquement les outils nécessaires pour le projet
 

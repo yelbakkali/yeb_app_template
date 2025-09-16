@@ -172,9 +172,11 @@ Pour développer et tester l'application en mode web :
 
 Pour ajouter un nouveau calcul :
 
-1. Créez un nouveau script Python dans `shared_python/calculs/`
+1. Créez un nouveau script Python dans `shared_python/scripts/`
 2. Exécutez `scripts/package_python_scripts.sh` pour mettre à jour les assets
 3. Dans votre code Flutter, utilisez `UnifiedPythonService.runScript('nom_du_script', [args])`
+
+Pour plus d'informations sur l'organisation des scripts, voir [docs/script_organization.md](docs/script_organization.md).
 
 ## 📊 Tests et intégration continue (CI)
 

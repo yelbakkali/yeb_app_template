@@ -10,10 +10,13 @@ NC='\033[0m' # No Color
 
 # Vérifier si le script de prérequis existe et l'exécuter
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-PREREQ_SCRIPT="${SCRIPT_DIR}/scripts/check_prerequisites.sh"
+PREREQ_SCRIPT="${SCRIPT_DIR}/template/scripts/check_prerequisites.sh"
 
 if [ -f "$PREREQ_SCRIPT" ]; then
-    echo "Vérification des prérequis avant l'initialisation..."
+    echo "Vérificatioif [ -f "$SCRIPT_DIR/template/scripts/configure_vscode_for_flutter.sh" ]; then
+    echo "Configuration de VS Code pour le projet..."
+    chmod +x "$SCRIPT_DIR/template/scripts/configure_vscode_for_flutter.sh"
+    "$SCRIPT_DIR/template/scripts/configure_vscode_for_flutter.sh"s prérequis avant l'initialisation..."
     chmod +x "$PREREQ_SCRIPT"
     "$PREREQ_SCRIPT"
 
@@ -535,10 +538,10 @@ echo "Ces scripts ne sont plus nécessaires après la première configuration et
 read -p "Nettoyer les fichiers d'initialisation ? (o/N) " -n 1 -r
 echo ""
 if [[ $REPLY =~ ^[oO]$ ]]; then
-    if [ -f "$SCRIPT_DIR/scripts/cleanup_init_files.sh" ]; then
+    if [ -f "$SCRIPT_DIR/template/scripts/cleanup_init_files.sh" ]; then
         echo "Exécution du script de nettoyage..."
-        chmod +x "$SCRIPT_DIR/scripts/cleanup_init_files.sh"
-        "$SCRIPT_DIR/scripts/cleanup_init_files.sh"
+        chmod +x "$SCRIPT_DIR/template/scripts/cleanup_init_files.sh"
+        "$SCRIPT_DIR/template/scripts/cleanup_init_files.sh"
     else
         print_warning "Script de nettoyage non trouvé"
     fi

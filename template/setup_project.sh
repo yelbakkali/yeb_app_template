@@ -37,7 +37,7 @@ echo "Ce script va vérifier les prérequis et initialiser votre projet"
 # Étape 1: Vérification des prérequis
 print_header "Étape 1: Vérification des prérequis"
 
-PREREQ_SCRIPT="${SCRIPT_DIR}/scripts/check_prerequisites.sh"
+PREREQ_SCRIPT="${SCRIPT_DIR}/template/scripts/check_prerequisites.sh"
 if [ -f "$PREREQ_SCRIPT" ]; then
     chmod +x "$PREREQ_SCRIPT"
     "$PREREQ_SCRIPT"
