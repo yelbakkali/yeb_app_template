@@ -3,10 +3,10 @@ RÉFÉRENCES CROISÉES:
 - Ce fichier est référencé dans: [README.md:70, 90, 146]
 - Ce fichier est référencé dans: [run_dev.bat:6]
 - Ce fichier est référencé dans: [run_dev.sh:8]
-- Ce fichier est référencé dans: [bootstrap.sh:6]
+- Ce fichier est référencé dans: [setup_template.sh:6]
 - Ce fichier est référencé dans: [setup_project.bat:5]
 - Ce fichier est référencé dans: [init_project.bat:7]
-- Ce fichier est référencé dans: [template/bootstrap.sh:204]
+- Ce fichier est référencé dans: [template/entry-points/bootstrap.sh:204]
 - Ce fichier est référencé dans: [update_docs.sh:10]
 -->
 
@@ -14,7 +14,7 @@ RÉFÉRENCES CROISÉES:
 
 Ce guide vous aidera à installer et configurer l'environnement de développement pour le projet yeb_app_template.
 
-> **Note :** Si vous utilisez ce template pour créer un nouveau projet, référez-vous d'abord au [processus d'initialisation](../README.md) qui utilise le script `bootstrap.sh`. Vous pouvez également consulter la documentation du template dans le dossier `template/docs/`. Ce guide s'applique une fois que vous avez déjà initialisé votre projet.
+> **Note :** Si vous utilisez ce template pour créer un nouveau projet, référez-vous d'abord au [processus d'initialisation](../README.md) qui utilise le script `setup_template.sh`. Vous pouvez également consulter la documentation du template dans le dossier `template/docs/`. Ce guide s'applique une fois que vous avez déjà initialisé votre projet.
 
 ## Prérequis
 
@@ -84,7 +84,7 @@ git clone https://github.com/votre-utilisateur/yeb_app_template.git
 cd yeb_app_template
 ```
 
-Pour créer un nouveau projet basé sur ce template, utilisez plutôt le script `bootstrap.sh` comme indiqué dans le [README](../README.md) et documenté dans [`template/docs/bootstrap.md`](../template/docs/bootstrap.md).
+Pour créer un nouveau projet basé sur ce template, utilisez plutôt le script `setup_template.sh` comme indiqué dans le [README](../README.md) et documenté dans [`template/docs/setup_template.md`](../template/docs/setup_template.md).
 
 ### 2. Utiliser le script d'installation automatique (recommandé)
 
@@ -163,7 +163,7 @@ run_dev.bat
 
 ## Configuration de l'éditeur VS Code
 
-La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`template/init_project.sh` ou `template/init_project.bat`). Ces scripts sont appelés automatiquement par le script `bootstrap.sh` lors de la création d'un nouveau projet. Ils créent les fichiers suivants dans le dossier `.vscode` :
+La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`template/entry-points/init_project.sh` ou `template/entry-points/init_project.bat`). Ces scripts sont appelés automatiquement par le script `setup_template.sh` lors de la création d'un nouveau projet. Ils créent les fichiers suivants dans le dossier `.vscode` :
 
 - `settings.json` : Configuration de l'éditeur et des extensions
 - `extensions.json` : Recommandations d'extensions à installer

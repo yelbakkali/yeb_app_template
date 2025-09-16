@@ -1,11 +1,12 @@
 <!--
 RÉFÉRENCES CROISÉES:
-- Ce fichier est référencé dans: [docs/installation.md:83]
+- Ce fichier est référencé dans: [README.md:104, 105, 108, 111, 204]
+- Ce fichier est référencé dans: [docs/installation.md:13, 83, 162]
 -->
 
-# Script Bootstrap pour yeb_app_template
+# Script d'initialisation du template yeb_app_template
 
-Ce script autonome (`bootstrap.sh`) vous permet de créer rapidement un nouveau projet basé sur le template yeb_app_template.
+Ce script autonome (`setup_template.sh`) vous permet de créer rapidement un nouveau projet basé sur le template yeb_app_template.
 
 ## Fonctionnalités du script
 
@@ -18,17 +19,17 @@ Ce script autonome (`bootstrap.sh`) vous permet de créer rapidement un nouveau 
 
 ## Utilisation
 
-1. Téléchargez uniquement ce script bootstrap:
+1. Téléchargez uniquement ce script d'initialisation:
 
 ```bash
-curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/bootstrap.sh
-chmod +x bootstrap.sh
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/setup_template.sh
+chmod +x setup_template.sh
 ```
 
 1. Exécutez le script:
 
 ```bash
-./bootstrap.sh
+./setup_template.sh
 ```
 
 1. Suivez les instructions à l'écran:
@@ -43,17 +44,11 @@ Le script crée automatiquement des instructions spéciales pour GitHub Copilot 
 - Lire automatiquement la documentation du projet
 - Comprendre la structure et la méthodologie
 - S'adapter au contexte spécifique de votre projet
-- Vous assister de manière plus pertinente
 
-Une fois le projet créé, vous pouvez simplement ouvrir VS Code et demander à GitHub Copilot de vous assister. Il sera déjà familiarisé avec votre projet.
+## Options avancées
 
-## Prérequis
+Le script d'initialisation propose plusieurs options pour personnaliser le processus d'installation:
 
-Le script vérifie automatiquement si vous avez les outils nécessaires:
-
-- Git
-- curl ou wget
-
-## Remarque
-
-Ce bootstrap est la méthode recommandée pour démarrer un nouveau projet à partir du template yeb_app_template, car il configure tout correctement et automatiquement.
+- Mode silencieux: Utilisez l'option `-s` pour une installation avec des valeurs par défaut
+- Spécification du nom de projet: Utilisez l'option `-p nom_projet` pour définir le nom du projet
+- Aide: Utilisez l'option `-h` pour afficher l'aide du script

@@ -105,7 +105,7 @@ Pour les sessions importantes, créer un nouveau fichier de session dans `.copil
 
 Lorsque l'utilisateur utilise ce projet comme template :
 
-- Guider l'utilisateur pour renommer le projet (si non fait avec le script `bootstrap.sh`)
+- Guider l'utilisateur pour renommer le projet (si non fait avec le script `setup_template.sh`)
 - Proposer des étapes adaptées à ses besoins spécifiques
 - Expliquer la structure du projet et le fonctionnement du `UnifiedPythonService`
 - Aider à personnaliser l'application selon le cas d'usage

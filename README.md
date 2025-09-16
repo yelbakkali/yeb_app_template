@@ -5,7 +5,7 @@ RÉFÉRENCES CROISÉES:
 - Ce fichier est référencé dans: [.github/copilot-instructions.md:59]
 - Ce fichier est référencé dans: [docs/installation.md:5, 75]
 - Ce fichier est référencé dans: [.copilot/sessions/session_20250909_suite.md:55]
-- Ce fichier est référencé dans: [template/bootstrap.sh:150, 151, 152, 153]
+- Ce fichier est référencé dans: [template/entry-points/bootstrap.sh:150, 151, 152, 153]
 - Ce fichier est référencé dans: [update_docs.sh:27, 28, 29, 30, 31]
 -->
 
@@ -101,14 +101,14 @@ Parcourez le dossier `docs/` pour découvrir :
 ## Méthode 1 : Utiliser le script d'initialisation (recommandé)
 
 ```bash
-# Télécharger uniquement le script bootstrap.sh
-curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/bootstrap.sh
+# Télécharger uniquement le script setup_template.sh
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.sh
 
 # Rendre le script exécutable
-chmod +x bootstrap.sh
+chmod +x setup_template.sh
 
 # Exécuter le script d'initialisation
-./bootstrap.sh
+./setup_template.sh
 ```
 
 Ce script va vous guider à travers les étapes suivantes :
@@ -203,7 +203,7 @@ Une fois que vous avez créé votre projet à partir de ce template, vous pouvez
 
 ### Personnalisation automatique
 
-Le script `bootstrap.sh` s'occupe de la personnalisation initiale via les scripts dans le dossier `template/` :
+Le script `setup_template.sh` s'occupe de la personnalisation initiale via les scripts dans le dossier `template/` :
 
 - Renommage automatique du projet dans tous les fichiers
 - Configuration des dépendances

@@ -11,7 +11,7 @@ La structure est la suivante :
 ```plaintext
 template/
 ├── entry-points/     # Points d'entrée principaux pour l'initialisation du projet
-│   ├── bootstrap.sh
+│   ├── bootstrap.sh    # Renommé en setup_template.sh à la racine
 │   ├── init_project.bat
 │   ├── init_project.sh
 │   ├── setup_project.bat
@@ -32,7 +32,7 @@ template/
 
 Ce dossier contient les scripts principaux qui servent de points d'entrée pour l'initialisation du projet :
 
-1. **bootstrap.sh** - Script autonome qui télécharge le template et configure un nouveau projet
+1. **bootstrap.sh** - Script autonome qui télécharge le template et configure un nouveau projet (renommé en setup_template.sh à la racine)
 2. **init_project.sh / init_project.bat** - Scripts d'initialisation du projet (renommage, configuration)
 3. **setup_project.sh / setup_project.bat** - Scripts d'installation tout-en-un qui vérifient les prérequis et lancent l'initialisation
 
@@ -52,7 +52,7 @@ Ce dossier contient la documentation spécifique au template et aux instructions
 
 Les scripts de points d'entrée font appel aux scripts utilitaires selon le schéma suivant :
 
-- `bootstrap.sh` → télécharge le template et lance `setup_project.sh`
+- `setup_template.sh` (anciennement `bootstrap.sh`) → télécharge le template et lance `setup_project.sh`
 - `setup_project.sh` → appelle `check_prerequisites.sh` puis `init_project.sh`
 - `init_project.sh` → appelle `check_prerequisites.sh`, `configure_vscode_for_flutter.sh`, etc.
 
@@ -60,7 +60,7 @@ Les scripts de points d'entrée font appel aux scripts utilitaires selon le sch�
 
 Pour initialiser un nouveau projet, utilisez l'un des points d'entrée suivants :
 
-1. **Méthode autonome** : Exécutez `bootstrap.sh` qui téléchargera le template et lancera la configuration
+1. **Méthode autonome** : Exécutez `setup_template.sh` qui téléchargera le template et lancera la configuration
 2. **Méthode après clonage** : Après avoir cloné le dépôt, exécutez `setup_project.sh` (Linux/macOS) ou `setup_project.bat` (Windows)
 3. **Méthode manuelle** : Exécutez directement `init_project.sh` (Linux/macOS) ou `init_project.bat` (Windows) si les prérequis sont déjà installés
 
