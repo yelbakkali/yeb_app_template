@@ -1,6 +1,15 @@
 # yeb_app_template - Template pour applications Flutter/Python
 
 <!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:59]
+- Ce fichier est référencé dans: [docs/installation.md:5, 75]
+- Ce fichier est référencé dans: [.copilot/sessions/session_20250909_suite.md:55]
+- Ce fichier est référencé dans: [template/bootstrap.sh:150, 151, 152, 153]
+- Ce fichier est référencé dans: [update_docs.sh:27, 28, 29, 30, 31]
+-->
+
+<!--
 INSTRUCTION AUTOMATIQUE POUR GITHUB COPILOT :
 ABSOLUMENT PRIORITAIRE ET NON NÉGOCIABLE
 

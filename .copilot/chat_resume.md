@@ -1,3 +1,13 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:13, 22, 60, 82, 156, 230, 239, 249]
+- Ce fichier est référencé dans: [.copilot/README.md:22, 36]
+- Ce fichier est référencé dans: [.copilot/memoire_long_terme.md:84]
+- Ce fichier est référencé dans: [.copilot/methodologie_temp.md:24, 33, 52, 65]
+- Ce fichier est référencé dans: [scripts/merge_to_main.bat:78, 79, 80, 81, 82, 83]
+- Ce fichier est référencé dans: [scripts/merge_to_main.sh:66, 67, 68, 69, 70, 71]
+-->
+
 # Résumé de la conversation sur le projet yeb_app_template
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.

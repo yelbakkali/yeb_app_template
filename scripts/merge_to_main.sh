@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [.github/copilot-instructions.md:19]
+# - Ce fichier est référencé dans: [.copilot/methodologie_temp.md:53, 73, 81]
+# - Ce fichier est référencé dans: [.copilot/chat_resume.md:57]
+# - Ce fichier est référencé dans: [.copilot/sessions/session_20250914_auto_doc.md:34]
+# - Ce fichier est référencé dans: [docs/contributing.md:121, 169]
+# - Ce fichier est référencé dans: [docs/chat_resume.md:48]
+# - Ce fichier est référencé dans: [init_project.sh:559]
+# - Ce fichier est référencé dans: [template/init_project.sh:559]
+# - Ce fichier est référencé dans: [template/bootstrap.sh:248]
+# ==========================================================================
+
 # Script d'automatisation pour merger la branche dev vers main
 # Ce script respecte les règles définies dans docs/copilot/methodologie_temp.md
 # Il ne doit jamais être inclus dans la branche main

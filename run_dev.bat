@@ -1,4 +1,17 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [setup_project.bat:89]
+:: - Ce fichier est référencé dans: [init_project.sh:556]
+:: - Ce fichier est référencé dans: [docs/installation.md:149, 194]
+:: - Ce fichier est référencé dans: [docs/modes_demarrage.md:54]
+:: - Ce fichier est référencé dans: [init_project.bat:495]
+:: - Ce fichier est référencé dans: [template/setup_project.bat:89]
+:: - Ce fichier est référencé dans: [template/init_project.sh:556]
+:: - Ce fichier est référencé dans: [template/bootstrap.sh:245]
+:: - Ce fichier est référencé dans: [template/init_project.bat:495]
+:: ==========================================================================
+
 :: Script lanceur tout-en-un pour yeb_app_template avec l'approche de packaging
 :: Ce script prépare les scripts Python pour le packaging, lance le backend web et l'application Flutter
 

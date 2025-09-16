@@ -1,4 +1,11 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [README.md:135]
+:: - Ce fichier est référencé dans: [docs/installation.md:95]
+:: - Ce fichier est référencé dans: [init_project.bat:4]
+:: ==========================================================================
+
 REM Script d'installation tout-en-un pour le template yeb_app_template
 
 REM Couleurs pour les messages (Windows)

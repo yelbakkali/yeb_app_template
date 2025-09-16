@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [.github/copilot-instructions.md:18, 115, 119, 121, 135, 138, 140]
+# - Ce fichier est référencé dans: [.copilot/memoire_long_terme.md:37, 41, 43, 57, 60, 62]
+# - Ce fichier est référencé dans: [.copilot/chat_resume.md:57]
+# - Ce fichier est référencé dans: [.copilot/sessions/session_20250914_auto_doc.md:33]
+# - Ce fichier est référencé dans: [docs/contributing.md:101, 104, 106, 109, 168]
+# - Ce fichier est référencé dans: [docs/chat_resume.md:48]
+# - Ce fichier est référencé dans: [template/bootstrap.sh:228]
+# ==========================================================================
+
 # git_autocommit.sh
 # Script d'automatisation des opérations Git courantes (add, commit, push)
 # Ce script détecte les fichiers modifiés, génère un message de commit, puis effectue toutes les actions nécessaires

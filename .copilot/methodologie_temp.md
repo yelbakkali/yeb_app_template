@@ -1,3 +1,14 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:12, 56, 77]
+- Ce fichier est référencé dans: [.copilot/README.md:20, 35]
+- Ce fichier est référencé dans: [.copilot/chat_resume.md:56]
+- Ce fichier est référencé dans: [.copilot/methodologie_temp.md:20, 52, 89, 108]
+- Ce fichier est référencé dans: [.copilot/sessions/session_20250914_auto_doc.md:27]
+- Ce fichier est référencé dans: [scripts/merge_to_main.bat:3, 70, 71, 72, 126, 128]
+- Ce fichier est référencé dans: [scripts/merge_to_main.sh:17, 58, 59, 60, 103, 104]
+-->
+
 # Méthodologie Template GitHub Copilot
 
 > **Important** : Ce document est un complément au fichier principal `methodologie.md`. Assurez-vous d'avoir lu ce fichier principal en premier.

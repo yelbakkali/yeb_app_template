@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:46, 89]
+- Ce fichier est référencé dans: [template/bootstrap.sh:202]
+- Ce fichier est référencé dans: [update_docs.sh:9]
+-->
+
 # Structure du projet yeb_app_template
 
 Ce document décrit l'organisation des dossiers et fichiers du projet.

@@ -1,4 +1,15 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [setup_project.bat:59]
+:: - Ce fichier est référencé dans: [scripts/cleanup_init_files.bat:43, 118, 119, 120, 121]
+:: - Ce fichier est référencé dans: [scripts/cleanup_init_files.sh:45, 117]
+:: - Ce fichier est référencé dans: [docs/installation.md:162]
+:: - Ce fichier est référencé dans: [docs/copilot/template_initialization.md:15]
+:: - Ce fichier est référencé dans: [.copilot/methodologie_temp.md:35]
+:: - Ce fichier est référencé dans: [template/docs/copilot/template_initialization.md:15]
+:: ==========================================================================
+
 REM Script d'initialisation du projet après l'utilisation du template
 
 REM Couleurs pour les messages (Windows)

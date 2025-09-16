@@ -1,4 +1,19 @@
 #!/bin/bash
+
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [README.md:151, 163]
+# - Ce fichier est référencé dans: [init_project.sh:556]
+# - Ce fichier est référencé dans: [setup_project.sh:203]
+# - Ce fichier est référencé dans: [docs/installation.md:150, 151, 201]
+# - Ce fichier est référencé dans: [docs/contributing.md:173]
+# - Ce fichier est référencé dans: [docs/modes_demarrage.md:7, 44, 51]
+# - Ce fichier est référencé dans: [docs/packaging_approach.md:55]
+# - Ce fichier est référencé dans: [template/init_project.sh:556]
+# - Ce fichier est référencé dans: [template/bootstrap.sh:227, 245]
+# - Ce fichier est référencé dans: [template/setup_project.sh:203]
+# ==========================================================================
+
 # Script lanceur tout-en-un pour yeb_app_template avec l'approche de packaging
 # Ce script prépare les scripts Python pour le packaging, lance le backend web et l'application Flutter
 

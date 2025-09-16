@@ -1,4 +1,16 @@
 #!/bin/bash
+
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [README.md:150, 160, 176]
+# - Ce fichier est référencé dans: [run_dev.sh:45]
+# - Ce fichier est référencé dans: [docs/copilot/template_initialization.md:44]
+# - Ce fichier est référencé dans: [docs/chat_resume.md:33]
+# - Ce fichier est référencé dans: [docs/packaging_approach.md:20, 54, 63]
+# - Ce fichier est référencé dans: [.copilot/chat_resume.md:43]
+# - Ce fichier est référencé dans: [template/docs/copilot/template_initialization.md:44]
+# ==========================================================================
+
 # Script de packaging des scripts Python partagés pour toutes les plateformes
 # Cette approche copie les scripts dans les assets de Flutter au lieu de faire une synchronisation manuelle
 

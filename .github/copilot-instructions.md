@@ -182,6 +182,44 @@ Lorsque l'utilisateur utilise ce projet comme template :
 - Expliquer la structure du projet et le fonctionnement du `UnifiedPythonService`
 - Aider à personnaliser l'application selon le cas d'usage
 
+### 5.3 Gestion des références croisées dans les fichiers
+
+Pour tous les fichiers avec les extensions .md, .sh et .bat, ajouter systématiquement en début de fichier un bloc de commentaires contenant les références aux autres documents où ce fichier est mentionné, avec les numéros de lignes précis :
+
+- Pour les fichiers **Markdown (.md)** :
+  ```markdown
+  <!--
+  RÉFÉRENCES CROISÉES:
+  - Ce fichier est référencé dans: [chemin/vers/fichier1.md:5, 6, 84]
+  - Ce fichier est référencé dans: [chemin/vers/fichier2.md:12, 45]
+  -->
+  ```
+
+- Pour les fichiers **Shell (.sh)** :
+  ```bash
+  # ==========================================================================
+  # RÉFÉRENCES CROISÉES:
+  # - Ce fichier est référencé dans: [chemin/vers/fichier1.md:5, 6, 84]
+  # - Ce fichier est référencé dans: [chemin/vers/fichier2.md:12, 45]
+  # ==========================================================================
+  ```
+
+- Pour les fichiers **Batch (.bat)** :
+  ```bat
+  :: ==========================================================================
+  :: RÉFÉRENCES CROISÉES:
+  :: - Ce fichier est référencé dans: [chemin/vers/fichier1.md:5, 6, 84]
+  :: - Ce fichier est référencé dans: [chemin/vers/fichier2.md:12, 45]
+  :: ==========================================================================
+  ```
+
+Cette règle s'applique :
+- À la création de tout nouveau fichier .md, .sh ou .bat
+- Lors de la modification d'un fichier existant, si les références sont incomplètes
+- À tous les fichiers existants de ces types, qui doivent progressivement être mis à jour
+
+GitHub Copilot doit identifier automatiquement les références possibles par analyse du contenu des autres fichiers et proposer de mettre à jour le bloc de références quand il détecte une référence manquante. Les numéros de lignes indiqués correspondent précisément aux endroits où le fichier est mentionné.
+
 ## 6. Gestion des fichiers d'historique pour les nouveaux projets
 
 ### 6.1 Comportement au démarrage d'un nouveau projet depuis le template

@@ -1,4 +1,16 @@
 #!/bin/bash
+
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [README.md:104, 105, 108, 111, 204]
+# - Ce fichier est référencé dans: [docs/installation.md:13, 83, 162]
+# - Ce fichier est référencé dans: [docs/bootstrap.md:3, 19, 20, 26]
+# - Ce fichier est référencé dans: [docs/copilot/template_initialization.md:15]
+# - Ce fichier est référencé dans: [.copilot/chat_resume.md:58, 62]
+# - Ce fichier est référencé dans: [.copilot/memoire_long_terme.md:108]
+# - Ce fichier est référencé dans: [bootstrap.sh:32, 64]
+# ==========================================================================
+
 # bootstrap.sh - Script de démarrage pour initialiser un nouveau projet à partir du template yeb_app_template
 # Auteur: Yassine El Bakkali
 # Ce script télécharge le template yeb_app_template et configure un nouveau projet

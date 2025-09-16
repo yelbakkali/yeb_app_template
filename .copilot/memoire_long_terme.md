@@ -1,3 +1,9 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:11, 24, 55, 79]
+- Ce fichier est référencé dans: [.copilot/README.md:21]
+-->
+
 # Mémoire à Long Terme pour GitHub Copilot
 
 > **⚠️ INSTRUCTION IMPÉRATIVE ET ABSOLUE ⚠️**

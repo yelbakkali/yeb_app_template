@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:56]
+-->
+
 # Extension avec des scripts et packages personnalisés
 
 Ce guide explique comment étendre le projet yeb_app_template avec vos propres scripts Python et packages pour répondre à vos besoins spécifiques.

@@ -1,4 +1,13 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [.copilot/methodologie_temp.md:8]
+:: - Ce fichier est référencé dans: [.copilot/chat_resume.md:7]
+:: - Ce fichier est référencé dans: [init_project.bat:498]
+:: - Ce fichier est référencé dans: [template/init_project.bat:498]
+:: - Ce fichier est référencé dans: [scripts/merge_to_main.bat:76, 131, 133]
+:: ==========================================================================
+
 REM Script d'automatisation pour merger la branche dev vers main (version Windows)
 REM Ce script respecte les règles définies dans docs/copilot/methodologie_temp.md
 REM Il ne doit jamais être inclus dans la branche main

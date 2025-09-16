@@ -1,3 +1,11 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:70, 90, 146]
+- Ce fichier est référencé dans: [run_dev.bat:6]
+- Ce fichier est référencé dans: [template/bootstrap.sh:204]
+- Ce fichier est référencé dans: [update_docs.sh:10]
+-->
+
 # Guide d'installation du projet yeb_app_template
 
 Ce guide vous aidera à installer et configurer l'environnement de développement pour le projet yeb_app_template.
