@@ -3,10 +3,9 @@ RÉFÉRENCES CROISÉES:
 - Ce fichier est référencé dans: [README.md:70, 90, 146]
 - Ce fichier est référencé dans: [run_dev.bat:6]
 - Ce fichier est référencé dans: [run_dev.sh:8]
-- Ce fichier est référencé dans: [setup_template.sh:6]
+- Ce fichier est référencé dans: [setup_template.sh:6, 204]
 - Ce fichier est référencé dans: [setup_project.bat:5]
 - Ce fichier est référencé dans: [init_project.bat:7]
-- Ce fichier est référencé dans: [template/entry-points/bootstrap.sh:204]
 - Ce fichier est référencé dans: [update_docs.sh:10]
 -->
 

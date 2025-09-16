@@ -11,7 +11,6 @@ La structure est la suivante :
 ```plaintext
 template/
 ├── entry-points/     # Points d'entrée principaux pour l'initialisation du projet
-│   ├── bootstrap.sh    # Renommé en setup_template.sh à la racine
 │   ├── init_project.bat
 │   ├── init_project.sh
 │   ├── setup_project.bat
@@ -32,9 +31,10 @@ template/
 
 Ce dossier contient les scripts principaux qui servent de points d'entrée pour l'initialisation du projet :
 
-1. **bootstrap.sh** - Script autonome qui télécharge le template et configure un nouveau projet (renommé en setup_template.sh à la racine)
-2. **init_project.sh / init_project.bat** - Scripts d'initialisation du projet (renommage, configuration)
-3. **setup_project.sh / setup_project.bat** - Scripts d'installation tout-en-un qui vérifient les prérequis et lancent l'initialisation
+1. **init_project.sh / init_project.bat** - Scripts d'initialisation du projet (renommage, configuration)
+2. **setup_project.sh / setup_project.bat** - Scripts d'installation tout-en-un qui vérifient les prérequis et lancent l'initialisation
+
+**Note:** Le script `setup_template.sh` à la racine du projet remplace l'ancien script `bootstrap.sh` qui se trouvait auparavant dans ce dossier.
 
 ## Utilitaires (`utils/`)
 
@@ -50,9 +50,9 @@ Ce dossier contient la documentation spécifique au template et aux instructions
 
 ## Relations entre les scripts
 
-Les scripts de points d'entrée font appel aux scripts utilitaires selon le schéma suivant :
+Les scripts font appel les uns aux autres selon le schéma suivant :
 
-- `setup_template.sh` (anciennement `bootstrap.sh`) → télécharge le template et lance `setup_project.sh`
+- `setup_template.sh` (à la racine) → télécharge le template et lance `setup_project.sh`
 - `setup_project.sh` → appelle `check_prerequisites.sh` puis `init_project.sh`
 - `init_project.sh` → appelle `check_prerequisites.sh`, `configure_vscode_for_flutter.sh`, etc.
 

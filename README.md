@@ -5,7 +5,7 @@ RÉFÉRENCES CROISÉES:
 - Ce fichier est référencé dans: [.github/copilot-instructions.md:59]
 - Ce fichier est référencé dans: [docs/installation.md:5, 75]
 - Ce fichier est référencé dans: [.copilot/sessions/session_20250909_suite.md:55]
-- Ce fichier est référencé dans: [template/entry-points/bootstrap.sh:150, 151, 152, 153]
+- Ce fichier est référencé dans: [setup_template.sh:150, 151, 152, 153]
 - Ce fichier est référencé dans: [update_docs.sh:27, 28, 29, 30, 31]
 -->
 
