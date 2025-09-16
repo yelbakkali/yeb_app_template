@@ -1,13 +1,12 @@
 # Instructions pour GitHub Copilot - Projet YEB App Template
 
-Ce document définit la méthodologie complète que GitHub Copilot doit suivre lors de la collaboration sur ce projet. Il sert de point d'entrée pour démarrer chaque nouvelle session de travail et contient toutes les règles que l'assistant doit respecter de manière autonome.
+Ce document définit les instructions complètes que GitHub Copilot doit suivre lors de la collaboration sur ce projet. Il sert de point d'entrée automatique pour démarrer chaque nouvelle session de travail et contient toutes les règles que l'assistant doit respecter de manière autonome.
 
 > **⚠️ INSTRUCTION AUTOMATIQUE IMPÉRATIVE POUR GITHUB COPILOT ⚠️**
 >
 > Dès que tu lis ce fichier, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION :
 >
 > 1. Lire automatiquement les fichiers suivants dans cet ordre précis :
->    - `docs/copilot/methodologie.md`
 >    - `docs/copilot/methodologie_temp.md` (si présent)
 >    - `docs/chat_resume.md`
 >    - Les sessions documentées dans `docs/copilot/sessions/`
@@ -45,7 +44,7 @@ GitHub Copilot doit :
 
 ### 2.1 Au début de chaque session
 
-1. Lire ce fichier (`methodologie.md`) pour rappeler la méthodologie complète
+1. Lire ce fichier (`.copilot/instructions.md`) pour rappeler la méthodologie complète
 2. **RÈGLE CRITIQUE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `docs/copilot/`, en particulier:
    - `methodologie_temp.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques au développement du template
    - `README.md` - Pour comprendre la structure générale de documentation
@@ -68,7 +67,6 @@ GitHub Copilot doit :
 
 **RÈGLE ABSOLUE ET NON-NÉGOCIABLE** : À chaque début de session, TOUS les fichiers du dossier `docs/copilot/` doivent être lus SANS EXCEPTION, y compris mais non limité à:
 
-- `methodologie.md` (ce fichier)
 - `methodologie_temp.md` (instructions spéciales pour le développement du template)
 - `README.md`
 - `template_initialization.md`
@@ -180,7 +178,7 @@ Lorsque l'utilisateur utilise ce projet comme template :
 
 Pour les utilisateurs qui créent un nouveau projet à partir de ce template :
 
-- **Quand l'utilisateur dit** "lire methodologie.md" : GitHub Copilot doit immédiatement comprendre qu'il faut lire TOUTE la documentation disponible
+- **Quand l'utilisateur dit** "lire les instructions" ou "lire la documentation" : GitHub Copilot doit immédiatement comprendre qu'il faut lire TOUTE la documentation disponible
 - GitHub Copilot doit noter que les fichiers d'historique (`chat_resume.md` et fichiers dans `docs/copilot/sessions/`) seront initialement vides
 - L'état initial du nouveau projet de l'utilisateur est "propre", sans historique de développement antérieur
 - L'utilisateur est libre de définir sa propre stratégie de gestion de branches et d'historique pour son projet
@@ -217,7 +215,7 @@ GitHub Copilot doit expliquer clairement à l'utilisateur que :
 La méthodologie décrite dans ce document n'est pas figée et peut être adaptée selon les besoins spécifiques du projet :
 
 - L'utilisateur peut demander à tout moment d'ajouter, modifier ou supprimer des règles méthodologiques
-- Lorsque l'utilisateur demande un changement de méthodologie, GitHub Copilot appliquera ces modifications dans ce fichier (`methodologie.md`)
+- Lorsque l'utilisateur demande un changement de méthodologie, GitHub Copilot appliquera ces modifications dans ce fichier (`instructions.md`)
 - Les changements de méthodologie seront appliqués immédiatement pour la suite de la collaboration
 - GitHub Copilot suivra toujours la version la plus récente de la méthodologie
 
@@ -226,7 +224,7 @@ La méthodologie décrite dans ce document n'est pas figée et peut être adapt�
 Pour modifier cette méthodologie, l'utilisateur peut simplement :
 
 1. Indiquer clairement à GitHub Copilot quelles règles doivent être ajoutées, modifiées ou supprimées
-2. Demander explicitement la mise à jour du fichier `methodologie.md`
+2. Demander explicitement la mise à jour du fichier `instructions.md`
 3. Vérifier les modifications proposées avant validation
 
 Cette approche permet au projet d'évoluer et de s'adapter aux besoins changeants de l'utilisateur tout en maintenant une documentation claire des pratiques de travail.
