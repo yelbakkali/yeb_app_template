@@ -87,12 +87,36 @@ Parcourez le dossier `docs/` pour découvrir :
 
 ```bash
 # Cloner votre nouveau dépôt
-git clone https://github.com/votre-username/nom-de-votre-depot.git
-cd nom-de-votre-depot
+# Pour créer un nouveau projet basé sur ce template
 
-# Méthode 1 : Installation automatique tout-en-un (recommandée)
-# Cette méthode vérifie les prérequis, installe les outils manquants si possible,
-# initialise le projet et ouvre VS Code automatiquement.
+## Méthode 1 : Utiliser le script d'initialisation (recommandé)
+
+```bash
+# Télécharger uniquement le script bootstrap.sh
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/bootstrap.sh
+
+# Rendre le script exécutable
+chmod +x bootstrap.sh
+
+# Exécuter le script d'initialisation
+./bootstrap.sh
+```
+
+Ce script va vous guider à travers les étapes suivantes :
+
+1. Demander le nom de votre projet
+2. Télécharger le template complet
+3. Configurer le projet avec vos informations
+4. Installer les dépendances nécessaires
+5. Initialiser un nouveau dépôt Git
+6. Configurer GitHub Copilot pour votre projet
+
+## Méthode 2 : Clone manuel et installation
+
+```bash
+# Cloner le dépôt
+git clone https://github.com/yelbakkali/yeb_app_template.git nom-de-votre-projet
+cd nom-de-votre-projet
 
 # Pour Linux/macOS :
 chmod +x setup_project.sh
@@ -100,14 +124,6 @@ chmod +x setup_project.sh
 
 # Pour Windows :
 setup_project.bat
-
-# Méthode 2 : Installation manuelle étape par étape
-# Pour Linux/macOS :
-chmod +x init_project.sh
-./init_project.sh
-
-# Pour Windows :
-init_project.bat
 ```
 
 Le script d'initialisation va :
@@ -122,9 +138,8 @@ Pour des instructions détaillées, consultez notre [guide d'installation](docs/
 
 ## 🛠️ Scripts utilitaires
 
-- `package_python_scripts.sh` : Prépare les scripts Python pour le packaging
+- `scripts/package_python_scripts.sh` : Prépare les scripts Python pour le packaging
 - `run_dev.sh` : Lance l'environnement de développement complet
-- `run_dev_direct.sh` : Lance l'environnement avec accès direct aux scripts source
 - `start_web_integrated.sh` : Lance l'application Flutter en mode web avec le serveur Python intégré
 
 ## 👩‍💻 Développement
@@ -133,7 +148,7 @@ Pour développer et tester l'application :
 
 ```bash
 # Préparer les scripts Python pour le packaging
-./package_python_scripts.sh
+./scripts/package_python_scripts.sh
 
 # Lancer l'environnement de développement
 ./run_dev.sh
@@ -149,7 +164,7 @@ Pour développer et tester l'application en mode web :
 Pour ajouter un nouveau calcul :
 
 1. Créez un nouveau script Python dans `shared_python/calculs/`
-2. Exécutez `package_python_scripts.sh` pour mettre à jour les assets
+2. Exécutez `scripts/package_python_scripts.sh` pour mettre à jour les assets
 3. Dans votre code Flutter, utilisez `UnifiedPythonService.runScript('nom_du_script', [args])`
 
 ## 📊 Tests et intégration continue (CI)
@@ -177,7 +192,7 @@ Une fois que vous avez créé votre projet à partir de ce template, vous pouvez
 
 ### Personnalisation automatique
 
-Le script `init_project.sh` (ou `init_project.bat` sur Windows) s'occupe de la personnalisation initiale :
+Le script `bootstrap.sh` s'occupe de la personnalisation initiale via les scripts dans le dossier `template/` :
 
 - Renommage automatique du projet dans tous les fichiers
 - Configuration des dépendances
@@ -213,7 +228,7 @@ Les contributions sont les bienvenues ! Consultez notre [guide de contribution](
 
 ## 🤖 Collaboration avec GitHub Copilot
 
-Ce projet utilise une structure documentée pour faciliter la collaboration avec GitHub Copilot. Consultez les fichiers dans `docs/copilot/` pour plus d'informations.
+Ce projet utilise une structure documentée pour faciliter la collaboration avec GitHub Copilot. Consultez les fichiers dans `.copilot/` pour plus d'informations.
 
 ## 📄 Licence
 

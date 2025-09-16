@@ -558,6 +558,6 @@ echo "3. Pour le développement web, utilisez './start_web_integrated.sh' (Unix)
 echo "4. Utilisez git avec le workflow recommandé : développement sur 'dev', fusion vers 'main'"
 echo "   Pour fusionner dev vers main : scripts/merge_to_main.sh"
 echo ""
-echo "Si vous utilisez VS Code avec GitHub Copilot, demandez à l'assistant de 'lire les fichiers dans .copilot' pour vous aider à personnaliser davantage votre projet."
+echo "Si vous utilisez VS Code avec GitHub Copilot, demandez à l'assistant de 'lire la documentation dans docs/' pour vous aider à personnaliser davantage votre projet."
 echo ""
 print_success "Bon développement !"

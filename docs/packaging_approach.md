@@ -17,7 +17,7 @@ Notre application Flutter multiplateforme utilise des scripts Python pour effect
 ## Comment ça fonctionne
 
 1. Les scripts Python sont placés dans le dossier `shared_python/` à la racine du projet.
-2. Le script `package_python_scripts.sh` copie ces scripts dans le dossier `flutter_app/assets/shared_python/`.
+2. Le script `scripts/package_python_scripts.sh` copie ces scripts dans le dossier `flutter_app/assets/shared_python/`.
 3. Le fichier `pubspec.yaml` référence ces assets pour qu'ils soient inclus dans le package Flutter.
 4. Le service `UnifiedPythonService` extrait ces scripts au runtime dans un dossier temporaire sur chaque plateforme.
 5. Des scripts spécifiques à chaque plateforme garantissent que les scripts sont correctement intégrés :
@@ -51,8 +51,8 @@ Une API backend (FastAPI) accède aux mêmes scripts Python et expose leurs fonc
 
 ## Scripts utilitaires
 
-- `package_python_scripts.sh` : Prépare les scripts Python pour le packaging.
-- `run_dev_direct.sh` : Lance l'application en mode développement avec accès direct aux scripts.
+- `scripts/package_python_scripts.sh` : Prépare les scripts Python pour le packaging.
+- `run_dev.sh` : Lance l'application en mode développement avec packaging des scripts Python.
 - `extract_python_scripts.sh` : Script pour iOS pour extraire les scripts Python pendant le build.
 
 ## Maintenance et mise à jour
@@ -60,7 +60,7 @@ Une API backend (FastAPI) accède aux mêmes scripts Python et expose leurs fonc
 Pour mettre à jour les scripts Python :
 
 1. Modifiez les scripts dans le dossier `shared_python/`.
-2. Exécutez `package_python_scripts.sh` pour mettre à jour les assets.
+2. Exécutez `scripts/package_python_scripts.sh` pour mettre à jour les assets.
 3. Reconstruisez l'application Flutter.
 
 Cette approche garantit que tous les utilisateurs obtiennent les mêmes fonctionnalités de calcul sur toutes les plateformes, tout en minimisant la complexité de maintenance.

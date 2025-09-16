@@ -10,7 +10,7 @@ Ce document est un supplément à la méthodologie générale qui contient des i
 
 Cette stratégie s'applique uniquement pendant le développement du template yeb_app_template, pas aux projets créés par les utilisateurs :
 
-- **Branche `dev`** : Conserve l'historique complet du développement du template (fichier `chat_resume.md` et dossier `docs/copilot/sessions/`) pour référence et amélioration continue du template
+- **Branche `dev`** : Conserve l'historique complet du développement du template (fichier `.copilot/chat_resume.md` et dossier `.copilot/sessions/`) pour référence et amélioration continue du template
 - **Branche `main`** : Ne contient pas les fichiers d'historique, car elle est destinée aux utilisateurs finaux comme point de départ propre pour leurs projets
 
 ### Gestion des fichiers lors de la publication du template
@@ -19,8 +19,8 @@ Lors de la publication du template sur la branche `main`, les actions suivantes 
 
 1. Ne pas inclure ce fichier (`methodologie_temp.md`) sur la branche `main`
 2. Vider complètement les fichiers suivants :
-   - `docs/chat_resume.md`
-   - Tous les fichiers dans `docs/copilot/sessions/` (mais conserver le dossier)
+   - `.copilot/chat_resume.md`
+      - Tous les fichiers dans `.copilot/sessions/` (mais conserver le dossier)
 3. S'assurer que les scripts d'initialisation (`init_project.sh`, `init_project.bat`) fonctionnent correctement
 
 ### Test du template avant publication
@@ -49,10 +49,10 @@ Les fichiers suivants NE DOIVENT ABSOLUMENT JAMAIS être inclus dans la branche 
 
 | Fichier/Dossier | Action requise avant fusion vers `main` |
 |----------------|----------------------------------------|
-| **`docs/copilot/methodologie_temp.md`** | **JAMAIS INCLUS** - Ce fichier doit être complètement exclu |
+| **`.copilot/methodologie_temp.md`** | **JAMAIS INCLUS** - Ce fichier doit être complètement exclu |
 | **`scripts/merge_to_main.sh`** | **JAMAIS INCLUS** - Ce script d'automatisation doit être complètement exclu |
-| **`docs/chat_resume.md`** | VIDER COMPLÈTEMENT - Ne conserver que l'en-tête |
-| **`docs/copilot/sessions/*`** | VIDER TOUS LES FICHIERS - Conserver uniquement les dossiers vides |
+| **`.copilot/chat_resume.md`** | VIDER COMPLÈTEMENT - Ne conserver que l'en-tête |
+| **`.copilot/sessions/*`** | VIDER TOUS LES FICHIERS - Conserver uniquement les dossiers vides |
 
 ### Procédure obligatoire pour tout push/merge vers main
 

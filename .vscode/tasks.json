@@ -49,6 +49,20 @@
       "problemMatcher": []
     },
     {
+      "label": "Run Full Development Environment (Windows)",
+      "type": "shell",
+      "command": ".\\run_dev.bat",
+      "windows": {
+        "command": ".\\run_dev.bat"
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Run Web Integrated Environment (WSL)",
       "type": "shell",
       "command": "./start_web_integrated.sh",
@@ -62,7 +76,21 @@
     {
       "label": "Package Python Scripts (WSL)",
       "type": "shell",
-      "command": "./package_python_scripts.sh",
+      "command": "./scripts/package_python_scripts.sh",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Package Python Scripts (Windows)",
+      "type": "shell",
+      "command": ".\\scripts\\package_python_scripts.bat",
+      "windows": {
+        "command": ".\\scripts\\package_python_scripts.bat"
+      },
       "group": "build",
       "presentation": {
         "reveal": "always",

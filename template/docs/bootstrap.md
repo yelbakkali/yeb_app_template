@@ -16,7 +16,7 @@ Ce script autonome (`bootstrap.sh`) vous permet de créer rapidement un nouveau 
 1. Téléchargez uniquement ce script bootstrap:
 
 ```bash
-curl -O https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/bootstrap.sh
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/bootstrap.sh
 chmod +x bootstrap.sh
 ```
 

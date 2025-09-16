@@ -12,7 +12,7 @@ Lorsque l'utilisateur demande à Copilot de "lire la documentation dans docs/" o
 
 ## Processus automatisé d'initialisation
 
-Quand l'utilisateur demande à Copilot de l'aide après avoir initialisé son projet avec `init_project.sh` ou `init_project.bat`, Copilot doit :
+Quand l'utilisateur demande à Copilot de l'aide après avoir initialisé son projet avec le script `bootstrap.sh` (qui appelle `template/init_project.sh` ou `template/init_project.bat` en interne), Copilot doit :
 
 1. **Résumer la structure du projet** :
    - Expliquer la structure des dossiers du template
@@ -41,7 +41,7 @@ Pour ajouter un nouveau module de calcul Python :
 
 1. Créez un fichier dans le dossier `shared_python/` (par exemple `mon_module.py`)
 2. Implémentez une fonction `main()` qui sera le point d'entrée
-3. Exécutez `./package_python_scripts.sh` pour mettre à jour les assets
+3. Exécutez `./scripts/package_python_scripts.sh` pour mettre à jour les assets
 4. Utilisez dans Flutter via `UnifiedPythonService.runScript('mon_module', [args])`
 ```
 

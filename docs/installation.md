@@ -2,6 +2,8 @@
 
 Ce guide vous aidera à installer et configurer l'environnement de développement pour le projet yeb_app_template.
 
+> **Note :** Si vous utilisez ce template pour créer un nouveau projet, référez-vous d'abord au [processus d'initialisation](../README.md) qui utilise le script `bootstrap.sh`. Vous pouvez également consulter la documentation du template dans le dossier `template/docs/`. Ce guide s'applique une fois que vous avez déjà initialisé votre projet.
+
 ## Prérequis
 
 ### Outils principaux
@@ -63,10 +65,14 @@ code --install-extension esbenp.prettier-vscode
 
 ### 1. Cloner le dépôt
 
+Si vous travaillez sur le template lui-même (et non pas pour créer un nouveau projet) :
+
 ```bash
 git clone https://github.com/votre-utilisateur/yeb_app_template.git
 cd yeb_app_template
 ```
+
+Pour créer un nouveau projet basé sur ce template, utilisez plutôt le script `bootstrap.sh` comme indiqué dans le [README](../README.md) et documenté dans [`template/docs/bootstrap.md`](../template/docs/bootstrap.md).
 
 ### 2. Utiliser le script d'installation automatique (recommandé)
 
@@ -133,19 +139,19 @@ cd ..
 #### Pour Linux/macOS
 
 ```bash
-chmod +x run_dev_environment.sh
-./run_dev_environment.sh
+chmod +x run_dev.sh
+./run_dev.sh
 ```
 
 #### Pour Windows
 
 ```bash
-run_dev_environment.bat
+run_dev.bat
 ```
 
 ## Configuration de l'éditeur VS Code
 
-La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`init_project.sh` ou `init_project.bat`). Les scripts créent les fichiers suivants dans le dossier `.vscode` :
+La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`template/init_project.sh` ou `template/init_project.bat`). Ces scripts sont appelés automatiquement par le script `bootstrap.sh` lors de la création d'un nouveau projet. Ils créent les fichiers suivants dans le dossier `.vscode` :
 
 - `settings.json` : Configuration de l'éditeur et des extensions
 - `extensions.json` : Recommandations d'extensions à installer

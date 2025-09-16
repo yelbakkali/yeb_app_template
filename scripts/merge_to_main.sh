@@ -52,10 +52,10 @@ git rm -f scripts/merge_to_main.sh || { echo -e "${YELLOW}Note: Le script merge_
 
 # Vider chat_resume.md
 echo "Vidage de chat_resume.md..."
-echo "# Résumé des sessions de travail avec GitHub Copilot" > docs/chat_resume.md
-echo "" >> docs/chat_resume.md
-echo "Ce document résume les sessions de travail avec GitHub Copilot pour faciliter la reprise du contexte." >> docs/chat_resume.md
-git add docs/chat_resume.md
+echo "# Résumé des sessions de travail avec GitHub Copilot" > .copilot/chat_resume.md
+echo "" >> .copilot/chat_resume.md
+echo "Ce document résume les sessions de travail avec GitHub Copilot pour faciliter la reprise du contexte." >> .copilot/chat_resume.md
+git add .copilot/chat_resume.md
 
 # Vider les fichiers de sessions
 echo "Vidage des fichiers de sessions..."

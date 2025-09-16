@@ -7,17 +7,20 @@ Ce document définit les instructions complètes que GitHub Copilot doit suivre 
 > ACTION IMMÉDIATE REQUISE : Dès l'ouverture de ce projet, tu DOIS IMMÉDIATEMENT et SANS EXCEPTION exécuter TOUTES les actions suivantes AVANT de répondre à l'utilisateur :
 >
 > 1. Lire OBLIGATOIREMENT et SANS DÉLAI les fichiers suivants dans cet ordre précis :
->    - `docs/copilot/methodologie_temp.md` (si présent)
->    - `docs/chat_resume.md` << CRITIQUE POUR L'HISTORIQUE DU PROJET >>
->    - Les sessions documentées dans `docs/copilot/sessions/` << CRITIQUE POUR LE CONTEXTE >>
->    - `docs/copilot/template_initialization.md`
+>    - `.copilot/memoire_long_terme.md` << ABSOLUMENT CRITIQUE POUR MAINTENIR LA COHÉRENCE >>
+>    - `.copilot/methodologie_temp.md` (si présent)
+>    - `.copilot/chat_resume.md` << CRITIQUE POUR L'HISTORIQUE DU PROJET >>
+>    - Les sessions documentées dans `.copilot/sessions/` << CRITIQUE POUR LE CONTEXTE >>
+>    - `template/docs/copilot/template_initialization.md`
 >
 > 2. Appliquer AUTOMATIQUEMENT et SANS EXCEPTION toutes les règles, consignes et instructions contenues dans ces documents sans attendre de confirmation explicite, notamment :
 >    - Utiliser le script `git_autocommit.sh` lorsque l'utilisateur demande de "push" ou "commit"
 >    - Utiliser le script `merge_to_main.sh` lorsque l'utilisateur demande de "merger" ou "fusionner vers main"
 >    - Appliquer toutes les conventions et règles de documentation spécifiques
 >
-> 3. Confirmer dans ta première réponse que tu as bien lu l'historique du projet en mentionnant EXPLICITEMENT la dernière mise à jour de `docs/chat_resume.md` et la dernière session documentée.
+> 3. Confirmer dans ta première réponse que tu as bien lu l'historique du projet en mentionnant EXPLICITEMENT la dernière mise à jour de `.copilot/chat_resume.md` et la dernière session documentée.
+>
+> 4. RELIRE OBLIGATOIREMENT le fichier `.copilot/memoire_long_terme.md` toutes les 4 questions/réponses échangées avec l'utilisateur pour maintenir la cohérence de ton comportement.
 >
 > ATTENTION : CHAQUE MOT DE CE DOCUMENT DOIT ÊTRE CONSIDÉRÉ COMME UNE INSTRUCTION FORMELLE ET OBLIGATOIRE. AUCUNE PARTIE N'EST FACULTATIVE OU DE MOINDRE IMPORTANCE. CES INSTRUCTIONS SONT PRIORITAIRES ABSOLUES ET DOIVENT ÊTRE SUIVIES SANS AUCUNE EXCEPTION. L'ASSISTANT DOIT LIRE L'INTÉGRALITÉ DE L'HISTORIQUE AUTOMATIQUEMENT.
 
@@ -47,19 +50,19 @@ GitHub Copilot doit :
 ### 2.1 Au début de chaque session
 
 1. Lire ce fichier (`.copilot/instructions.md`) pour rappeler la méthodologie complète
-2. **RÈGLE ABSOLUMENT CRITIQUE ET NON NÉGOCIABLE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `docs/copilot/`, en particulier:
+2. **RÈGLE ABSOLUMENT CRITIQUE ET NON NÉGOCIABLE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `.copilot/`, en particulier:
    - `methodologie_temp.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques au développement du template
    - `README.md` - **LECTURE OBLIGATOIRE** pour comprendre la structure générale de documentation
    - Tous les autres fichiers présents dans ce dossier
 3. Lire tous les fichiers README.md du projet pour en comprendre la structure et les fonctionnalités
-4. Consulter `docs/chat_resume.md` pour comprendre le contexte global du projet
-5. Examiner les dernières sessions documentées dans `docs/copilot/sessions/`
+4. Consulter `.copilot/chat_resume.md` pour comprendre le contexte global du projet
+5. Examiner les dernières sessions documentées dans `.copilot/sessions/`
 6. Analyser l'état actuel du projet (structure, dépendances, patterns)
 7. Présenter un résumé des dernières actions et de l'état du projet
 
 ### 2.2 Déclencheurs spécifiques
 
-- **Quand l'utilisateur dit** "lire les fichiers dans docs/copilot" : Effectuer les étapes de la section 2.1
+- **Quand l'utilisateur dit** "lire les fichiers dans .copilot" : Effectuer les étapes de la section 2.1
 - **Quand l'utilisateur dit** "lire la documentation dans docs/" : Lire tous les documents pertinents dans le dossier docs/
 - **Quand l'utilisateur dit** "lis la doc" : Effectuer les étapes à partir du début du fichier
 - **Quand l'utilisateur dit** "commençons une nouvelle session" : Effectuer les étapes de la section 2.1
@@ -67,14 +70,15 @@ GitHub Copilot doit :
 
 ### 2.3 Règle d'or pour la documentation
 
-**RÈGLE ABSOLUMENT IMPÉRATIVE ET TOTALEMENT NON-NÉGOCIABLE** : À chaque début de session, TOUS les fichiers du dossier `docs/copilot/` doivent être lus SANS AUCUNE EXCEPTION, y compris mais non limité à:
+**RÈGLE ABSOLUMENT IMPÉRATIVE ET TOTALEMENT NON-NÉGOCIABLE** : À chaque début de session, TOUS les fichiers du dossier `.copilot/` doivent être lus SANS AUCUNE EXCEPTION, y compris mais non limité à:
 
 - `methodologie_temp.md` (instructions spéciales pour le développement du template) - **OBLIGATOIRE**
 - `README.md` - **OBLIGATOIRE**
-- `template_initialization.md` - **OBLIGATOIRE**
+- `memoire_long_terme.md` - **OBLIGATOIRE**
 - Tout nouveau fichier qui aurait pu être ajouté depuis - **OBLIGATOIRE**
-- TOUS les fichiers dans `docs/copilot/sessions/` - **ABSOLUMENT OBLIGATOIRE**
-- Le fichier `docs/chat_resume.md` - **CRITIQUE ET OBLIGATOIRE**
+- TOUS les fichiers dans `.copilot/sessions/` - **ABSOLUMENT OBLIGATOIRE**
+- Le fichier `.copilot/chat_resume.md` - **CRITIQUE ET OBLIGATOIRE**
+- Le fichier `template/docs/copilot/template_initialization.md` - **OBLIGATOIRE**
 
 Cette règle s'applique AUTOMATIQUEMENT au démarrage de chaque session, SANS qu'il soit nécessaire que l'utilisateur le demande explicitement. L'assistant ne doit JAMAIS, SOUS AUCUN PRÉTEXTE, omettre la lecture de l'un quelconque de ces documents, car ils contiennent des informations VITALES pour le bon déroulement du projet.
 
@@ -147,11 +151,11 @@ Cette automatisation s'applique à toutes les commandes Git courantes liées à 
 
 - Documenter toute modification significative dans les fichiers appropriés
 - Consigner les commandes exécutées et leur résultat
-- Mettre à jour le fichier `docs/chat_resume.md` après chaque session importante
+- Mettre à jour le fichier `.copilot/chat_resume.md` après chaque session importante
 
 ### 4.2 Création de nouvelles sessions documentées
 
-Pour les sessions importantes, créer un nouveau fichier de session dans `docs/copilot/sessions/` contenant :
+Pour les sessions importantes, créer un nouveau fichier de session dans `.copilot/sessions/` contenant :
 
 - Le contexte et les objectifs de la session
 - Les discussions et décisions techniques
@@ -171,7 +175,7 @@ Pour les sessions importantes, créer un nouveau fichier de session dans `docs/c
 
 Lorsque l'utilisateur utilise ce projet comme template :
 
-- Guider l'utilisateur pour renommer le projet (si non fait avec `init_project.sh`)
+- Guider l'utilisateur pour renommer le projet (si non fait avec le script `bootstrap.sh`)
 - Proposer des étapes adaptées à ses besoins spécifiques
 - Expliquer la structure du projet et le fonctionnement du `UnifiedPythonService`
 - Aider à personnaliser l'application selon le cas d'usage
@@ -183,7 +187,7 @@ Lorsque l'utilisateur utilise ce projet comme template :
 Pour les utilisateurs qui créent un nouveau projet à partir de ce template :
 
 - **Quand l'utilisateur dit** "lire les instructions" ou "lire la documentation" : GitHub Copilot doit immédiatement comprendre qu'il faut lire TOUTE la documentation disponible
-- GitHub Copilot doit noter que les fichiers d'historique (`chat_resume.md` et fichiers dans `docs/copilot/sessions/`) seront initialement vides
+- GitHub Copilot doit noter que les fichiers d'historique (`.copilot/chat_resume.md` et fichiers dans `.copilot/sessions/`) seront initialement vides
 - L'état initial du nouveau projet de l'utilisateur est "propre", sans historique de développement antérieur
 - L'utilisateur est libre de définir sa propre stratégie de gestion de branches et d'historique pour son projet
 
@@ -191,8 +195,8 @@ Pour les utilisateurs qui créent un nouveau projet à partir de ce template :
 
 Pour tout nouveau projet créé à partir du template, GitHub Copilot doit, sans qu'on le lui rappelle :
 
-1. Créer le premier fichier de session dans `docs/copilot/sessions/` (format: `session_YYYYMMDD.md`)
-2. Commencer à remplir le fichier `chat_resume.md` vide avec les informations de la première session
+1. Créer le premier fichier de session dans `.copilot/sessions/` (format: `session_YYYYMMDD.md`)
+2. Commencer à remplir le fichier `.copilot/chat_resume.md` vide avec les informations de la première session
 3. Suivre strictement toutes les règles de cette méthodologie dès le premier échange
 4. Expliquer à l'utilisateur le fonctionnement de cette méthodologie de documentation
 
@@ -202,7 +206,7 @@ GitHub Copilot doit expliquer clairement à l'utilisateur que :
 
 - Un système de documentation continue est en place
 - Les sessions importantes seront documentées automatiquement
-- Le fichier `chat_resume.md` servira de point d'entrée pour reprendre le travail
+- Le fichier `.copilot/chat_resume.md` servira de point d'entrée pour reprendre le travail
 - Cette approche permettra une collaboration efficace sur le long terme
 
 ## 7. Aspects techniques importants

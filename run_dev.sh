@@ -27,7 +27,7 @@ fi
 
 # Packager les scripts Python
 print_header "Préparation des scripts Python pour le packaging"
-bash "$BASE_DIR/package_python_scripts.sh"
+bash "$BASE_DIR/scripts/package_python_scripts.sh"
 
 # Définir la variable d'environnement pour le mode développement
 export FLUTTER_DEV_MODE=true

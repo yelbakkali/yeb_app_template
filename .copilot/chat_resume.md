@@ -30,7 +30,7 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 ## Fichiers clés créés/modifiés
 
 - `/flutter_app/lib/services/unified_python_service.dart` : Service central d'exécution Python
-- `/package_python_scripts.sh` : Script de préparation des assets Python
+- `/scripts/package_python_scripts.sh` : Script de préparation des assets Python
 - `/flutter_app/android/app/python_config.gradle.kts` : Configuration pour Android
 - `/flutter_app/ios/extract_python_scripts.sh` : Configuration pour iOS
 - `/docs/packaging_approach.md` : Documentation de l'approche de packaging
@@ -44,10 +44,10 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 ## Dernières réalisations
 
 1. **Renforcement de l'automatisation pour GitHub Copilot (14 septembre 2025)**
-   - Ajout d'instructions impératives dans `docs/copilot/methodologie.md` pour déclencher la lecture de la documentation ET l'application automatique des consignes
+   - Ajout d'instructions impératives dans `.copilot/methodologie_temp.md` pour déclencher la lecture de la documentation ET l'application automatique des consignes
    - Spécification explicite de l'utilisation automatique des scripts (`git_autocommit.sh`, `merge_to_main.sh`) sans intervention de l'utilisateur
    - Mise à jour du guide de style Markdown avec de nouvelles règles
-   - Documentation détaillée dans `docs/copilot/sessions/session_20250914_auto_doc.md`
+   - Documentation détaillée dans `.copilot/sessions/session_20250914_auto_doc.md`
 
 2. **Structure des branches Git**
    - Branche `main` créée pour la production
@@ -62,7 +62,7 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 
 4. **Mise à jour de la documentation**
    - Mise à jour complète du fichier `workload.md` avec l'architecture et les prérequis
-   - Création du fichier de résumé de conversation `docs/chat_resume.md`
+   - Création du fichier de résumé de conversation `.copilot/chat_resume.md`
 
 5. **Configuration de l'environnement de développement VS Code**
    - Création et ajout des fichiers `.vscode/extensions.json`, `.vscode/launch.json`, `.vscode/tasks.json` pour faciliter le développement collaboratif
@@ -75,7 +75,7 @@ Ce document résume les principaux points abordés dans notre conversation sur l
    - Structure prête pour l'ajout ultérieur de fonctions métier spécifiques au 737
 
 7. **Mise en place du système de documentation pour la collaboration avec GitHub Copilot**
-   - Création d'une structure dans `docs/copilot/` pour documenter les sessions de travail
+   - Création d'une structure dans `.copilot/` pour documenter les sessions de travail
    - Mise en place d'instructions et règles de communication claires entre l'utilisateur et l'assistant
    - Ajout d'un système de validation avant toute action sur le projet
 
@@ -117,13 +117,13 @@ Quand ce fichier est mentionné au début d'une session :
 
 ## Historique détaillé des sessions
 
-L'historique complet des sessions de travail avec l'assistant est disponible dans le dossier `docs/copilot/sessions/`. Chaque fichier contient:
+L'historique complet des sessions de travail avec l'assistant est disponible dans le dossier `.copilot/sessions/`. Chaque fichier contient:
 
 - Les discussions et décisions importantes
 - Les actions réalisées avec les commandes exactes
 - L'état du projet à la fin de la session
 - Les prochaines étapes identifiées
 
-Pour reprendre le travail avec plus de contexte, demandez à l'assistant de "lire les fichiers dans docs/copilot".
+Pour reprendre le travail avec plus de contexte, demandez à l'assistant de "lire les fichiers dans .copilot".
 
 Ce fichier sera régulièrement mis à jour pour maintenir la continuité des échanges et du développement.
