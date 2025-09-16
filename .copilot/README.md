@@ -17,8 +17,7 @@ Ce projet utilise un système structuré pour documenter les interactions avec G
   ├── sessions/                   # Historique des sessions
   │   ├── session_DATE.md         # Une session par date
   │   └── template.md             # Template pour nouvelles sessions
-  ├── methodologie_temp.md        # Méthodologie pour GitHub Copilot
-  ├── instructions.md             # Instructions principales pour GitHub Copilot
+  ├── methodologie_temp.md        # Méthodologie pour GitHub Copilot pour fonctionner sur le template
   ├── memoire_long_terme.md       # Mémoire à long terme de GitHub Copilot
   ├── chat_resume.md              # Résumé global du projet
   └── README.md                   # Ce fichier

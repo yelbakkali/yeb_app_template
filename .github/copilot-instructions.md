@@ -52,6 +52,7 @@ GitHub Copilot doit :
 
 1. Lire ce fichier (`.github/copilot-instructions.md`) pour rappeler la méthodologie complète
 2. **RÈGLE ABSOLUMENT CRITIQUE ET NON NÉGOCIABLE** : Lire IMMÉDIATEMENT et SYSTÉMATIQUEMENT TOUS les fichiers disponibles dans le dossier `.copilot/`, en particulier:
+   - `memoire_long_terme.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques pour le comportement de github copilot :le "mémoire long terme"
    - `methodologie_temp.md` - **LECTURE OBLIGATOIRE** pour les instructions spécifiques au développement du template
    - `README.md` - **LECTURE OBLIGATOIRE** pour comprendre la structure générale de documentation
    - Tous les autres fichiers présents dans ce dossier
@@ -210,97 +211,12 @@ GitHub Copilot doit expliquer clairement à l'utilisateur que :
 - Le fichier `.copilot/chat_resume.md` servira de point d'entrée pour reprendre le travail
 - Cette approche permettra une collaboration efficace sur le long terme
 
-## 7. Architecture et aspects techniques importants
+## 7. Aspects techniques importants
 
-### 7.1 Vue d'ensemble de l'architecture
-
-- L'application est une solution Flutter multiplateforme avec backend Python intégré
-- Architecture basée sur le principe "écrire une fois, exécuter partout" pour les scripts Python
-- Les scripts Python sont développés dans `shared_python/` et empaquetés comme assets dans Flutter
-- Le service `UnifiedPythonService` gère l'extraction et l'exécution des scripts Python sur chaque plateforme
-
-### 7.2 Composants principaux
-
-- **flutter_app/** : Application Flutter avec UI multiplateforme
-  - `lib/services/unified_python_service.dart` : Service central pour l'exécution des scripts Python
-  - `lib/main.dart` : Point d'entrée de l'application avec exemples d'intégration Python
-
-- **shared_python/** : Scripts Python partagés
-  - `scripts/` : Scripts Python exécutables simples
-  - `packages/` : Packages Python complexes
-  - `web_adapter.py` : Interface FastAPI pour l'exécution des scripts via le web
-
-- **web_backend/** : Backend Python complet pour le mode web
-  - `main.py` : Point d'entrée de l'API FastAPI
-
-### 7.3 Mécanisme d'intégration Python/Flutter
-
-Le `UnifiedPythonService` est le composant central qui :
-1. Extrait les scripts Python des assets Flutter vers un emplacement temporaire
-2. Gère l'exécution adaptée à chaque plateforme :
-   - Android : via Chaquopy
-   - iOS : via Python-Apple-support
-   - Windows : via Python embarqué
-   - Web : via API backend
-   - Linux/macOS : via Python système
-3. Expose une API unifiée pour l'exécution des scripts : `runScript(scriptPath, args)`
-
-### 7.4 Workflows de développement
-
-Le projet propose deux modes principaux de développement :
-
-#### Mode développement complet (`run_dev.sh/bat`)
-
-```bash
-# Lancer l'environnement de développement complet
-./run_dev.sh
-```
-
-Ce mode :
-- Package les scripts Python vers les assets Flutter avec `scripts/package_python_scripts.sh`
-- Lance le backend FastAPI complet (`web_backend/main.py`)
-- Lance l'application Flutter en mode web avec Chrome
-- Active la variable d'environnement `FLUTTER_DEV_MODE=true` pour accéder directement aux scripts source
-- Utilise tmux (Linux) ou plusieurs fenêtres cmd (Windows) pour gérer les processus
-
-#### Mode web intégré léger (`start_web_integrated.sh/bat`)
-
-```bash
-# Lancer l'environnement web intégré léger
-./start_web_integrated.sh
-```
-
-Ce mode :
-- Utilise un serveur Python minimal via `web_adapter.py`
-- Installe uniquement les dépendances web avec Poetry
-- Convient pour les tests d'interface rapides
-
-### 7.5 Commandes clés pour le développement
-
-- **Packaging des scripts Python** :
-  ```bash
-  ./scripts/package_python_scripts.sh
-  ```
-
-- **Test de l'application web uniquement** :
-  ```bash
-  ./test_web_app.sh
-  ```
-
-- **Synchronisation des scripts Python** (obsolète, préférer package_python_scripts.sh) :
-  ```bash
-  ./sync_python_scripts.sh
-  ```
-
-- **Configuration de l'environnement VS Code** :
-  ```bash
-  ./configure_vscode.sh
-  ```
-
-- **Initialisation d'un nouveau projet basé sur ce template** :
-  ```bash
-  ./bootstrap.sh
-  ```
+- L'application est une solution Flutter multiplateforme avec backend Python
+- Le service `UnifiedPythonService` gère l'intégration des scripts Python
+- Les scripts Python sont empaquetés comme assets dans l'application Flutter
+- Le template fournit une UI minimaliste que l'utilisateur doit adapter à ses besoins
 
 ## 8. Évolution de la méthodologie
 
