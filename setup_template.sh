@@ -193,56 +193,57 @@ run_setup_script() {
     fi
 }
 
-# Instructions pour GitHub Copilot
-create_copilot_instructions() {
-    print_header "Configuration pour GitHub Copilot"
+# Mise à jour des instructions pour GitHub Copilot
+update_copilot_instructions() {
+    print_header "Mise à jour des instructions pour GitHub Copilot"
 
-    echo -e "Création des instructions pour GitHub Copilot..."
+    echo -e "Mise à jour des instructions pour GitHub Copilot..."
 
-    # Créer un fichier d'instructions pour GitHub Copilot
-    mkdir -p .copilot
-    cat > .copilot/bootstrap_instructions.md << EOL
-# Instructions pour GitHub Copilot
+    # Vérifier l'existence des répertoires et fichiers
+    if [ -d ".github" ] && [ -f ".github/copilot-instructions.md" ]; then
+        # Remplacer le nom du projet dans les instructions Copilot
+        echo -e "Mise à jour du fichier .github/copilot-instructions.md..."
+        sed -i "s/YEB App Template/$PROJECT_NAME/g" .github/copilot-instructions.md
+        sed -i "s/yeb_app_template/$PROJECT_NAME/g" .github/copilot-instructions.md
+    else
+        echo -e "${YELLOW}Avertissement:${NC} Le fichier .github/copilot-instructions.md n'a pas été trouvé."
+    fi
 
-Ce fichier contient des instructions spécifiques pour GitHub Copilot afin qu'il puisse comprendre rapidement la structure et la méthodologie du projet lorsqu'il est interrogé par l'utilisateur.
+    # Mettre à jour les informations dans le fichier de mémoire long terme
+    if [ -d ".copilot" ] && [ -f ".copilot/memoire_long_terme.md" ]; then
+        echo -e "Mise à jour du fichier .copilot/memoire_long_terme.md..."
+        sed -i "s/YEB App Template/$PROJECT_NAME/g" .copilot/memoire_long_terme.md
+        sed -i "s/yeb_app_template/$PROJECT_NAME/g" .copilot/memoire_long_terme.md
+    fi
 
-## Étapes d'initialisation automatique pour Copilot
+    # Créer le fichier chat_resume.md s'il n'existe pas encore
+    if [ ! -f ".copilot/chat_resume.md" ]; then
+        echo -e "Création du fichier .copilot/chat_resume.md..."
+        mkdir -p .copilot
+        cat > .copilot/chat_resume.md << EOL
+# Résumé des sessions de travail - Projet $PROJECT_NAME
 
-1. **Lecture de la documentation**:
-   - Lire d'abord les fichiers dans le dossier \`.copilot/\` pour comprendre le contexte du projet
-   - Lire ensuite le fichier \`docs/project_structure.md\` pour comprendre l'architecture du projet
-   - Consulter \`docs/contributing.md\` pour connaître les conventions de code et le workflow
-   - Vérifier \`docs/installation.md\` pour comprendre l'environnement de développement
+Ce fichier sert à maintenir un résumé chronologique des sessions de travail avec GitHub Copilot sur le projet $PROJECT_NAME.
 
-2. **Compréhension de la méthodologie**:
-   - Examiner le workflow Git dans \`docs/git_workflow.md\`
-   - Comprendre comment les tests sont organisés dans \`docs/testing.md\`
-   - Identifier les pratiques de développement Flutter/Python dans la documentation
+## Initialisation du projet
 
-3. **Adaptation au contexte de l'utilisateur**:
-   - Comprendre que ce projet s'appelle \`$PROJECT_NAME\`
-   - La description du projet est: \`$PROJECT_DESCRIPTION\`
-   - Adapter les suggestions et réponses à ce contexte spécifique
+- Date: $(date +"%Y-%m-%d")
+- Actions:
+  - Création initiale du projet à partir du template yeb_app_template
+  - Personnalisation du projet avec le nom "$PROJECT_NAME"
+  - Description du projet: "$PROJECT_DESCRIPTION"
+  - Configuration de l'environnement de développement
 
-## Rappels importants pour Copilot
+## Prochaines étapes
 
-- **Architecture hybride**: Ce projet utilise Flutter pour le frontend et Python pour le backend
-- **Structure multi-package**: Le code Flutter est dans \`flutter_app/\`, les backends Python sont séparés
-- **Chemins relatifs**: Toujours utiliser des chemins relatifs, jamais de chemins absolus
-- **Automatisation**: Utiliser les scripts dans \`scripts/\` pour les tâches courantes
-- **Tests**: Les tests Flutter sont dans \`flutter_app/test/\`, pas à la racine
+- Personnaliser l'interface utilisateur Flutter pour répondre aux besoins du projet
+- Adapter les scripts Python pour les calculs spécifiques au projet
+- Mettre en place la logique métier spécifique au projet
 
-## Commandes à connaître
-
-- \`./setup_project.sh\`: Pour (ré)initialiser le projet
-- \`./run_dev.sh\`: Pour lancer l'environnement de développement complet
-- \`./scripts/git_autocommit.sh\`: Pour faciliter les commits Git
-- \`cd flutter_app && flutter test\`: Pour exécuter les tests Flutter
-
-Cette documentation sera automatiquement consultée par GitHub Copilot lorsqu'il sera interrogé sur ce projet.
 EOL
+    fi
 
-    print_success "Instructions pour GitHub Copilot créées"
+    print_success "Instructions pour GitHub Copilot mises à jour"
 }
 
 # Afficher les instructions finales
@@ -272,7 +273,7 @@ main() {
     ask_project_name
     download_template
     customize_template
-    create_copilot_instructions
+    update_copilot_instructions
     run_setup_script
     show_final_instructions
 }
