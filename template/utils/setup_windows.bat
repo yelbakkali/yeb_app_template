@@ -68,23 +68,23 @@ echo [INFO] Vérification de l'installation de Flutter...
 where flutter >nul 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo [INFO] Installation de Flutter...
-    
+
     REM Créer un dossier pour Flutter
     if not exist "%USERPROFILE%\development" mkdir "%USERPROFILE%\development"
-    
+
     REM Télécharger Flutter
     echo [INFO] Téléchargement de Flutter...
     powershell -Command "Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.19.4-stable.zip -OutFile flutter.zip"
-    
+
     REM Extraire Flutter
     echo [INFO] Extraction de Flutter...
     powershell -Command "Expand-Archive -Path flutter.zip -DestinationPath %USERPROFILE%\development"
     del flutter.zip
-    
+
     REM Ajouter Flutter au PATH
     setx PATH "%PATH%;%USERPROFILE%\development\flutter\bin"
     set PATH=%PATH%;%USERPROFILE%\development\flutter\bin
-    
+
     REM Activer la prise en charge du développement web
     flutter config --enable-web
 ) else (
@@ -129,7 +129,7 @@ echo [INFO] Vérification de la disponibilité de WSL...
 wsl --status >nul 2>&1
 if %ERRORLEVEL% EQU 0 (
     echo [INFO] WSL est installé, configuration...
-    
+
     REM Vérifier si Ubuntu est installé, sinon l'installer
     wsl -l | findstr "Ubuntu" >nul
     if %ERRORLEVEL% NEQ 0 (
@@ -138,14 +138,14 @@ if %ERRORLEVEL% EQU 0 (
     ) else (
         echo [INFO] Ubuntu est déjà installé sur WSL.
     )
-    
+
     REM Copier le script d'installation WSL
     echo [INFO] Copie du script d'installation WSL...
     cd /d %~dp0
     wsl -d Ubuntu -- mkdir -p ~/yeb_app_template_setup
     wsl -d Ubuntu -- cp $(wslpath '%~dp0setup_wsl.sh') ~/yeb_app_template_setup/
     wsl -d Ubuntu -- chmod +x ~/yeb_app_template_setup/setup_wsl.sh
-    
+
     echo [INFO] Pour finaliser l'installation sous WSL, exécutez:
     echo       wsl -d Ubuntu
     echo       ~/yeb_app_template_setup/setup_wsl.sh
