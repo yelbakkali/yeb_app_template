@@ -74,6 +74,9 @@
     // Configuration pour WSL Remote
     "terminal.integrated.defaultProfile.linux": "bash",
     "remote.WSL.fileWatcher.polling": true,
+    "remote.WSL.connectionGracePeriod": 0,
+    "remote.WSL.folderRecommendations": false,
+    "remote.WSL.debug": false,
     // Configuration supplémentaire Copilot
     "github.copilot.chat.localeOverride": "fr",
     "github.copilot.chat.agent.currentEditorContext.enabled": false,
