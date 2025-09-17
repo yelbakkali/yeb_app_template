@@ -423,6 +423,58 @@ else
     fi
 fi
 
+# Configuration de la commande 'code' dans le PATH pour WSL
+if [[ "$OS_TYPE" == "linux"* ]] && grep -q Microsoft /proc/version; then
+    print_header "Configuration de la commande 'code' pour VS Code dans WSL"
+    
+    # Vérifier si la commande 'code' fonctionne déjà
+    if command -v code &> /dev/null; then
+        print_success "La commande 'code' est déjà configurée dans votre PATH"
+    else
+        echo "La commande 'code' n'est pas configurée dans votre PATH. Configuration automatique..."
+        
+        # Vérifier si la configuration est déjà présente dans .bashrc
+        if grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$USER/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.bashrc; then
+            print_warning "La configuration existe déjà dans .bashrc"
+        else
+            # Ajouter la configuration à .bashrc
+            echo -e "\n# Ajout de VS Code au PATH pour pouvoir utiliser la commande 'code' depuis WSL" >> ~/.bashrc
+            echo 'export PATH="$PATH:/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bashrc
+            echo 'export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"' >> ~/.bashrc
+            
+            # Vérifier si .bash_profile existe et ajouter la même configuration
+            if [ -f ~/.bash_profile ]; then
+                if ! grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$USER/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.bash_profile; then
+                    echo -e "\n# Ajout de VS Code au PATH" >> ~/.bash_profile
+                    echo 'export PATH="$PATH:/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bash_profile
+                    echo 'export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"' >> ~/.bash_profile
+                fi
+            fi
+            
+            # Vérifier si .zshrc existe pour les utilisateurs de Zsh
+            if [ -f ~/.zshrc ]; then
+                if ! grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$USER/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.zshrc; then
+                    echo -e "\n# Ajout de VS Code au PATH" >> ~/.zshrc
+                    echo 'export PATH="$PATH:/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.zshrc
+                    echo 'export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"' >> ~/.zshrc
+                fi
+            fi
+            
+            # Créer un alias pour la commande code
+            echo -e "\n# Alias pour la commande code si elle n'est pas dans le PATH" >> ~/.bashrc
+            echo 'alias code="/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"' >> ~/.bashrc
+            echo 'alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/Code.exe"' >> ~/.bashrc
+            
+            print_success "Configuration de la commande 'code' ajoutée à vos fichiers de profil"
+            echo "Pour appliquer les changements immédiatement, exécutez: source ~/.bashrc"
+            
+            # Ajout automatique au PATH actuel pour la session courante
+            export PATH="$PATH:/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"
+            export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"
+        fi
+    fi
+fi
+
 # Résumé
 print_header "Résumé des vérifications"
 
