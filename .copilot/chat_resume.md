@@ -12,7 +12,7 @@ RÉFÉRENCES CROISÉES:
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
-**Dernière mise à jour :** 14 septembre 2025
+**Dernière mise à jour :** 17 septembre 2025
 
 ## Contexte du projet
 
@@ -146,3 +146,46 @@ L'historique complet des sessions de travail avec l'assistant est disponible dan
 Pour reprendre le travail avec plus de contexte, demandez à l'assistant de "lire les fichiers dans .copilot".
 
 Ce fichier sera régulièrement mis à jour pour maintenir la continuité des échanges et du développement.
+
+## Session du 17 septembre 2025: Refactoring de l'initialisation du template
+
+**Objectifs** : Simplifier le processus d'initialisation du template et nettoyer les fichiers redondants
+
+**Actions réalisées** :
+
+- Simplification du script `setup_template.sh` pour utiliser le nom du dossier courant comme nom du projet
+- Création d'une version Windows équivalente (`setup_template.bat`)
+- Suppression des scripts obsolètes (`init_project.*`, `setup_project.*`, etc.)
+- Modification du script pour supprimer le dossier `template/` après l'installation
+- Mise à jour de la documentation associée
+- Amélioration des instructions pour GitHub Copilot
+
+**Résultats** :
+
+- Processus d'initialisation plus simple et intuitif
+- Structure de projet plus propre sans fichiers redondants
+- Documentation mise à jour reflétant les changements
+
+**Fichiers modifiés** :
+
+- `setup_template.sh`
+- `README.md`
+- `docs/installation.md`
+- `template/docs/template_structure.md`
+- `.github/copilot-instructions.md`
+- `.copilot/memoire_long_terme.md`
+
+**Fichiers créés** :
+
+- `setup_template.bat`
+
+**Fichiers supprimés** :
+
+- `init_project.sh`, `init_project.bat`
+- `setup_project.sh`, `setup_project.bat`
+- `sync_python_scripts.sh`
+- `test_web_app.sh`
+- `update_docs.sh`
+- `wsl_flutter_windows_setup.sh`
+
+**Documentation détaillée** : Voir [session_20250917_refactoring_template.md](/.copilot/sessions/session_20250917_refactoring_template.md)
