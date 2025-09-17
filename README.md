@@ -229,6 +229,11 @@ Ce template inclut une configuration VS Code prête à l'emploi :
 - Extensions recommandées pour Flutter et Python
 - Configurations de débogage préconfigurées
 - Tâches VS Code pour les opérations courantes
+- Optimisations pour VS Code sous WSL (Windows Subsystem for Linux)
+
+### Optimisations WSL
+
+Si vous utilisez WSL pour le développement, ce template inclut des optimisations spécifiques pour VS Code qui permettent de résoudre le problème connu d'accumulation de redirections de ports. Consultez notre [guide d'optimisation WSL](docs/wsl_optimisation.md) pour plus de détails.
 
 ## 📈 Roadmap
 

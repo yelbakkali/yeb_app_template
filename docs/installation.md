@@ -156,6 +156,18 @@ chmod +x run_dev.sh
 run_dev.bat
 ```
 
+#### Pour WSL (Windows Subsystem for Linux)
+
+Si vous utilisez WSL pour le développement, le projet inclut des outils d'optimisation pour résoudre un problème connu de VS Code avec WSL où les redirections de ports s'accumulent.
+
+Lors de l'installation via `setup_wsl.sh`, un alias `code-wsl` est automatiquement configuré dans votre profil bash. Utilisez cette commande au lieu de `code` pour lancer VS Code avec les optimisations WSL :
+
+```bash
+code-wsl
+```
+
+Pour plus de détails sur ce problème et sa solution, consultez [Optimisation de VS Code pour WSL](wsl_optimisation.md).
+
 ## Configuration de l'éditeur VS Code
 
 La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet qui sont appelés par le script `setup_template.sh` lors de la création d'un nouveau projet. Ces scripts créent les fichiers suivants dans le dossier `.vscode` :

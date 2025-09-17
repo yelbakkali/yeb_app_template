@@ -64,25 +64,25 @@ fi
 echo_info "Vérification de l'installation de Flutter..."
 if ! command -v flutter &> /dev/null; then
     echo_info "Installation de Flutter..."
-    
+
     # Créer un dossier pour Flutter dans /opt
     FLUTTER_PATH="$HOME/development"
     mkdir -p "$FLUTTER_PATH"
-    
+
     # Télécharger Flutter
     cd "$FLUTTER_PATH"
     wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.19.4-stable.tar.xz
     tar xf flutter_linux_3.19.4-stable.tar.xz
     rm flutter_linux_3.19.4-stable.tar.xz
-    
+
     # Ajouter Flutter au PATH
     echo 'export PATH="$PATH:$HOME/development/flutter/bin"' >> ~/.bashrc
-    
+
     # Activer la prise en charge du développement web
     cd flutter
     export PATH="$PATH:$HOME/development/flutter/bin"
     flutter config --enable-web
-    
+
     echo_success "Flutter installé avec succès."
 else
     echo_info "Flutter est déjà installé."
@@ -152,6 +152,39 @@ fi
 
 cd ..
 
+# Configuration de l'optimisation VS Code pour WSL
+echo_info "Configuration du lanceur optimisé VS Code pour WSL..."
+SCRIPT_PATH="$(pwd)/scripts/start_vscode_wsl.sh"
+chmod +x "$SCRIPT_PATH"
+
+# Ajout d'un alias dans le profil bash
+PROFILE_FILE=""
+if [ -f "$HOME/.bashrc" ]; then
+    PROFILE_FILE="$HOME/.bashrc"
+elif [ -f "$HOME/.bash_profile" ]; then
+    PROFILE_FILE="$HOME/.bash_profile"
+elif [ -f "$HOME/.profile" ]; then
+    PROFILE_FILE="$HOME/.profile"
+fi
+
+if [ -n "$PROFILE_FILE" ]; then
+    # Vérifier si l'alias existe déjà
+    if grep -q "alias code-wsl=" "$PROFILE_FILE"; then
+        # Mettre à jour l'alias existant
+        sed -i "s|alias code-wsl=.*|alias code-wsl='$SCRIPT_PATH'|g" "$PROFILE_FILE"
+    else
+        # Ajouter le nouvel alias
+        echo -e "\n# Alias pour lancer VS Code avec des paramètres optimisés pour WSL" >> "$PROFILE_FILE"
+        echo "alias code-wsl='$SCRIPT_PATH'" >> "$PROFILE_FILE"
+    fi
+    echo_success "Alias 'code-wsl' configuré dans $PROFILE_FILE"
+    echo_info "Utilisez la commande 'code-wsl' pour lancer VS Code avec des paramètres optimisés pour WSL"
+else
+    echo_warning "Aucun fichier de profil bash trouvé. L'alias code-wsl n'a pas été configuré."
+    echo_info "Vous pouvez toujours utiliser le script manuellement : $SCRIPT_PATH"
+fi
+
 echo_success "Installation terminée avec succès!"
-echo_info "Veuillez redémarrer votre terminal ou exécuter 'source ~/.bashrc' pour appliquer les changements de PATH."
+echo_info "Veuillez redémarrer votre terminal ou exécuter 'source $PROFILE_FILE' pour appliquer les changements."
 echo_info "Pour démarrer le développement web, exécutez: cd flutter_app && flutter run -d chrome"
+echo_info "Pour lancer VS Code avec les optimisations WSL, utilisez: code-wsl"
