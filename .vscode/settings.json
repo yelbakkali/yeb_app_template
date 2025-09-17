@@ -1,13 +1,11 @@
 {
-    // Configuration Python
-    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
-    "python.analysis.extraPaths": [
-        "${workspaceFolder}/.venv/lib/python3.12/site-packages"
-    ],
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    // Configuration GitHub
-    "github-enterprise.uri": "",
+    // REMARQUE IMPORTANTE: Ces paramètres sont également définis dans le fichier
+    // d'espace de travail 'yeb_app_template.code-workspace'.
+    // Cette duplication assure que les paramètres sont appliqués que l'utilisateur
+    // ouvre le projet via le fichier workspace ou directement via le dossier.
+    //
+    // Si vous souhaitez remplacer certains paramètres spécifiquement pour votre
+    // environnement local (sans les partager avec l'équipe), vous pouvez les modifier ici.
     // Configuration GitHub Copilot
     "github.copilot.chat.reviewSelection.instructions": [
         {
@@ -17,6 +15,21 @@
             "file": ".copilot/memoire_long_terme.md"
         }
     ],
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "github.copilot.chat.localeOverride": "fr",
+    "github.copilot.chat.agent.currentEditorContext.enabled": false,
+    "github.copilot.chat.edits.temporalContext.enabled": true,
+    "github.copilot.chat.editor.temporalContext.enabled": true,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    // Configuration Python
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/.venv/lib/python3.12/site-packages"
+    ],
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    // Configuration GitHub
+    "github-enterprise.uri": "",
     // Configuration générale de l'éditeur
     "editor.formatOnSave": true,
     "editor.renderWhitespace": "boundary",
@@ -40,7 +53,7 @@
     "dart.debugExternalPackageLibraries": false,
     "dart.debugSdkLibraries": false,
     "dart.previewHotReloadOnSaveWatcher": true,
-    "dart.flutterHotReloadOnSave": true,
+    "dart.flutterHotReloadOnSave": "all",
     "dart.lineLength": 100,
     "dart.completeFunctionCalls": true,
     "dart.runPubGetOnPubspecChanges": "always",
@@ -77,12 +90,6 @@
     "remote.WSL.connectionGracePeriod": 0,
     "remote.WSL.folderRecommendations": false,
     "remote.WSL.debug": false,
-    // Configuration supplémentaire Copilot
-    "github.copilot.chat.localeOverride": "fr",
-    "github.copilot.chat.agent.currentEditorContext.enabled": false,
-    "github.copilot.chat.edits.temporalContext.enabled": true,
-    "github.copilot.chat.editor.temporalContext.enabled": true,
-    "github.copilot.nextEditSuggestions.enabled": true,
     // Configuration interface utilisateur
     "workbench.secondarySideBar.defaultVisibility": "visible",
     "window.zoomLevel": -1,

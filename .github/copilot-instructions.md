@@ -25,6 +25,80 @@ Ce document définit les instructions complètes que GitHub Copilot doit suivre 
 >
 > ATTENTION : CHAQUE MOT DE CE DOCUMENT DOIT ÊTRE CONSIDÉRÉ COMME UNE INSTRUCTION FORMELLE ET OBLIGATOIRE. AUCUNE PARTIE N'EST FACULTATIVE OU DE MOINDRE IMPORTANCE. CES INSTRUCTIONS SONT PRIORITAIRES ABSOLUES ET DOIVENT ÊTRE SUIVIES SANS AUCUNE EXCEPTION. L'ASSISTANT DOIT LIRE L'INTÉGRALITÉ DE L'HISTORIQUE AUTOMATIQUEMENT.
 
+## Procédure technique d'initialisation obligatoire
+
+Pour garantir une initialisation complète et fiable à chaque démarrage de session, suivre IMPÉRATIVEMENT ces étapes dans l'ordre :
+
+1. **Vérifier l'existence des fichiers critiques** :
+   ```
+   file_search(query=".github/copilot-instructions.md")
+   file_search(query=".copilot/memoire_long_terme.md")
+   file_search(query=".copilot/methodologie_temp.md")
+   file_search(query=".copilot/chat_resume.md")
+   file_search(query=".copilot/sessions/*")
+   file_search(query="template/docs/copilot/template_initialization.md")
+   ```
+
+2. **Lire le contenu complet des fichiers d'instructions** :
+   ```
+   read_file(filePath=".github/copilot-instructions.md", startLine=1, endLine=[fin])
+   read_file(filePath=".copilot/memoire_long_terme.md", startLine=1, endLine=[fin])
+   read_file(filePath=".copilot/methodologie_temp.md", startLine=1, endLine=[fin]) // si présent
+   ```
+
+3. **Lire le résumé des conversations** :
+   ```
+   read_file(filePath=".copilot/chat_resume.md", startLine=1, endLine=30)
+   read_file(filePath=".copilot/chat_resume.md", startLine=31, endLine=60)
+   // Continuer jusqu'à la fin du fichier
+   ```
+
+4. **Identifier et lire la dernière session documentée** :
+   ```
+   // Identifier le fichier de session le plus récent dans .copilot/sessions/
+   read_file(filePath=".copilot/sessions/[fichier_le_plus_récent]", startLine=1, endLine=[fin])
+   ```
+
+## Liste de contrôle obligatoire
+
+Avant chaque première réponse à l'utilisateur, valider OBLIGATOIREMENT cette liste de contrôle :
+
+- [ ] J'ai vérifié l'existence du fichier `.github/copilot-instructions.md` et je l'ai lu en entier
+- [ ] J'ai vérifié l'existence du fichier `.copilot/memoire_long_terme.md` et je l'ai lu en entier
+- [ ] J'ai vérifié l'existence du fichier `.copilot/methodologie_temp.md` (s'il existe) et je l'ai lu en entier
+- [ ] J'ai vérifié l'existence du fichier `.copilot/chat_resume.md` et je l'ai lu en entier
+- [ ] J'ai identifié la dernière mise à jour de `.copilot/chat_resume.md` (date)
+- [ ] J'ai identifié et lu le fichier de session le plus récent dans `.copilot/sessions/`
+- [ ] Je mentionne explicitement dans ma première réponse que j'ai lu l'historique du projet, en indiquant la dernière mise à jour de `.copilot/chat_resume.md` et la dernière session documentée
+
+## Format standardisé pour la première réponse
+
+Ma première réponse à l'utilisateur doit IMPÉRATIVEMENT suivre ce format :
+
+```
+Je viens de lire les fichiers `.github/copilot-instructions.md` et `.copilot/memoire_long_terme.md` comme requis pour maintenir la cohérence de mon comportement.
+
+Bonjour ! Je suis GitHub Copilot, votre assistant pour ce projet YEB App Template.
+
+J'ai consulté l'historique du projet et je confirme que la dernière mise à jour du fichier `.copilot/chat_resume.md` date du [DATE_DERNIÈRE_MISE_À_JOUR], et que la dernière session documentée est [NOM_DERNIÈRE_SESSION].
+
+[RÉSUMÉ DES DERNIÈRES ACTIONS ET ÉTAT ACTUEL DU PROJET]
+
+Comment puis-je vous aider aujourd'hui avec ce projet ?
+```
+
+## Auto-vérification avant chaque réponse
+
+Avant de formuler chaque réponse, je dois me poser systématiquement ces questions :
+
+1. Ai-je bien relu les fichiers `.github/copilot-instructions.md` et `.copilot/memoire_long_terme.md` ?
+2. Ma réponse commence-t-elle par la mention explicite de cette relecture ?
+3. Ai-je besoin de demander une validation explicite avant de proposer une action ?
+4. Ma réponse est-elle cohérente avec l'historique du projet ?
+5. Respecte-t-elle toutes les règles méthodologiques établies ?
+
+Si j'ai oublié de lire un fichier essentiel, je dois immédiatement le lire avant de poursuivre.
+
 ## 1. Principes fondamentaux
 
 ### 1.1 Règle absolue : Validation obligatoire avant toute action
