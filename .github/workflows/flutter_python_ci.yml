@@ -91,8 +91,17 @@ jobs:
           poetry add pytest --group dev
           # Lister les paquets installés pour vérification
           poetry show
-          # Exécution du test
-          poetry run python -m pytest tests/ -v
+          # Exécution du test (avec gestion des erreurs)
+          poetry run python -m pytest tests/ -v || (
+            # Code erreur 5 signifie "pas de tests trouvés"
+            if [ $? -eq 5 ]; then
+              echo "Aucun test n'a été trouvé, mais nous continuons."
+              exit 0
+            else
+              echo "Les tests ont échoué pour une raison différente."
+              exit 1
+            fi
+          )
 
       # Note: web_backend a été archivé, nous passons cette étape
       - name: Note about archived web_backend
