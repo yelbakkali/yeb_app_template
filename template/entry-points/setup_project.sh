@@ -47,7 +47,7 @@ PREREQ_SCRIPT="${PARENT_DIR}/utils/check_prerequisites.sh"
 if [ -f "$PREREQ_SCRIPT" ]; then
     chmod +x "$PREREQ_SCRIPT"
     "$PREREQ_SCRIPT"
-    
+
     # Si le script de prérequis échoue, demander si l'utilisateur veut continuer
     if [ $? -ne 0 ]; then
         echo -e "${YELLOW}Des prérequis sont manquants. Voulez-vous continuer quand même ? (o/N)${NC}"
@@ -70,7 +70,7 @@ INIT_SCRIPT="${SCRIPT_DIR}/init_project.sh"
 if [ -f "$INIT_SCRIPT" ]; then
     chmod +x "$INIT_SCRIPT"
     "$INIT_SCRIPT"
-    
+
     if [ $? -ne 0 ]; then
         print_error "Échec de l'initialisation du projet"
         exit 1
@@ -95,25 +95,25 @@ fi
 # Détection de macOS pour configurer automatiquement l'environnement
 if [[ "$OSTYPE" == "darwin"* ]]; then
     print_header "Configuration spécifique à macOS"
-    
+
     # Vérifier si l'architecture est Apple Silicon (M1/M2)
     if [[ $(uname -m) == "arm64" ]]; then
         print_header "Configuration pour Apple Silicon (M1/M2)"
-        
+
         # Vérifier si Rosetta 2 est déjà installé
         if ! pkgutil --pkg-info=com.apple.pkg.RosettaUpdateAuto &> /dev/null; then
             print_warning "Rosetta 2 n'est pas installé. Installation en cours..."
-            
+
             # Demander confirmation à l'utilisateur
             echo "Rosetta 2 est nécessaire pour certaines applications x86_64 sur les puces Apple Silicon."
             read -p "Voulez-vous installer Rosetta 2 maintenant? (o/N) " -n 1 -r
             echo
-            
+
             if [[ $REPLY =~ ^[oO]$ ]]; then
                 # Installer Rosetta 2 avec acceptation automatique de la licence
                 echo "Installation de Rosetta 2..."
                 sudo softwareupdate --install-rosetta --agree-to-license
-                
+
                 if [ $? -eq 0 ]; then
                     print_success "Rosetta 2 installé avec succès"
                 else
@@ -127,28 +127,28 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         else
             print_success "Rosetta 2 est déjà installé"
         fi
-        
+
         # Configuration automatique de Flutter pour Apple Silicon
         echo "Configuration automatique de Flutter pour Apple Silicon..."
-        
+
         # Rendre le script wrapper exécutable
         FLUTTER_WRAPPER="${SCRIPT_DIR}/../scripts/flutter_wrapper.sh"
         if [ -f "$FLUTTER_WRAPPER" ]; then
             chmod +x "$FLUTTER_WRAPPER"
             print_success "Script wrapper Flutter configuré"
-            
+
             # Créer un répertoire bin local dans le projet
             mkdir -p "${SCRIPT_DIR}/bin"
-            
+
             # Créer un lien symbolique vers notre wrapper
             ln -sf "$FLUTTER_WRAPPER" "${SCRIPT_DIR}/bin/flutter"
-            
+
             # Instructions pour utiliser le wrapper
             echo "Un wrapper Flutter a été configuré pour gérer automatiquement l'architecture."
             echo "Pour l'utiliser :"
             echo "1. Ajoutez ce répertoire à votre PATH : export PATH=\"${SCRIPT_DIR}/bin:\$PATH\""
             echo "2. Pour forcer l'exécution native : FLUTTER_FORCE_NATIVE=1 flutter <commande>"
-            
+
             # Proposer d'ajouter le répertoire bin au PATH dans le profil
             read -p "Voulez-vous ajouter le répertoire bin au PATH dans votre profil? (o/N) " -n 1 -r
             echo
@@ -169,7 +169,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
                         PROFILE_FILE="$HOME/.profile"
                         ;;
                 esac
-                
+
                 echo "" >> "$PROFILE_FILE"
                 echo "# Ajout du répertoire bin de ${PROJECT_NAME} au PATH" >> "$PROFILE_FILE"
                 echo "export PATH=\"${SCRIPT_DIR}/bin:\$PATH\"" >> "$PROFILE_FILE"
@@ -183,7 +183,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
             echo "  arch -x86_64 flutter <commande>"
         fi
     fi
-    
+
     # Vérifier la présence de XCode (nécessaire pour le développement iOS)
     if ! command -v xcodebuild &> /dev/null; then
         print_warning "XCode ne semble pas être installé"
@@ -191,7 +191,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     else
         print_success "XCode est installé"
     fi
-    
+
     # Vérifier les outils de ligne de commande XCode
     if ! xcode-select -p &> /dev/null; then
         print_warning "Les outils de ligne de commande XCode ne semblent pas être installés"
@@ -204,7 +204,7 @@ fi
 
 print_header "Installation terminée avec succès !"
 echo "Votre projet est maintenant configuré et prêt à l'emploi."
-echo 
+echo
 echo "Pour lancer l'application en développement :"
 echo "  - Mode local : ./run_dev.sh"
 echo "  - Mode web   : ./start_web_integrated.sh"

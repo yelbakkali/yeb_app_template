@@ -81,7 +81,7 @@ set "NC=[0m"
 
     :: Utiliser le nom du dossier courant comme nom du projet
     for %%I in (.) do set "PROJECT_NAME=%%~nxI"
-    
+
     :: Valider le nom du projet
     echo %PROJECT_NAME% | findstr /r "^[a-zA-Z0-9_-]*$" >nul
     if %ERRORLEVEL% neq 0 (
@@ -95,9 +95,9 @@ set "NC=[0m"
             exit /b 1
         )
     )
-    
+
     echo Le nom du projet sera '%GREEN%%PROJECT_NAME%%NC%' (basé sur le nom du dossier actuel).
-    
+
     echo Entrez une brève description de votre projet:
     set /p "PROJECT_DESCRIPTION=> "
 
@@ -125,7 +125,7 @@ set "NC=[0m"
 
     :: Restaurer notre script original
     move /y setup_template.bat.bak setup_template.bat
-    
+
     call :print_success "Template téléchargé avec succès"
 
     :: Supprimer le répertoire .git pour recommencer l'historique
@@ -200,7 +200,7 @@ set "NC=[0m"
             )
         )
     )
-    
+
     :: Suppression du dossier template qui n'est plus nécessaire après l'installation
     if exist "template" (
         echo Suppression du dossier template qui n'est plus nécessaire...
@@ -289,22 +289,22 @@ set "NC=[0m"
 
     call :check_prerequisites
     if %ERRORLEVEL% neq 0 exit /b 1
-    
+
     call :configure_project
     if %ERRORLEVEL% neq 0 exit /b 1
-    
+
     call :download_template
     if %ERRORLEVEL% neq 0 exit /b 1
-    
+
     call :customize_template
     if %ERRORLEVEL% neq 0 exit /b 1
-    
+
     call :update_copilot_instructions
     if %ERRORLEVEL% neq 0 exit /b 1
-    
+
     call :run_setup_script
     if %ERRORLEVEL% neq 0 exit /b 1
-    
+
     call :show_final_instructions
     exit /b 0
 

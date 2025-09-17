@@ -13,26 +13,26 @@ jobs:
   flutter_test:
     name: Test Flutter
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.35.3'  # Version exacte utilisée en local avec Dart 3.9.2
           channel: 'stable'
-          
+
       - name: Check Dart SDK version
         run: |
           cd flutter_app
           flutter --version
-          
+
       - name: Install dependencies
         run: |
           cd flutter_app
           flutter pub get
-          
+
       - name: Verify formatting
         run: |
           cd flutter_app
@@ -42,13 +42,13 @@ jobs:
           echo "Sauter la vérification de formatage pour le moment"
           # Commenter la commande qui cause des problèmes
           # flutter format --set-exit-if-changed .
-          
+
       - name: Analyze project source
         run: |
           cd flutter_app
           # Analyse avec --no-fatal-infos et --no-fatal-warnings pour ne pas échouer sur les avertissements
           flutter analyze --no-fatal-infos --no-fatal-warnings || echo "Analyse terminée avec des avertissements, on continue"
-          
+
       - name: Run tests
         run: |
           cd flutter_app
@@ -58,24 +58,24 @@ jobs:
           cat test/widget_test.dart
           echo "Exécution des tests avec gestion d'erreur"
           flutter test || echo "Tests échoués mais on continue"
-  
+
   python_test:
     name: Test Python
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-          
+
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
-          
+
       - name: Install dependencies & run tests for shared_python
         run: |
           cd shared_python
@@ -92,7 +92,7 @@ jobs:
           poetry show
           # Exécution du test
           poetry run python -m pytest tests/ -v
-          
+
       # Note: web_backend a été archivé, nous passons cette étape
       - name: Note about archived web_backend
         run: |

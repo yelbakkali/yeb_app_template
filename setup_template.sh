@@ -79,7 +79,7 @@ configure_project() {
 
     # Utiliser le nom du dossier courant comme nom du projet
     PROJECT_NAME=$(basename "$(pwd)")
-    
+
     # Valider le nom du projet
     if [[ ! "$PROJECT_NAME" =~ ^[a-zA-Z0-9_-]+$ ]]; then
         print_warning "Le nom du dossier actuel '$PROJECT_NAME' contient des caractères non supportés."
@@ -91,9 +91,9 @@ configure_project() {
             exit 1
         fi
     fi
-    
+
     echo -e "Le nom du projet sera '${GREEN}$PROJECT_NAME${NC}' (basé sur le nom du dossier actuel)."
-    
+
     echo -e "Entrez une brève description de votre projet:"
     read -p "> " project_description
 
@@ -120,7 +120,7 @@ download_template() {
         # Restaurer notre script original
         mv setup_template.sh.bak setup_template.sh
         chmod +x setup_template.sh
-        
+
         print_success "Template téléchargé avec succès"
 
         # Supprimer le répertoire .git pour recommencer l'historique
@@ -203,7 +203,7 @@ run_setup_script() {
     else
         print_warning "L'installation a rencontré des problèmes. Vérifiez les logs ci-dessus."
     fi
-    
+
     # Suppression du dossier template qui n'est plus nécessaire après l'installation
     if [ -d "template" ]; then
         echo -e "Suppression du dossier template qui n'est plus nécessaire..."
