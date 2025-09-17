@@ -12,7 +12,7 @@ Lorsque l'utilisateur demande à Copilot de "lire la documentation dans docs/" o
 
 ## Processus automatisé d'initialisation
 
-Quand l'utilisateur demande à Copilot de l'aide après avoir initialisé son projet avec le script `setup_template.sh` (qui appelle `template/entry-points/init_project.sh` ou `template/entry-points/init_project.bat` en interne), Copilot doit :
+Quand l'utilisateur demande à Copilot de l'aide après avoir initialisé son projet avec le script `setup_template.sh` (qui appelle les scripts d'initialisation en interne), Copilot doit :
 
 1. **Résumer la structure du projet** :
    - Expliquer la structure des dossiers du template

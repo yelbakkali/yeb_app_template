@@ -90,12 +90,8 @@ Pour créer un nouveau projet basé sur ce template, utilisez plutôt le script 
 Le projet inclut des scripts qui automatisent l'installation et la configuration :
 
 ```bash
-# Pour Linux/macOS :
-chmod +x setup_project.sh
-./setup_project.sh
-
-# Pour Windows :
-setup_project.bat
+# Utilisez le script setup_template.sh comme expliqué dans le README.md
+./setup_template.sh
 ```
 
 Ce script va :
@@ -162,7 +158,7 @@ run_dev.bat
 
 ## Configuration de l'éditeur VS Code
 
-La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`template/entry-points/init_project.sh` ou `template/entry-points/init_project.bat`). Ces scripts sont appelés automatiquement par le script `setup_template.sh` lors de la création d'un nouveau projet. Ils créent les fichiers suivants dans le dossier `.vscode` :
+La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet qui sont appelés par le script `setup_template.sh` lors de la création d'un nouveau projet. Ces scripts créent les fichiers suivants dans le dossier `.vscode` :
 
 - `settings.json` : Configuration de l'éditeur et des extensions
 - `extensions.json` : Recommandations d'extensions à installer

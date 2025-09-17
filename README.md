@@ -95,12 +95,17 @@ Parcourez le dossier `docs/` pour découvrir :
 ### Étape 3 : Initialiser votre nouveau dépôt
 
 ```bash
-# Cloner votre nouveau dépôt
 # Pour créer un nouveau projet basé sur ce template
 
-## Méthode 1 : Utiliser le script d'initialisation (recommandé)
+## Utiliser le script d'initialisation
+
+### Pour Linux/macOS
 
 ```bash
+# Créer un dossier avec le nom souhaité pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
+
 # Télécharger uniquement le script setup_template.sh
 curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.sh
 
@@ -111,36 +116,32 @@ chmod +x setup_template.sh
 ./setup_template.sh
 ```
 
-Ce script va vous guider à travers les étapes suivantes :
+### Pour Windows
 
-1. Demander le nom de votre projet
-2. Télécharger le template complet
-3. Configurer le projet avec vos informations
-4. Installer les dépendances nécessaires
-5. Initialiser un nouveau dépôt Git
-6. Configurer GitHub Copilot pour votre projet
+```powershell
+# Créer un dossier avec le nom souhaité pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
 
-## Méthode 2 : Clone manuel et installation
+# Télécharger uniquement le script setup_template.bat
+curl.exe -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.bat
 
-```bash
-# Cloner le dépôt
-git clone https://github.com/yelbakkali/yeb_app_template.git nom-de-votre-projet
-cd nom-de-votre-projet
-
-# Pour Linux/macOS :
-chmod +x setup_project.sh
-./setup_project.sh
-
-# Pour Windows :
-setup_project.bat
+# Exécuter le script d'initialisation
+setup_template.bat
 ```
 
-Le script d'initialisation va :
+> **Note importante :** Le nom du dossier que vous créez (`mon_super_projet` dans l'exemple) sera automatiquement utilisé comme nom de votre projet.
 
-- Détecter automatiquement le nom de votre projet (basé sur le nom du dépôt)
-- Personnaliser tous les fichiers en remplaçant "yeb_app_template" par votre nom de projet
-- Installer les dépendances nécessaires
-- Configurer votre environnement de développement
+Ce script va vous guider à travers les étapes suivantes :
+
+1. Utiliser le nom du dossier actuel comme nom de projet
+2. Demander une description et les informations sur l'auteur
+3. Télécharger le template complet
+4. Configurer le projet avec vos informations
+5. Installer les dépendances nécessaires
+6. Initialiser un nouveau dépôt Git
+7. Configurer GitHub Copilot pour votre projet
+
 - Créer le premier commit avec les modifications
 
 Pour des instructions détaillées, consultez notre [guide d'installation](docs/installation.md).

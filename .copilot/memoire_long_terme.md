@@ -8,9 +8,10 @@ RÉFÉRENCES CROISÉES:
 
 > **⚠️ INSTRUCTION IMPÉRATIVE ET ABSOLUE ⚠️**
 >
-> Tu DOIS IMPÉRATIVEMENT relire ce document toutes les 4 questions/réponses échangées avec l'utilisateur.
-> Cette relecture régulière est OBLIGATOIRE et NON NÉGOCIABLE pour maintenir la cohérence de ton comportement. ça te servira de "mémoire long terme".
+> Tu DOIS IMPÉRATIVEMENT relire ce document ET le fichier .github/copilot-instructions.md à CHAQUE réponse que tu formules.
+> Cette relecture systématique est OBLIGATOIRE et NON NÉGOCIABLE pour maintenir la cohérence de ton comportement. ça te servira de "mémoire long terme".
 > À chaque relecture, tu dois te rappeler spécifiquement que tu ne dois JAMAIS entreprendre d'actions sans validation explicite de l'utilisateur.
+> Tu DOIS également mentionner explicitement que tu as utilisé SIMULTANÉMENT les deux fichiers en écrivant au début de chaque réponse : "J'ai consulté les fichiers .github/copilot-instructions.md et .copilot/memoire_long_terme.md pour assurer la cohérence de ma réponse."
 
 ## 1. Protocole de communication et validation
 

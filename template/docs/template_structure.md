@@ -29,12 +29,9 @@ template/
 
 ## Points d'entrée (`entry-points/`)
 
-Ce dossier contient les scripts principaux qui servent de points d'entrée pour l'initialisation du projet :
+Ce dossier contient les scripts principaux qui servent de points d'entrée pour l'initialisation du projet. Ces scripts sont appelés par le script `setup_template.sh` à la racine du projet.
 
-1. **init_project.sh / init_project.bat** - Scripts d'initialisation du projet (renommage, configuration)
-2. **setup_project.sh / setup_project.bat** - Scripts d'installation tout-en-un qui vérifient les prérequis et lancent l'initialisation
-
-**Note:** Le script `setup_template.sh` à la racine du projet remplace l'ancien script `bootstrap.sh` qui se trouvait auparavant dans ce dossier.
+**Note:** Le script `setup_template.sh` à la racine du projet est le point d'entrée principal pour initialiser un nouveau projet à partir du template.
 
 ## Utilitaires (`utils/`)
 
@@ -52,17 +49,16 @@ Ce dossier contient la documentation spécifique au template et aux instructions
 
 Les scripts font appel les uns aux autres selon le schéma suivant :
 
-- `setup_template.sh` (à la racine) → télécharge le template et lance `setup_project.sh`
-- `setup_project.sh` → appelle `check_prerequisites.sh` puis `init_project.sh`
-- `init_project.sh` → appelle `check_prerequisites.sh`, `configure_vscode_for_flutter.sh`, etc.
+- `setup_template.sh` (à la racine) → télécharge le template et lance les scripts dans `template/entry-points/`
+- Les scripts dans `entry-points/` → appellent les utilitaires dans `utils/` comme `check_prerequisites.sh`, `configure_vscode_for_flutter.sh`, etc.
 
 ## Initialisation d'un nouveau projet
 
-Pour initialiser un nouveau projet, utilisez l'un des points d'entrée suivants :
+Pour initialiser un nouveau projet, utilisez la méthode suivante :
 
-1. **Méthode autonome** : Exécutez `setup_template.sh` qui téléchargera le template et lancera la configuration
-2. **Méthode après clonage** : Après avoir cloné le dépôt, exécutez `setup_project.sh` (Linux/macOS) ou `setup_project.bat` (Windows)
-3. **Méthode manuelle** : Exécutez directement `init_project.sh` (Linux/macOS) ou `init_project.bat` (Windows) si les prérequis sont déjà installés
+1. Créez un dossier avec le nom de votre projet
+2. Téléchargez le script `setup_template.sh`
+3. Exécutez `setup_template.sh` qui téléchargera le template et lancera la configuration
 
 ## Chemins relatifs
 

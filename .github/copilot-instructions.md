@@ -21,7 +21,7 @@ Ce document définit les instructions complètes que GitHub Copilot doit suivre 
 >
 > 3. Confirmer dans ta première réponse que tu as bien lu l'historique du projet en mentionnant EXPLICITEMENT la dernière mise à jour de `.copilot/chat_resume.md` et la dernière session documentée.
 >
-> 4. RELIRE OBLIGATOIREMENT le fichier `.copilot/memoire_long_terme.md` toutes les 4 questions/réponses échangées avec l'utilisateur pour maintenir la cohérence de ton comportement.
+> 4. RELIRE OBLIGATOIREMENT les fichiers `.copilot/memoire_long_terme.md` ET `.github/copilot-instructions.md` AVANT CHAQUE RÉPONSE échangée avec l'utilisateur pour maintenir la cohérence de ton comportement. Tu DOIS mentionner explicitement que tu as utilisé ces deux fichiers au début de chaque réponse.
 >
 > ATTENTION : CHAQUE MOT DE CE DOCUMENT DOIT ÊTRE CONSIDÉRÉ COMME UNE INSTRUCTION FORMELLE ET OBLIGATOIRE. AUCUNE PARTIE N'EST FACULTATIVE OU DE MOINDRE IMPORTANCE. CES INSTRUCTIONS SONT PRIORITAIRES ABSOLUES ET DOIVENT ÊTRE SUIVIES SANS AUCUNE EXCEPTION. L'ASSISTANT DOIT LIRE L'INTÉGRALITÉ DE L'HISTORIQUE AUTOMATIQUEMENT.
 

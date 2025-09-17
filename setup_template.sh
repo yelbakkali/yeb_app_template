@@ -73,31 +73,37 @@ check_prerequisites() {
     fi
 }
 
-# Demander le nom du projet à l'utilisateur
-ask_project_name() {
+# Configurer le projet en utilisant le nom du dossier actuel
+configure_project() {
     print_header "Configuration du projet"
 
-    echo -e "Entrez le nom de votre nouveau projet (lettres, chiffres et tirets uniquement):"
-    read -p "> " project_name
-
+    # Utiliser le nom du dossier courant comme nom du projet
+    PROJECT_NAME=$(basename "$(pwd)")
+    
     # Valider le nom du projet
-    if [[ ! "$project_name" =~ ^[a-zA-Z0-9_-]+$ ]]; then
-        print_error "Nom de projet invalide. Utilisez uniquement des lettres, chiffres et tirets."
-        ask_project_name
-        return
+    if [[ ! "$PROJECT_NAME" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+        print_warning "Le nom du dossier actuel '$PROJECT_NAME' contient des caractères non supportés."
+        echo -e "Pour une meilleure compatibilité, le dossier du projet devrait contenir uniquement des lettres, chiffres et tirets."
+        echo -e "Voulez-vous continuer quand même ? (o/n)"
+        read -p "> " confirm
+        if [[ ! "$confirm" =~ ^[oO]$ ]]; then
+            print_error "Installation annulée. Veuillez renommer votre dossier et réessayer."
+            exit 1
+        fi
     fi
-
+    
+    echo -e "Le nom du projet sera '${GREEN}$PROJECT_NAME${NC}' (basé sur le nom du dossier actuel)."
+    
     echo -e "Entrez une brève description de votre projet:"
     read -p "> " project_description
 
     echo -e "Entrez votre nom ou celui de votre organisation:"
     read -p "> " project_author
 
-    PROJECT_NAME=$project_name
     PROJECT_DESCRIPTION=$project_description
     PROJECT_AUTHOR=$project_author
 
-    print_success "Nom du projet configuré: $PROJECT_NAME"
+    print_success "Projet configuré: $PROJECT_NAME"
 }
 
 # Télécharger le template depuis GitHub
@@ -183,16 +189,26 @@ run_setup_script() {
     echo -e "Exécution du script d'installation..."
 
     # Rendre les scripts exécutables
-    chmod +x template/entry-points/setup_project.sh
+    chmod +x template/entry-points/*.sh
     chmod +x scripts/*.sh
 
-    # Exécuter le script d'installation
-    ./template/entry-points/setup_project.sh
+    # Exécuter les scripts d'installation nécessaires
+    # Note: Les scripts spécifiques peuvent être modifiés selon les besoins du template
+    if [ -f "template/entry-points/setup_project.sh" ]; then
+        ./template/entry-points/setup_project.sh
+    fi
 
     if [ $? -eq 0 ]; then
         print_success "Installation terminée avec succès"
     else
         print_warning "L'installation a rencontré des problèmes. Vérifiez les logs ci-dessus."
+    fi
+    
+    # Suppression du dossier template qui n'est plus nécessaire après l'installation
+    if [ -d "template" ]; then
+        echo -e "Suppression du dossier template qui n'est plus nécessaire..."
+        rm -rf template
+        print_success "Dossier template supprimé avec succès"
     fi
 }
 
@@ -259,7 +275,8 @@ show_final_instructions() {
     echo -e "1. Consultez la documentation dans le dossier ${YELLOW}docs/${NC} pour plus d'informations"
     echo -e "2. Lancez votre application en développement avec ${YELLOW}./run_dev.sh${NC} (Unix) ou ${YELLOW}run_dev.bat${NC} (Windows)"
     echo -e "3. Pour le développement web, utilisez ${YELLOW}./start_web_integrated.sh${NC} (Unix) ou ${YELLOW}start_web_integrated.bat${NC} (Windows)"
-    echo -e "4. Utilisez git avec le workflow recommandé : développement sur ${YELLOW}'dev'${NC}, fusion vers ${YELLOW}'main'${NC}"
+    echo -e "4. Créez une branche de développement avec: ${YELLOW}git checkout -b dev${NC}"
+    echo -e "5. Utilisez git avec le workflow recommandé : développement sur ${YELLOW}'dev'${NC}, fusion vers ${YELLOW}'main'${NC}"
     echo -e "   Pour fusionner dev vers main : ${YELLOW}scripts/merge_to_main.sh${NC}"
     echo -e ""
     echo -e "Si vous utilisez VS Code avec GitHub Copilot, demandez à l'assistant de ${YELLOW}'lire les fichiers dans .copilot'${NC}"
@@ -273,7 +290,7 @@ main() {
     print_header "Création d'un nouveau projet à partir du template yeb_app_template"
 
     check_prerequisites
-    ask_project_name
+    configure_project
     download_template
     customize_template
     update_copilot_instructions
