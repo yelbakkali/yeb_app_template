@@ -104,14 +104,17 @@ ask_project_name() {
 download_template() {
     print_header "Téléchargement du template"
 
-    # Créer le répertoire du projet
-    mkdir -p "$PROJECT_NAME"
-    cd "$PROJECT_NAME"
-
     echo -e "Téléchargement du template depuis GitHub..."
 
-    # Cloner le dépôt
+    # Sauvegarder le script actuel
+    cp setup_template.sh setup_template.sh.bak
+
+    # Cloner le dépôt directement dans le répertoire courant
     if git clone --depth 1 https://github.com/yelbakkali/yeb_app_template.git .; then
+        # Restaurer notre script original
+        mv setup_template.sh.bak setup_template.sh
+        chmod +x setup_template.sh
+        
         print_success "Template téléchargé avec succès"
 
         # Supprimer le répertoire .git pour recommencer l'historique
@@ -180,11 +183,11 @@ run_setup_script() {
     echo -e "Exécution du script d'installation..."
 
     # Rendre les scripts exécutables
-    chmod +x setup_project.sh
+    chmod +x template/entry-points/setup_project.sh
     chmod +x scripts/*.sh
 
     # Exécuter le script d'installation
-    ./setup_project.sh
+    ./template/entry-points/setup_project.sh
 
     if [ $? -eq 0 ]; then
         print_success "Installation terminée avec succès"
