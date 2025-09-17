@@ -19,14 +19,14 @@ def test_calcul_simple():
     assert resultat['différence'] == 5
     assert resultat['produit'] == 50
     assert resultat['quotient'] == 2.0
-    
+
     # Test avec des valeurs négatives
     resultat = calcul_demo.calcul_simple(-10, 5)
     assert resultat['somme'] == -5
     assert resultat['différence'] == -15
     assert resultat['produit'] == -50
     assert resultat['quotient'] == -2.0
-    
+
     # Test avec zéro
     resultat = calcul_demo.calcul_simple(10, 0)
     assert resultat['somme'] == 10
@@ -48,7 +48,7 @@ def test_main_function_erreurs():
     # Test avec un nombre insuffisant d'arguments
     resultat = calcul_demo.main("10")
     assert 'erreur' in resultat
-    
+
     # Test avec des arguments non numériques
     resultat = calcul_demo.main("dix", "cinq")
     assert 'erreur' in resultat
@@ -58,11 +58,11 @@ def test_main_function_types():
     # Test avec des entiers
     resultat = calcul_demo.main(10, 5)
     assert resultat['somme'] == 15
-    
+
     # Test avec des flottants
     resultat = calcul_demo.main(10.5, 5.5)
     assert resultat['somme'] == 16.0
-    
+
     # Test avec une combinaison
     resultat = calcul_demo.main(10, 5.5)
     assert resultat['somme'] == 15.5

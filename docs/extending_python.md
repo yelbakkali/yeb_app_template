@@ -88,11 +88,15 @@ def main(*args):
 
 ## Ajouter des packages Python personnalisés
 
-Pour des fonctionnalités plus complexes, vous pouvez créer vos propres packages Python.
+Pour des fonctionnalités plus complexes, vous pouvez créer vos propres packages Python. Ce projet utilise `package-mode = false` dans son `pyproject.toml` principal, ce qui offre une flexibilité supplémentaire dans la façon dont vous pouvez organiser et créer vos packages.
 
-### Emplacement des packages
+### Options pour la création de packages
 
-Les packages personnalisés doivent être placés dans le répertoire `shared_python/packages/` :
+Vous disposez de plusieurs approches pour créer et utiliser des packages Python dans ce projet :
+
+#### Option 1 : Packages informels dans le répertoire shared_python/packages/
+
+Cette approche simple est idéale pour des composants réutilisables internes :
 
 ```plaintext
 yeb_app_template/
@@ -107,9 +111,97 @@ yeb_app_template/
                 └── autre_module.py
 ```
 
-### Structure d'un package
+Pour l'utiliser dans vos scripts :
 
-La structure de base d'un package est la suivante :
+```python
+# Dans scripts/mon_script.py
+from packages.mon_package.module1 import fonction_principale
+
+def main(*args):
+    # Utilisation de la fonction du package
+    resultat = fonction_principale(args[0])
+    return {"resultat": resultat}
+```
+
+#### Option 2 : Packages formels installables
+
+Pour des packages plus structurés que vous pourriez vouloir partager ou publier ultérieurement :
+
+```plaintext
+yeb_app_template/
+└── shared_python/
+    └── packages/
+        └── mon_package_formel/
+            ├── pyproject.toml  # Configuration Poetry spécifique au package
+            ├── README.md
+            └── src/
+                └── mon_package_formel/
+                    ├── __init__.py
+                    └── module.py
+```
+
+Avec un `pyproject.toml` spécifique au package :
+
+```toml
+[tool.poetry]
+name = "mon_package_formel"
+version = "0.1.0"
+description = "Description de mon package"
+authors = ["Votre Nom <votre.email@example.com>"]
+# Ici, on active le mode package pour ce package spécifique
+packages = [{include = "mon_package_formel", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+# Dépendances spécifiques à ce package
+```
+
+Pour installer ce package dans votre environnement principal :
+
+```bash
+cd shared_python
+poetry add ../shared_python/packages/mon_package_formel
+```
+
+#### Option 3 : Développement en mode éditable
+
+Pour un cycle de développement fluide avec vos packages formels :
+
+```bash
+cd shared_python
+poetry add -e ../shared_python/packages/mon_package_formel
+```
+
+Le mode éditable (`-e`) permet de modifier le code source sans avoir à réinstaller le package après chaque modification.
+
+#### Option 4 : Approche hybride avec imports relatifs
+
+Une structure simplifiée qui fonctionne bien avec `package-mode = false` :
+
+```plaintext
+yeb_app_template/
+└── shared_python/
+    ├── __init__.py  # Marque le dossier comme package
+    ├── packages/
+    │   ├── __init__.py  # Permet l'importation via "from shared_python.packages..."
+    │   └── mon_package/
+    │       ├── __init__.py
+    │       └── module.py
+```
+
+Utilisation dans les scripts :
+
+```python
+# Dans scripts/mon_script.py
+from shared_python.packages.mon_package.module import ma_fonction
+
+def main(*args):
+    return {"resultat": ma_fonction(args[0])}
+```
+
+### Structure d'un package simple
+
+Pour un package informel (Option 1 ou 4), suivez cette structure de base :
 
 1. Créez un dossier avec le nom de votre package dans `shared_python/packages/`
 2. Ajoutez un fichier `__init__.py` pour marquer le dossier comme un package Python
@@ -128,14 +220,14 @@ __version__ = "0.1.0"
 
 Pour ajouter des dépendances à votre projet :
 
-1. **Ajout via Poetry** (recommandé) :
+**Méthode 1: Ajout via Poetry** (recommandé) :
 
 ```bash
 cd shared_python
 poetry add nom-du-package
 ```
 
-1. **Ajout manuel** dans `pyproject.toml` :
+**Méthode 2: Ajout manuel** dans `pyproject.toml` :
 
 ```toml
 [tool.poetry.dependencies]
@@ -149,6 +241,19 @@ Puis mettez à jour le lockfile :
 cd shared_python
 poetry lock
 ```
+
+### Mode de package dans Poetry (`package-mode = false`)
+
+Le projet utilise `package-mode = false` dans son `pyproject.toml` principal, ce qui offre plusieurs avantages :
+
+1. **Structure flexible** : Vous n'êtes pas contraint à une structure de répertoire spécifique
+2. **Facilité d'utilisation** : Poetry se concentre uniquement sur la gestion des dépendances
+3. **Simplicité** : Pas besoin de configurer des chemins d'installation complexes
+4. **Compatibilité avec l'intégration Flutter** : Idéal pour des scripts exécutés via `UnifiedPythonService`
+
+Cette configuration est parfaite pour ce projet où les scripts Python sont souvent utilisés comme des utilitaires indépendants plutôt que comme un package Python traditionnel à importer.
+
+Si vous créez des packages formels (Option 2), vous pouvez activer le mode package spécifiquement pour ces packages individuels, tout en conservant la flexibilité globale du projet.
 
 ## Organiser les packages complexes
 

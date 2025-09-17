@@ -22,9 +22,9 @@
     "github.copilot.chat.editor.temporalContext.enabled": true,
     "github.copilot.nextEditSuggestions.enabled": true,
     // Configuration Python
-    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "python.defaultInterpreterPath": "/home/yassine/.cache/pypoetry/virtualenvs/shared-python-scripts-DE3egfyO-py3.12/bin/python",
     "python.analysis.extraPaths": [
-        "${workspaceFolder}/.venv/lib/python3.12/site-packages"
+        "/home/yassine/.cache/pypoetry/virtualenvs/shared-python-scripts-DE3egfyO-py3.12/lib/python3.12/site-packages"
     ],
     "python.linting.enabled": true,
     "python.linting.pylintEnabled": true,

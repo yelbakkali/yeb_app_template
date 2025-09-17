@@ -194,6 +194,40 @@ else
     echo_info "Vous pouvez toujours utiliser le script manuellement : $SCRIPT_PATH"
 fi
 
+# Configuration de Poetry pour shared_python
+echo_info "Configuration de l'environnement Poetry pour shared_python..."
+if [ -d "shared_python" ]; then
+    cd shared_python
+    if ! poetry --version > /dev/null 2>&1; then
+        echo_error "Poetry n'est pas installé. Veuillez l'installer avant de continuer."
+        echo_info "Vous pouvez l'installer avec: curl -sSL https://install.python-poetry.org | python3 -"
+    else
+        poetry install
+        POETRY_ENV_PATH=$(poetry env info --path)
+        if [ -n "$POETRY_ENV_PATH" ]; then
+            echo_success "Environnement Poetry configuré dans: $POETRY_ENV_PATH"
+
+            # Mettre à jour settings.json pour pointer vers l'environnement Poetry
+            mkdir -p ../.vscode
+            if [ -f "../.vscode/settings.json" ]; then
+                # Extraire la version de Python (3.x)
+                PYTHON_VERSION=$(ls $POETRY_ENV_PATH/lib/ | grep python3 | head -n 1)
+
+                # Mettre à jour le chemin de l'interpréteur Python
+                sed -i "s|\"python.defaultInterpreterPath\": \".*\"|\"python.defaultInterpreterPath\": \"$POETRY_ENV_PATH/bin/python\"|g" ../.vscode/settings.json
+                sed -i "s|\"python.analysis.extraPaths\": \\[.*\\]|\"python.analysis.extraPaths\": [\"$POETRY_ENV_PATH/lib/$PYTHON_VERSION/site-packages\"]|g" ../.vscode/settings.json
+
+                echo_success "Configuration VS Code mise à jour pour utiliser l'environnement Poetry"
+            fi
+        else
+            echo_error "Impossible de déterminer le chemin de l'environnement Poetry"
+        fi
+    fi
+    cd ..
+else
+    echo_warning "Dossier shared_python non trouvé. La configuration Poetry a été ignorée."
+fi
+
 echo_success "Installation terminée avec succès!"
 echo_info "Veuillez redémarrer votre terminal ou exécuter 'source $PROFILE_FILE' pour appliquer les changements."
 echo_info "Pour démarrer le développement web, exécutez: cd flutter_app && flutter run -d chrome"

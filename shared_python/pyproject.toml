@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Scripts Python partagés pour l'application yeb_app_template"
 authors = ["Your Name <your.email@example.com>"]
 readme = "README.md"
-packages = [{include = "shared_python"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"

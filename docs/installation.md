@@ -129,10 +129,10 @@ flutter pub get
 
 ### 4. Installation des dépendances Python
 
-Pour le backend Python local :
+Pour les scripts Python partagés :
 
 ```bash
-cd python_backend
+cd shared_python
 poetry install
 cd ..
 ```
@@ -145,7 +145,20 @@ poetry install
 cd ..
 ```
 
-### 5. Configuration de l'environnement de développement
+### 5. Gestion des dépendances Python avec Poetry
+
+Le projet utilise Poetry pour gérer les dépendances Python de manière isolée et reproductible. Toutes les dépendances sont définies dans le fichier `shared_python/pyproject.toml`.
+
+Pour ajouter une nouvelle dépendance au projet :
+
+```bash
+cd shared_python
+poetry add nom_du_package
+```
+
+VS Code est automatiquement configuré pour utiliser l'environnement virtuel Poetry, ce qui permet à l'éditeur de reconnaître toutes les dépendances installées sans configuration supplémentaire.
+
+### 6. Configuration de l'environnement de développement
 
 #### Pour Linux/macOS
 
@@ -176,9 +189,26 @@ Pour plus de détails sur ce problème et sa solution, consultez [Optimisation d
 
 La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet qui sont appelés par le script `setup_template.sh` lors de la création d'un nouveau projet. Ces scripts créent les fichiers suivants dans le dossier `.vscode` :
 
-- `settings.json` : Configuration de l'éditeur et des extensions
+- `settings.json` : Configuration de l'éditeur et des extensions, y compris la configuration pour Poetry
 - `extensions.json` : Recommandations d'extensions à installer
 - `launch.json` : Configurations de débogage pour Flutter et Python
+
+### Intégration avec Poetry pour Python
+
+Le projet utilise Poetry pour gérer les dépendances Python et l'environnement virtuel. La configuration VS Code est automatiquement mise à jour pour utiliser l'environnement virtuel Poetry de `shared_python`, ce qui permet :
+
+1. La reconnaissance automatique des packages installés via Poetry
+2. L'intellisense complet pour toutes les dépendances
+3. L'analyse de code précise sans fausses erreurs d'importation
+
+Si vous installez de nouveaux packages Python, utilisez toujours Poetry :
+
+```bash
+cd shared_python
+poetry add nom_du_package
+```
+
+Cela installera le package et le rendra immédiatement disponible dans VS Code.
 
 ### Configuration appliquée
 
@@ -198,6 +228,11 @@ Cette configuration automatique inclut :
 3. **Configuration générale** :
    - Sauvegarde automatique
    - Taille de tabulation à 2 espaces
+
+4. **Configuration Poetry pour Python** :
+   - Détection automatique de l'environnement virtuel Poetry pour `shared_python`
+   - Configuration des chemins d'accès pour l'intellisense et l'analyse de code
+   - Support complet des dépendances gérées par Poetry
    - Paramètres Git simplifiés
 
 ### Personnalisation

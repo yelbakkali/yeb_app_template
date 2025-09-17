@@ -25,25 +25,20 @@ class TestableApp extends StatelessWidget {
 
 class TestableHomePage extends StatelessWidget {
   final String title;
-  
+
   const TestableHomePage({super.key, required this.title});
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text(title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('Test de l\'interface utilisateur'),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text('Calculer'),
-            ),
+            ElevatedButton(onPressed: () {}, child: const Text('Calculer')),
           ],
         ),
       ),
@@ -57,31 +52,31 @@ void main() {
     testWidgets('Test de chargement de l\'interface', (WidgetTester tester) async {
       // Construire l'application testable
       await tester.pumpWidget(const TestableApp());
-      
+
       // Vérifier que les éléments de base sont présents
       expect(find.text('Test App Page'), findsOneWidget);
       expect(find.text('Test de l\'interface utilisateur'), findsOneWidget);
       expect(find.text('Calculer'), findsOneWidget);
     });
-    
+
     testWidgets('Test du bouton calculer', (WidgetTester tester) async {
       // Construire l'application testable
       await tester.pumpWidget(const TestableApp());
-      
+
       // Vérifier que le bouton est présent
       expect(find.byType(ElevatedButton), findsOneWidget);
-      
+
       // Appuyer sur le bouton
       await tester.tap(find.byType(ElevatedButton));
       await tester.pump();
-      
+
       // Le bouton ne fait rien pour l'instant, mais le test ne doit pas planter
     });
-    
+
     testWidgets('Vérification de la hiérarchie des widgets', (WidgetTester tester) async {
       // Construire l'application testable
       await tester.pumpWidget(const TestableApp());
-      
+
       // Vérifier la structure de base
       expect(find.byType(MaterialApp), findsOneWidget);
       expect(find.byType(Scaffold), findsOneWidget);

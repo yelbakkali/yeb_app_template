@@ -19,7 +19,7 @@ def test_analyser_donnees_success():
     # Chaîne de test avec des nombres valides
     data_str = "10, 20, 30, 40, 50"
     resultat = analyse_data.analyser_donnees(data_str)
-    
+
     # Vérifier la présence de toutes les statistiques
     assert 'moyenne' in resultat
     assert 'médiane' in resultat
@@ -28,7 +28,7 @@ def test_analyser_donnees_success():
     assert 'max' in resultat
     assert 'somme' in resultat
     assert 'nombre' in resultat
-    
+
     # Vérifier les valeurs des statistiques
     assert resultat['moyenne'] == 30.0
     assert resultat['médiane'] == 30.0
@@ -43,7 +43,7 @@ def test_analyser_donnees_error():
     # Chaîne de test avec des valeurs non numériques
     data_str = "10, vingt, 30, quarante, 50"
     resultat = analyse_data.analyser_donnees(data_str)
-    
+
     # Vérifier la présence de l'erreur
     assert 'erreur' in resultat
 
@@ -53,7 +53,7 @@ def test_main_function_success():
     resultat = analyse_data.main("10,20,30,40,50")
     assert resultat['moyenne'] == 30.0
     assert resultat['nombre'] == 5
-    
+
     # Test avec plusieurs arguments séparés
     resultat = analyse_data.main("10", "20", "30", "40", "50")
     assert resultat['moyenne'] == 30.0
@@ -64,7 +64,7 @@ def test_main_function_error():
     # Test sans arguments
     resultat = analyse_data.main()
     assert 'erreur' in resultat
-    
+
     # Test avec des arguments invalides
     resultat = analyse_data.main("abc", "def")
     assert 'erreur' in resultat
@@ -78,7 +78,7 @@ def test_main_function_edge_cases():
     assert resultat['min'] == 42.0
     assert resultat['max'] == 42.0
     assert resultat['nombre'] == 1
-    
+
     # Test avec des espaces supplémentaires
     resultat = analyse_data.main(" 10 , 20 , 30 ")
     assert resultat['nombre'] == 3

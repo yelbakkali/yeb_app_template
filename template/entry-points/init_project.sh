@@ -269,11 +269,14 @@ cat > .vscode/settings.json << EOF
   },
 
   // Configuration Python
-  "python.defaultInterpreterPath": "\${workspaceFolder}/web_backend/.venv/bin/python",
+  // Utiliser l'environnement Poetry pour shared_python (sera configuré par setup_wsl.sh)
+  "python.defaultInterpreterPath": "\${workspaceFolder}/shared_python/.venv/bin/python",
+  "python.analysis.extraPaths": [
+    "\${workspaceFolder}/shared_python/.venv/lib/python3.12/site-packages"
+  ],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.formatting.provider": "black",
-  "python.formatting.blackPath": "\${workspaceFolder}/web_backend/.venv/bin/black",
   "python.formatting.blackArgs": ["--line-length", "88"],
   "[python]": {
     "editor.formatOnSave": true,
