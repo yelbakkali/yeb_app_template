@@ -97,21 +97,6 @@
         "panel": "new"
       },
       "problemMatcher": []
-    },
-    {
-      "label": "Optimized VS Code Launch (WSL)",
-      "type": "shell",
-      "command": "./scripts/start_vscode_wsl.sh",
-      "group": {
-        "kind": "none"
-      },
-      "presentation": {
-        "reveal": "always",
-        "panel": "new",
-        "close": true
-      },
-      "problemMatcher": [],
-      "detail": "Launches a new VS Code window with optimized settings for WSL to prevent port forwarding issues"
     }
   ]
 }
