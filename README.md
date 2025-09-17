@@ -71,11 +71,50 @@ Consultez notre [guide d'installation détaillé](docs/installation.md) pour des
 
 ## �🚀 Démarrage rapide
 
-### Étape 1 : Utiliser ce template
+### Étape 1 : Installer le template
 
-1. Cliquez sur le bouton vert **"Use this template"** en haut de la page GitHub
-2. Sélectionnez **"Create a new repository"**
-3. Remplissez les informations de votre nouveau dépôt et cliquez sur **"Create repository from template"**
+Il existe deux méthodes pour installer ce template :
+
+#### Méthode 1 : Installation via script (recommandée)
+
+Cette méthode télécharge uniquement le script d'installation qui configurera ensuite votre projet :
+
+```bash
+# Créez un dossier pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
+
+# Téléchargez et exécutez le script d'installation
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.sh
+chmod +x setup_template.sh
+./setup_template.sh
+```
+
+Pour Windows :
+
+```powershell
+# Créez un dossier pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
+
+# Téléchargez et exécutez le script d'installation
+curl.exe -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.bat
+setup_template.bat
+```
+
+#### Méthode 2 : Clonage direct du dépôt
+
+```bash
+# Cloner le dépôt
+git clone https://github.com/yelbakkali/yeb_app_template.git mon_super_projet
+cd mon_super_projet
+
+# Supprimer le lien avec le dépôt d'origine
+rm -rf .git
+git init
+
+# Personnaliser votre projet en modifiant les fichiers nécessaires
+```
 
 ### Étape 2 : Explorer la documentation
 
@@ -92,57 +131,41 @@ Parcourez le dossier `docs/` pour découvrir :
 - Le workflow Git recommandé (`git_workflow.md`)
 - Et plus encore...
 
-### Étape 3 : Initialiser votre nouveau dépôt
+### Étape 3 : Personnaliser votre projet
+
+Après l'installation, suivez ces étapes pour personnaliser votre projet :
 
 ```bash
-# Pour créer un nouveau projet basé sur ce template
-
-## Utiliser le script d'initialisation
-
-### Pour Linux/macOS
-
-```bash
-# Créer un dossier avec le nom souhaité pour votre projet
-mkdir mon_super_projet
+# Accéder à votre projet
 cd mon_super_projet
 
-# Télécharger uniquement le script setup_template.sh
-curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.sh
-
-# Rendre le script exécutable
-chmod +x setup_template.sh
-
-# Exécuter le script d'initialisation
-./setup_template.sh
+# Ouvrir le projet dans VS Code
+code .
 ```
 
-### Pour Windows
+Une fois dans VS Code, si vous utilisez GitHub Copilot, vous pouvez demander :
 
-```powershell
-# Créer un dossier avec le nom souhaité pour votre projet
-mkdir mon_super_projet
-cd mon_super_projet
-
-# Télécharger uniquement le script setup_template.bat
-curl.exe -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.bat
-
-# Exécuter le script d'initialisation
-setup_template.bat
+```text
+Aide-moi à personnaliser ce projet pour [votre cas d'usage]
 ```
+
+GitHub Copilot lira automatiquement toute la documentation et vous guidera pour adapter le template à vos besoins spécifiques.
+
+## Fonctionnement du script d'initialisation
 
 > **Note importante :** Le nom du dossier que vous créez (`mon_super_projet` dans l'exemple) sera automatiquement utilisé comme nom de votre projet.
 
-Ce script va vous guider à travers les étapes suivantes :
+Le script d'initialisation (`setup_template.sh` ou `setup_template.bat`) vous guide à travers les étapes suivantes :
 
-1. Utiliser le nom du dossier actuel comme nom de projet
-2. Demander une description et les informations sur l'auteur
-3. Télécharger le template complet
-4. Configurer le projet avec vos informations
-5. Installer les dépendances nécessaires
-6. Initialiser un nouveau dépôt Git
-7. Configurer GitHub Copilot pour votre projet
-
-- Créer le premier commit avec les modifications
+1. Vérifie les prérequis système (Git, outils de développement)
+2. Utilise le nom du dossier actuel comme nom de projet
+3. Vous demande une description et les informations sur l'auteur
+4. Télécharge le template complet depuis le dépôt GitHub
+5. Configure le projet avec vos informations personnalisées
+6. Installe les dépendances nécessaires (Flutter, Python)
+7. Initialise un nouveau dépôt Git local
+8. Configure GitHub Copilot pour votre projet (si disponible)
+9. Crée le premier commit avec toutes les modifications
 
 Pour des instructions détaillées, consultez notre [guide d'installation](docs/installation.md).
 
