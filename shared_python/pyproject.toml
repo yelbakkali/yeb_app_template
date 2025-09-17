@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Scripts Python partagés pour l'application yeb_app_template"
 authors = ["Your Name <your.email@example.com>"]
 readme = "README.md"
-packages = [{include = "."}]
+packages = [{include = "shared_python"}]
 
 [tool.poetry.dependencies]
 python = ">=3.9,<3.13"
@@ -25,7 +25,7 @@ web = ["fastapi", "uvicorn"]
 pytest = "^8.4.2"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
+requires = ["poetry-core>=1.6.0"]
 build-backend = "poetry.core.masonry.api"
 
 # Section personnalisée pour les dépendances spécifiques aux scripts

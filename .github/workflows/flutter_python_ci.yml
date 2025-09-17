@@ -83,10 +83,11 @@ jobs:
           which poetry || echo "Poetry not found in PATH"
           # Mise à jour du fichier lock si nécessaire
           poetry lock
-          # Installe les dépendances avec l'option explicite dev
+          # Configuration de Poetry pour éviter l'erreur "tuple index out of range"
           poetry config virtualenvs.create true
-          poetry install
-          # Ajout explicite de pytest
+          # Contourner l'installation du projet actuel avec -n (pas d'installation du projet root)
+          poetry install --no-root
+          # Ajouter pytest explicitement si nécessaire
           poetry add pytest --group dev
           # Lister les paquets installés pour vérification
           poetry show
