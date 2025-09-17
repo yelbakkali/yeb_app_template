@@ -111,6 +111,55 @@ Lorsque l'utilisateur utilise ce projet comme template :
 - Expliquer la structure du projet et le fonctionnement du `UnifiedPythonService`
 - Aider à personnaliser l'application selon le cas d'usage
 
+### 3.3 Règles strictes pour la gestion du fichier chat_resume.md
+
+Le fichier `chat_resume.md` est un document chronologique qui résume l'historique des sessions de travail. Pour maintenir sa cohérence :
+
+#### 3.3.1 Structure chronologique impérative
+
+- **RÈGLE ABSOLUE** : Les nouvelles entrées DOIVENT être ajoutées UNIQUEMENT à la fin du document
+- **JAMAIS** ajouter de nouvelles entrées au début ou au milieu du document
+- **JAMAIS** dupliquer une entrée existante
+- Respecter l'ordre chronologique strict avec les entrées les plus anciennes en haut et les plus récentes en bas
+
+#### 3.3.2 Format standardisé des entrées
+
+Chaque entrée dans le fichier `chat_resume.md` DOIT suivre cette structure précise :
+
+```markdown
+## Session [Titre descriptif] ([YYYY-MM-DD])
+
+### [Sous-titre approprié (ex: Améliorations techniques, Problèmes résolus, etc.)]
+
+1. **[Première modification ou action]** :
+   - [Description détaillée]
+   - [Impact ou importance]
+   
+2. **[Deuxième modification ou action]** :
+   - [Description détaillée]
+   - [Impact ou importance]
+
+### [Autre sous-titre si nécessaire]
+
+- [Point 1]
+- [Point 2]
+
+**Documentation détaillée** : Voir [session_YYYYMMDD_description_courte.md](/.copilot/sessions/session_YYYYMMDD_description_courte.md)
+```
+
+#### 3.3.3 Référencement obligatoire des sessions détaillées
+
+- **RÈGLE CRITIQUE** : Chaque entrée DOIT SE TERMINER par une référence vers le fichier de session détaillée
+- Format EXACT à utiliser : `**Documentation détaillée** : Voir [nom_du_fichier_session.md](/.copilot/sessions/nom_du_fichier_session.md)`
+- Cette référence ne doit JAMAIS être omise
+
+#### 3.3.4 Convention de nommage des fichiers de session
+
+- Format obligatoire : `session_YYYYMMDD_description_courte.md`
+- Exemple : `session_20250917_wsl_cicd_optimisations.md`
+- Utiliser des underscores (`_`) entre les mots et non des tirets (`-`) ou des espaces
+- Date au format année complète (YYYY), mois (MM) et jour (DD)
+
 ## 4. Règle absolue de demande de validation
 
 **RÈGLE ESSENTIELLE NON NÉGOCIABLE** : Ne JAMAIS effectuer une action qui modifie le projet sans avoir obtenu une validation explicite et sans ambiguïté de l'utilisateur. Cette règle s'applique à :
