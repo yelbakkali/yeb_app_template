@@ -65,9 +65,9 @@ INSTALLED_TOOLS=()
 install_tool_linux() {
     local tool_name=$1
     local package_name=${2:-$1}
-    
+
     print_header "Installation de $tool_name"
-    
+
     # Déterminer le gestionnaire de paquets
     if command -v apt-get &> /dev/null; then
         echo "Utilisation de apt-get..."
@@ -89,7 +89,7 @@ install_tool_linux() {
         MISSING_TOOLS+=("$tool_name")
         return 1
     fi
-    
+
     if [ $? -eq 0 ]; then
         print_success "$tool_name installé avec succès"
         INSTALLED_TOOLS+=("$tool_name")
@@ -105,20 +105,20 @@ install_tool_linux() {
 install_tool_macos() {
     local tool_name=$1
     local package_name=${2:-$1}
-    
+
     print_header "Installation de $tool_name"
-    
+
     # Vérifier si Homebrew est installé
     if ! command -v brew &> /dev/null; then
         echo "Homebrew n'est pas installé. Installation de Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        
+
         if [ $? -ne 0 ]; then
             print_error "Échec de l'installation de Homebrew. Veuillez installer $tool_name manuellement."
             MISSING_TOOLS+=("$tool_name")
             return 1
         fi
-        
+
         # Ajouter Homebrew au PATH pour la session courante (selon l'architecture)
         if [ -f "/opt/homebrew/bin/brew" ]; then
             # Pour Apple Silicon (M1/M2)
@@ -140,10 +140,10 @@ install_tool_macos() {
             fi
         fi
     fi
-    
+
     echo "Utilisation de Homebrew pour installer $tool_name..."
     brew install "$package_name"
-    
+
     if [ $? -eq 0 ]; then
         print_success "$tool_name installé avec succès"
         INSTALLED_TOOLS+=("$tool_name")
@@ -160,23 +160,23 @@ check_and_install_tool() {
     local tool_name=$1
     local command_name=${2:-$1}
     local package_name=${3:-$1}
-    
+
     echo -n "Vérification de $tool_name... "
     if command -v "$command_name" &> /dev/null; then
         print_success "Installé"
         return 0
     else
         print_warning "Non installé"
-        
+
         read -p "Voulez-vous installer $tool_name automatiquement? (o/N) " -n 1 -r
         echo
-        
+
         if [[ ! $REPLY =~ ^[oO]$ ]]; then
             print_warning "$tool_name sera nécessaire pour le projet. Veuillez l'installer manuellement."
             MISSING_TOOLS+=("$tool_name")
             return 1
         fi
-        
+
         # Installation selon la plateforme
         case $OS_TYPE in
             linux)
@@ -214,7 +214,7 @@ if [[ "$OS_TYPE" == "macos" ]]; then
         if ! command -v python3 &> /dev/null; then
             print_header "Installation de Python via Homebrew"
             brew install python3
-            
+
             if [ $? -eq 0 ]; then
                 print_success "Python installé avec succès via Homebrew"
                 INSTALLED_TOOLS+=("Python")
@@ -240,13 +240,13 @@ fi
 if ! command -v poetry &> /dev/null; then
     echo -n "Vérification de Poetry... "
     print_warning "Non installé"
-    
+
     read -p "Voulez-vous installer Poetry automatiquement? (o/N) " -n 1 -r
     echo
-    
+
     if [[ $REPLY =~ ^[oO]$ ]]; then
         print_header "Installation de Poetry"
-        
+
         if [[ "$OS_TYPE" == "macos" ]] && command -v brew &> /dev/null; then
             echo "Installation de Poetry via Homebrew..."
             brew install poetry
@@ -254,7 +254,7 @@ if ! command -v poetry &> /dev/null; then
             echo "Installation de Poetry via le script officiel..."
             curl -sSL https://install.python-poetry.org | python3 -
         fi
-        
+
         if [ $? -eq 0 ]; then
             # Ajouter Poetry au PATH pour cette session selon la plateforme
             if [[ "$OS_TYPE" == "macos" ]]; then
@@ -269,7 +269,7 @@ if ! command -v poetry &> /dev/null; then
                 export PATH="$HOME/.local/bin:$PATH"
                 export PATH="$HOME/.poetry/bin:$PATH"
             fi
-            
+
             print_success "Poetry installé avec succès"
             INSTALLED_TOOLS+=("Poetry")
         else
@@ -291,14 +291,14 @@ if [[ "$OS_TYPE" == "linux" || "$OS_TYPE" == "macos" ]]; then
         echo -n "Vérification de tmux... "
         if ! command -v tmux &> /dev/null; then
             print_warning "Non installé"
-            
+
             read -p "Voulez-vous installer tmux via Homebrew? (o/N) " -n 1 -r
             echo
-            
+
             if [[ $REPLY =~ ^[oO]$ ]]; then
                 print_header "Installation de tmux"
                 brew install tmux
-                
+
                 if [ $? -eq 0 ]; then
                     print_success "tmux installé avec succès"
                     INSTALLED_TOOLS+=("tmux")
@@ -323,29 +323,29 @@ fi
 if ! command -v flutter &> /dev/null; then
     echo -n "Vérification de Flutter... "
     print_warning "Non installé"
-    
+
     # Sur macOS, proposer l'installation via Homebrew
     if [[ "$OS_TYPE" == "macos" ]] && command -v brew &> /dev/null; then
         print_header "Installation de Flutter"
         echo "Flutter peut être installé via Homebrew sur macOS."
         read -p "Voulez-vous installer Flutter via Homebrew? (o/N) " -n 1 -r
         echo
-        
+
         if [[ $REPLY =~ ^[oO]$ ]]; then
             echo "Installation de Flutter via Homebrew..."
             brew install --cask flutter
-            
+
             if [ $? -eq 0 ]; then
                 print_success "Flutter installé avec succès"
                 INSTALLED_TOOLS+=("Flutter")
-                
+
                 # Vérifier la version de Flutter
                 FLUTTER_VERSION=$(flutter --version | head -n 1 | awk '{print $2}')
                 echo "Version de Flutter : $FLUTTER_VERSION"
             else
                 print_error "Échec de l'installation de Flutter via Homebrew"
                 MISSING_TOOLS+=("Flutter")
-                
+
                 # Instructions pour installation manuelle
                 echo "Pour installer Flutter manuellement sur macOS :"
                 echo "1. Téléchargez Flutter depuis https://docs.flutter.dev/get-started/install/macos"
@@ -393,30 +393,30 @@ if ! command -v code &> /dev/null; then
     MISSING_TOOLS+=("VS Code")
 else
     print_success "VS Code est installé"
-    
+
     # Installation des extensions VS Code recommandées
     print_header "Installation des extensions VS Code recommandées"
     read -p "Voulez-vous installer les extensions VS Code recommandées? (o/N) " -n 1 -r
     echo
-    
+
     if [[ $REPLY =~ ^[oO]$ ]]; then
         # Extensions Flutter/Dart
         code --install-extension Dart-Code.flutter
         code --install-extension Dart-Code.dart-code
-        
+
         # Extensions Python
         code --install-extension ms-python.python
         code --install-extension ms-python.vscode-pylance
         code --install-extension LittleFoxTeam.vscode-python-test-adapter
-        
+
         # Outils généraux
         code --install-extension mhutchie.git-graph
         code --install-extension eamodio.gitlens
-        
+
         # Qualité du code
         code --install-extension dbaeumer.vscode-eslint
         code --install-extension esbenp.prettier-vscode
-        
+
         print_success "Extensions VS Code installées"
     else
         print_warning "Les extensions seront proposées à l'ouverture du projet dans VS Code."
@@ -426,13 +426,13 @@ fi
 # Configuration de la commande 'code' dans le PATH pour WSL
 if [[ "$OS_TYPE" == "linux"* ]] && grep -q Microsoft /proc/version; then
     print_header "Configuration de la commande 'code' pour VS Code dans WSL"
-    
+
     # Vérifier si la commande 'code' fonctionne déjà
     if command -v code &> /dev/null; then
         print_success "La commande 'code' est déjà configurée dans votre PATH"
     else
         echo "La commande 'code' n'est pas configurée dans votre PATH. Configuration automatique..."
-        
+
         # Vérifier si la configuration est déjà présente dans .bashrc
         if grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$USER/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.bashrc; then
             print_warning "La configuration existe déjà dans .bashrc"
@@ -441,7 +441,7 @@ if [[ "$OS_TYPE" == "linux"* ]] && grep -q Microsoft /proc/version; then
             echo -e "\n# Ajout de VS Code au PATH pour pouvoir utiliser la commande 'code' depuis WSL" >> ~/.bashrc
             echo 'export PATH="$PATH:/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bashrc
             echo 'export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"' >> ~/.bashrc
-            
+
             # Vérifier si .bash_profile existe et ajouter la même configuration
             if [ -f ~/.bash_profile ]; then
                 if ! grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$USER/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.bash_profile; then
@@ -450,7 +450,7 @@ if [[ "$OS_TYPE" == "linux"* ]] && grep -q Microsoft /proc/version; then
                     echo 'export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"' >> ~/.bash_profile
                 fi
             fi
-            
+
             # Vérifier si .zshrc existe pour les utilisateurs de Zsh
             if [ -f ~/.zshrc ]; then
                 if ! grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$USER/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.zshrc; then
@@ -459,15 +459,15 @@ if [[ "$OS_TYPE" == "linux"* ]] && grep -q Microsoft /proc/version; then
                     echo 'export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"' >> ~/.zshrc
                 fi
             fi
-            
+
             # Créer un alias pour la commande code
             echo -e "\n# Alias pour la commande code si elle n'est pas dans le PATH" >> ~/.bashrc
             echo 'alias code="/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft\ VS\ Code/Code.exe"' >> ~/.bashrc
             echo 'alias code="/mnt/c/Program\ Files/Microsoft\ VS\ Code/Code.exe"' >> ~/.bashrc
-            
+
             print_success "Configuration de la commande 'code' ajoutée à vos fichiers de profil"
             echo "Pour appliquer les changements immédiatement, exécutez: source ~/.bashrc"
-            
+
             # Ajout automatique au PATH actuel pour la session courante
             export PATH="$PATH:/mnt/c/Users/$USER/AppData/Local/Programs/Microsoft VS Code/bin"
             export PATH="$PATH:/mnt/c/Program Files/Microsoft VS Code/bin"

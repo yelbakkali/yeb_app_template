@@ -134,7 +134,7 @@ Chaque entrée dans le fichier `chat_resume.md` DOIT suivre cette structure pré
 1. **[Première modification ou action]** :
    - [Description détaillée]
    - [Impact ou importance]
-   
+
 2. **[Deuxième modification ou action]** :
    - [Description détaillée]
    - [Impact ou importance]

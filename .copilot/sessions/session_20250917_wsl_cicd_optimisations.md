@@ -32,7 +32,7 @@ Nous avons modifié le script d'installation du template pour configurer automat
 # Configuration de la commande 'code' pour WSL
 if grep -q "WSL" /proc/version && ! which code > /dev/null 2>&1; then
     echo "Configuration de la commande 'code' pour WSL..."
-    
+
     # Vérifie si la ligne est déjà dans .bashrc
     if ! grep -q "export PATH=\"\$PATH:/mnt/c/Users/\$(cmd.exe /c 'echo %USERNAME%' 2>/dev/null | tr -d '\\r')/AppData/Local/Programs/Microsoft VS Code/bin\"" ~/.bashrc; then
         echo 'export PATH="$PATH:/mnt/c/Users/$(cmd.exe /c '"'"'echo %USERNAME%'"'"' 2>/dev/null | tr -d '"'"'\\r'"'"')/AppData/Local/Programs/Microsoft VS Code/bin"' >> ~/.bashrc
