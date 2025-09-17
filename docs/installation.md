@@ -1,6 +1,19 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:70, 90, 146]
+- Ce fichier est référencé dans: [run_dev.bat:6]
+- Ce fichier est référencé dans: [run_dev.sh:8]
+- Ce fichier est référencé dans: [setup_template.sh:6, 204]
+- Ce fichier est référencé dans: [setup_project.bat:5]
+- Ce fichier est référencé dans: [init_project.bat:7]
+- Ce fichier est référencé dans: [update_docs.sh:10]
+-->
+
 # Guide d'installation du projet yeb_app_template
 
 Ce guide vous aidera à installer et configurer l'environnement de développement pour le projet yeb_app_template.
+
+> **Note :** Si vous utilisez ce template pour créer un nouveau projet, référez-vous d'abord au [processus d'initialisation](../README.md) qui utilise le script `setup_template.sh`. Vous pouvez également consulter la documentation du template dans le dossier `template/docs/`. Ce guide s'applique une fois que vous avez déjà initialisé votre projet.
 
 ## Prérequis
 
@@ -63,22 +76,26 @@ code --install-extension esbenp.prettier-vscode
 
 ### 1. Cloner le dépôt
 
+Si vous travaillez sur le template lui-même (et non pas pour créer un nouveau projet) :
+
 ```bash
 git clone https://github.com/votre-utilisateur/yeb_app_template.git
 cd yeb_app_template
 ```
+
+Pour créer un nouveau projet basé sur ce template, utilisez plutôt le script `setup_template.sh` comme indiqué dans le [README](../README.md) et documenté dans [`template/docs/setup_template.md`](../template/docs/setup_template.md).
 
 ### 2. Utiliser le script d'installation automatique (recommandé)
 
 Le projet inclut des scripts qui automatisent l'installation et la configuration :
 
 ```bash
-# Pour Linux/macOS :
-chmod +x setup_project.sh
-./setup_project.sh
+# Utilisez le script setup_template.sh comme expliqué dans le README.md
+./setup_template.sh
 
-# Pour Windows :
-setup_project.bat
+# Ou pour une installation manuelle des dépendances :
+./template/utils/setup.sh    # Linux/macOS
+template\utils\setup.bat     # Windows
 ```
 
 Ce script va :
@@ -112,10 +129,10 @@ flutter pub get
 
 ### 4. Installation des dépendances Python
 
-Pour le backend Python local :
+Pour les scripts Python partagés :
 
 ```bash
-cd python_backend
+cd shared_python
 poetry install
 cd ..
 ```
@@ -128,28 +145,70 @@ poetry install
 cd ..
 ```
 
-### 5. Configuration de l'environnement de développement
+### 5. Gestion des dépendances Python avec Poetry
+
+Le projet utilise Poetry pour gérer les dépendances Python de manière isolée et reproductible. Toutes les dépendances sont définies dans le fichier `shared_python/pyproject.toml`.
+
+Pour ajouter une nouvelle dépendance au projet :
+
+```bash
+cd shared_python
+poetry add nom_du_package
+```
+
+VS Code est automatiquement configuré pour utiliser l'environnement virtuel Poetry, ce qui permet à l'éditeur de reconnaître toutes les dépendances installées sans configuration supplémentaire.
+
+### 6. Configuration de l'environnement de développement
 
 #### Pour Linux/macOS
 
 ```bash
-chmod +x run_dev_environment.sh
-./run_dev_environment.sh
+chmod +x run_dev.sh
+./run_dev.sh
 ```
 
 #### Pour Windows
 
 ```bash
-run_dev_environment.bat
+run_dev.bat
 ```
+
+#### Pour WSL (Windows Subsystem for Linux)
+
+Si vous utilisez WSL pour le développement, le projet inclut des outils d'optimisation pour résoudre un problème connu de VS Code avec WSL où les redirections de ports s'accumulent.
+
+Lors de l'installation via `setup_wsl.sh`, un alias `code-wsl` est automatiquement configuré dans votre profil bash. Utilisez cette commande au lieu de `code` pour lancer VS Code avec les optimisations WSL :
+
+```bash
+code-wsl
+```
+
+Pour plus de détails sur ce problème et sa solution, consultez [Optimisation de VS Code pour WSL](wsl_optimisation.md).
 
 ## Configuration de l'éditeur VS Code
 
-La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet (`init_project.sh` ou `init_project.bat`). Les scripts créent les fichiers suivants dans le dossier `.vscode` :
+La configuration optimale de VS Code est **automatiquement mise en place** par les scripts d'initialisation du projet qui sont appelés par le script `setup_template.sh` lors de la création d'un nouveau projet. Ces scripts créent les fichiers suivants dans le dossier `.vscode` :
 
-- `settings.json` : Configuration de l'éditeur et des extensions
+- `settings.json` : Configuration de l'éditeur et des extensions, y compris la configuration pour Poetry
 - `extensions.json` : Recommandations d'extensions à installer
 - `launch.json` : Configurations de débogage pour Flutter et Python
+
+### Intégration avec Poetry pour Python
+
+Le projet utilise Poetry pour gérer les dépendances Python et l'environnement virtuel. La configuration VS Code est automatiquement mise à jour pour utiliser l'environnement virtuel Poetry de `shared_python`, ce qui permet :
+
+1. La reconnaissance automatique des packages installés via Poetry
+2. L'intellisense complet pour toutes les dépendances
+3. L'analyse de code précise sans fausses erreurs d'importation
+
+Si vous installez de nouveaux packages Python, utilisez toujours Poetry :
+
+```bash
+cd shared_python
+poetry add nom_du_package
+```
+
+Cela installera le package et le rendra immédiatement disponible dans VS Code.
 
 ### Configuration appliquée
 
@@ -169,6 +228,11 @@ Cette configuration automatique inclut :
 3. **Configuration générale** :
    - Sauvegarde automatique
    - Taille de tabulation à 2 espaces
+
+4. **Configuration Poetry pour Python** :
+   - Détection automatique de l'environnement virtuel Poetry pour `shared_python`
+   - Configuration des chemins d'accès pour l'intellisense et l'analyse de code
+   - Support complet des dépendances gérées par Poetry
    - Paramètres Git simplifiés
 
 ### Personnalisation
@@ -193,7 +257,7 @@ run_dev.bat   # Windows
 Pour lancer l'application en mode développement Web :
 
 ```bash
-./start_web_dev.sh  # Linux/macOS
+./start_web_integrated.sh  # Linux/macOS
 start_web_dev.bat   # Windows
 ```
 

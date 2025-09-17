@@ -1,7 +1,27 @@
 {
+  // Extensions recommandées pour ce projet
   "recommendations": [
-    "ms-python.python",
-    "ms-vscode.cpptools",
-    "github.vscode-pull-request-github"
+    // Extensions Flutter/Dart
+    "dart-code.dart-code", // Support du langage Dart
+    "dart-code.flutter", // Support de Flutter
+    "nash.awesome-flutter-snippets", // Snippets pratiques pour Flutter
+    // Extensions Python
+    "ms-python.python", // Support du langage Python
+    "ms-python.vscode-pylance", // Serveur de langage Python amélioré
+    "ms-python.black-formatter", // Formateur Python
+    "njpwerner.autodocstring", // Génération automatique de documentation Python
+    "matangover.mypy", // Vérification de type statique pour Python
+    // Linters et formatage
+    "streetsidesoftware.code-spell-checker", // Vérification orthographique
+    "esbenp.prettier-vscode", // Formateur pour divers langages
+    // Git et Collaboration
+    "github.vscode-pull-request-github", // Gestion des pull requests depuis VS Code
+    "eamodio.gitlens", // Fonctionnalités Git avancées
+    // Productivité
+    "github.copilot", // GitHub Copilot
+    "github.copilot-chat", // Chat GitHub Copilot
+    "ms-vsliveshare.vsliveshare", // Collaboration en temps réel
+    // Fonctionnalités natives (si nécessaire)
+    "ms-vscode.cpptools" // Support C/C++ pour le code natif
   ]
 }

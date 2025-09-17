@@ -1,3 +1,13 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:92, 196]
+- Ce fichier est référencé dans: [docs/project_structure.md:36]
+- Ce fichier est référencé dans: [docs/installation.md:279]
+- Ce fichier est référencé dans: [docs/chat_resume.md:37, 55]
+- Ce fichier est référencé dans: [.copilot/chat_resume.md:47, 74]
+- Ce fichier est référencé dans: [template/bootstrap.sh:207]
+-->
+
 # Guide du workflow Git pour yeb_app_template
 
 Ce document décrit le workflow Git recommandé pour le développement de l'application yeb_app_template.

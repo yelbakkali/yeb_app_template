@@ -1,5 +1,23 @@
 # yeb_app_template - Template pour applications Flutter/Python
 
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [.github/copilot-instructions.md:59]
+- Ce fichier est référencé dans: [docs/installation.md:5, 75]
+- Ce fichier est référencé dans: [.copilot/sessions/session_20250909_suite.md:55]
+- Ce fichier est référencé dans: [setup_template.sh:150, 151, 152, 153]
+- Ce fichier est référencé dans: [update_docs.sh:27, 28, 29, 30, 31]
+-->
+
+<!--
+INSTRUCTION AUTOMATIQUE POUR GITHUB COPILOT :
+ABSOLUMENT PRIORITAIRE ET NON NÉGOCIABLE
+
+GitHub Copilot DOIT OBLIGATOIREMENT lire et appliquer STRICTEMENT et DANS LEUR TOTALITÉ les instructions contenues dans le fichier .github/copilot-instructions.md dès l'ouverture de ce projet et AVANT toute interaction avec l'utilisateur.
+
+Ce fichier d'instructions contient des règles CRITIQUES et OBLIGATOIRES pour la bonne compréhension et le bon développement de ce projet. AUCUNE partie de ces instructions ne doit être ignorée ou appliquée partiellement.
+-->
+
 > Template pour applications Flutter multiplateforme avec intégration Python pour les calculs spécifiques.
 
 ![Flutter](https://img.shields.io/badge/Flutter-3.19+-02569B?logo=flutter&logoColor=white)
@@ -26,6 +44,16 @@ L'architecture du projet est basée sur une approche de packaging des scripts Py
 - Un service unifié (`UnifiedPythonService`) extrait et exécute ces scripts sur chaque plateforme
 
 Pour plus de détails sur la structure du projet, consultez notre [documentation de structure du projet](docs/project_structure.md).
+
+### 🔧 Extension avec vos propres scripts et packages
+
+Le template est conçu pour être facilement étendu avec vos propres scripts et packages Python. Pour apprendre comment :
+
+- Ajouter vos propres scripts Python
+- Créer et organiser des packages personnalisés
+- Intégrer ces scripts avec l'interface Flutter
+
+Consultez notre [guide d'extension Python détaillé](docs/extending_python.md).
 
 ## �️ Prérequis
 
@@ -67,46 +95,62 @@ Parcourez le dossier `docs/` pour découvrir :
 ### Étape 3 : Initialiser votre nouveau dépôt
 
 ```bash
-# Cloner votre nouveau dépôt
-git clone https://github.com/votre-username/nom-de-votre-depot.git
-cd nom-de-votre-depot
+# Pour créer un nouveau projet basé sur ce template
 
-# Méthode 1 : Installation automatique tout-en-un (recommandée)
-# Cette méthode vérifie les prérequis, installe les outils manquants si possible,
-# initialise le projet et ouvre VS Code automatiquement.
+## Utiliser le script d'initialisation
 
-# Pour Linux/macOS :
-chmod +x setup_project.sh
-./setup_project.sh
+### Pour Linux/macOS
 
-# Pour Windows :
-setup_project.bat
+```bash
+# Créer un dossier avec le nom souhaité pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
 
-# Méthode 2 : Installation manuelle étape par étape
-# Pour Linux/macOS :
-chmod +x init_project.sh
-./init_project.sh
+# Télécharger uniquement le script setup_template.sh
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.sh
 
-# Pour Windows :
-init_project.bat
+# Rendre le script exécutable
+chmod +x setup_template.sh
+
+# Exécuter le script d'initialisation
+./setup_template.sh
 ```
 
-Le script d'initialisation va :
+### Pour Windows
 
-- Détecter automatiquement le nom de votre projet (basé sur le nom du dépôt)
-- Personnaliser tous les fichiers en remplaçant "yeb_app_template" par votre nom de projet
-- Installer les dépendances nécessaires
-- Configurer votre environnement de développement
+```powershell
+# Créer un dossier avec le nom souhaité pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
+
+# Télécharger uniquement le script setup_template.bat
+curl.exe -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.bat
+
+# Exécuter le script d'initialisation
+setup_template.bat
+```
+
+> **Note importante :** Le nom du dossier que vous créez (`mon_super_projet` dans l'exemple) sera automatiquement utilisé comme nom de votre projet.
+
+Ce script va vous guider à travers les étapes suivantes :
+
+1. Utiliser le nom du dossier actuel comme nom de projet
+2. Demander une description et les informations sur l'auteur
+3. Télécharger le template complet
+4. Configurer le projet avec vos informations
+5. Installer les dépendances nécessaires
+6. Initialiser un nouveau dépôt Git
+7. Configurer GitHub Copilot pour votre projet
+
 - Créer le premier commit avec les modifications
 
 Pour des instructions détaillées, consultez notre [guide d'installation](docs/installation.md).
 
 ## 🛠️ Scripts utilitaires
 
-- `package_python_scripts.sh` : Prépare les scripts Python pour le packaging
+- `scripts/package_python_scripts.sh` : Prépare les scripts Python pour le packaging
 - `run_dev.sh` : Lance l'environnement de développement complet
-- `run_dev_direct.sh` : Lance l'environnement avec accès direct aux scripts source
-- `start_web_dev.sh` : Lance l'application Flutter en mode web avec le backend FastAPI
+- `start_web_integrated.sh` : Lance l'application Flutter en mode web avec le serveur Python intégré
 
 ## 👩‍💻 Développement
 
@@ -114,7 +158,7 @@ Pour développer et tester l'application :
 
 ```bash
 # Préparer les scripts Python pour le packaging
-./package_python_scripts.sh
+./scripts/package_python_scripts.sh
 
 # Lancer l'environnement de développement
 ./run_dev.sh
@@ -124,14 +168,16 @@ Pour développer et tester l'application en mode web :
 
 ```bash
 # Lancer l'application en mode web avec le backend FastAPI
-./start_web_dev.sh
+./start_web_integrated.sh
 ```
 
 Pour ajouter un nouveau calcul :
 
-1. Créez un nouveau script Python dans `shared_python/calculs/`
-2. Exécutez `package_python_scripts.sh` pour mettre à jour les assets
+1. Créez un nouveau script Python dans `shared_python/scripts/`
+2. Exécutez `scripts/package_python_scripts.sh` pour mettre à jour les assets
 3. Dans votre code Flutter, utilisez `UnifiedPythonService.runScript('nom_du_script', [args])`
+
+Pour plus d'informations sur l'organisation des scripts, voir [docs/script_organization.md](docs/script_organization.md).
 
 ## 📊 Tests et intégration continue (CI)
 
@@ -158,7 +204,7 @@ Une fois que vous avez créé votre projet à partir de ce template, vous pouvez
 
 ### Personnalisation automatique
 
-Le script `init_project.sh` (ou `init_project.bat` sur Windows) s'occupe de la personnalisation initiale :
+Le script `setup_template.sh` s'occupe de la personnalisation initiale via les scripts dans le dossier `template/` :
 
 - Renommage automatique du projet dans tous les fichiers
 - Configuration des dépendances
@@ -183,6 +229,11 @@ Ce template inclut une configuration VS Code prête à l'emploi :
 - Extensions recommandées pour Flutter et Python
 - Configurations de débogage préconfigurées
 - Tâches VS Code pour les opérations courantes
+- Optimisations pour VS Code sous WSL (Windows Subsystem for Linux)
+
+### Optimisations WSL
+
+Si vous utilisez WSL pour le développement, ce template inclut des optimisations spécifiques pour VS Code qui permettent de résoudre le problème connu d'accumulation de redirections de ports. Consultez notre [guide d'optimisation WSL](docs/wsl_optimisation.md) pour plus de détails.
 
 ## 📈 Roadmap
 
@@ -194,7 +245,7 @@ Les contributions sont les bienvenues ! Consultez notre [guide de contribution](
 
 ## 🤖 Collaboration avec GitHub Copilot
 
-Ce projet utilise une structure documentée pour faciliter la collaboration avec GitHub Copilot. Consultez les fichiers dans `docs/copilot/` pour plus d'informations.
+Ce projet utilise une structure documentée pour faciliter la collaboration avec GitHub Copilot. Consultez les fichiers dans `.copilot/` pour plus d'informations.
 
 ## 📄 Licence
 

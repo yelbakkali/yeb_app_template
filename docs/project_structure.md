@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:46, 89]
+- Ce fichier est référencé dans: [template/bootstrap.sh:202]
+- Ce fichier est référencé dans: [update_docs.sh:9]
+-->
+
 # Structure du projet yeb_app_template
 
 Ce document décrit l'organisation des dossiers et fichiers du projet.
@@ -65,10 +72,23 @@ python_backend/
 
 ### scripts/
 
-Scripts d'installation et de configuration :
+Scripts utilisés pendant le développement :
 
 ```bash
 scripts/
+├── flutter_wrapper_macos.sh # Wrapper pour Flutter sur macOS avec Apple Silicon
+├── git_autocommit.sh        # Script pour automatiser les commits Git
+├── merge_to_main.bat/sh     # Scripts pour fusionner les branches vers main
+├── package_python_scripts.*  # Scripts pour empaqueter les scripts Python
+└── start_vscode_wsl.sh      # Script pour démarrer VS Code optimisé pour WSL
+```
+
+### template/utils/
+
+Scripts d'installation et de configuration utilisés lors de l'initialisation du projet :
+
+```bash
+template/utils/
 ├── setup.bat                # Script d'installation principal (Windows)
 ├── setup.sh                 # Script d'installation principal (Unix)
 ├── setup_windows.bat        # Configuration spécifique à Windows

@@ -1,3 +1,8 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier ne semble pas être référencé explicitement dans d'autres fichiers du projet
+-->
+
 # Gestion des chemins dans le projet
 
 Ce document explique comment les chemins sont gérés automatiquement dans le projet et comment sont traitées les spécificités de chaque plateforme.

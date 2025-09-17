@@ -1,3 +1,14 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [README.md:236]
+- Ce fichier est référencé dans: [run_dev.sh:9]
+- Ce fichier est référencé dans: [scripts/git_autocommit.sh:9]
+- Ce fichier est référencé dans: [scripts/merge_to_main.sh:9]
+- Ce fichier est référencé dans: [CONTRIBUTORS.md:25]
+- Ce fichier est référencé dans: [template/bootstrap.sh:203]
+- Ce fichier est référencé dans: [update_docs.sh:11]
+-->
+
 # Guide de contribution
 
 Merci de votre intérêt pour contribuer au projet yeb_app_template ! Ce guide vous aidera à comprendre comment vous pouvez participer efficacement au développement du projet.
@@ -99,12 +110,12 @@ Pour simplifier les opérations Git courantes, le projet inclut plusieurs script
    ```bash
    # Mode automatique (non-interactif)
    ./scripts/git_autocommit.sh
-   
+
    # Mode interactif (questions pour valider le message et le push)
    ./scripts/git_autocommit.sh --interactive
    # ou
    ./scripts/git_autocommit.sh -i
-   
+
    # Avec message personnalisé
    ./scripts/git_autocommit.sh -m "Votre message de commit"
    ```

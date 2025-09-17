@@ -1,4 +1,19 @@
 #!/bin/bash
+
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [README.md:151, 163]
+# - Ce fichier est référencé dans: [init_project.sh:556]
+# - Ce fichier est référencé dans: [setup_project.sh:203]
+# - Ce fichier est référencé dans: [docs/installation.md:150, 151, 201]
+# - Ce fichier est référencé dans: [docs/contributing.md:173]
+# - Ce fichier est référencé dans: [docs/modes_demarrage.md:7, 44, 51]
+# - Ce fichier est référencé dans: [docs/packaging_approach.md:55]
+# - Ce fichier est référencé dans: [template/init_project.sh:556]
+# - Ce fichier est référencé dans: [template/bootstrap.sh:227, 245]
+# - Ce fichier est référencé dans: [template/setup_project.sh:203]
+# ==========================================================================
+
 # Script lanceur tout-en-un pour yeb_app_template avec l'approche de packaging
 # Ce script prépare les scripts Python pour le packaging, lance le backend web et l'application Flutter
 
@@ -27,7 +42,7 @@ fi
 
 # Packager les scripts Python
 print_header "Préparation des scripts Python pour le packaging"
-bash "$BASE_DIR/package_python_scripts.sh"
+bash "$BASE_DIR/scripts/package_python_scripts.sh"
 
 # Définir la variable d'environnement pour le mode développement
 export FLUTTER_DEV_MODE=true

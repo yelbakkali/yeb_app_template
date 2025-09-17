@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "shared_python_scripts"
+version = "0.1.0"
+description = "Scripts Python partagés pour l'application yeb_app_template"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+# Dépendances communes pour tous les scripts
+pandas = "^2.3.2"
+numpy = "^1.26.4"
+requests = "^2.32.0"
+# Dépendances pour le mode web (optionnelles)
+fastapi = {version = "^0.110.0", optional = true}
+uvicorn = {version = "^0.30.0", optional = true}
+# Ajoutez vos nouvelles dépendances ici
+# matplotlib = "^3.8.0"  # Exemple : décommentez pour ajouter matplotlib
+
+[tool.poetry.extras]
+web = ["fastapi", "uvicorn"]
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.2"
+
+[build-system]
+requires = ["poetry-core>=1.6.0"]
+build-backend = "poetry.core.masonry.api"
+
+# Section personnalisée pour les dépendances spécifiques aux scripts
+[tool.shared_scripts.dependencies]
+# Format: chemin_relatif = ["dependency1", "dependency2", ...]
+# Les chemins sont relatifs au dossier shared_python
+"scripts/calcul_demo" = ["numpy", "pandas"]
+# Exemples pour d'autres scripts
+# "scripts/data_analysis" = ["matplotlib", "scipy"]
+# "packages/mon_package" = ["numpy", "requests", "beautifulsoup4"]

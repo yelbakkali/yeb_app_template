@@ -1,3 +1,10 @@
+<!--
+RÉFÉRENCES CROISÉES:
+- Ce fichier est référencé dans: [docs/project_structure.md:37]
+- Ce fichier est référencé dans: [docs/chat_resume.md:56]
+- Ce fichier est référencé dans: [.copilot/chat_resume.md:75]
+-->
+
 # Configuration de protection des branches GitHub
 
 Ce document décrit comment configurer la protection des branches dans GitHub pour le projet yeb_app_template.

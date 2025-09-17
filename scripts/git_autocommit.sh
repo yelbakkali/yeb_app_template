@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [.github/copilot-instructions.md:18, 115, 119, 121, 135, 138, 140]
+# - Ce fichier est référencé dans: [.copilot/memoire_long_terme.md:37, 41, 43, 57, 60, 62]
+# - Ce fichier est référencé dans: [.copilot/chat_resume.md:57]
+# - Ce fichier est référencé dans: [.copilot/sessions/session_20250914_auto_doc.md:33]
+# - Ce fichier est référencé dans: [docs/contributing.md:101, 104, 106, 109, 168]
+# - Ce fichier est référencé dans: [docs/chat_resume.md:48]
+# - Ce fichier est référencé dans: [template/bootstrap.sh:228]
+# ==========================================================================
+
 # git_autocommit.sh
 # Script d'automatisation des opérations Git courantes (add, commit, push)
 # Ce script détecte les fichiers modifiés, génère un message de commit, puis effectue toutes les actions nécessaires
@@ -47,46 +58,46 @@ if [ "$1" == "--message" ] || [ "$1" == "-m" ]; then
 else
     # Générer un message de commit basé sur les fichiers modifiés
     modified_files=$(git status --porcelain | grep -E '^\s*[AM]' | sed 's/^[ MAD?]*//' | sed 's/^[ MAD?]*//')
-    
+
     # Compter le nombre de fichiers par extension/type
     md_files=$(echo "$modified_files" | grep -c '\.md$' || true)
     sh_files=$(echo "$modified_files" | grep -c '\.sh$' || true)
     py_files=$(echo "$modified_files" | grep -c '\.py$' || true)
     dart_files=$(echo "$modified_files" | grep -c '\.dart$' || true)
-    
+
     # Détecter les dossiers principaux modifiés
     docs_modified=$(echo "$modified_files" | grep -c '^docs/' || true)
     scripts_modified=$(echo "$modified_files" | grep -c '^scripts/' || true)
     flutter_modified=$(echo "$modified_files" | grep -c '^flutter_app/' || true)
     python_modified=$(echo "$modified_files" | grep -c '^python_backend\|^web_backend\|^shared_python/' || true)
-    
+
     # Construire un message de commit pertinent
     commit_message="Mise à jour: "
-    
+
     if [ $docs_modified -gt 0 ]; then
         if [ $md_files -gt 0 ]; then
             commit_message+="documentation "
         fi
     fi
-    
+
     if [ $scripts_modified -gt 0 ]; then
         if [ $sh_files -gt 0 ]; then
             commit_message+="scripts d'automatisation "
         fi
     fi
-    
+
     if [ $flutter_modified -gt 0 ]; then
         if [ $dart_files -gt 0 ]; then
             commit_message+="code Flutter "
         fi
     fi
-    
+
     if [ $python_modified -gt 0 ]; then
         if [ $py_files -gt 0 ]; then
             commit_message+="code Python "
         fi
     fi
-    
+
     # Si le message est trop générique, utiliser une liste de fichiers
     if [ "$commit_message" == "Mise à jour: " ]; then
         num_files=$(echo "$git_status" | wc -l)
@@ -139,7 +150,7 @@ if [ "$1" == "--interactive" ] || [ "$1" == "-i" ]; then
     # Mode interactif activé avec le drapeau
     echo -e "${YELLOW}Voulez-vous pousser les changements vers le dépôt distant? [o/n]${NC}"
     read -r push_response
-    
+
     if [ "$push_response" == "o" ]; then
         current_branch=$(git branch --show-current)
         git push origin "$current_branch"
