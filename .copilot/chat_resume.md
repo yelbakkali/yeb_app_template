@@ -14,7 +14,7 @@ RÉFÉRENCES CROISÉES:
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
-**Dernière mise à jour :** 17 septembre 2025
+**Dernière mise à jour :** 17 septembre 2025 (fin de journée)
 
 ## Contexte du projet
 
@@ -234,3 +234,38 @@ Ce fichier sera régulièrement mis à jour pour maintenir la continuité des é
 - Template plus facile à utiliser pour les nouveaux développeurs
 
 **Documentation détaillée** : Voir [session_20250917_wsl_cicd_optimisations.md](/.copilot/sessions/session_20250917_wsl_cicd_optimisations.md)
+
+## Session du 17 septembre 2025 (après-midi) : Intégration Poetry et environnements Python
+
+### Problèmes résolus
+
+1. **Correction des erreurs d'importation Python dans VS Code** :
+   - Résolution des erreurs "Impossible de résoudre l'importation pandas/numpy" dans Pylance
+   - Configuration de l'environnement virtuel Poetry pour `shared_python`
+   - Installation des dépendances nécessaires via Poetry
+
+2. **Amélioration de la documentation sur l'utilisation de Poetry** :
+   - Mise à jour de la documentation expliquant le mode `package-mode = false` dans Poetry
+   - Ajout de sections détaillées sur les différentes options pour créer des packages Python
+   - Documentation des avantages de l'approche Poetry pour ce projet
+
+3. **Mise à jour des scripts d'initialisation** :
+   - Modification des scripts pour configurer automatiquement VS Code avec l'environnement Poetry
+   - Ajout de code dans `setup_wsl.sh` pour détecter et configurer Poetry
+
+### Fichiers modifiés (session Poetry)
+
+- `.vscode/settings.json` - Configuration pour utiliser l'environnement virtuel Poetry
+- `docs/installation.md` - Documentation améliorée sur l'installation et la gestion des dépendances
+- `docs/extending_python.md` - Documentation complète sur la création de packages avec Poetry
+- `template/entry-points/init_project.sh` - Configuration VS Code pour nouveaux projets
+- `template/utils/setup_wsl.sh` - Détection et configuration automatique de l'environnement Poetry
+
+### Résultats et bénéfices
+
+- Élimination des fausses erreurs d'importation dans VS Code
+- Gestion des dépendances Python plus robuste et cohérente
+- Meilleure documentation pour les nouveaux développeurs sur l'organisation des packages Python
+- Configuration automatique de l'environnement de développement pour les nouveaux projets
+
+**Documentation détaillée** : Voir [session_20250917_poetry_vscode_integration.md](/.copilot/sessions/session_20250917_poetry_vscode_integration.md)
