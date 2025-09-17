@@ -411,9 +411,9 @@ if exist "%PARENT_DIR%utils\configure_vscode_for_flutter.bat" (
 
 REM Installation des dépendances du projet
 call :print_header "Installation des dépendances"
-if exist "%PARENT_DIR%utils\install_dependencies.bat" (
+if exist "%PARENT_DIR%\utils\install_dependencies.bat" (
     echo Installation des dépendances du projet...
-    call "%PARENT_DIR%utils\install_dependencies.bat"
+    call "%PARENT_DIR%\utils\install_dependencies.bat"
     call :print_success "Dépendances installées avec succès"
 ) else (
     call :print_warning "Le script d'installation des dépendances n'a pas été trouvé."

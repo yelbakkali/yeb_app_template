@@ -1,4 +1,9 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [template/entry-points/init_project.bat:414, 416]
+:: ==========================================================================
+
 REM Script pour installer toutes les dépendances nécessaires
 REM pour le projet yeb_app_template
 REM Ce script installe les dépendances Dart/Flutter et Python
@@ -14,7 +19,7 @@ echo %YELLOW%   INSTALLATION DES DÉPENDANCES DU PROJET      %NC%
 echo %YELLOW%===============================================%NC%
 
 REM Chemin du répertoire racine du projet
-set "PROJECT_ROOT=%~dp0.."
+set "PROJECT_ROOT=%~dp0..\.."
 cd "%PROJECT_ROOT%"
 
 echo.
@@ -102,11 +107,72 @@ if exist "%PROJECT_ROOT%\python_backend" (
 )
 
 echo.
+echo %GREEN%3. Installation des extensions VS Code recommandées%NC%
+REM Vérifie si la commande code est disponible (VS Code installé)
+where code >nul 2>&1
+if %ERRORLEVEL% EQU 0 (
+    echo %YELLOW%Installation des extensions VS Code recommandées...%NC%
+
+    REM Extensions Flutter/Dart
+    call code --install-extension dart-code.dart-code
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de dart-code.dart-code%NC%
+    call code --install-extension dart-code.flutter
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de dart-code.flutter%NC%
+    call code --install-extension nash.awesome-flutter-snippets
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de nash.awesome-flutter-snippets%NC%
+
+    REM Extensions Python
+    call code --install-extension ms-python.python
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de ms-python.python%NC%
+    call code --install-extension ms-python.vscode-pylance
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de ms-python.vscode-pylance%NC%
+    call code --install-extension ms-python.black-formatter
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de ms-python.black-formatter%NC%
+    call code --install-extension njpwerner.autodocstring
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de njpwerner.autodocstring%NC%
+    call code --install-extension matangover.mypy
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de matangover.mypy%NC%
+
+    REM Linters et formatage
+    call code --install-extension streetsidesoftware.code-spell-checker
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de streetsidesoftware.code-spell-checker%NC%
+    call code --install-extension esbenp.prettier-vscode
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de esbenp.prettier-vscode%NC%
+
+    REM Git et Collaboration
+    call code --install-extension github.vscode-pull-request-github
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de github.vscode-pull-request-github%NC%
+    call code --install-extension eamodio.gitlens
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de eamodio.gitlens%NC%
+
+    REM Productivité
+    call code --install-extension github.copilot
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de github.copilot%NC%
+    call code --install-extension github.copilot-chat
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de github.copilot-chat%NC%
+    call code --install-extension ms-vsliveshare.vsliveshare
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de ms-vsliveshare.vsliveshare%NC%
+
+    REM Fonctionnalités natives
+    call code --install-extension ms-vscode.cpptools
+    if %ERRORLEVEL% NEQ 0 echo %RED%Échec de l'installation de ms-vscode.cpptools%NC%
+
+    echo %GREEN%Installation des extensions VS Code terminée.%NC%
+) else (
+    echo %YELLOW%La commande 'code' n'est pas disponible dans le PATH.%NC%
+    echo %YELLOW%Pour installer les extensions VS Code recommandées, assurez-vous que VS Code est installé%NC%
+    echo %YELLOW%et que la commande 'code' est disponible dans votre PATH.%NC%
+    echo %YELLOW%Vous pouvez également installer les extensions manuellement depuis VS Code.%NC%
+    echo %YELLOW%Les extensions recommandées sont listées dans .vscode/extensions.json%NC%
+)
+
+echo.
 echo %GREEN%===============================================%NC%
 echo %GREEN%   INSTALLATION DES DÉPENDANCES TERMINÉE       %NC%
 echo %GREEN%===============================================%NC%
 echo Si des erreurs sont apparues, vérifiez que les outils suivants sont bien installés :
 echo - Flutter/Dart
 echo - Poetry (pour Python) ou pip
+echo - VS Code (pour les extensions recommandées)
 echo.
 echo Vous pouvez maintenant travailler sur le projet!

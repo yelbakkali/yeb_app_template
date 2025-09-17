@@ -132,10 +132,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Configuration automatique de Flutter pour Apple Silicon..."
 
         # Rendre le script wrapper exécutable
-        FLUTTER_WRAPPER="${SCRIPT_DIR}/../scripts/flutter_wrapper.sh"
+        FLUTTER_WRAPPER="${SCRIPT_DIR}/../scripts/flutter_wrapper_macos.sh"
         if [ -f "$FLUTTER_WRAPPER" ]; then
             chmod +x "$FLUTTER_WRAPPER"
-            print_success "Script wrapper Flutter configuré"
+            print_success "Script wrapper Flutter pour macOS configuré"
 
             # Créer un répertoire bin local dans le projet
             mkdir -p "${SCRIPT_DIR}/bin"

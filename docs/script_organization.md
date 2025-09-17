@@ -13,7 +13,7 @@ Les scripts dans le dossier `/scripts/` sont des outils opérationnels qui sont 
 - `package_python_scripts.sh/bat` : Prépare les scripts Python pour le packaging dans les assets Flutter
 - `git_autocommit.sh` : Outil pour faciliter les commits Git
 - `merge_to_main.sh/bat` : Utilitaire pour fusionner la branche de développement vers main
-- `flutter_wrapper.sh` : Script enveloppe pour les commandes Flutter
+- `flutter_wrapper_macos.sh` : Script enveloppe pour les commandes Flutter sur macOS avec Apple Silicon
 
 ### 2. Scripts d'initialisation (/template/scripts)
 
