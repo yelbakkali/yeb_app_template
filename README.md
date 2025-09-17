@@ -85,7 +85,7 @@ mkdir mon_super_projet
 cd mon_super_projet
 
 # Téléchargez et exécutez le script d'installation
-curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.sh
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/setup_template.sh
 chmod +x setup_template.sh
 ./setup_template.sh
 ```
@@ -98,7 +98,7 @@ mkdir mon_super_projet
 cd mon_super_projet
 
 # Téléchargez et exécutez le script d'installation
-curl.exe -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/dev/setup_template.bat
+curl.exe -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/setup_template.bat
 setup_template.bat
 ```
 
