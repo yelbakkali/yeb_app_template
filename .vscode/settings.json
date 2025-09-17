@@ -74,22 +74,18 @@
     // Configuration pour WSL Remote
     "terminal.integrated.defaultProfile.linux": "bash",
     "remote.WSL.fileWatcher.polling": true,
-    
     // Configuration supplémentaire Copilot
     "github.copilot.chat.localeOverride": "fr",
     "github.copilot.chat.agent.currentEditorContext.enabled": false,
     "github.copilot.chat.edits.temporalContext.enabled": true,
     "github.copilot.chat.editor.temporalContext.enabled": true,
     "github.copilot.nextEditSuggestions.enabled": true,
-    
     // Configuration interface utilisateur
     "workbench.secondarySideBar.defaultVisibility": "visible",
     "window.zoomLevel": -1,
-    
     // Configuration sécurité et confiance
     "security.workspace.trust.untrustedFiles": "open",
     "security.workspace.trust.enabled": false,
-    
     // Configuration d'imbrication des fichiers
     "explorer.fileNesting.patterns": {
         "*.ts": "${capture}.js",
