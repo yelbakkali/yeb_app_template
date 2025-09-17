@@ -1,4 +1,12 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [template/entry-points/init_project.bat:414, 416]
+:: - Ce fichier est référencé dans: [template/utils/setup.bat:17]
+:: - Ce fichier est référencé dans: [template/utils/setup.sh:70]
+:: - Ce fichier est référencé dans: [docs/project_structure.md:81]
+:: ==========================================================================
+
 REM Script d'installation des dépendances pour Windows
 REM Ce script installe tous les outils nécessaires pour le développement du projet yeb_app_template sous Windows
 

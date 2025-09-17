@@ -36,7 +36,7 @@ Le script effectue les opérations suivantes :
 
 ### Utilisation
 
-Lors de l'installation du template via le script `setup_wsl.sh`, un alias `code-wsl` est automatiquement ajouté à votre profil bash. Pour l'utiliser :
+Lors de l'installation du template via le script `template/utils/setup_wsl.sh`, un alias `code-wsl` est automatiquement ajouté à votre profil bash. Pour l'utiliser :
 
 ```bash
 # Pour ouvrir VS Code dans le répertoire courant

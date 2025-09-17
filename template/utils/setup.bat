@@ -1,4 +1,11 @@
 @echo off
+:: ==========================================================================
+:: RÉFÉRENCES CROISÉES:
+:: - Ce fichier est référencé dans: [template/entry-points/init_project.bat:310]
+:: - Ce fichier est référencé dans: [template/entry-points/init_project.sh:350]
+:: - Ce fichier est référencé dans: [docs/project_structure.md:79]
+:: ==========================================================================
+
 REM Script d'installation intelligent - Détecte l'environnement et exécute le script approprié
 
 echo [INFO] Démarrage du script d'installation intelligent...

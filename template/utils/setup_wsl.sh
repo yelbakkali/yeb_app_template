@@ -1,4 +1,14 @@
 #!/bin/bash
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [template/entry-points/init_project.sh:361, 372, 383]
+# - Ce fichier est référencé dans: [template/utils/setup_windows.bat:146, 147, 151]
+# - Ce fichier est référencé dans: [template/utils/setup.sh:35, 37, 39, 46, 47, 49]
+# - Ce fichier est référencé dans: [docs/project_structure.md:82]
+# - Ce fichier est référencé dans: [docs/wsl_optimisation.md:4, 39]
+# - Ce fichier est référencé dans: [docs/installation.md:163]
+# ==========================================================================
+
 # Script d'installation des dépendances pour WSL (Ubuntu/Debian)
 # Ce script installe tous les outils nécessaires pour le développement du projet yeb_app_template dans WSL
 
@@ -118,7 +128,7 @@ fi
 
 # Configurer le projet
 echo_info "Installation des dépendances Python du projet..."
-cd "$(dirname "$0")/.."  # Revenir à la racine du projet
+cd "$(dirname "$0")/../.."  # Revenir à la racine du projet
 
 # Installer les dépendances Python avec Poetry
 cd python_backend

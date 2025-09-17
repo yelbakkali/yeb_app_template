@@ -92,6 +92,10 @@ Le projet inclut des scripts qui automatisent l'installation et la configuration
 ```bash
 # Utilisez le script setup_template.sh comme expliqué dans le README.md
 ./setup_template.sh
+
+# Ou pour une installation manuelle des dépendances :
+./template/utils/setup.sh    # Linux/macOS
+template\utils\setup.bat     # Windows
 ```
 
 Ce script va :

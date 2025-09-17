@@ -1,4 +1,10 @@
 #!/bin/bash
+# ==========================================================================
+# RÉFÉRENCES CROISÉES:
+# - Ce fichier est référencé dans: [template/entry-points/init_project.sh:360, 371, 382]
+# - Ce fichier est référencé dans: [docs/project_structure.md:80]
+# ==========================================================================
+
 # Script d'installation intelligent - Détecte l'environnement et exécute le script approprié
 
 set -e  # Arrête le script si une erreur se produit
@@ -62,7 +68,7 @@ elif [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" ==
     # Windows
     echo_warning "Environnement Windows détecté."
     echo_warning "Veuillez exécuter le script setup_windows.bat en tant qu'administrateur."
-    echo_warning "Le script est disponible dans le dossier 'scripts' du projet."
+    echo_warning "Le script est disponible dans le dossier 'template/utils' du projet."
 else
     # Environnement non reconnu
     echo_error "Système d'exploitation non reconnu: $OSTYPE"
