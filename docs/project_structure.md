@@ -18,6 +18,7 @@ yeb_app_template/
 ├── python_backend/          # Backend Python pour le développement local
 ├── scripts/                 # Scripts d'installation et de configuration
 ├── shared_python/           # Code Python partagé entre les plateformes
+├── template/                # Scripts et utilitaires pour le template
 ├── test/                    # Tests généraux du projet
 └── web_backend/             # Backend Python pour le déploiement web
 ```
@@ -83,16 +84,22 @@ scripts/
 └── start_vscode_wsl.sh      # Script pour démarrer VS Code optimisé pour WSL
 ```
 
-### template/utils/
+#### Dossier `template/`
 
-Scripts d'installation et de configuration utilisés lors de l'initialisation du projet :
+Le dossier `template/` contient les fichiers nécessaires à l'initialisation et à la configuration du projet lors de l'utilisation en tant que template :
 
 ```bash
-template/utils/
-├── setup.bat                # Script d'installation principal (Windows)
-├── setup.sh                 # Script d'installation principal (Unix)
-├── setup_windows.bat        # Configuration spécifique à Windows
-└── setup_wsl.sh             # Configuration spécifique à WSL
+template/
+├── docs/                    # Documentation spécifique au template
+├── entry-points/            # Points d'entrée pour les scripts d'installation
+└── utils/                   # Scripts utilitaires pour l'installation
+    ├── git_config_helper.sh # Script de vérification Git et création de dépôt GitHub (Linux/macOS)
+    ├── git_config_helper.bat # Script de vérification Git et création de dépôt GitHub (Windows)
+    ├── setup.bat            # Script d'installation principal (Windows)
+    ├── setup.sh             # Script d'installation principal (Unix)
+    ├── setup_macos.sh       # Configuration spécifique à macOS
+    ├── setup_windows.bat    # Configuration spécifique à Windows
+    └── setup_wsl.sh         # Configuration spécifique à WSL
 ```
 
 ### web_backend/
