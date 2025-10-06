@@ -90,6 +90,19 @@ chmod +x setup_template.sh
 ./setup_template.sh
 ```
 
+Pour macOS :
+
+```bash
+# Créez un dossier pour votre projet
+mkdir mon_super_projet
+cd mon_super_projet
+
+# Téléchargez et exécutez le script d'installation spécifique à macOS
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/macos_setup.sh
+chmod +x macos_setup.sh
+./macos_setup.sh
+```
+
 Pour Windows :
 
 ```powershell

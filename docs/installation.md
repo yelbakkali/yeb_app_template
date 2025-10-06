@@ -91,12 +91,30 @@ Le projet inclut des scripts qui automatisent l'installation et la configuration
 
 ```bash
 # Utilisez le script setup_template.sh comme expliqué dans le README.md
-./setup_template.sh
+./setup_template.sh          # Linux
+./macos_setup.sh            # macOS (version adaptée pour les spécificités de macOS)
 
 # Ou pour une installation manuelle des dépendances :
 ./template/utils/setup.sh    # Linux/macOS
 template\utils\setup.bat     # Windows
 ```
+
+#### Note spéciale pour les utilisateurs macOS
+
+Si vous rencontrez des problèmes avec le script standard `setup_template.sh` sur macOS (notamment des erreurs liées à la commande `sed` ou des problèmes d'encodage), utilisez plutôt le script `macos_setup.sh` qui a été spécifiquement adapté pour tenir compte des particularités de macOS :
+
+```bash
+# Téléchargez et exécutez le script d'installation spécifique à macOS
+curl -LJO https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/macos_setup.sh
+chmod +x macos_setup.sh
+./macos_setup.sh
+```
+
+Le script `macos_setup.sh` effectue les mêmes opérations que `setup_template.sh` mais avec des commandes adaptées à l'environnement macOS, notamment pour :
+
+- Utiliser correctement la commande `sed` avec la syntaxe spécifique à macOS
+- Gérer les différences de comportement des commandes Unix sur macOS
+- Traiter correctement les caractères spéciaux dans les fichiers de configuration
 
 Ce script va :
 
