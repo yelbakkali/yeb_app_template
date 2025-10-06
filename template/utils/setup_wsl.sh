@@ -229,6 +229,16 @@ else
 fi
 
 echo_success "Installation terminée avec succès!"
+
+# Exécuter les tests d'installation si disponibles
+if [ -f "../tests/test_installation.sh" ]; then
+    echo_info "Exécution des tests d'installation..."
+    bash ../tests/test_installation.sh
+elif [ -f "template/tests/test_installation.sh" ]; then
+    echo_info "Exécution des tests d'installation..."
+    bash template/tests/test_installation.sh
+fi
+
 echo_info "Veuillez redémarrer votre terminal ou exécuter 'source $PROFILE_FILE' pour appliquer les changements."
 echo_info "Pour démarrer le développement web, exécutez: cd flutter_app && flutter run -d chrome"
 echo_info "Pour lancer VS Code avec les optimisations WSL, utilisez: code-wsl"

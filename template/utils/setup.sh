@@ -52,18 +52,20 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     fi
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS
-    echo_warning "Environnement macOS détecté."
-    echo_warning "Script d'installation pour macOS non encore disponible."
-    echo_warning "Veuillez installer manuellement les dépendances suivantes:"
-    echo "- Flutter (https://docs.flutter.dev/get-started/install/macos)"
-    echo "- Python 3 (https://www.python.org/downloads/macos/)"
-    echo "- Poetry (https://python-poetry.org/docs/#installation)"
-    echo "- VS Code (https://code.visualstudio.com/download)"
-    echo "- Extensions VS Code recommandées:"
-    echo "  * ms-python.python"
-    echo "  * dart-code.flutter"
-    echo "  * dart-code.dart-code"
-    echo "  * github.vscode-pull-request-github"
+    echo_info "Environnement macOS détecté."
+    SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
+    if [ -f "$SCRIPT_DIR/setup_macos.sh" ]; then
+        echo_info "Exécution du script d'installation pour macOS..."
+        bash "$SCRIPT_DIR/setup_macos.sh"
+    else
+        echo_error "Script d'installation macOS non trouvé: $SCRIPT_DIR/setup_macos.sh"
+        echo_warning "Veuillez installer manuellement les dépendances suivantes:"
+        echo "- Flutter (https://docs.flutter.dev/get-started/install/macos)"
+        echo "- Python 3 (https://www.python.org/downloads/macos/)"
+        echo "- Poetry (https://python-poetry.org/docs/#installation)"
+        echo "- VS Code (https://code.visualstudio.com/download)"
+        exit 1
+    fi
 elif [[ "$OSTYPE" == "cygwin" ]] || [[ "$OSTYPE" == "msys" ]] || [[ "$OSTYPE" == "win32" ]]; then
     # Windows
     echo_warning "Environnement Windows détecté."
