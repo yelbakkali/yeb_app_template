@@ -228,6 +228,62 @@ else
     echo_warning "Dossier shared_python non trouvé. La configuration Poetry a été ignorée."
 fi
 
+echo_success "Installation de base terminée avec succès!"
+
+# Vérification et configuration Git
+echo_info "Vérification de la configuration Git..."
+if [ -f "../utils/git_config_helper.sh" ]; then
+    chmod +x ../utils/git_config_helper.sh
+    # Exécuter uniquement la partie de vérification de la configuration Git
+    source ../utils/git_config_helper.sh
+    check_git_config
+    
+    echo_info "Souhaitez-vous configurer un dépôt GitHub pour ce projet?"
+    read -p "Configurer GitHub maintenant? (o/n) : " setup_github
+    if [[ "$setup_github" =~ ^[oO]$ ]]; then
+        # Vérifier si GitHub CLI est installé, sinon l'installer
+        if ! command -v gh &> /dev/null; then
+            echo_info "Installation de GitHub CLI..."
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh -y
+        fi
+        
+        # Exécuter la partie de configuration du dépôt GitHub
+        setup_github_repository
+    else
+        echo_info "Vous pourrez configurer le dépôt GitHub plus tard avec:"
+        echo_info "bash template/utils/git_config_helper.sh"
+    fi
+elif [ -f "template/utils/git_config_helper.sh" ]; then
+    chmod +x template/utils/git_config_helper.sh
+    # Exécuter uniquement la partie de vérification de la configuration Git
+    source template/utils/git_config_helper.sh
+    check_git_config
+    
+    echo_info "Souhaitez-vous configurer un dépôt GitHub pour ce projet?"
+    read -p "Configurer GitHub maintenant? (o/n) : " setup_github
+    if [[ "$setup_github" =~ ^[oO]$ ]]; then
+        # Vérifier si GitHub CLI est installé, sinon l'installer
+        if ! command -v gh &> /dev/null; then
+            echo_info "Installation de GitHub CLI..."
+            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+            sudo apt update
+            sudo apt install gh -y
+        fi
+        
+        # Exécuter la partie de configuration du dépôt GitHub
+        setup_github_repository
+    else
+        echo_info "Vous pourrez configurer le dépôt GitHub plus tard avec:"
+        echo_info "bash template/utils/git_config_helper.sh"
+    fi
+else
+    echo_warning "Script de configuration Git non trouvé. La configuration de Git et GitHub devra être effectuée manuellement."
+fi
+
 echo_success "Installation terminée avec succès!"
 
 # Exécuter les tests d'installation si disponibles
