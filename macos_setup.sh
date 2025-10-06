@@ -119,10 +119,10 @@ download_template() {
         # Déplacer tous les fichiers du dossier temporaire vers le répertoire courant
         mv temp_repo/* .
         mv temp_repo/.[!.]* . 2>/dev/null || true  # Déplacer les fichiers cachés
-        
+
         # Supprimer le dossier temporaire
         rm -rf temp_repo
-        
+
         print_success "Template téléchargé avec succès"
 
         # Supprimer le répertoire .git pour recommencer l'historique
@@ -228,7 +228,7 @@ main() {
     echo -e ""
     echo -e "Voulez-vous continuer? (o/n)"
     read -p "> " confirm
-    
+
     if [[ ! "$confirm" =~ ^[oO]$ ]]; then
         print_error "Installation annulée."
         exit 1
