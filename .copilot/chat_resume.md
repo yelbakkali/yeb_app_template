@@ -14,7 +14,19 @@ RÉFÉRENCES CROISÉES:
 
 Ce document résume les principaux points abordés dans notre conversation sur le développement du projet yeb_app_template. Il peut être utilisé pour reprendre une conversation interrompue avec un assistant IA.
 
-**Dernière mise à jour :** 17 septembre 2025 (fin de journée)
+**Dernière mise à jour :** 6 octobre 2025
+
+## Dernière session
+
+La dernière session de travail s'est concentrée sur l'amélioration de la compatibilité macOS pour le template. Les principales actions réalisées sont :
+
+1. Création de scripts spécifiques pour macOS (`macos_setup.sh` et `setup_macos.sh`)
+2. Adaptation de la syntaxe des commandes `sed` pour macOS avec l'option `-i ''`
+3. Détection intelligente de l'architecture (Apple Silicon vs Intel) pour la configuration de Homebrew
+4. Configuration spécifique pour le développement iOS (Xcode, CocoaPods)
+5. Création d'un framework de test d'installation pour valider automatiquement l'installation
+
+Ces améliorations résolvent les problèmes d'installation précédemment rencontrés sur macOS, notamment les erreurs "404:: command not found" et les problèmes liés aux répertoires non vides. Tous les détails sont disponibles dans `.copilot/sessions/session_20251006_macos_support.md`.
 
 ## Contexte du projet
 
