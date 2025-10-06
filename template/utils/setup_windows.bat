@@ -154,6 +154,19 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 echo.
+echo [SUCCES] Installation de base terminée avec succès!
+
+REM Vérification et configuration Git
+echo [INFO] Vérification de la configuration Git...
+if exist "..\utils\git_config_helper.bat" (
+    call ..\utils\git_config_helper.bat
+) else if exist "template\utils\git_config_helper.bat" (
+    call template\utils\git_config_helper.bat
+) else (
+    echo [AVERTISSEMENT] Script de configuration Git non trouvé. La configuration de Git et GitHub devra être effectuée manuellement.
+)
+
+echo.
 echo [SUCCES] Installation terminée avec succès!
 echo [INFO] Veuillez redémarrer votre ordinateur pour appliquer tous les changements de PATH.
 echo.

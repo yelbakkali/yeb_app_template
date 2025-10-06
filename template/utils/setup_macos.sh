@@ -308,6 +308,44 @@ else
     echo_warning "Xcode n'est pas installé. Pour le développement iOS, installez Xcode depuis l'App Store."
 fi
 
+echo_success "Installation de base terminée avec succès!"
+
+# Vérification et configuration Git
+echo_info "Vérification de la configuration Git..."
+if [ -f "../utils/git_config_helper.sh" ]; then
+    chmod +x ../utils/git_config_helper.sh
+    # Exécuter uniquement la partie de vérification de la configuration Git
+    source ../utils/git_config_helper.sh
+    check_git_config
+
+    echo_info "Souhaitez-vous configurer un dépôt GitHub pour ce projet?"
+    read -p "Configurer GitHub maintenant? (o/n) : " setup_github
+    if [[ "$setup_github" =~ ^[oO]$ ]]; then
+        # Exécuter la partie de configuration du dépôt GitHub
+        setup_github_repository
+    else
+        echo_info "Vous pourrez configurer le dépôt GitHub plus tard avec:"
+        echo_info "bash template/utils/git_config_helper.sh"
+    fi
+elif [ -f "template/utils/git_config_helper.sh" ]; then
+    chmod +x template/utils/git_config_helper.sh
+    # Exécuter uniquement la partie de vérification de la configuration Git
+    source template/utils/git_config_helper.sh
+    check_git_config
+
+    echo_info "Souhaitez-vous configurer un dépôt GitHub pour ce projet?"
+    read -p "Configurer GitHub maintenant? (o/n) : " setup_github
+    if [[ "$setup_github" =~ ^[oO]$ ]]; then
+        # Exécuter la partie de configuration du dépôt GitHub
+        setup_github_repository
+    else
+        echo_info "Vous pourrez configurer le dépôt GitHub plus tard avec:"
+        echo_info "bash template/utils/git_config_helper.sh"
+    fi
+else
+    echo_warning "Script de configuration Git non trouvé. La configuration de Git et GitHub devra être effectuée manuellement."
+fi
+
 echo_success "Installation terminée avec succès!"
 
 # Exécuter les tests d'installation si disponibles
