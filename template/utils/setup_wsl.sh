@@ -237,7 +237,7 @@ if [ -f "../utils/git_config_helper.sh" ]; then
     # Exécuter uniquement la partie de vérification de la configuration Git
     source ../utils/git_config_helper.sh
     check_git_config
-    
+
     echo_info "Souhaitez-vous configurer un dépôt GitHub pour ce projet?"
     read -p "Configurer GitHub maintenant? (o/n) : " setup_github
     if [[ "$setup_github" =~ ^[oO]$ ]]; then
@@ -249,7 +249,7 @@ if [ -f "../utils/git_config_helper.sh" ]; then
             sudo apt update
             sudo apt install gh -y
         fi
-        
+
         # Exécuter la partie de configuration du dépôt GitHub
         setup_github_repository
     else
@@ -261,7 +261,7 @@ elif [ -f "template/utils/git_config_helper.sh" ]; then
     # Exécuter uniquement la partie de vérification de la configuration Git
     source template/utils/git_config_helper.sh
     check_git_config
-    
+
     echo_info "Souhaitez-vous configurer un dépôt GitHub pour ce projet?"
     read -p "Configurer GitHub maintenant? (o/n) : " setup_github
     if [[ "$setup_github" =~ ^[oO]$ ]]; then
@@ -273,7 +273,7 @@ elif [ -f "template/utils/git_config_helper.sh" ]; then
             sudo apt update
             sudo apt install gh -y
         fi
-        
+
         # Exécuter la partie de configuration du dépôt GitHub
         setup_github_repository
     else

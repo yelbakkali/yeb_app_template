@@ -68,4 +68,3 @@ Les scripts macOS ont été créés avec la syntaxe appropriée pour macOS, nota
 2. Recueillir des retours d'utilisateurs macOS pour valider l'expérience d'installation
 3. Continuer à améliorer la documentation pour les utilisateurs macOS
 4. Envisager l'ajout de scripts d'automatisation supplémentaires spécifiques à macOS (par exemple, pour le déploiement sur l'App Store)
-

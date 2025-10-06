@@ -60,13 +60,13 @@ for /f "tokens=*" %%a in ('git config --global user.name') do set "GIT_USER_NAME
 if "!GIT_USER_NAME!"=="" (
     call :echo_warning "Git user.name n'est pas configuré."
     call :echo_info "Configuration de Git user.name..."
-    
+
     set /p "git_name=Entrez votre nom pour Git (ex: John Doe) : "
     if "!git_name!"=="" (
         call :echo_error "Aucun nom fourni. Configuration incomplète."
         exit /b 1
     )
-    
+
     git config --global user.name "!git_name!"
     call :echo_success "Git user.name configuré : !git_name!"
 ) else (
@@ -78,13 +78,13 @@ for /f "tokens=*" %%a in ('git config --global user.email') do set "GIT_USER_EMA
 if "!GIT_USER_EMAIL!"=="" (
     call :echo_warning "Git user.email n'est pas configuré."
     call :echo_info "Configuration de Git user.email..."
-    
+
     set /p "git_email=Entrez votre email pour Git (ex: john.doe@example.com) : "
     if "!git_email!"=="" (
         call :echo_error "Aucun email fourni. Configuration incomplète."
         exit /b 1
     )
-    
+
     git config --global user.email "!git_email!"
     call :echo_success "Git user.email configuré : !git_email!"
 ) else (
@@ -175,7 +175,7 @@ if %ERRORLEVEL% neq 0 (
     call :echo_error "GitHub CLI (gh) n'est pas installé."
     call :echo_info "Installation de GitHub CLI..."
     call :echo_info "Téléchargement de GitHub CLI..."
-    
+
     :: Vérifier si winget est disponible
     where winget >nul 2>&1
     if %ERRORLEVEL% equ 0 (
@@ -193,9 +193,9 @@ gh auth status >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     call :echo_warning "Vous n'êtes pas authentifié avec GitHub CLI."
     call :echo_info "Veuillez vous authentifier maintenant..."
-    
+
     gh auth login
-    
+
     if %ERRORLEVEL% neq 0 (
         call :echo_error "Échec de l'authentification GitHub CLI."
         call :echo_info "Vous pourrez créer le dépôt manuellement plus tard."
