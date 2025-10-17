@@ -11,7 +11,7 @@ Lorsqu'un utilisateur crée un nouveau projet avec `setup_template.sh`, le fichi
 
 ## Contenu généré
 
-```markdown
+```text
 <!--
 RÉFÉRENCES CROISÉES:
 - Ce fichier est référencé dans: [.github/copilot-instructions.md:13, 22, 60, 82, 156, 230, 239, 249]
@@ -41,6 +41,7 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 ### ❌ Ancien format (trop verbeux)
 
 L'ancien `chat_resume.md` généré contenait :
+
 - Titre personnalisé avec le nom du projet
 - Date complète
 - Section détaillée "Initialisation du projet" avec tous les détails
@@ -54,6 +55,7 @@ L'ancien `chat_resume.md` généré contenait :
 ### ✅ Nouveau format (minimaliste)
 
 Le nouveau `chat_resume.md` contient :
+
 - En-tête avec références croisées
 - Titre générique
 - Section "Résumé de la conversation" (à remplir)
@@ -84,6 +86,7 @@ rm -rf .copilot/sessions/*
 ```
 
 **Fichiers supprimés** :
+
 - `session_20250917_wsl_cicd_optimisations.md`
 - `session_20250917_poetry_vscode_integration.md`
 - `session_20251006_macos_support.md`
@@ -92,7 +95,7 @@ rm -rf .copilot/sessions/*
 
 ### Structure après initialisation
 
-```
+```text
 .copilot/
 ├── README.md                    # Conservé (documentation générale)
 ├── memoire_long_terme.md       # Conservé et personnalisé
@@ -126,7 +129,7 @@ chmod +x setup_template.sh
 
 ### 2. Configuration interactive
 
-```
+```text
 Configuration du projet
 Le nom du projet sera 'mon_projet'
 Entrez une brève description de votre projet:
@@ -138,7 +141,7 @@ Entrez votre nom ou celui de votre organisation:
 
 ### 3. Nettoyage automatique
 
-```
+```text
 ✓ Instructions Copilot mises à jour
 ✓ Mémoire long terme mise à jour
 ℹ Suppression des fichiers de session du template...
@@ -150,6 +153,7 @@ Entrez votre nom ou celui de votre organisation:
 ### 4. Résultat final
 
 Le nouveau projet `mon_projet` a :
+
 - ✅ Un `chat_resume.md` avec seulement les informations de base
 - ✅ Un dossier `sessions/` vide
 - ✅ Aucune trace de l'historique du template
@@ -160,6 +164,7 @@ Le nouveau projet `mon_projet` a :
 ## Notes pour GitHub Copilot
 
 Lorsque GitHub Copilot lit ce fichier minimal, il comprend que :
+
 - C'est un nouveau projet basé sur le template
 - Il n'y a pas encore d'historique de développement
 - Le fichier est prêt à être rempli au fur et à mesure des sessions

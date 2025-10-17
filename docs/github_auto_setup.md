@@ -15,16 +15,19 @@ Le script `setup_template.sh` inclut maintenant une fonctionnalité de création
 ### Installation de GitHub CLI
 
 **Ubuntu/Debian :**
+
 ```bash
 sudo apt install gh
 ```
 
 **macOS :**
+
 ```bash
 brew install gh
 ```
 
 **Autres systèmes :**
+
 Consultez [https://cli.github.com/](https://cli.github.com/)
 
 ### Authentification
@@ -36,6 +39,7 @@ gh auth login
 ```
 
 Suivez les instructions interactives pour :
+
 1. Choisir GitHub.com ou GitHub Enterprise
 2. Choisir HTTPS ou SSH
 3. Vous authentifier via navigateur ou token
@@ -74,7 +78,7 @@ Lorsque vous exécutez `setup_template.sh`, le script :
 
 ### Exemple d'interaction
 
-```
+```text
 ==================================================================
  Configuration du dépôt GitHub
 ==================================================================
@@ -117,7 +121,7 @@ Le workflow complet se déroule sans intervention :
 
 Le script affiche des instructions manuelles :
 
-```
+```text
 ⚠ GitHub CLI (gh) n'est pas installé
 
 Pour créer automatiquement un dépôt GitHub, installez GitHub CLI :
@@ -139,7 +143,7 @@ Instructions pour créer le dépôt manuellement :
 
 Le script propose de lancer l'authentification :
 
-```
+```text
 ⚠ Vous n'êtes pas authentifié avec GitHub CLI
 
 Pour vous authentifier, exécutez :
@@ -155,7 +159,7 @@ Voulez-vous créer le dépôt GitHub manuellement plus tard ? (o/N)
 
 L'utilisateur peut refuser et créer le dépôt plus tard :
 
-```
+```text
 Voulez-vous créer un dépôt GitHub pour mon_projet ? (o/N)
 > n
 
@@ -219,6 +223,10 @@ brew install gh
 gh auth login
 ```
 
+```bash
+gh auth login
+```
+
 ### Erreur : "Repository already exists"
 
 **Solution** : Le dépôt existe déjà sur GitHub
@@ -275,6 +283,7 @@ gh repo create --help
 ```
 
 Paramètres disponibles :
+
 - `--add-readme` : Ajouter un README (non recommandé, déjà présent)
 - `--homepage URL` : URL de la page d'accueil
 - `--team TEAM` : Assigner à une équipe
@@ -287,12 +296,14 @@ Paramètres disponibles :
 ### Workflow complet recommandé
 
 1. **Créer le dossier du projet**
+
    ```bash
    mkdir mon_projet
    cd mon_projet
    ```
 
 2. **Télécharger et exécuter le script**
+
    ```bash
    curl -O https://raw.githubusercontent.com/yelbakkali/yeb_app_template/main/setup_template.sh
    chmod +x setup_template.sh
@@ -300,12 +311,14 @@ Paramètres disponibles :
    ```
 
 3. **Suivre les étapes interactives**
+
    - Configuration du projet
    - Téléchargement du template
    - Personnalisation
    - **Création du dépôt GitHub** ← Nouvelle étape !
 
 4. **Commencer à développer**
+
    ```bash
    git checkout -b dev
    # Développer...

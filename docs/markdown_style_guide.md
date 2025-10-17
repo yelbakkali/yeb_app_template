@@ -87,6 +87,17 @@ Ce document définit les règles de formatage Markdown à suivre pour tous les d
 
 - Ne sautez pas de niveaux de titre (ex : de `#` à `###` sans `##`)
 
+### MD022 : Lignes vides autour des titres
+
+- Entourez les titres de niveau 3 et supérieur (`###`, `####`, etc.) de lignes vides avant et après
+- Les titres de niveau 1 (`#`) et 2 (`##`) doivent également avoir une ligne vide avant (mais pas nécessairement après s'ils sont suivis immédiatement d'un paragraphe)
+
+### MD024 : Titres dupliqués
+
+- Évitez d'avoir plusieurs titres identiques dans un même document
+- Si nécessaire, ajoutez des précisions pour différencier les titres (ex : "Configuration - Partie 1", "Configuration - Partie 2")
+- Cette règle aide à la navigation et à la structure du document
+
 ### MD026 : Ponctuation dans les titres
 
 - Évitez d'utiliser la ponctuation à la fin des titres (., :, ;)
