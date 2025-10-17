@@ -28,7 +28,6 @@
 
 ### Problèmes corrigés dans setup_template.sh
 
-
 | # | Problème | Solution | Statut |
 |---|----------|----------|--------|
 | 1 | Clone Git échoue si dossier non vide | Clone dans dossier temporaire puis déplacement | ✅ |
@@ -143,9 +142,9 @@
 
 ## 🔗 LIENS UTILES
 
-- **Dépôt** : https://github.com/yelbakkali/yeb_app_template
-- **Branche dev** : https://github.com/yelbakkali/yeb_app_template/tree/dev
-- **Branche main** : https://github.com/yelbakkali/yeb_app_template/tree/main
+- **Dépôt** : <https://github.com/yelbakkali/yeb_app_template>
+- **Branche dev** : <https://github.com/yelbakkali/yeb_app_template/tree/dev>
+- **Branche main** : <https://github.com/yelbakkali/yeb_app_template/tree/main>
 - **Dernier commit dev** : 75ca3c9
 - **Dernier commit main** : c6d3cf4
 
