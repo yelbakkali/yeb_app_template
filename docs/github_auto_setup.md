@@ -32,7 +32,6 @@ Consultez [https://cli.github.com/](https://cli.github.com/)
 
 ### Authentification
 
-
 Avant d'utiliser cette fonctionnalité, vous devez être authentifié avec GitHub :
 
 ```bash
@@ -48,7 +47,6 @@ Suivez les instructions interactives pour :
 ## Fonctionnement
 
 ### Flux automatique
-
 
 Lorsque vous exécutez `setup_template.sh`, le script :
 
@@ -105,7 +103,6 @@ Le dépôt doit-il être public ou privé ? (public/privé)
 ## Cas d'utilisation
 
 ### Cas 1 : Création automatique réussie
-
 
 Le workflow complet se déroule sans intervention :
 
@@ -176,13 +173,11 @@ Pour créer le dépôt plus tard, exécutez :
 
 ### Créer un dépôt public
 
-
 ```bash
 gh repo create mon_projet --public --source=. --push
 ```
 
 ### Créer un dépôt privé avec description
-
 
 ```bash
 gh repo create mon_projet --private --source=. --description "Ma super application" --push
@@ -190,20 +185,17 @@ gh repo create mon_projet --private --source=. --description "Ma super applicati
 
 ### Lister vos dépôts
 
-
 ```bash
 gh repo list
 ```
 
 ### Voir les détails d'un dépôt
 
-
 ```bash
 gh repo view
 ```
 
 ### Ouvrir le dépôt dans le navigateur
-
 
 ```bash
 gh repo view --web
@@ -214,7 +206,6 @@ gh repo view --web
 ### Erreur : "gh: command not found"
 
 **Solution** : Installez GitHub CLI
-
 
 ```bash
 # Ubuntu/Debian
@@ -228,6 +219,9 @@ brew install gh
 
 **Solution** : Authentifiez-vous
 
+```bash
+gh auth login
+```
 
 ```bash
 gh auth login
@@ -236,7 +230,6 @@ gh auth login
 ### Erreur : "Repository already exists"
 
 **Solution** : Le dépôt existe déjà sur GitHub
-
 
 ```bash
 # Option 1 : Utiliser un nom différent
@@ -253,7 +246,6 @@ git push -u origin main
 ### Le push échoue
 
 **Solution** : Vérifier les permissions et la branche
-
 
 ```bash
 # Vérifier le remote
@@ -275,7 +267,6 @@ Si vous souhaitez modifier le comportement par défaut :
 
 ### Changer la visibilité par défaut
 
-
 Éditez `setup_template.sh` ligne ~384 :
 
 ```bash
@@ -286,7 +277,6 @@ local visibility_flag="--private"
 ### Ajouter des paramètres supplémentaires
 
 Consultez la documentation de `gh` :
-
 
 ```bash
 gh repo create --help
@@ -304,7 +294,6 @@ Paramètres disponibles :
 ## Intégration dans le workflow
 
 ### Workflow complet recommandé
-
 
 1. **Créer le dossier du projet**
 
@@ -341,7 +330,6 @@ Paramètres disponibles :
 ## Sécurité
 
 ### Bonnes pratiques
-
 
 1. **Dépôts privés pour le code sensible**
    - Toujours choisir "privé" pour le code propriétaire
