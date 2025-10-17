@@ -56,7 +56,6 @@ L'ancien `chat_resume.md` généré contenait :
 
 Le nouveau `chat_resume.md` contient :
 
-
 - En-tête avec références croisées
 - Titre générique
 - Section "Résumé de la conversation" (à remplir)
@@ -81,14 +80,12 @@ En plus du `chat_resume.md` minimal, le script supprime maintenant :
 
 ### Fichiers de session du template
 
-
 ```bash
 # Suppression automatique de tous les fichiers de session
 rm -rf .copilot/sessions/*
 ```
 
 **Fichiers supprimés** :
-
 
 - `session_20250917_wsl_cicd_optimisations.md`
 - `session_20250917_poetry_vscode_integration.md`

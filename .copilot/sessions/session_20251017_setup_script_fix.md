@@ -288,7 +288,6 @@ Pour valider ces corrections, il faudrait tester :
 
 ## Fichiers modifiés
 
-
 | Fichier | Modifications |
 |---------|---------------|
 | `setup_template.sh` | Réécriture complète (303 → 433 lignes) |
@@ -304,7 +303,6 @@ Pour valider ces corrections, il faudrait tester :
 ## Fonctionnalité supplémentaire ajoutée : Création automatique du dépôt GitHub
 
 ### Nouvelle fonction `setup_github_repository()`
-
 
 Suite à la demande de l'utilisateur concernant l'absence de création du dépôt GitHub, une nouvelle fonction a été ajoutée au script.
 
@@ -364,10 +362,7 @@ setup_github_repository() {
 - La commande `wait` garantit la fin des processus enfants avant le nettoyage
 - Les messages colorés améliorent la lisibilité
 
-## Validation
-
-
-## Validation
+## Conclusion de la session
 
 Ce script a été réécrit selon les meilleures pratiques Bash :
 
