@@ -19,6 +19,7 @@ L'utilisateur a signalé plusieurs erreurs critiques lors de l'utilisation du sc
 **Localisation** : Fonction `run_setup_script()` (anciennes lignes 193-206)
 
 **Cause** :
+
 - Le script appelait `./template/entry-points/setup_project.sh`
 - Puis supprimait **immédiatement** le dossier `template/` avec `rm -rf template`
 - Le script `setup_project.sh` essayait ensuite d'ouvrir VS Code avec le répertoire de travail `template/entry-points/`
@@ -31,11 +32,13 @@ L'utilisateur a signalé plusieurs erreurs critiques lors de l'utilisation du sc
 **Localisation** : Fonction `customize_template()` (anciennes lignes 156-175)
 
 **Cause** :
+
 - Le script essayait de personnaliser `web_backend/pyproject.toml` et `python_backend/pyproject.toml`
 - Ces dossiers **n'existent pas** dans le template actuel
 - Seul `shared_python/pyproject.toml` existe
 
 **Impact** :
+
 - Personnalisation incomplète silencieuse
 - Erreur Poetry lors de l'installation des dépendances
 
@@ -44,6 +47,7 @@ L'utilisateur a signalé plusieurs erreurs critiques lors de l'utilisation du sc
 **Localisation** : Fonction `download_template()` (anciennes lignes 121-147)
 
 **Cause** :
+
 - La commande `git clone ... .` échoue si le dossier contient déjà des fichiers
 - Mécanisme de sauvegarde/restauration du script fragile
 
@@ -52,6 +56,7 @@ L'utilisateur a signalé plusieurs erreurs critiques lors de l'utilisation du sc
 ### 🟠 PROBLÈME MAJEUR #4 : Contexte d'exécution incorrect
 
 **Cause** :
+
 - Le script `setup_project.sh` était appelé depuis la racine du projet
 - Mais il s'attendait à être exécuté depuis `template/entry-points/`
 - Causait des erreurs de chemins relatifs
@@ -61,6 +66,7 @@ L'utilisateur a signalé plusieurs erreurs critiques lors de l'utilisation du sc
 ### ✅ Correction #1 : Réécriture de `download_template()`
 
 **Nouvelle approche** :
+
 ```bash
 # Cloner dans un dossier temporaire
 local temp_dir="temp_template_$$"
@@ -75,6 +81,7 @@ rm -rf "$temp_dir"
 ```
 
 **Avantages** :
+
 - ✅ Fonctionne même si le répertoire n'est pas vide
 - ✅ Pas de conflit avec le script lui-même
 - ✅ Gestion propre des erreurs
@@ -82,12 +89,14 @@ rm -rf "$temp_dir"
 ### ✅ Correction #2 : Personnalisation corrigée
 
 **Modifications** :
+
 - ❌ Supprimé : Références à `web_backend/` et `python_backend/`
 - ✅ Ajouté : Personnalisation de `shared_python/pyproject.toml`
 - ✅ Ajouté : Vérifications d'existence avant chaque `sed`
 - ✅ Ajouté : Messages d'information et d'avertissement
 
 **Code** :
+
 ```bash
 if [ -f "shared_python/pyproject.toml" ]; then
     print_info "Mise à jour de shared_python/pyproject.toml..."
@@ -102,6 +111,7 @@ fi
 ### ✅ Correction #3 : Exécution correcte de setup_project.sh
 
 **Nouvelle approche** :
+
 ```bash
 # Changer de répertoire pour exécuter le script dans son contexte
 (
@@ -119,6 +129,7 @@ fi
 ```
 
 **Avantages** :
+
 - ✅ Le script s'exécute dans son contexte natif
 - ✅ Les chemins relatifs fonctionnent correctement
 - ✅ Le dossier n'est supprimé qu'après exécution complète
@@ -127,6 +138,7 @@ fi
 ### ✅ Amélioration #4 : Meilleure expérience utilisateur
 
 **Ajouts** :
+
 - Nouvelle fonction `print_info()` pour les messages informatifs
 - Logs détaillés à chaque étape
 - Messages d'erreur plus clairs
@@ -137,6 +149,7 @@ fi
 ### ✅ Amélioration #5 : Installation automatique de GitHub CLI dans les prérequis
 
 **Nouvelle fonctionnalité** :
+
 - Vérification de GitHub CLI dans `check_prerequisites()`
 - Classification des outils en "obligatoires" (git, curl/wget) et "optionnels" (gh)
 - Proposition d'installation interactive de GitHub CLI si manquant
@@ -150,6 +163,7 @@ fi
 - Rappel pour l'authentification (`gh auth login`)
 
 **Code clé** :
+
 ```bash
 # Vérifier GitHub CLI (OPTIONNEL mais recommandé)
 if ! command -v gh &> /dev/null; then
@@ -163,6 +177,7 @@ fi
 ```
 
 **Avantages** :
+
 - ✅ L'utilisateur n'a plus besoin d'installer manuellement GitHub CLI
 - ✅ Installation guidée et automatisée
 - ✅ Support de multiples distributions Linux
@@ -172,11 +187,13 @@ fi
 ### ✅ Amélioration #6 : Nettoyage des fichiers d'historique du template
 
 **Problème identifié** :
+
 Après l'installation d'un nouveau projet, les fichiers de session du template restaient présents, et le fichier `chat_resume.md` contenait tout l'historique du template au lieu d'être minimal.
 
 **Solution implémentée** :
 
 1. **Suppression automatique des fichiers de session** :
+
    ```bash
    # Nettoyer les fichiers de session du template
    if [ -d ".copilot/sessions" ]; then
@@ -187,22 +204,26 @@ Après l'installation d'un nouveau projet, les fichiers de session du template r
    ```
 
 2. **Nouveau format minimal pour chat_resume.md** :
+
    - Ancien : ~60 lignes avec toute la structure et l'historique pré-rempli
    - Nouveau : ~16 lignes avec seulement les informations de base
 
    **Contenu minimal** :
+
    - En-tête avec références croisées
    - Titre générique
    - Section "Contexte du projet" avec nom, objectif et état
    - Prêt à être rempli par l'utilisateur
 
 **Fichiers affectés après initialisation** :
+
 - `.copilot/sessions/*` → Tous supprimés (dossier vide)
 - `.copilot/chat_resume.md` → Réinitialisé avec format minimal
 - `.copilot/memoire_long_terme.md` → Conservé et personnalisé
 - `.copilot/README.md` → Conservé (documentation générale)
 
 **Avantages** :
+
 - ✅ Nouveau projet = nouveau départ (pas de pollution de l'historique du template)
 - ✅ Fichier `chat_resume.md` propre et prêt à l'emploi
 - ✅ Dossier `sessions/` vide, prêt pour les nouvelles sessions
@@ -211,7 +232,8 @@ Après l'installation d'un nouveau projet, les fichiers de session du template r
 ## Changements de structure
 
 ### Ancien script (303 lignes)
-```
+
+```text
 check_prerequisites()
 configure_project()
 download_template()          ← BUGUÉ
@@ -223,7 +245,8 @@ main()
 ```
 
 ### Nouveau script (433 lignes)
-```
+
+```text
 print_info()                 ← NOUVEAU
 check_prerequisites()
 configure_project()
@@ -249,12 +272,14 @@ Pour valider ces corrections, il faudrait tester :
 ## Impact sur les utilisateurs
 
 ### Avant (version buguée)
+
 - ❌ Échec systématique à la fin de l'installation
 - ❌ Erreur Poetry pour `web_backend`
 - ❌ Pas de feedback clair sur les problèmes
 - ❌ Impossible de terminer l'installation
 
 ### Après (version corrigée)
+
 - ✅ Installation complète sans erreur
 - ✅ Personnalisation correcte de `shared_python/`
 - ✅ Logs détaillés et informatifs
@@ -262,6 +287,7 @@ Pour valider ces corrections, il faudrait tester :
 - ✅ Gestion robuste des erreurs
 
 ## Fichiers modifiés
+
 
 | Fichier | Modifications |
 |---------|---------------|
@@ -279,9 +305,11 @@ Pour valider ces corrections, il faudrait tester :
 
 ### Nouvelle fonction `setup_github_repository()`
 
+
 Suite à la demande de l'utilisateur concernant l'absence de création du dépôt GitHub, une nouvelle fonction a été ajoutée au script.
 
 **Fonctionnalités** :
+
 - ✅ Vérification de la présence de GitHub CLI (`gh`)
 - ✅ Vérification de l'authentification GitHub
 - ✅ Création interactive du dépôt (public/privé)
@@ -291,6 +319,7 @@ Suite à la demande de l'utilisateur concernant l'absence de création du dépô
 - ✅ Mode fallback avec instructions manuelles si `gh` n'est pas disponible
 
 **Flux d'exécution** :
+
 1. Vérifie si `gh` est installé
 2. Vérifie l'authentification GitHub
 3. Demande confirmation pour créer le dépôt
@@ -302,6 +331,7 @@ Suite à la demande de l'utilisateur concernant l'absence de création du dépô
 9. Affiche l'URL du dépôt
 
 **Code clé** :
+
 ```bash
 setup_github_repository() {
     # Vérification de gh CLI
@@ -314,11 +344,13 @@ setup_github_repository() {
 ```
 
 **Intégration** :
+
 - Ajoutée comme étape 7 dans le flux principal
 - Optionnelle : peut être ignorée par l'utilisateur
 - Gestion d'erreur complète avec instructions de fallback
 
 **Avantages** :
+
 - ✅ Automatisation complète du workflow
 - ✅ Pas besoin de quitter le terminal
 - ✅ Configuration correcte dès le départ
@@ -334,7 +366,11 @@ setup_github_repository() {
 
 ## Validation
 
+
+## Validation
+
 Ce script a été réécrit selon les meilleures pratiques Bash :
+
 - ✅ Vérification d'existence avant toute opération
 - ✅ Gestion d'erreur à chaque étape critique
 - ✅ Messages informatifs pour l'utilisateur
