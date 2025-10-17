@@ -40,8 +40,8 @@ Ce document résume les principaux points abordés dans notre conversation sur l
 
 ### ❌ Ancien format (trop verbeux)
 
-
 L'ancien `chat_resume.md` généré contenait :
+
 - Titre personnalisé avec le nom du projet
 - Date complète
 - Section détaillée "Initialisation du projet" avec tous les détails
@@ -98,7 +98,7 @@ rm -rf .copilot/sessions/*
 
 ### Structure après initialisation
 
-```
+```text
 .copilot/
 ├── README.md                    # Conservé (documentation générale)
 ├── memoire_long_terme.md       # Conservé et personnalisé
@@ -111,8 +111,6 @@ rm -rf .copilot/sessions/*
 ## Utilisation pour les développeurs du template
 
 Si vous développez le template `yeb_app_template` :
-
-
 
 1. **Sur la branche `dev`** : Gardez tous vos fichiers de session et l'historique complet
 2. **Lors du merge vers `main`** : Utilisez `scripts/merge_to_main.sh` qui nettoie automatiquement
@@ -173,5 +171,4 @@ Lorsque GitHub Copilot lit ce fichier minimal, il comprend que :
 - C'est un nouveau projet basé sur le template
 - Il n'y a pas encore d'historique de développement
 - Le fichier est prêt à être rempli au fur et à mesure des sessions
-- Les informations essentielles (nom, description, objectif) sont présentes
 - Les informations essentielles (nom, description, objectif) sont présentes
