@@ -1,0 +1,14 @@
+{
+  "FCOM 737-MAX D6-27370-MAX-RAM(P2) Rev 9 30-11-25 COMPLETE.pdf": {
+    "doc": "D6-27370-MAX-RAM(P2)",
+    "rev": "9",
+    "date": "November 30, 2025",
+    "model": "737 MAX"
+  },
+  "FCOM D6-27370-8B6-RAM(B6)_B737_Rev63_30-09-2025 Complete.pdf": {
+    "doc": "D6-27370-8B6-RAM(B6)",
+    "rev": "63",
+    "date": "September 30, 2025",
+    "model": "737 NG"
+  }
+}

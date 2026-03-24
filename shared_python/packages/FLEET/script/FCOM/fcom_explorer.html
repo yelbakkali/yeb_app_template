@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>FCOM Data Explorer</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, Arial, sans-serif; font-size: 13px; background: #f0f2f5; color: #222; height: 100vh; display: flex; flex-direction: column; }
+  #topbar { background: #0055aa; color: white; padding: 10px 16px; display: flex; align-items: center; gap: 12px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+  #topbar h1 { font-size: 15px; font-weight: bold; flex: 1; }
+  #load-btn { background: white; color: #0055aa; border: none; border-radius: 6px; padding: 6px 14px; font-size: 13px; font-weight: bold; cursor: pointer; }
+  #file-input { display: none; }
+  #status { font-size: 12px; opacity: 0.85; }
+  #searchbar { background: #003d88; padding: 8px 16px; display: none; }
+  #searchbar input { width: 100%; padding: 6px 10px; border-radius: 6px; border: none; font-size: 13px; outline: none; }
+  #main { display: flex; flex: 1; overflow: hidden; }
+  #sidebar { width: 280px; min-width: 200px; background: white; border-right: 1px solid #dde; overflow-y: auto; flex-shrink: 0; display: none; }
+
+.tree-chapter { border-bottom: 1px solid #eef; }
+.tree-chapter-title { background: #e8eeff; padding: 8px 12px; font-weight: bold; font-size: 12px; color: #003d88; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 6px; }
+.tree-chapter-title:hover { background: #d0dcff; }
+
+.tree-pi-chapter { border-bottom: 1px solid #eef; }
+.tree-pi-chapter-title { background: #f0f4ff; padding: 6px 12px 6px 24px; font-weight: bold; font-size: 11px; color: #334477; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 5px; border-bottom: 1px solid #e8e8ff; }
+.tree-pi-chapter-title:hover { background: #e0e8ff; }
+.tree-pi-chapter-content { display: none; }
+.tree-pi-chapter-content.open { display: block; }
+
+.tree-sub-title { padding: 6px 12px 6px 36px; font-size: 11px; color: #445; cursor: pointer; user-select: none; display: flex; align-items: center; gap: 5px; border-bottom: 1px solid #f0f0f0; }
+.tree-sub-title:hover { background: #f0f4ff; }
+.tree-table-list { display: none; background: #f8faff; }
+.tree-table-list.open { display: block; }
+
+.tree-table-item { padding: 5px 12px 5px 46px; font-size: 11px; color: #556; cursor: pointer; border-bottom: 1px solid #eef; }
+.tree-table-item:hover { background: #e8f0ff; }
+.tree-table-item.active { background: #cce0ff; color: #003d88; font-weight: bold; }
+
+.tree-arrow { font-size: 10px; transition: transform 0.2s; display: inline-block; }
+.tree-arrow.open { transform: rotate(90deg); }
+.tree-subchapter { display: none; }
+.tree-subchapter.open { display: block; }
+
+#resizer { width: 5px; background: #dde; cursor: col-resize; flex-shrink: 0; }
+#resizer:hover { background: #aac; }
+#content { flex: 1; overflow-y: auto; padding: 16px; display: none; }
+#welcome { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: #888; gap: 12px; }
+#welcome .icon { font-size: 48px; }
+#welcome p { font-size: 14px; }
+.breadcrumb { font-size: 11px; color: #888; margin-bottom: 10px; padding: 6px 10px; background: #f8f8f8; border-radius: 6px; border: 1px solid #e8e8e8; }
+.breadcrumb span { color: #0055aa; }
+.section-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.section-tab { padding: 5px 10px; background: #e8eeff; border: 1px solid #c0ceff; border-radius: 5px; font-size: 11px; cursor: pointer; color: #334; white-space: nowrap; }
+.section-tab:hover { background: #d0dcff; }
+.section-tab.active { background: #0055aa; color: white; border-color: #0055aa; }
+.table-wrapper { overflow-x: auto; background: white; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+table { border-collapse: collapse; min-width: 100%; font-size: 12px; white-space: nowrap; }
+th { background: #0055aa; color: white; padding: 6px 10px; text-align: center; border: 1px solid #004499; }
+td { padding: 4px 10px; border: 1px solid #dde; text-align: center; }
+tr:nth-child(even) td { background: #f0f4ff; }
+tr:hover td { background: #ddeeff; }
+td.empty { color: #ccc; }
+td:first-child { font-weight: bold; background: #f8f8ff; border-right: 2px solid #bbc; }
+tr:nth-child(even) td:first-child { background: #eeeeff; }
+.table-stats { font-size: 11px; color: #888; margin-top: 6px; text-align: right; }
+.notes-block { margin-top: 10px; padding: 8px 12px; background: #fffbea; border-left: 3px solid #f0b429; border-radius: 0 6px 6px 0; }
+.notes-block ul { list-style: none; padding: 0; margin: 0; }
+.notes-block li { font-size: 11px; color: #554400; margin-bottom: 4px; line-height: 1.5; padding-left: 4px; }
+.empty-state { text-align: center; color: #aaa; padding: 40px; font-size: 13px; }
+</style>
+
+</head>
+<body>
+
+<div id="topbar">
+  <h1>FCOM Data Explorer</h1>
+  <span id="status">Aucun fichier charge</span>
+  <button id="load-btn" onclick="document.getElementById('file-input').click()">Charger fcom_data.json</button>
+  <input type="file" id="file-input" accept=".json">
+</div>
+
+<div id="searchbar">
+  <input type="text" id="search-input" placeholder="Rechercher un sous-chapitre..." oninput="filterTree()">
+</div>
+
+<div id="main">
+  <div id="sidebar"></div>
+  <div id="resizer"></div>
+  <div id="content">
+    <div id="welcome">
+      <div class="icon">📊</div>
+      <p>Selectionnez un tableau dans le menu</p>
+    </div>
+  </div>
+</div>
+
+<script>
+var fcomData = null;
+
+// Verifie si une cle est une cle de notes
+function isNotesKey(key) {
+  return key.endsWith('_notes');
+}
+
+// Retourne le titre affichable d'une cle de tableau
+function tableTitle(key) {
+  return key;
+}
+
+// Retourne la cle de notes associee
+function notesKey(key) {
+  return key + '_notes';
+}
+
+document.getElementById('file-input').addEventListener('change', function(e) {
+  var file = e.target.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    try {
+      fcomData = JSON.parse(ev.target.result);
+      document.getElementById('status').textContent = file.name + ' charge';
+      document.getElementById('sidebar').style.display = 'block';
+      document.getElementById('content').style.display = 'block';
+      document.getElementById('searchbar').style.display = 'block';
+      buildTree('');
+    } catch(err) {
+      alert('Erreur JSON : ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+});
+
+function getPiChapter(subchapter) {
+  if (!fcomData || !fcomData['_pi_chapters']) return 'General';
+  return fcomData['_pi_chapters'][subchapter] || 'General';
+}
+
+function buildTree(filter) {
+  var sidebar = document.getElementById('sidebar');
+  sidebar.innerHTML = '';
+  if (!fcomData) return;
+
+  for (var chapter in fcomData) {
+    if (chapter === 'metadata_hash' || chapter === '_pi_chapters') continue;
+    var subchapters = fcomData[chapter];
+
+    var arrow = document.createElement('span');
+    arrow.className = 'tree-arrow open';
+    arrow.textContent = '▶';
+
+    var chapterTitle = document.createElement('div');
+    chapterTitle.className = 'tree-chapter-title';
+    chapterTitle.appendChild(arrow);
+    chapterTitle.appendChild(document.createTextNode(' ' + chapter));
+
+    var subDiv = document.createElement('div');
+    subDiv.className = 'tree-subchapter open';
+
+    // Grouper par pi_chapter
+    var piGroups = {};
+    var piOrder  = [];
+    for (var subchapter in subchapters) {
+      var piChap = getPiChapter(subchapter);
+      if (!piGroups[piChap]) { piGroups[piChap] = []; piOrder.push(piChap); }
+      piGroups[piChap].push(subchapter);
+    }
+
+    var hasVisible = false;
+
+    piOrder.forEach(function(piChap) {
+      var visibleSubs = piGroups[piChap].filter(function(sub) {
+        return !filter || sub.toLowerCase().indexOf(filter.toLowerCase()) !== -1;
+      });
+      if (visibleSubs.length === 0) return;
+      hasVisible = true;
+
+      var piArrow = document.createElement('span');
+      piArrow.className = 'tree-arrow open';
+      piArrow.textContent = '▶';
+
+      var piTitle = document.createElement('div');
+      piTitle.className = 'tree-pi-chapter-title';
+      piTitle.appendChild(piArrow);
+      piTitle.appendChild(document.createTextNode(' ' + piChap));
+
+      var piContent = document.createElement('div');
+      piContent.className = 'tree-pi-chapter-content open';
+
+      (function(pc, pa) {
+        piTitle.addEventListener('click', function() {
+          var isOpen = pc.classList.contains('open');
+          pc.classList.toggle('open', !isOpen);
+          pa.classList.toggle('open', !isOpen);
+        });
+      })(piContent, piArrow);
+
+      visibleSubs.forEach(function(subchapter) {
+        var tables = subchapters[subchapter];
+
+        var subArrow = document.createElement('span');
+        subArrow.className = 'tree-arrow';
+        subArrow.textContent = '▶';
+
+        var subTitle = document.createElement('div');
+        subTitle.className = 'tree-sub-title';
+        subTitle.appendChild(subArrow);
+        subTitle.appendChild(document.createTextNode(' ' + subchapter));
+
+        var tableList = document.createElement('div');
+        tableList.className = 'tree-table-list';
+
+        (function(tl, sa) {
+          subTitle.addEventListener('click', function() {
+            var isOpen = tl.classList.contains('open');
+            tl.classList.toggle('open', !isOpen);
+            sa.classList.toggle('open', !isOpen);
+          });
+        })(tableList, subArrow);
+
+        for (var tableKey in tables) {
+          if (isNotesKey(tableKey)) continue;
+
+          var item = document.createElement('div');
+          item.className = 'tree-table-item';
+          item.textContent = tableTitle(tableKey);
+          item.setAttribute('data-chapter', chapter);
+          item.setAttribute('data-subchapter', subchapter);
+          item.setAttribute('data-table', tableKey);
+
+          (function(el) {
+            el.addEventListener('click', function() {
+              document.querySelectorAll('.tree-table-item').forEach(function(x) { x.classList.remove('active'); });
+              el.classList.add('active');
+              showTable(
+                el.getAttribute('data-chapter'),
+                el.getAttribute('data-subchapter'),
+                el.getAttribute('data-table')
+              );
+            });
+          })(item);
+
+          tableList.appendChild(item);
+        }
+
+        piContent.appendChild(subTitle);
+        piContent.appendChild(tableList);
+      });
+
+      var piDiv = document.createElement('div');
+      piDiv.className = 'tree-pi-chapter';
+      piDiv.appendChild(piTitle);
+      piDiv.appendChild(piContent);
+      subDiv.appendChild(piDiv);
+    });
+
+    if (!hasVisible) continue;
+
+    (function(sd, ar) {
+      chapterTitle.addEventListener('click', function() {
+        var isOpen = sd.classList.contains('open');
+        sd.classList.toggle('open', !isOpen);
+        ar.classList.toggle('open', !isOpen);
+      });
+    })(subDiv, arrow);
+
+    var chapterDiv = document.createElement('div');
+    chapterDiv.className = 'tree-chapter';
+    chapterDiv.appendChild(chapterTitle);
+    chapterDiv.appendChild(subDiv);
+    sidebar.appendChild(chapterDiv);
+  }
+}
+
+function showTable(chapter, subchapter, tableKey) {
+  var content = document.getElementById('content');
+  content.innerHTML = '';
+
+  var sections    = fcomData[chapter][subchapter][tableKey];
+  var nKey        = notesKey(tableKey);
+  var notesData   = fcomData[chapter][subchapter][nKey] || {};
+  var sectionKeys = Object.keys(sections);
+
+  var bc = document.createElement('div');
+  bc.className = 'breadcrumb';
+  bc.innerHTML = '<span>' + chapter + '</span> › <span>' + getPiChapter(subchapter) +
+                 '</span> › <span>' + subchapter + '</span> › ' + tableTitle(tableKey);
+  content.appendChild(bc);
+
+  var tabsDiv = document.createElement('div');
+  tabsDiv.className = 'section-tabs';
+  content.appendChild(tabsDiv);
+
+  var wrapper = document.createElement('div');
+  wrapper.className = 'table-wrapper';
+  content.appendChild(wrapper);
+
+  var stats = document.createElement('div');
+  stats.className = 'table-stats';
+  content.appendChild(stats);
+
+  var notesBlock = document.createElement('div');
+  notesBlock.className = 'notes-block';
+  notesBlock.style.display = 'none';
+  content.appendChild(notesBlock);
+
+  sectionKeys.forEach(function(sec, idx) {
+    var tab = document.createElement('div');
+    tab.className = 'section-tab' + (idx === 0 ? ' active' : '');
+    tab.textContent = sec;
+    (function(s, t) {
+      t.addEventListener('click', function() {
+        document.querySelectorAll('.section-tab').forEach(function(x) { x.classList.remove('active'); });
+        t.classList.add('active');
+        renderTable(sections[s], wrapper, stats);
+        renderNotes(notesData[s], notesBlock);
+      });
+    })(sec, tab);
+    tabsDiv.appendChild(tab);
+  });
+
+  if (sectionKeys.length > 0) {
+    renderTable(sections[sectionKeys[0]], wrapper, stats);
+    renderNotes(notesData[sectionKeys[0]], notesBlock);
+  }
+}
+
+function renderTable(data, wrapper, stats) {
+  if (!data || !Array.isArray(data) || data.length === 0) {
+    wrapper.innerHTML = '<div class="empty-state">Aucune donnee</div>';
+    if (stats) stats.textContent = '';
+    return;
+  }
+  var header = data[0];
+  var rows   = data.slice(1);
+  var html   = '<table><thead><tr>';
+  header.forEach(function(h) { html += '<th>' + (h || '') + '</th>'; });
+  html += '</tr></thead><tbody>';
+  rows.forEach(function(row) {
+    html += '<tr>';
+    for (var i = 0; i < header.length; i++) {
+      var cell = (i < row.length) ? row[i] : '';
+      var val  = (cell === null || cell === undefined || cell === '') ? '' : String(cell);
+      html += val === '' ? '<td class="empty">-</td>' : '<td>' + val + '</td>';
+    }
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  wrapper.innerHTML = html;
+  if (stats) {
+    stats.textContent = rows.length + ' ligne' + (rows.length > 1 ? 's' : '') +
+                        ' · ' + (header.length - 1) + ' colonne' + (header.length > 2 ? 's' : '');
+  }
+}
+
+function renderNotes(notes, notesBlock) {
+  if (!notes || !Array.isArray(notes) || notes.length === 0) {
+    notesBlock.style.display = 'none';
+    notesBlock.innerHTML = '';
+    return;
+  }
+  var html = '<ul>';
+  notes.forEach(function(note) { html += '<li>' + note + '</li>'; });
+  html += '</ul>';
+  notesBlock.innerHTML = html;
+  notesBlock.style.display = 'block';
+}
+
+function filterTree() {
+  buildTree(document.getElementById('search-input').value);
+}
+
+var resizer = document.getElementById('resizer');
+var sidebar = document.getElementById('sidebar');
+var isResizing = false;
+resizer.addEventListener('mousedown', function() {
+  isResizing = true;
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+});
+document.addEventListener('mousemove', function(e) {
+  if (!isResizing) return;
+  var w = e.clientX;
+  if (w > 150 && w < 500) sidebar.style.width = w + 'px';
+});
+document.addEventListener('mouseup', function() {
+  isResizing = false;
+  document.body.style.cursor = '';
+  document.body.style.userSelect = '';
+});
+</script>
+
+</body>
+</html>
