@@ -8,27 +8,29 @@ Emplacement : meme dossier que extract_fcom.py et main.py
 import csv
 import json
 import re
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from patterns import NOTES_STOP_PATTERNS
 
 FCOM_DATA_FILE    = "fcom_data.json"
 CHAPTERS_MAP_FILE = "pi_chapters_map.json"
 
 
-# ── Noms de dossiers ──────────────────────────────────────────────────────────
+# -- Noms de dossiers --
 
 def safe_name(text):
-    """Convertit un titre en nom de dossier compatible toutes plateformes."""
     text = text.lower().strip()
     text = text.replace('/', '-').replace('\\', '-')
-    text = re.sub(r'[\\/*?:"<>|°%]', '', text)
+    text = re.sub(r'[\\/*?:"<>|%]', '', text)
     text = re.sub(r'\s+', ' ', text).strip()
     return text[:100]
 
 
-# ── CSV ───────────────────────────────────────────────────────────────────────
+# -- CSV --
 
 def write_csv(data, path):
-    """Ecrit une liste de listes en fichier CSV."""
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     with open(path, 'w', newline='', encoding='utf-8-sig') as f:
         writer = csv.writer(f)
@@ -36,10 +38,9 @@ def write_csv(data, path):
             writer.writerow([c if c is not None else '' for c in row])
 
 
-# ── TOC ───────────────────────────────────────────────────────────────────────
+# -- TOC --
 
 def load_toc(fcom_dir):
-    """Charge toc.json depuis fcom_dir."""
     toc_path = Path(fcom_dir) / "toc.json"
     if not toc_path.exists():
         raise FileNotFoundError("toc.json introuvable : " + str(toc_path))
@@ -48,10 +49,6 @@ def load_toc(fcom_dir):
 
 
 def load_chapters_map(pi_dir):
-    """
-    Charge pi_chapters_map.json depuis pi_dir.
-    Retourne un dict vide si absent.
-    """
     path = Path(pi_dir) / CHAPTERS_MAP_FILE
     if not path.exists():
         return {"subchapters": {}, "aliases": {}}
@@ -80,7 +77,7 @@ def find_subchapters(toc_data, pi_dir=None):
                 for chap in sec["children"]:
                     if chap["title"] in ("Pkg Model Identification", "Text"):
                         continue
-                    pi_chapter = chap["title"]   # <-- nouveau
+                    pi_chapter = chap["title"]
                     subs = chap["children"]
                     for i, sub in enumerate(subs):
                         name = sub["title"].strip()
@@ -103,14 +100,15 @@ def find_subchapters(toc_data, pi_dir=None):
                         subchapters.setdefault(canonical, []).append({
                             "fcom":          fcom_name,
                             "section_title": section_title,
-                            "pi_chapter":    pi_chapter,   # <-- nouveau
+                            "pi_chapter":    pi_chapter,
                             "page":          page,
                             "page_end":      page_end,
                         })
 
     return subchapters
 
-# ── fcom_data.json ────────────────────────────────────────────────────────────
+
+# -- fcom_data.json --
 
 def load_fcom_data(fcom_dir):
     path = Path(fcom_dir) / FCOM_DATA_FILE
@@ -143,7 +141,7 @@ def set_data(fcom_data, chapter, subchapter, table, section, values):
     fcom_data[chapter][subchapter][table][section] = values
 
 
-# ── assign_by_x ───────────────────────────────────────────────────────────────
+# -- assign_by_x --
 
 def assign_by_x(col_xs, words_in_row, n_total):
     result = [''] * n_total
@@ -153,50 +151,26 @@ def assign_by_x(col_xs, words_in_row, n_total):
     return result
 
 
-# ── Notes ─────────────────────────────────────────────────────────────────────
+# -- Notes --
 
 def extract_notes(lines, data_end_idx):
-    """
-    Extrait les notes apres un tableau.
-    Gere les notes numerotees (1. 2. 3.) et les notes avec asterisque (*).
-    Retourne une liste de strings, vide si pas de notes.
-    """
     notes   = []
     current = None
-
-    # Mots-cles qui indiquent un nouveau tableau — on s'arrete
-    STOP_PATTERNS = [
-        r'^Table \d+ of \d+',
-        r'^WEIGHT\s',
-        r'^FLAPS\s',
-        r'^TEMP\s',
-        r'^PRESS ALT',
-        r'^V1,\s',
-        r'^Slope',
-        r'^Boeing Proprietary',
-        r'^Copyright',
-    ]
 
     for line in lines[data_end_idx:]:
         line = line.strip()
         if not line:
             continue
-
-        # Arreter si nouveau tableau detecte
-        if any(re.match(p, line) for p in STOP_PATTERNS):
+        if any(re.match(p, line) for p in NOTES_STOP_PATTERNS):
             break
-
-        # Note numerotee : "1." "2." etc.
         if re.match(r'^\d+\.', line):
             if current:
                 notes.append(current)
             current = line
-        # Note avec asterisque
         elif line.startswith('*'):
             if current:
                 notes.append(current)
             current = line
-        # Note courte sans numero (ex: "Check V1(MCG).")
         elif re.match(r'^[A-Z][a-zA-Z0-9\s\(\)\.%/\-]+\.$', line) and len(line) < 80:
             if current:
                 notes.append(current)
@@ -212,17 +186,83 @@ def extract_notes(lines, data_end_idx):
     return notes
 
 
+# -- run_extraction generique --
 
-# ── Rendu HTML interne ────────────────────────────────────────────────────────
+def run_extraction(fcom_dir, pi_dir, subchapters, subchapter, extract_fn, chapter="PI"):
+    fcom_dir = Path(fcom_dir)
+    pi_dir   = Path(pi_dir)
+
+    entries = subchapters.get(subchapter, [])
+    if not entries:
+        print("Sous-chapitre non trouve : " + subchapter)
+        return False
+
+    fcom_data = load_fcom_data(fcom_dir)
+
+    sub_key = safe_name(subchapter)
+    if chapter in fcom_data and sub_key in fcom_data[chapter]:
+        del fcom_data[chapter][sub_key]
+
+    print("Extraction : " + subchapter)
+    success = True
+
+    for entry in entries:
+        pdf_path      = fcom_dir / (entry["fcom"] + ".pdf")
+        section_title = entry["section_title"]
+        page          = entry["page"]
+        page_end      = entry.get("page_end")
+
+        if not pdf_path.exists():
+            print("  PDF introuvable : " + str(pdf_path))
+            success = False
+            continue
+
+        print("  " + safe_name(section_title) + "  (p." + str(page) + ")")
+
+        tables = extract_fn(pdf_path, page, page_end)
+        if tables:
+            for key, data in tables.items():
+                set_data(fcom_data, chapter, sub_key, key, section_title, data)
+                if not key.endswith('_notes'):
+                    n_notes = len(tables.get(key + '_notes', []))
+                    if isinstance(data, list):
+                        print("    " + key + "  (" + str(len(data) - 1) + " lignes)" +
+                              ("  [" + str(n_notes) + " notes]" if n_notes else ""))
+        else:
+            print("    ECHEC")
+            success = False
+
+    if success:
+        save_fcom_data(fcom_data, fcom_dir)
+        print("  fcom_data.json mis a jour")
+        html_name = "verify_" + sub_key.replace(' ', '_') + ".html"
+        html_path = pi_dir / sub_key / html_name
+        export_subchapter_html(fcom_data, chapter, sub_key, html_path)
+    else:
+        print("  Extractions incompletes -- fcom_data.json non modifie")
+
+    return success
+
+
+# -- run_main generique --
+
+def run_main(run_fn):
+    script_dir  = Path(run_fn.__code__.co_filename).parent
+    fcom_dir    = script_dir.parent.parent
+    pi_dir      = script_dir.parent
+    toc_data    = load_toc(fcom_dir)
+    subchapters = find_subchapters(toc_data, pi_dir)
+    run_fn(fcom_dir, pi_dir, subchapters)
+
+
+# -- Rendu HTML interne --
 
 def _render_section_data(lines, data):
-    """Rendu HTML d'une section : tableau ou notes."""
     if not data:
         lines.append('<p class="empty">Aucune donnee</p>')
         return
 
     if isinstance(data, list) and len(data) > 0 and isinstance(data[0], list):
-        # Tableau (liste de listes)
         lines.append('<table>')
         for i, row in enumerate(data):
             if i == 0:
@@ -239,7 +279,6 @@ def _render_section_data(lines, data):
         lines.append('</table>')
 
     elif isinstance(data, list) and len(data) > 0 and isinstance(data[0], str):
-        # Notes (liste de strings)
         lines.append('<ul class="notes">')
         for note in data:
             lines.append('<li>' + note + '</li>')
@@ -250,7 +289,6 @@ def _render_section_data(lines, data):
 
 
 def _html_styles():
-    """Retourne les styles CSS communs."""
     return [
         'body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 10px; background: #f5f5f5; }',
         'h1 { font-size: 15px; color: #333; border-bottom: 2px solid #0066cc; padding-bottom: 6px; }',
@@ -274,7 +312,7 @@ def _html_styles():
     ]
 
 
-# ── Export HTML sous-chapitre ─────────────────────────────────────────────────
+# -- Export HTML sous-chapitre --
 
 def export_subchapter_html(fcom_data, chapter, subchapter, output_path):
     try:
@@ -299,7 +337,7 @@ def export_subchapter_html(fcom_data, chapter, subchapter, output_path):
     nav = '<div class="nav"><a href="#">' + subchapter + '</a>'
     for table_key in tables:
         if not table_key.endswith('_notes'):
-            nav += '<a href="#' + table_key + '">' + table_key.replace('_', ' ') + '</a>'
+            nav += '<a href="#' + safe_name(table_key) + '">' + table_key + '</a>'
     nav += '</div>'
     lines.append(nav)
     lines.append('<h1>' + chapter + ' / ' + subchapter + '</h1>')
@@ -307,13 +345,12 @@ def export_subchapter_html(fcom_data, chapter, subchapter, output_path):
     for table_key, sections in tables.items():
         if table_key.endswith('_notes'):
             continue
-        lines.append('<h2 id="' + table_key + '">' + table_key.replace('_', ' ') + '</h2>')
+        lines.append('<h2 id="' + safe_name(table_key) + '">' + table_key + '</h2>')
         for section_title, data in sections.items():
             lines.append('<div class="section">')
             lines.append('<h3>' + section_title + '</h3>')
             _render_section_data(lines, data)
 
-            # Afficher les notes associees si presentes
             notes_key = table_key + '_notes'
             if notes_key in tables and section_title in tables[notes_key]:
                 notes = tables[notes_key][section_title]
@@ -332,7 +369,7 @@ def export_subchapter_html(fcom_data, chapter, subchapter, output_path):
     print('HTML genere : ' + str(output_path))
 
 
-# ── Export HTML global ────────────────────────────────────────────────────────
+# -- Export HTML global --
 
 def export_html(fcom_data, output_path):
     lines = []
@@ -350,14 +387,14 @@ def export_html(fcom_data, output_path):
 
     nav = '<div class="nav"><a href="#">FCOM Data</a>'
     for chapter in fcom_data:
-        if chapter != 'metadata_hash':
+        if chapter not in ('metadata_hash', '_pi_chapters'):
             nav += '<a href="#' + chapter + '">' + chapter + '</a>'
     nav += '</div>'
     lines.append(nav)
     lines.append('<h1>FCOM Data - Verification</h1>')
 
     for chapter, subchapters in fcom_data.items():
-        if chapter == 'metadata_hash':
+        if chapter in ('metadata_hash', '_pi_chapters'):
             continue
         lines.append('<div class="chapter" id="' + chapter + '">')
         lines.append('<h2>' + chapter + '</h2>')
@@ -366,7 +403,7 @@ def export_html(fcom_data, output_path):
             for table_key, sections in tables.items():
                 if table_key.endswith('_notes'):
                     continue
-                lines.append('<h4>' + table_key.replace('_', ' ') + '</h4>')
+                lines.append('<h4>' + table_key + '</h4>')
                 for section_title, data in sections.items():
                     lines.append('<div class="section">')
                     lines.append('<h5>' + section_title + '</h5>')

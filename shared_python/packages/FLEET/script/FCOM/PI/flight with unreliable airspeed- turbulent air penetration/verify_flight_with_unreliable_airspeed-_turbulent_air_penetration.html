@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verify - flight with unreliable airspeed- turbulent air penetration</title>
+<style>
+body { font-family: Arial, sans-serif; font-size: 12px; margin: 0; padding: 10px; background: #f5f5f5; }
+h1 { font-size: 15px; color: #333; border-bottom: 2px solid #0066cc; padding-bottom: 6px; }
+h2 { font-size: 13px; color: #0066cc; margin-top: 20px; margin-bottom: 4px; }
+h3 { font-size: 11px; color: #666; margin-top: 12px; margin-bottom: 4px; font-style: italic; }
+h4 { font-size: 11px; color: #666; margin-top: 12px; margin-bottom: 4px; font-style: italic; }
+h5 { font-size: 11px; color: #888; margin-top: 8px; margin-bottom: 4px; }
+.chapter { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px; margin-bottom: 20px; }
+.section { background: #f9f9f9; border-left: 3px solid #0066cc; padding: 8px 12px; margin: 8px 0; }
+table { border-collapse: collapse; margin: 6px 0 12px 0; font-size: 11px; white-space: nowrap; }
+th { background: #0066cc; color: #fff; padding: 4px 8px; text-align: center; border: 1px solid #005bb5; }
+td { padding: 3px 7px; border: 1px solid #ccc; text-align: center; }
+tr:nth-child(even) td { background: #eef4ff; }
+tr:hover td { background: #d0e8ff; }
+.empty { color: #bbb; }
+.nav { position: sticky; top: 0; background: #0066cc; padding: 6px 10px; margin: -10px -10px 12px -10px; }
+.nav a { color: #fff; text-decoration: none; margin-right: 12px; font-size: 12px; font-weight: bold; }
+.nav a:hover { text-decoration: underline; }
+.notes { margin: 6px 0 6px 16px; padding: 0; }
+.notes li { font-size: 11px; color: #445; margin-bottom: 3px; line-height: 1.4; }
+</style>
+</head>
+<body>
+<div class="nav"><a href="#">flight with unreliable airspeed- turbulent air penetration</a><a href="#climb (280-.76)">Climb (280/.76)</a><a href="#cruise (.76-280)">Cruise (.76/280)</a></div>
+<h1>PI / flight with unreliable airspeed- turbulent air penetration</h1>
+<h2 id="climb (280-.76)">Climb (280/.76)</h2>
+<div class="section">
+<h3>737-8 LEAP-1B27 KG C M EASA CATB TO1-10% TO2-20%</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th><th>WEIGHT 90</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>V/S (FT/MIN)</td><td>1700</td><td>1100</td><td>600</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td></tr>
+<tr><td>30000</td><td>V/S (FT/MIN)</td><td>2500</td><td>1900</td><td>1500</td><td>1100</td><td>800</td><td>600</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>6.5</td><td>6.0</td><td>5.5</td><td>5.5</td><td>5.5</td><td>6.0</td></tr>
+<tr><td>20000</td><td>V/S (FT/MIN)</td><td>3700</td><td>2900</td><td>2300</td><td>1800</td><td>1500</td><td>1200</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>10.0</td><td>8.5</td><td>8.0</td><td>7.5</td><td>7.5</td><td>7.5</td></tr>
+<tr><td>10000</td><td>V/S (FT/MIN)</td><td>5100</td><td>4000</td><td>3200</td><td>2700</td><td>2200</td><td>1900</td></tr>
+<tr><td>SEA LEVEL</td><td>PITCH ATT</td><td>14.0</td><td>11.5</td><td>10.5</td><td>9.5</td><td>9.0</td><td>9.0</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-8 LEAP-1B27 KG C M FAA CATB TO1-10% TO2-20% ALT-AB</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th><th>WEIGHT 90</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>V/S (FT/MIN)</td><td>1700</td><td>1100</td><td>600</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td></tr>
+<tr><td>30000</td><td>V/S (FT/MIN)</td><td>2500</td><td>1900</td><td>1500</td><td>1100</td><td>800</td><td>600</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>6.5</td><td>6.0</td><td>5.5</td><td>5.5</td><td>5.5</td><td>6.0</td></tr>
+<tr><td>20000</td><td>V/S (FT/MIN)</td><td>3700</td><td>2900</td><td>2300</td><td>1800</td><td>1500</td><td>1200</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>10.0</td><td>8.5</td><td>8.0</td><td>7.5</td><td>7.5</td><td>7.5</td></tr>
+<tr><td>10000</td><td>V/S (FT/MIN)</td><td>5100</td><td>4000</td><td>3200</td><td>2700</td><td>2200</td><td>1900</td></tr>
+<tr><td>SEA LEVEL</td><td>PITCH ATT</td><td>14.0</td><td>11.5</td><td>10.5</td><td>9.5</td><td>9.0</td><td>9.0</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-8 LEAP-1B28 KG C M EASA CATB TO1-10% TO2-20% ALT-AB</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th><th>WEIGHT 90</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>V/S (FT/MIN)</td><td>1700</td><td>1100</td><td>600</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td><td>4.0</td></tr>
+<tr><td>30000</td><td>V/S (FT/MIN)</td><td>2500</td><td>1900</td><td>1500</td><td>1100</td><td>800</td><td>600</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>7.0</td><td>6.5</td><td>6.0</td><td>6.0</td><td>6.0</td><td>6.0</td></tr>
+<tr><td>20000</td><td>V/S (FT/MIN)</td><td>4000</td><td>3100</td><td>2500</td><td>2100</td><td>1700</td><td>1300</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>11.0</td><td>9.5</td><td>8.5</td><td>8.0</td><td>7.5</td><td>7.5</td></tr>
+<tr><td>10000</td><td>V/S (FT/MIN)</td><td>5500</td><td>4300</td><td>3500</td><td>2900</td><td>2400</td><td>2100</td></tr>
+<tr><td>SEA LEVEL</td><td>PITCH ATT</td><td>15.0</td><td>12.5</td><td>11.0</td><td>10.0</td><td>9.5</td><td>9.5</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-800W CFM56-7B26 KG FAA EU-OPS CATC/N TALPA</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.0</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>V/S (FT/MIN)</td><td>1700</td><td>1100</td><td>600</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>3.5</td><td>4.0</td><td>4.0</td></tr>
+<tr><td>30000</td><td>V/S (FT/MIN)</td><td>2500</td><td>1900</td><td>1500</td><td>1100</td><td>800</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>7.0</td><td>6.5</td><td>6.0</td><td>6.0</td><td>6.0</td></tr>
+<tr><td>20000</td><td>V/S (FT/MIN)</td><td>4200</td><td>3300</td><td>2600</td><td>2100</td><td>1700</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>11.0</td><td>9.5</td><td>8.5</td><td>8.0</td><td>8.0</td></tr>
+<tr><td>10000</td><td>V/S (FT/MIN)</td><td>5600</td><td>4400</td><td>3600</td><td>3000</td><td>2500</td></tr>
+<tr><td>SEA LEVEL</td><td>PITCH ATT</td><td>14.5</td><td>12.5</td><td>11.0</td><td>10.0</td><td>9.5</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-800WSFP1 CFM56-7B26 C M KG FAA EUOPS CATC TALPA (FMC Model 737-800W.1)</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>4.0</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>V/S (FT/MIN)</td><td>1700</td><td>1100</td><td>600</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>4.0</td><td>4.0</td><td>3.5</td><td>4.0</td><td>4.0</td></tr>
+<tr><td>30000</td><td>V/S (FT/MIN)</td><td>2500</td><td>1900</td><td>1500</td><td>1100</td><td>800</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>7.0</td><td>6.5</td><td>6.0</td><td>6.0</td><td>6.0</td></tr>
+<tr><td>20000</td><td>V/S (FT/MIN)</td><td>4200</td><td>3300</td><td>2600</td><td>2100</td><td>1700</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>11.0</td><td>9.5</td><td>8.5</td><td>8.0</td><td>8.0</td></tr>
+<tr><td>10000</td><td>V/S (FT/MIN)</td><td>5600</td><td>4400</td><td>3600</td><td>3000</td><td>2500</td></tr>
+<tr><td>SEA LEVEL</td><td>PITCH ATT</td><td>14.5</td><td>12.5</td><td>11.0</td><td>10.0</td><td>9.5</td></tr>
+</table>
+</div>
+<h2 id="cruise (.76-280)">Cruise (.76/280)</h2>
+<div class="section">
+<h3>737-8 LEAP-1B27 KG C M EASA CATB TO1-10% TO2-20%</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th><th>WEIGHT 90</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>2.0</td><td>2.5</td><td>3.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>%N1</td><td>78.4</td><td>80.9</td><td>84.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td><td class="empty">-</td></tr>
+<tr><td>35000</td><td>%N1</td><td>76.8</td><td>78.2</td><td>80.0</td><td>82.5</td><td>85.7</td><td class="empty">-</td></tr>
+<tr><td>35000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>30000</td><td>%N1</td><td>76.2</td><td>77.1</td><td>78.3</td><td>79.8</td><td>81.6</td><td>84.2</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>4.0</td></tr>
+<tr><td>25000</td><td>%N1</td><td>72.2</td><td>73.0</td><td>74.3</td><td>75.7</td><td>77.6</td><td>79.8</td></tr>
+<tr><td>25000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>3.0</td><td>3.5</td><td>4.0</td></tr>
+<tr><td>20000</td><td>%N1</td><td>68.1</td><td>69.0</td><td>70.1</td><td>71.5</td><td>73.2</td><td>75.4</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.5</td><td>3.0</td><td>3.5</td><td>4.0</td></tr>
+<tr><td>15000</td><td>%N1</td><td>64.3</td><td>65.0</td><td>66.1</td><td>67.3</td><td>68.9</td><td>70.9</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-8 LEAP-1B27 KG C M FAA CATB TO1-10% TO2-20% ALT-AB</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th><th>WEIGHT 90</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>2.0</td><td>2.5</td><td>3.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>%N1</td><td>78.4</td><td>80.9</td><td>84.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td><td class="empty">-</td></tr>
+<tr><td>35000</td><td>%N1</td><td>76.8</td><td>78.2</td><td>80.0</td><td>82.5</td><td>85.7</td><td class="empty">-</td></tr>
+<tr><td>35000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>30000</td><td>%N1</td><td>76.2</td><td>77.1</td><td>78.3</td><td>79.8</td><td>81.6</td><td>84.2</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>4.0</td></tr>
+<tr><td>25000</td><td>%N1</td><td>72.2</td><td>73.0</td><td>74.3</td><td>75.7</td><td>77.6</td><td>79.8</td></tr>
+<tr><td>25000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>3.0</td><td>3.5</td><td>4.0</td></tr>
+<tr><td>20000</td><td>%N1</td><td>68.1</td><td>69.0</td><td>70.1</td><td>71.5</td><td>73.2</td><td>75.4</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.5</td><td>3.0</td><td>3.5</td><td>4.0</td></tr>
+<tr><td>15000</td><td>%N1</td><td>64.3</td><td>65.0</td><td>66.1</td><td>67.3</td><td>68.9</td><td>70.9</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-8 LEAP-1B28 KG C M EASA CATB TO1-10% TO2-20% ALT-AB</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th><th>WEIGHT 90</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>2.0</td><td>2.5</td><td>3.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>%N1</td><td>78.4</td><td>80.9</td><td>84.5</td><td class="empty">-</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td><td class="empty">-</td></tr>
+<tr><td>35000</td><td>%N1</td><td>76.8</td><td>78.2</td><td>80.0</td><td>82.5</td><td>85.7</td><td class="empty">-</td></tr>
+<tr><td>35000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>30000</td><td>%N1</td><td>76.2</td><td>77.1</td><td>78.3</td><td>79.8</td><td>81.6</td><td>84.2</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td><td>4.0</td></tr>
+<tr><td>25000</td><td>%N1</td><td>72.2</td><td>73.0</td><td>74.3</td><td>75.7</td><td>77.6</td><td>79.8</td></tr>
+<tr><td>25000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>3.0</td><td>3.5</td><td>4.0</td></tr>
+<tr><td>20000</td><td>%N1</td><td>68.1</td><td>69.0</td><td>70.1</td><td>71.5</td><td>73.2</td><td>75.4</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.5</td><td>3.0</td><td>3.5</td><td>4.0</td></tr>
+<tr><td>15000</td><td>%N1</td><td>64.3</td><td>65.0</td><td>66.1</td><td>67.3</td><td>68.9</td><td>70.9</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-800W CFM56-7B26 KG FAA EU-OPS CATC/N TALPA</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>2.0</td><td>2.5</td><td>3.5</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>%N1</td><td>82.9</td><td>85.4</td><td>88.9</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>1.0</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>35000</td><td>%N1</td><td>81.2</td><td>82.6</td><td>84.4</td><td>86.8</td><td>90.4</td></tr>
+<tr><td>35000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td></tr>
+<tr><td>30000</td><td>%N1</td><td>80.7</td><td>81.5</td><td>82.7</td><td>84.2</td><td>86.1</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td></tr>
+<tr><td>25000</td><td>%N1</td><td>77.2</td><td>77.9</td><td>79.0</td><td>80.5</td><td>82.3</td></tr>
+<tr><td>25000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.5</td></tr>
+<tr><td>20000</td><td>%N1</td><td>73.6</td><td>74.2</td><td>75.3</td><td>76.6</td><td>78.2</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>15000</td><td>%N1</td><td>69.8</td><td>70.6</td><td>71.6</td><td>72.9</td><td>74.4</td></tr>
+</table>
+</div>
+<div class="section">
+<h3>737-800WSFP1 CFM56-7B26 C M KG FAA EUOPS CATC TALPA (FMC Model 737-800W.1)</h3>
+<table>
+<tr><th>PRESSURE ALTITUDE (FT)</th><th>PARAMETER</th><th>WEIGHT 40</th><th>WEIGHT 50</th><th>WEIGHT 60</th><th>WEIGHT 70</th><th>WEIGHT 80</th></tr>
+<tr><td class="empty">-</td><td>PITCH ATT</td><td>2.0</td><td>2.5</td><td>3.5</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>%N1</td><td>82.9</td><td>85.4</td><td>88.9</td><td class="empty">-</td><td class="empty">-</td></tr>
+<tr><td>40000</td><td>PITCH ATT</td><td>1.0</td><td>2.0</td><td>2.5</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>35000</td><td>%N1</td><td>81.2</td><td>82.6</td><td>84.4</td><td>86.8</td><td>90.4</td></tr>
+<tr><td>35000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td></tr>
+<tr><td>30000</td><td>%N1</td><td>80.7</td><td>81.5</td><td>82.7</td><td>84.2</td><td>86.1</td></tr>
+<tr><td>30000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.0</td></tr>
+<tr><td>25000</td><td>%N1</td><td>77.2</td><td>77.9</td><td>79.0</td><td>80.5</td><td>82.3</td></tr>
+<tr><td>25000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>2.5</td><td>3.5</td></tr>
+<tr><td>20000</td><td>%N1</td><td>73.6</td><td>74.2</td><td>75.3</td><td>76.6</td><td>78.2</td></tr>
+<tr><td>20000</td><td>PITCH ATT</td><td>1.0</td><td>1.5</td><td>2.0</td><td>3.0</td><td>3.5</td></tr>
+<tr><td>15000</td><td>%N1</td><td>69.8</td><td>70.6</td><td>71.6</td><td>72.9</td><td>74.4</td></tr>
+</table>
+</div>
+</body>
+</html>

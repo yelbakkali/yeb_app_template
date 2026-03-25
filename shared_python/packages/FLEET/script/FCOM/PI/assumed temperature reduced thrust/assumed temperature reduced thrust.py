@@ -1,28 +1,14 @@
-"""
-assumed temperature reduced thrust.py
-Extraction des tableaux du sous-chapitre Assumed Temperature Reduced Thrust.
-
-Emplacement : PI/assumed temperature reduced thrust/assumed temperature reduced thrust.py
-
-Peut etre lance seul :
-  python3 "assumed temperature reduced thrust.py"
-
-Dependances : pip install pdfplumber
-"""
-
+# assumed temperature reduced thrust.py
 import re
 import sys
 from pathlib import Path
-
 import pdfplumber
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from fcom_utils import safe_name, load_toc, find_subchapters, extract_notes, assign_by_x
-from fcom_utils import load_fcom_data, save_fcom_data, set_data, export_subchapter_html
+from fcom_utils import extract_notes, assign_by_x, run_extraction, run_main
 
-SUBCHAPTER = "Assumed Temperature Reduced Thrust"
-CHAPTER    = "PI"
-
+SUBCHAPTER   = "Assumed Temperature Reduced Thrust"
+CHAPTER      = "PI"
 KEY_MAX_TEMP = "Maximum Assumed Temperature"
 KEY_N1       = "Takeoff %N1"
 KEY_BLEED    = "%N1 Adjustments for Engine Bleeds"
@@ -61,8 +47,8 @@ def extract_oat_table(lines, start_idx, row_label):
         data_start += 1
 
     header = [row_label] + ['ALT / ' + a for a in altitudes]
-    n_cols = len(altitudes)
-    rows   = [header]
+    n_cols       = len(altitudes)
+    rows         = [header]
     data_end_idx = len(lines)
 
     for i, line in enumerate(lines[data_start:], start=data_start):
@@ -72,11 +58,9 @@ def extract_oat_table(lines, start_idx, row_label):
         parts = line.split()
         if not parts:
             continue
-
         if parts[0] in ('MINIMUM', 'Boeing', 'Copyright'):
             data_end_idx = i
             break
-
         if len(parts) >= 3 and parts[1] == '&' and parts[2] == 'BELOW':
             oat    = parts[0] + ' & BELOW'
             values = parts[3:]
@@ -86,7 +70,6 @@ def extract_oat_table(lines, start_idx, row_label):
         else:
             data_end_idx = i
             break
-
         while len(values) < n_cols:
             values.append('')
         rows.append([oat] + values[:n_cols])
@@ -108,8 +91,8 @@ def extract_bleed_table(lines, start_idx, words=None):
     altitudes = parts[conf_idx + 1:]
 
     header = ['BLEED CONFIG'] + ['ALT / ' + a for a in altitudes]
-    n_cols = len(altitudes)
-    rows   = [header]
+    n_cols       = len(altitudes)
+    rows         = [header]
     data_end_idx = len(lines)
 
     col_xs = None
@@ -136,7 +119,6 @@ def extract_bleed_table(lines, start_idx, words=None):
         parts = line.split()
         if not parts:
             continue
-
         if parts[0] in ('PACKS', 'ENGINE', 'WING'):
             if len(parts) > 1 and parts[1] in ('OFF', 'ANTI-ICE', 'AND'):
                 config     = parts[0] + ' ' + parts[1]
@@ -184,7 +166,7 @@ def extract_bleed_table(lines, start_idx, words=None):
     return (rows if len(rows) > 1 else None), data_end_idx
 
 
-def extract_assumed_temp_page(pdf_path, page_num):
+def extract_page(pdf_path, page_num):
     with pdfplumber.open(pdf_path) as pdf:
         page  = pdf.pages[page_num]
         text  = page.extract_text()
@@ -227,7 +209,7 @@ def extract_assumed_temp_page(pdf_path, page_num):
     return results
 
 
-def extract_assumed_temp(pdf_path, page_num, page_end):
+def extract_all(pdf_path, page_num, page_end=None):
     results = {}
     with pdfplumber.open(pdf_path) as pdf:
         total = len(pdf.pages)
@@ -239,72 +221,15 @@ def extract_assumed_temp(pdf_path, page_num, page_end):
             text = pdf.pages[p].extract_text() or ""
         if 'Assumed Temperature' not in text and 'Assumed Temp' not in text:
             break
-        page_data = extract_assumed_temp_page(pdf_path, p)
+        page_data = extract_page(pdf_path, p)
         results.update(page_data)
 
     return results if results else None
 
 
 def run(fcom_dir, pi_dir, subchapters):
-    fcom_dir = Path(fcom_dir)
-    pi_dir   = Path(pi_dir)
-
-    entries = subchapters.get(SUBCHAPTER, [])
-    if not entries:
-        print("Sous-chapitre non trouve : " + SUBCHAPTER)
-        return
-
-    fcom_data = load_fcom_data(fcom_dir)
-
-    if CHAPTER in fcom_data:
-        if safe_name(SUBCHAPTER) in fcom_data[CHAPTER]:
-            del fcom_data[CHAPTER][safe_name(SUBCHAPTER)]
-
-    print("Extraction : " + SUBCHAPTER)
-    success = True
-
-    for entry in entries:
-        pdf_path      = fcom_dir / (entry["fcom"] + ".pdf")
-        section_title = entry["section_title"]
-        page          = entry["page"]
-        page_end      = entry.get("page_end")
-
-        if not pdf_path.exists():
-            print("  PDF introuvable : " + str(pdf_path))
-            success = False
-            continue
-
-        print("  " + safe_name(section_title) + "  (p." + str(page) + ")")
-
-        tables = extract_assumed_temp(pdf_path, page, page_end)
-        if tables:
-            for key, data in tables.items():
-                set_data(fcom_data, CHAPTER, safe_name(SUBCHAPTER),
-                         key, section_title, data)
-                if not key.endswith('_notes'):
-                    n_notes = len(tables.get(key + '_notes', []))
-                    if isinstance(data, list):
-                        print("    " + key + "  (" + str(len(data) - 1) + " lignes)" +
-                              ("  [" + str(n_notes) + " notes]" if n_notes else ""))
-        else:
-            print("    ECHEC")
-            success = False
-
-    if success:
-        save_fcom_data(fcom_data, fcom_dir)
-        print("  fcom_data.json mis a jour")
-        html_name = "verify_" + safe_name(SUBCHAPTER).replace(' ', '_') + ".html"
-        html_path = pi_dir / safe_name(SUBCHAPTER) / html_name
-        export_subchapter_html(fcom_data, CHAPTER, safe_name(SUBCHAPTER), html_path)
-    else:
-        print("  Extractions incompletes — fcom_data.json non modifie")
+    run_extraction(fcom_dir, pi_dir, subchapters, SUBCHAPTER, extract_all)
 
 
 if __name__ == "__main__":
-    script_dir = Path(__file__).parent
-    fcom_dir   = script_dir.parent.parent
-    pi_dir     = script_dir.parent
-
-    toc_data    = load_toc(fcom_dir)
-    subchapters = find_subchapters(toc_data, pi_dir)
-    run(fcom_dir, pi_dir, subchapters)
+    run_main(run)

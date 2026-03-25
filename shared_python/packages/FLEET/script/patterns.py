@@ -97,3 +97,26 @@ RETROCAL_PANTRY_MAP = {
     "D"     : ("pantry_d_weight",     "pantry_d_index"),
     "FERRY" : ("pantry_ferry_weight", "pantry_ferry_index"),
 }
+
+# Patterns qui indiquent la fin des notes (debut d'un nouveau tableau ou section)
+NOTES_STOP_PATTERNS = [
+    r'^Table \d+ of \d+',
+    r'^WEIGHT\s',
+    r'^FLAPS\s',
+    r'^TEMP\s',
+    r'^PRESS ALT',
+    r'^V1,\s',
+    r'^Slope',
+    r'^Boeing Proprietary',
+    r'^Copyright',
+    r'^%N1 Adjust',
+    r'^Takeoff %N1',
+    r'^Max (Climb|Continuous)',
+    r'^Go-[Aa]round',
+    r'^BLEED\s',
+    r'^CONFIGURATION\s',
+    r'^ENGINE\s',
+    r'^PACKS\s',
+    r'^WING\s',
+    r'^A/C\s',
+]
